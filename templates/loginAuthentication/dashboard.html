@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Login V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<!--===============================================================================================-->
+<style>
+    .navbar .dropdown-menu li{
+        margin: 0;
+        justify-content: center;
+        padding: 3px 10px;
+    }
+    .navbar .dropdown-menu li a:hover{
+        text-decoration: none;
+        color: #ffffff;
+    }
+    .navbar .dropdown-menu li:hover{
+        background: #007bff;
+        color: #ffffff;
+    }
+    .navbar .btn-secondary.active, .btn-secondary:active, .show>.btn-secondary.dropdown-toggle {
+    background-color: #007bff;
+    background-image: none;
+    border-color: #007bff;
+}
+    .pageheader button:hover {
+    background-color: #345feb;
+    color: #fff;
+    border: none;
+}
+    .button-color a:hover{
+        color: #ffffff !important;
+    }
+
+</style>
+</head>
+<body>
+<div class="home">
+        <header class="pageheader">
+            <nav class="homenav flex justify-between">
+                {% comment %} <div class="logo">
+                    <a href="{% url "home:homepage" %}"><img src="{% static '/images/logo.png' %}" alt="logo"></a>
+                </div> {% endcomment %}
+                <ul class="navbar align-center">
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/support">Support</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle button-color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 7px 6px;">
+                        Corporate login
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a href="/login">Admin Login</a></li>
+                        <li><a href="/employee/employeelogin">Employee Login</a></li>
+                      </div>
+                    </div>
+
+                    <li><button class="button-color" name="c_login"><a href="consumer/customer_login" >Customer Login</a></button></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="homemain">
+            <div class="hometop flex">
+                <div class="hometext1">
+                    <h5>Streamline your billing,
+                        Simplify your billing with our Water Billing System</h5>
+                        <br>
+                    <p>A water billing system helps in managing and tracking
+                        the consumption of water by customers and billing them accordingly.</p>
+                    <button class="button-color" type="button">Get Started</button>
+                </div>
+            </div>
+            <div class="homemiddle">
+                <div class="homemiddle1">
+                    <h3 class="homecompany">BlueLine Splash</h3>
+                    <p class="hometext2">
+                        The goal of our company is to create an efficient and reliable water billing system that saves time and
+                        resources for both water utility companies and their customers.A well-designed water billing system can help
+                        water utility companies to improve their customer service, reduce billing errors and disputes, and increase
+                        operational efficiency. It can also help customers to manage their water usage and costs more effectively.
+                        <br>
+                        <button class="button-color" name="learn">Learn More</button>
+                    </p>
+                </div>
+                <div class="homemiddle2">
+                    {% comment %} <img src="{%static 'images/image-removebg-preview (1).png' %}" alt="picture"> {% endcomment %}
+                </div>
+            </div>
+            <div class="homebottom">
+                {% comment %} <img class="savewater" src="{%static 'images/2001.i211.019_save water faucet realistic composition.jpg' %}" alt="picture"> {% endcomment %}
+                <p>
+                    In every city more than 50 to 80 percent of the total waste water discharge is from residential sector.
+                    Industrial and commercial buildings claim only the rest.Water is a limited and vital resource that plays a
+                    critical role in our daily lives. As responsible citizens, it is imperative that we make concerted efforts to
+                    conserve this precious resource. A number of simple and effective measures can be adopted in our daily lives to
+                    save water.By adopting these small yet impactful changes, we can collectively ensure that our precious water
+                    resources are preserved and made available for future generations.
+                </p>
+            </div>
+        </main>
+        <footer class="pagefooter">
+            <div class="pageend">
+                <h3>Company</h3>
+                <a href=""><p>About Us</p></a>
+                <a href=""><p>Contact Us</p></a>
+                <a href=""><p>Support</p> </a>
+            </div>
+            <div class="pageend1">
+                <h3>Connect With Us</h3>
+                {% comment %} <a href=""><img src="{%static 'images/5296499_fb_facebook_facebook logo_icon.png' %}" alt="fb"></a>
+                <a href=""><img src="{%static 'images/5296514_bird_tweet_twitter_twitter logo_icon.svg' %}" alt="tw"></a>
+                <a href=""><img src="{%static 'images/5296765_camera_instagram_instagram logo_icon.svg' %}" alt="inst"></a> {% endcomment %}
+            </div>
+        </footer>
+    </div>
+<!-- <div class="top">-->
+<!--        <div class="left">-->
+<!--            <img src="https://dynamic.brandcrowd.com/asset/logo/926a3500-a3f7-4755-a8f5-9e43880a561c/logo-search-grid-1x?logoTemplateVersion=1&v=637916578078770000&text=bluelinesplash&colorpalette=blue" alt="Logo">-->
+<!--            <h3 class="company">BlueLine Splash</h3>-->
+<!--        </div>-->
+<!--        <div class="right">-->
+<!--            <button name="admin"><a href="/login" style="color: #1b1e21; background: #828AD3">Admin Login</a></button>-->
+<!--            <button name="c_login"><a href="consumer/customer_login" style="color: #1b1e21; background: #828AD3">Customer Login</a></button>-->
+<!--        </div>-->
+<!--        <div class="text1">-->
+<!--            Streamline your billing,Simplify your billing with our Water Billing System-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="middle">-->
+<!--        <div class="middle1">-->
+<!--            <h3 class="company2">BlueLine Splash</h3>-->
+<!--            <p class="text2">-->
+<!--                The goal of the project is to create an efficient and reliable water billing system that saves time and resources for both water utility companies and their customers.-->
+<!--                <br>-->
+<!--                <button name="learn">Learn More</button>-->
+<!--            </p>-->
+<!--        </div>-->
+<!--        <div class="middle2">-->
+<!--            <img src="{% static 'images/image-removebg-preview (1).png' %}" alt="picture">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="bottom">-->
+<!--        <img class="savewater" src="{% static 'images/2001.i211.019_save water faucet realistic composition.jpg' %}" alt="picture">-->
+<!--        <p class="text3">-->
+<!--            In every city more than 50 to 80 percent of the total waste water discharge is from residential sector. Industrial and commercial buildings claim only the rest.-->
+<!--        </p>-->
+<!--    </div>-->
+<!--    <div class="end">-->
+<!--        <div class="end1">-->
+<!--            <h3>Company</h3>-->
+<!--            <a href=""><p>About Us</p></a>-->
+<!--            <a href=""><p>Contact Us</p></a>-->
+<!--            <a href=""><p>Support</p> </a>-->
+<!--        </div>-->
+<!--        <div class="end2">-->
+<!--            <p>Follow Us</p>-->
+<!--            <a href=""><img src="{% static 'images/5296499_fb_facebook_facebook logo_icon.png' %}" alt="fb"></a>-->
+<!--            <a href=""><img src="{% static 'images/5296514_bird_tweet_twitter_twitter logo_icon.svg' %}" alt="tw"></a>-->
+<!--            <a href=""><img src="{% static 'images/5296765_camera_instagram_instagram logo_icon.svg' %}" alt="inst"></a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+{#<div class="container">#}
+{#    <div class="p-5">#}
+{#        <button type="button" class="btn btn-primary"><a href="/login">Login</a></button>#}
+{#        <button type="button" class="btn btn-success"><a href="/register">signup</a></button>#}
+{#    </div>#}
+{#</div>#}
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

@@ -60,7 +60,7 @@ def register(request):
 
       #sending simple Welcome Email
         subject = "Welcome to VenueVistaIn Login!!"
-        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to GFG!! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\nAnubhav Madhav"        
+        message = "Hi, " + myuser.first_name + "!! \n" + "\nThank you for visiting our website.\n We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\nRabina Roka"        
         from_email = settings.EMAIL_HOST_USER
 
        #to whom email can be send 

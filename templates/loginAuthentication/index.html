@@ -28,10 +28,12 @@
 {% if done == 1 %}
 <h3>Hello {{ fname }}!</h3>
 <br>
+
+</div>
 <h4>You're successfully logged in.</h4> 
 <button type="submit"><a href="/LogOut">LogOut</a></button>
 {% else %} 
-<button type="submit"><a href="/Register">Registers</a></button>
+<button type="submit"><a href="/Register">Register</a></button>
 <button type="submit"><a href="/Login">LogIn</a></button>
 <br>
 {% endif %}
