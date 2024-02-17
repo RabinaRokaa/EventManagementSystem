@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styles */
+        nav {
+            background-color: rgba(0, 59, 149, 1);
+            padding: 30px; /* Increase padding to make navbar larger */
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #eee;
+            padding: 0px;
+            width: 100%
+            text-align: center;
+        }
+
+        /* Main Content styles */
+        .main-content {
+            text-align: center;
+        }
+
+        .main-content img {
+            max-width: 100%;
+            height: auto;
+             margin-top: 0;/* Add margin-top to create space between navbar and image */
+        }
+
+        .how-we-work {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            margin-top: 20px; /* Add margin-top to create space between image and text */
+        }
+
+        .how-we-work img {
+            max-width: 200px; /* Adjust the image width as needed */
+            margin-right: 20px; /* Add space between image and text */
+        }
+
+        .create-your-account {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            margin-top: 20px; /* Add margin-top to create space between image and text */
+        }
+
+        .create-your-account img {
+            max-width: 200px; /* Adjust the image width as needed */
+            margin-right: 20px; /* Add space between image and text */
+        }
+        
+        .your_account {
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white; /* Add text color to make it visible on the background */
+            border: none; /* Remove default button border */
+            cursor: pointer; /* Add pointer cursor on hover */
+        }
+        .how_we_works {
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white; /* Add text color to make it visible on the background */
+            border: none; /* Remove default button border */
+            cursor: pointer; /* Add pointer cursor on hover */
+        }
+
+        /* Footer styles */
+        /* Footer styles */
+        <style>
+            /* ... (existing styles) ... */
+        
+            /* Footer styles */
+            footer {
+                background-color: rgba(0, 59, 149, 1);
+                color: white;
+                text-align: right;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between; /* Add this property to space items */
+            }
+        
+            .copy {
+                background-color: rgba(0, 59, 149, 1);
+                color: white;
+                text-align: left;
+                padding-bottom: 10px;
+            }
+        
+            .company {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end; /* Align items to the end of the container (right side) */
+            }
+        
+            .company p,
+            .company a {
+                color: white;
+                text-decoration: none;
+                margin: 10px 0;
+                padding-right: 30px; /* Adjust padding-right instead of padding-left */
+            }
+        
+            .company a {
+                margin: 5px 0;
+            }
+        
+        
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Register</a>
+        <a href="#">Login</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Image below Navbar -->
+        <img src="{% static 'images/image.jpg' %}" alt="Main Image">
+        
+        <!-- How we work section -->
+        <div class="how-we-work">
+            <img src="{% static 'images/iconn.png' %}" alt="Icon">
+            <div>
+                <h2>How we works?</h2>
+                <p>"Our Event Management System operates through a streamlined process, empowering users to create, manage, and execute successful events effortlessly. Our user-centric approach ensures a seamless event management experience, providing you with the tools and support needed to organize successful events from start to finish. Join our platform today and elevate your event planning process!"</p>
+                <button class="how_we_works">Learn more</button>
+            </div>
+        </div>
+
+        <!-- Create Your Account section -->
+        <div class="create-your-account">
+            <img src="{% static 'images/icon.png' %}" alt="Icon">
+            <div>
+                <h2>Create Your Account</h2>
+                <p>With our intuitive interface, you can easily create, manage, and customize events to suit your unique requirements. From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers unparalleled flexibility to cater to diverse event types.</p>
+                <button class="your_account">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>© Photo, Inc. 2023.</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+
+</body>
+</html>

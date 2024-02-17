@@ -13,6 +13,9 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from . tokens import generate_token
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView , PasswordResetConfirmView
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 #cretaing function for home page
@@ -22,11 +25,16 @@ def home(request):
 def register(request):
     if request.method == "POST":   #using POST method
         username = request.POST['username']    #name tag used in register page
+        
         fname = request.POST['fname']
         lname = request.POST['lname']
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
+        # Check if the 'is_superuser' checkbox is checked in the form
+        is_superuser = request.POST.get('is_superuser', False)
+
+       
 
         #checking user validation
         if User.objects.filter(username=username):
@@ -49,6 +57,7 @@ def register(request):
             messages.error(request, "Username must be Alpha-Numeric!!")
             return redirect('home')
 
+ 
        #creating user object in models
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
@@ -56,7 +65,10 @@ def register(request):
         myuser.is_active = False
         myuser.save()
         messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
-
+ #checking for superuser
+        if is_superuser:
+            myuser.is_superuser = True
+            myuser.save()
 
       #sending simple Welcome Email
         subject = "Welcome to VenueVistaIn Login!!"
@@ -107,7 +119,12 @@ def user_login(request , backend=None):
             auth_login(request, user_param)
             fname = user_param.first_name
             messages.success(request, "Logged In Sucessfully!!")
-            return render(request, "loginAuthentication/index.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
+
+      #for admin login to redirect admin panel after login
+            if user_param.is_superuser:
+                return redirect('adminpanel')
+            else:  
+                return render(request, "loginAuthentication/organizerpanel.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
         else:
             messages.error(request, "Wrong Credentials!!")
 
@@ -136,11 +153,23 @@ def activate(request,uidb64,token):
        
         myuser.save()
         auth_login(request, myuser)
-        messages.success(request, "Your Account has been activated!!")
+        messages.success(request, "Your Account has been activated!!Now, you can login")
         return render(request,'loginAuthentication/index.html',{'done':1})
     else:
         print("Invalid activation attempt")
         return render(request,'activation_failed.html')
+
+
+class PasswordResetCustomView(PasswordResetView):
+    template_name = 'loginAuthentication/password_reset_form.html'
+    email_template_name = 'loginAuthentication/password_reset_email.html'
+    subject_template_name = 'loginAuthentication/password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+    success_message = "We've emailed you instructions for setting your password. If an account exists with the email you entered, you should receive them shortly. If you don't receive an email, please make sure you've entered the address you registered with and check your spam folder."
+
+class PasswordResetConfirmCustomView(PasswordResetConfirmView):
+    template_name = 'loginAuthentication/password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
 
 
 def logOut(request):
@@ -149,117 +178,15 @@ def logOut(request):
    return redirect ('home')
 
 
-def dashboard(req):
-    return render(req, 'loginAuthentication/index.html')
+# def dashboard(req):
+#     return render(req, 'loginAuthentication/index.html')
 
+def landingpage(req):
+    return render(req, 'loginAuthentication/landingpage.html')
 
+def organizerpanel(req):
+    return render(req, 'loginAuthentication/organizerpanel.html')
 
-# #making function for authentication
-# def signup(request):
-#     if request.method == "POST":   #using POST method
-#         username = request.POST['username']    #name tag
-#         fname = request.POST['fname']
-#         lname = request.POST['lname']
-#         email = request.POST['email']
-#         pass1 = request.POST['pass1']
-#         pass2 = request.POST['pass2']
-        
-        
-#         if User.objects.filter(username=username):
-#             messages.error(request, "Username already exist! Please try some other username.")
-#             return redirect('home')
-        
-#         if User.objects.filter(email=email).exists():
-#             messages.error(request, "Email Already Registered!!")
-#             return redirect('home')
-        
-#         if len(username)>20:
-#             messages.error(request, "Username must be under 20 charcters!!")
-#             return redirect('home')
-        
-#         if pass1 != pass2:
-#             messages.error(request, "Passwords didn't matched!!")
-#             return redirect('home')
-        
-#         if not username.isalnum():
-#             messages.error(request, "Username must be Alpha-Numeric!!")
-#             return redirect('home')
-        
-#         #creating a user object
-#         myuser = User.objects.create_user(username, email, pass1)
-#         myuser.first_name = fname
-#         myuser.last_name = lname
-#         myuser.is_active = False
-#         myuser.save()
-#         messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
-        
-#         # Welcome Email
-#         subject = "Welcome to GFG- Django Login!!"
-#         message = "Hello " + myuser.first_name + "!! \n" + "Welcome to GFG!! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\nAnubhav Madhav"        
-#         from_email = settings.EMAIL_HOST_USER
-#         to_list = [myuser.email]
-#         send_mail(subject, message, from_email, to_list, fail_silently=True)
-        
-#         # Email Address Confirmation Email
-#         current_site = get_current_site(request)
-#         email_subject = "Confirm your Email @ GFG - Django Login!!"
-#         message2 = render_to_string('email_confirmation.html',{
-            
-#             'name': myuser.first_name,
-#             'domain': current_site.domain,
-#             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
-#             'token': generate_token.make_token(myuser)
-#         })
-#         email = EmailMessage(
-#         email_subject,
-#         message2,
-#         settings.EMAIL_HOST_USER,
-#         [myuser.email],
-#         )
-#         email.fail_silently = True
-#         email.send()
-        
-#         #after register directly redirect to login page
-#         return redirect('login')
-        
-#     return render(request, "LoginAuthentication/signup.html")
-# def activate(request,uidb64,token):
-#     try:
-#         uid = force_text(urlsafe_base64_decode(uidb64))
-#         myuser = User.objects.get(pk=uid)
-#     except (TypeError,ValueError,OverflowError,User.DoesNotExist):
-#         myuser = None
+def adminpanel(req):
+    return render(req, 'loginAuthentication/adminpanel.html')
 
-#     if myuser is not None and generate_token.check_token(myuser,token):
-#         myuser.is_active = True
-#         # user.profile.signup_confirmation = True
-#         myuser.save()
-#         login(request,myuser)
-#         messages.success(request, "Your Account has been activated!!")
-#         return redirect('signin')
-#     else:
-#         return render(request,'activation_failed.html')
-    
-
-# def login(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         pass1 = request.POST['pass1']
-        
-#         user = authenticate(username=username, password=pass1)
-        
-#         if user is not None:
-#             login(request, user)
-#             fname = user.first_name
-#             # messages.success(request, "Logged In Sucessfully!!")
-#             return render(request, "authentication/index.html",{"fname":fname})
-#         else:
-#             messages.error(request, "Bad Credentials!!")
-#             return redirect('home')
-#     return render(request, "LoginAuthentication/login.html")
-
-# def logout(request):
-#     logout(request)
-#     messages.success(request, "Logged Out Successfully!!")
-#     return redirect('home')
-   

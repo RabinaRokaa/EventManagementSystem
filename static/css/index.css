@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+}
+
+/* Navbar styles */
+nav {
+    background-color: rgba(0, 59, 149, 1);
+    padding: 30px; /* Increase padding to make navbar larger */
+    color: white;
+    text-align: center;
+}
+
+nav button {
+    background-color: rgb(3, 10, 18);
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+    
+}
+
+nav a:hover {
+    color: #eef1f1a4; /* Change to the desired color when hovering */
+}
+
+/* Header styles */
+header {
+    background-color: #eee;
+    padding: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Main Content styles */
+.main-content {
+    text-align: center;
+    
+}
+
+.main-content img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 0;
+}
+
+.how-we-work,
+.create-your-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.how-we-work img,
+.create-your-account img {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+.your_account,
+.how_we_works {
+    background-color: rgba(0, 108, 228, 1);
+    margin: 10px;
+    padding: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer styles */
+footer {
+    background-color: rgba(0, 59, 149, 1);
+    color: white;
+    text-align: right;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.copy {
+    background-color: rgba(0, 59, 149, 1);
+    color: white;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.company {
+    display: flex;
+    flex-direction: column;
+}
+
+.company a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    padding-right: 30px;
+    font-size: small;
+}
+
+.company p {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    padding-right: 30px;
+    font-size: large;
+}
+

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,37 +7,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
-    <!--to display the messages we have to use the following tag-->
-      {% for message in messages %}
-       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-
-        <!--for displaying as bold-->
-        <strong>Message:</strong> {{ message }}
-
-        <!--for closing the message tag--> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">      
-        <span aria-hidden="true">&times;</span>
-        </button>
+    <!-- To display the messages, use the following tag -->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <!-- For displaying as bold -->
+            <strong>Message:</strong> {{ message }}
+            <!-- For closing the message tag -->
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        {% endfor %} 
+    {% endfor %} 
 
-    <h3>Welcome to Online Event Management System</h3>
+    <!-- After successfully login -->
 
-<!--if user is successfully login display the following things-->
-{% if done == 1 %}
-<h3>Hello {{ fname }}!</h3>
-<br>
+        <!-- After clicking on the home and other text, they follow the following URLs -->
+        <nav>
+            <a href="/">Home</a>
+            <a href="/aboutus">About Us</a>
+            <a href="/contact">Contact</a>
+            <a href="/Register">Register</a>
+            <a href="/Login">LogIn</a>
+        </nav>
+        
+   
 
-</div>
-<h4>You're successfully logged in.</h4> 
-<button type="submit"><a href="/LogOut">LogOut</a></button>
-{% else %} 
-<button type="submit"><a href="/Register">Register</a></button>
-<button type="submit"><a href="/Login">LogIn</a></button>
-<br>
-{% endif %}
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Image below Navbar -->
+        <img src="{% static 'images/image.jpg' %}" alt="Main Image">
+        
+        <!-- How we work section -->
+        <div class="how-we-work">
+            <img src="{% static 'images/iconn.png' %}" alt="Icon">
+            <div>
+                <h2>How we work?</h2>
+                <p>"Our Event Management System operates through a streamlined process, empowering users to create, manage, and execute successful events effortlessly. Our user-centric approach ensures a seamless event management experience, providing you with the tools and support needed to organize successful events from start to finish. Join our platform today and elevate your event planning process!"</p>
+                <button class="how_we_works">Learn more</button>
+            </div>
+        </div>
+
+        <!-- Create Your Account section -->
+        <div class="create-your-account">
+            <img src="{% static 'images/icon.png' %}" alt="Icon">
+            <div>
+                <h2>Create Your Account</h2>
+                <p>With our intuitive interface, you can easily create, manage, and customize events to suit your unique requirements. From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers unparalleled flexibility to cater to diverse event types.</p>
+                <button class="your_account">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
