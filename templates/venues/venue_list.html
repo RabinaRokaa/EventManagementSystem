@@ -1,0 +1,66 @@
+<!-- venue_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Venue List</h1>
+    <a href="{% url 'addvenue' %}" class="btn btn-primary">Add venue</a>
+    {% comment %} <a href="{% url 'update_venue' venue.id %}" class="btn btn-primary">Update venue</a> {% endcomment %}
+    {% comment %} <a href="{% url 'delete_venue ' venue.id %}" class="btn btn-primary">Delete venue</a> {% endcomment %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Capacity</th>
+                <th>Cost</th>
+                <th>Venue Image</th>
+                <th>Actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for venue in venues %}
+                <tr>
+                    <td>{{ venue.id }}</td>
+                    <td>{{ venue.Name }}</td>
+                    <td>{{ venue.Location }}</td>
+                    <td>{{ venue.Type }}</td>
+                    <td>{{ venue.Description }}</td>
+                    <td>{{ venue.Capacity }}</td>
+                    <td>{{ venue.Cost }}</td>
+                    <td><img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"></td>
+                    <td>
+                        <a href="{% url 'view_venue' venue.id %}" class="btn btn-info">View</a>
+                        <a href="{% url 'update_venue' venue.id %}" class="btn btn-primary">Update</a>
+                        <a href="{% url 'delete_venue' venue.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
