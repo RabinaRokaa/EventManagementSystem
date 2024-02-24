@@ -1,7 +1,8 @@
 from django.core.mail import EmailMessage, send_mail
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
+# from django.contrib.auth import user as auth_user
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -16,6 +17,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView , PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
+
 
 # Create your views here.
 #cretaing function for home page
@@ -190,3 +192,35 @@ def organizerpanel(req):
 def adminpanel(req):
     return render(req, 'loginAuthentication/adminpanel.html')
 
+def userlist(request):
+    users = User.objects.all()  #fetch users from the database
+    return render(request, 'loginAuthentication/user_list.html', {'users': users})
+    # return render(req, 'loginAuthentication/userlist.html')
+
+
+def delete_user(request, id):
+    user = get_object_or_404(User, id= id)
+    if request.method == 'POST':
+        user.delete()
+        return HttpResponseRedirect('/user_list')  # Redirect to venue list page after delete
+    return render(request, 'loginAuthentication/delete_user.html', {'myuser': user})
+
+# def delete_user(request, id):
+#     try:
+#         user = User.objects.get(id=id)
+#         user.delete()
+#         messages.success(request, f"User {user.username} has been deleted successfully.")
+#     except User.DoesNotExist:
+#         messages.error(request, "User does not exist.")
+#     return redirect('user_list')
+
+ 
+# pass id attribute from urls
+def view_user(request, id):
+    # dictionary for initial data with 
+    # field names as keys
+    context ={}
+ 
+    # add the dictionary during initialization
+    context["data"] = User.objects.get(id = id)    
+    return render(request, "loginAuthentication/view_user.html", context)

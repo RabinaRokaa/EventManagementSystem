@@ -1,0 +1,128 @@
+<!-- venue_list.html -->
+
+{% load static %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>User list</title>
+     <link rel="stylesheet" href="{% static 'css/userlist.css' %}">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+ </head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <aside>
+            
+        <div class="top">
+            <!--for logo-->
+            <div>
+                <img src="./images/logo.png">
+                <h2>Venue <span class="danger">TOR</span></h2>
+            </div>
+            <!--using google close icon-->
+            <div class="close" id="close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </div>
+            <!--sidebar/sibling of the top-->
+            <div class="sidebar">
+                <a href="/adminpanel">
+                    <span class="material-symbols-outlined">grid_view</span>
+                    <h3> Home </h3>    
+                </a>         
+                <a href="/user_list" onclick="loadUserList()">
+                    <span class="material-symbols-outlined">group</span>
+                    <h3> Users </h3>    
+                </a>         
+                <a href="/venue_list" onclick="loadVenueList()">
+                    <span class="material-symbols-outlined">roofing</span>
+                    <h3> Venues </h3>    
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined">celebration</span>
+                    <h3> Decorations </h3>    
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined"> person_book</span>
+                    <h3> photographer </h3>    
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined">book_online</span>
+                    <h3> Booking </h3>    
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined">mail_outline</span>
+                    <h3> Feedback </h3> 
+                    <span class="message-count">7</span>  
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3> Logout </h3> 
+                    
+                </a>         
+            </div>       
+        </div>
+    </aside>
+    
+    <main>
+      <h1>Users List</h1>
+     
+    <div class="tab">
+
+      <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                
+                <th>is_active</th>
+                
+                <th>Actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for myuser in users %}
+                <tr>
+                    <!--come from views.py-->
+                    <td>{{ myuser.id }}</td>
+                    <td>{{ myuser.first_name }}</td>
+                    <td>{{ myuser.last_name}}</td>
+                    <td>{{ myuser.email }}</td>
+                    <td>{{ myuser.username }}</td>
+                    <td>{{ myuser.is_active }}</td>
+                    <td>
+                        <a href="{% url 'view_user' myuser.id %}" class="btn btn-info">View</a>
+                        <a href="{% url 'delete_user' myuser.id %}">Delete </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </main>
+   </div>
+</body>
+</html>

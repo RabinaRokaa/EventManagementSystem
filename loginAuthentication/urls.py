@@ -20,6 +20,10 @@ urlpatterns = [
     path('landingpage/',views.landingpage,name='landingpage'),
     path('organizerpanel/',views.organizerpanel,name='organizerpanel'),
     path('adminpanel/',views.adminpanel,name='adminpanel'),
+    path('user_list/',views.userlist,name='userlist'),
+    path('<id>/view_venue',views.view_user,name='view_user'),
+    # path('<id>/delete_venue',views.delete_user,name='delete_user'),
+     path('<id>/delete_user', views.delete_user, name='delete_user'),
     # path('password_reset/',views.resetpassword,name='password_reset'),
     #give template name for using the customized page not default django page
     path('password_reset_form/', views.PasswordResetCustomView.as_view(template_name='loginAuthentication/password_reset_form.html'), name='password_reset_form'),
