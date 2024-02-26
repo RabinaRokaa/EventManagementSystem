@@ -8,7 +8,6 @@ from .forms import VenuesForm
 from Venues.models import Venues
 
 
-
 def venues(req):
     
     venues = Venues.objects.all()  #fetch venues from the database

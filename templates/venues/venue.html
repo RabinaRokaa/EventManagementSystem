@@ -39,6 +39,15 @@
             text-align: center;
         }
 
+        button{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+    padding: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+        }
+
         /* Main Content styles */
         .main-content {
             text-align: center;
@@ -56,6 +65,17 @@
             margin-bottom: 20px;
         }
         
+        .middle .car .pictures {
+            display: flex;
+            /* flex-direction: row; Arrange images side by side */ 
+            margin:10px;
+        }
+
+        .middle .car img {
+            flex: 0 0 200px; /* Fixed height for the image container */
+            width: 80%; /* Each image takes 50% of the space */
+            margin-right: 10px; /* Add some space between images */
+        }
         
         .cards {
             width: 30%; /* Adjust width as needed */
@@ -63,15 +83,104 @@
             background-color: white;
             border-radius: 5px;
             margin: 0 10px 20px; /* Add margin to create space between cards */
+            box-shadow: 2px 2px 10px black;
+        }
+/*--*/
+    .middle .cards {
+       display: flex;
+       flex-direction: column; /* Arrange elements vertically */
+       align-items: center; /* Center align elements */
+       background-color: white;
+       border-radius: 5px;
+       box-shadow: 2px 2px 10px black;
+       margin: 0 10px 20px;
+    }
+        
+        .middle .cards .name {
+            padding: 10px;
+        }
+
+        
+        
+         
+        .middle .cards .img img {
+            width: 80%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the container */
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        .desc {
+            width: 80%; /* Adjust width as needed */
+            margin: 0 auto; /* Center the description */
+            text-align: justify; /* Justify the text */
+            overflow-wrap: break-word; /* Break long words */
         }
         
 
-        .cards:hover{
-            box-shadow: 2px 2px 10px black;
+
+        .middle .cards .title {
+            flex: 0 0 200px; /* Allow the details to grow as needed */
+            max-width: calc(100% - 200px); /* Set maximum width for description container */
+            max-height: 150px; /* Set maximum height for description container */
+            overflow-y: auto; /* Allow vertical overflow */
+            padding: 10px;
+            text-align: left; /* Center align text */
+        }
+        /*--*/
+
+        .cards img {
+            width: 80%; /* Adjust width as needed */
+            display: inline-block;
+            background-color: white;
+            border-radius: 5px;
+            margin: 0 10px 20px; /* Add margin to create space between cards */
+        }
+         
+        .img img[alt] {
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
+       .middle .car{
+        background-color: white;
+        border-radius: 1px;
+        box-shadow: 1px 1px 5px gray;
+        margin: 0 10px 20px;
+      } 
+
+      .middle .car .img img{
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px black;
+        margin-bottom: 10px; /* Add margin bottom to create a gap */
+      }
+
+
+
+        /*--*/
+        
+
+        {% comment %} .car :hover{
+            box-shadow: 2px 2px 10px black;
+        } {% endcomment %}
+
         .title{
-            text-align: center
+            text-align: center;
+        }
+
+        .title h3 {
+            text-align: center;
+            font-size: 1rem;
+            color: black;
+        }
+        .title h4 {
+            text-align: center;
+            font-size: 1rem;
+            color: gray;
+            margin:20px;
+            padding:0px;
         }
 
         .middle {
@@ -131,20 +240,9 @@
             </button>
         </div>
     {% endfor %} 
-
-    <!-- After successfully login -->
-    {% if done == 1 %}
-        <div>
-            <h3>Hello {{ fname }}!</h3>
-            <br>
-            
-            <button type="submit"><a href="/LogOut">LogOut</a></button>
-        </div>
-    {% else %} 
-        <!-- After clicking on the home and other text, they follow the following URLs -->
+    
+<!-- After clicking on the home and other text, they follow the following URLs -->
         
-        
-    {% endif %}
     <nav>
         <a href="/">Home</a>
         <a href="/viewvenue">View Venue</a>
@@ -157,7 +255,7 @@
     <div class="main-content">
         
         <!-- Image below Navbar -->
-        <img src="{% static 'images/panel.png' %}" alt="Main Image">
+        {% comment %} <img src="{% static 'images/panel.png' %}" alt="Main Image">
         
         
                 <h2>Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h2>
@@ -166,23 +264,42 @@
                 <p>Easily navigate to the photographer style</p>
                 <p>Find Hotels and Venue</p>
                 
-                 </br>     
+                 </br>      {% endcomment %}
 
         <!--we are using card layout horizontally-->
+
         <div class="second">
             <h2>You can go through your event type </h2>
-
+        {% for venue in venues %}
          <div class=" middle">
-              <div class = "cards">
-            <div class = "img">
-             <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100">
+           <div class = "car">
+            <div class="name">
+             <h3>{{venue.Name}} </h3>
             </div>
+            <div class="pictures">
+            {% for image in venue.Venue_image.all %}
+             <div class = "img"> 
+                <img src="{{ image.image.url }}" alt="{{ venue.Name }}" width="200" height="150">
+             </div>
+            {% endfor %}
+            </div>
+            
+             {% comment %} <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}
+             {% comment %} <img src="{% static 'media/' %}{{ venue.Venue_image }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}      
              
             <div class = "title">
-                <h3>Hotels </h3>
+                <h3> {{ venue.Location }} <h3>
+                <h4> cost:{{ venue.Cost }} <h4>
+                <div class="desc">
+                 <h3>{{ venue.Description }}<h3>
+                 </div>
+                
+                <button class="your_account">Explore this venue</button>
             </div>
-              </div>
-              <div class = "cards">
+          </div>
+         </div>
+        {% endfor %}
+              {% comment %} <div class = "cards">
             <div class = "img1">
              <img src="{% static 'images/banquet.png' %}" alt="Icon">
             </div>
@@ -199,10 +316,11 @@
             <div class = "title">
                 <h3>Conference room</h3>
             </div>
-                </div>
-            </div>
+                </div> {% endcomment %}
+            
        </div>
     </div>
+    
     <!-- Footer -->
     <footer>
         <div class="copy">
