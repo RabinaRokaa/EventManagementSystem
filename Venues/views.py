@@ -105,6 +105,8 @@ from .forms import VenuesForm
 from .models import ImageFile
 
 def update_venue(request, venue_id):
+    from django.conf import settings
+
     venue = get_object_or_404(Venues, pk=venue_id)
 
     if request.method == 'POST':
@@ -114,7 +116,7 @@ def update_venue(request, venue_id):
             venue.save()
 
             # Clear existing images associated with the venue
-            venue.Venue_image.clear()
+            # venue.Venue_image.clear()
 
             # Handle multiple uploaded files and associate them with the venue
             for image in request.FILES.getlist('Venue_image'):
@@ -124,9 +126,24 @@ def update_venue(request, venue_id):
             return HttpResponse('<script>alert("Venue updated successfully!"); window.location.href = "/venue_list";</script>')  # Redirect to a success page or wherever you want
     else:
         form = VenuesForm(instance=venue)
+    
+        # Fetch image URLs associated with the venue
+    image_urls = [request.build_absolute_uri(settings.MEDIA_URL + str(image.image)) for image in venue.Venue_image.all()]
 
-    return render(request, "Venues/venue_update.html", {'form': form, 'venue': venue})
 
+
+
+    return render(request, "Venues/venue_update.html", {'form': form, 'venue': venue,'image_urls': image_urls})
+
+from django.http import JsonResponse
+
+def delete_image(request, image_id):
+    if request.method == 'POST':
+        image = get_object_or_404(ImageFile, pk=image_id)
+        image.delete()
+        return JsonResponse({'message': 'Image deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 # def update_venue(request, venue_id):
 #     venue = get_object_or_404(Venues, pk=venue_id)

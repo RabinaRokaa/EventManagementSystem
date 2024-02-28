@@ -1,0 +1,454 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+        }
+        /* Navbar styles */
+        nav {
+            background-color: rgba(0, 59, 149, 1);
+            padding: 30px; /* Increase padding to make navbar larger */
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #eee;
+            padding: 0px;
+            width: 100%
+            text-align: center;
+        }
+
+        button{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+    padding: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+        }
+
+        /* Main Content styles */
+        .main-content {
+            text-align: center;
+        }
+
+        .main-content img {
+            max-width: 100%;
+            
+            height: auto;
+             margin-top: 0;/* Add margin-top to create space between navbar and image */
+        }
+
+        .second {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .middle .car .pictures {
+            display: flex;
+            /* flex-direction: row; Arrange images side by side */ 
+            margin:10px;
+        }
+
+        .middle .car img {
+            flex: 0 0 200px; /* Fixed height for the image container */
+            width: 80%; /* Each image takes 50% of the space */
+            margin-right: 10px; /* Add some space between images */
+        }
+        
+       .middle .car .name h3{
+        color:#007bff;
+        padding:10px;
+        font-weight:bold;
+        font-size:1.5rem;
+       }
+
+
+        .cards {
+            width: 30%; /* Adjust width as needed */
+            display: inline-block;
+            background-color: gray;
+            border-radius: 5px;
+            margin: 0 10px 20px; /* Add margin to create space between cards */
+            box-shadow: 2px 2px 10px black;
+        }
+/*--*/
+    .middle .cards {
+       display: flex;
+       flex-direction: column; /* Arrange elements vertically */
+       align-items: center; /* Center align elements */
+       background-color: gray;
+       border-radius: 5px;
+       box-shadow: 2px 2px 10px black;
+       margin: 0 10px 20px;
+    }
+        
+        .middle .car .name {
+            padding: 1px;
+            text-align: center;
+            flex-direction:column;
+            font-size:10rem;
+        }
+
+        .middle .cards .img img {
+            width: 80%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the container */
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        
+        
+        
+        /*--*/
+
+        .cards img {
+            width: 80%; /* Adjust width as needed */
+            display: inline-block;
+            background-color: white;
+            border-radius: 5px;
+            margin: 0 10px 20px; /* Add margin to create space between cards */
+        }
+         
+        .img img[alt] {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+       .middle .car{
+        display:flex;
+        background-color: white;
+        
+        border-radius: 1px;
+        box-shadow: 1px 1px 5px gray;
+        margin: 0 10px 20px;
+      } 
+
+      .middle .car .img img{
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px black;
+        margin-bottom: 10px; /* Add margin bottom to create a gap */
+      }
+
+
+
+        /*--*/
+        
+
+        {% comment %} .car :hover{
+            box-shadow: 2px 2px 10px black;
+        } {% endcomment %}
+
+
+
+        .desc h3{
+            width: 80%; /* Adjust width as needed */
+            margin: 10px; /* Center the description */
+            padding:1px;
+            text-align: justify; /* Justify the text */
+            overflow-wrap: break-word; /* Break long words */
+        }
+        
+        .title{
+            text-align: left;
+        }
+        .Location{
+            text-align: left;
+            font-size: 1rem;
+            color: black;
+            text-decoration:underline;
+            margin:10px;
+            padding:1px;
+        }
+        
+        .title h2{
+            text-align: left;
+            font-size: 1rem;
+            color: black;
+            text-decoration:underline;
+            margin:10px;
+            padding:1px;
+        }
+        
+
+        .title h3 {
+            text-align: left;
+            font-size: 1rem;
+            color: black;
+            margin:1px;
+            padding:1px;
+        }
+        .title .name {
+            text-align: left;
+            font-size: 12rem;
+            color: black;
+        }
+        .title h4 {
+            text-align: left;
+            font-size: 1rem;
+            color: gray;
+            margin:15px;
+            padding:0px;
+            
+        }
+
+        .middle {
+            display: inline-block;
+            justify-content: center;
+        }
+        footer {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: right;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+         }
+        
+         .copy {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: left;
+            padding-bottom: 10px;
+         }
+        
+         .company {
+            display: flex;
+            flex-direction: column;
+         }
+        
+         .company a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: small;
+         }
+        
+         .company p {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: large;
+         }
+
+</style>
+</head>
+<body>
+
+        <!-- To display the messages, use the following tag -->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <!-- For displaying as bold -->
+            <strong>Message:</strong> {{ message }}
+            <!-- For closing the message tag -->
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %} 
+    
+<!-- After clicking on the home and other text, they follow the following URLs -->
+        
+    <nav>
+        <a href="/">Home</a>
+        <a href="/viewvenue">View Venue</a>
+        <a href="/bookanevent">Book an venue</a>
+        <a href="/bokkinghistory">Booking History</a>
+        <a href="/feedback">Feedback</a>
+        <a href="/settings">Settings</a>
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Image below Navbar -->
+        {% comment %} <img src="{% static 'images/panel.png' %}" alt="Main Image">
+        
+        
+                <h2>Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h2>
+                <p>Find Hotels and Venue</p>
+                <p>Choose your customize decoration types</p>
+                <p>Easily navigate to the photographer style</p>
+                <p>Find Hotels and Venue</p>
+                
+                 </br>      {% endcomment %}
+
+        <!--we are using card layout horizontally-->
+
+        <div class="second">
+            <h2>You can go through your event type </h2>
+        {% for venue in venues %}
+         <div class=" middle"> 
+           <div class = "car">
+            
+            <div class="pictures slider">
+              <div class="pictures">
+              {% for image in venue.Venue_image.all %}
+               <div class = "img"> 
+                  <img id="slideImage" src="{{ image.image.url }}" alt="{{ venue.Name }}" width="200" height="150">
+               </div>
+              {% endfor %}
+              </div>
+            </div>
+            
+             {% comment %} <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}
+             {% comment %} <img src="{% static 'media/' %}{{ venue.Venue_image }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}      
+             
+            <div class = "title">
+                <div class="name">
+                    <h3>{{venue.Name}}</h3>
+                </div>
+                <div class="location">
+                 <h2> {{ venue.Location }} <h2>
+                 </div>    
+                <div class="desc">
+                    <h3>{{ venue.Description }}<h3>
+                </div>
+                <h4> cost:{{ venue.Cost }} <h4>
+                
+                
+                <button class="your_account">Explore this venue</button>
+            </div>
+          </div>
+         </div>
+        {% endfor %}
+              {% comment %} <div class = "cards">
+            <div class = "img1">
+             <img src="{% static 'images/banquet.png' %}" alt="Icon">
+            </div>
+            <div class = "title">
+                <h3> Banquet Hall </h3>
+            </div>
+               </div>
+             
+
+               <div class = "cards">
+            <div class = "img2">
+             <img src="{% static 'images/conferenceroom.png' %}" alt="Icon">
+            </div>
+            <div class = "title">
+                <h3>Conference room</h3>
+            </div>
+                </div> {% endcomment %}
+            
+       </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka.</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    {% comment %} <script>
+        // JavaScript for slide functionality
+        var currentSlide = 1;
+        var totalSlides = {{ total_slides }}; // Total number of slides retrieved from the server-side
+
+        function showSlide(slideIndex) {
+            var slideImage = document.getElementById('slideImage');
+            slideImage.src = "{{ slide_images }}";
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides;
+            }
+            showSlide(currentSlide);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+            } else {
+                currentSlide = 1;
+            }
+            showSlide(currentSlide);
+        };
+    </script> {% endcomment %}
+
+
+</body>
+</html>
+.desc {
+    width: 80%%; /* Adjust width as needed */
+    margin: 0 auto; /* Center the description */
+    text-align: justify; /* Justify the text */
+    overflow-wrap: break-word; /* Break long words */
+}
+
+ 
+.img img[alt] {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.middle .car{
+background-color: white;
+border-radius: 1px;
+box-shadow: 1px 1px 5px gray;
+margin: 0 10px 20px;
+} 
+
+.middle .car .img img{
+background-color: white;
+border-radius: 5px;
+box-shadow: 2px 2px 10px black;
+margin-bottom: 10px; /* Add margin bottom to create a gap */
+}
+
+.title{
+    text-align: center;
+}
+
+.title h3 {
+    text-align: center;
+    font-size: 1rem;
+    color: black;
+}
+.title h4 {
+    text-align: center;
+    font-size: 1rem;
+    color: gray;
+    margin:20px;
+    padding:0px;
+}

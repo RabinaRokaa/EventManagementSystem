@@ -15,5 +15,7 @@ urlpatterns = [
    
      path('<id>/view_venue', views.view_venue, name= "view_venue"),
      path('venue', views.venues, name= "venues"),
+         path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
+
 
 ]

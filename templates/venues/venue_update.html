@@ -1,20 +1,3 @@
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Venue</title>
-</head>
-<body>
-    <h1>Update Venue</h1>
-    <form method="post" action="{% url 'update_venue' venue_id=venue.id %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% comment %} <input type="hidden" name="id" value="{{ venue.id }}"> {% endcomment %}
-        {% comment %} {{ form.as_p }}
-        <button type="submit">Update Venue</button>
-    </form>
-</body>
-</html> {% endcomment %} 
 
 
 <!DOCTYPE html>
@@ -35,6 +18,43 @@
     {% else %}
     <p>Error: Venue ID is empty.</p>
     {% endif %}
+    {% if image_urls %}
+    <h3>Images:</h3>
+    <ul id="image-list">
+        {% for image in venue.Venue_image.all %}
+            <li id="image-{{ image.id }}">
+                <img src="{{ image.image.url }}" alt="Venue Image">
+                <button type="button" class="delete-image" data-image-id="{{ image.id }}">Delete</button>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <button type="submit">Update Venue</button>
+    </form>
+  
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.delete-image').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var imageId = this.getAttribute('data-image-id');
+                deleteImage(imageId);
+            });
+        });
+
+        function deleteImage(imageId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/delete_image/' + imageId + '/');
+            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var imageElement = document.getElementById('image-' + imageId);
+                    imageElement.parentNode.removeChild(imageElement);
+                }
+            };
+            xhr.send();
+        }
+    });
+</script>
 </body>
 </html>
-

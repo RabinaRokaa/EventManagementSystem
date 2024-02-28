@@ -10,6 +10,34 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
     
 <style>
+    h1{
+        font-weight: 800;
+        font-size: 2rem;
+    }
+    
+    h2{
+        
+        font-size: 1.8rem;
+    }
+    
+    h3{
+        
+        font-size: 1.2rem;
+    }
+    
+    h4{
+        
+        font-size: 1rem;
+    }
+    
+    h5{
+        
+        font-size: 0.8rem;
+    }
+    small{
+        font-size: 0.75rem;
+    }
+    
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -35,158 +63,69 @@
         header {
             background-color: #eee;
             padding: 0px;
-            width: 100%
+            width: 100%;
             text-align: center;
         }
 
-        button{
+        .your_account{
             background-color: rgba(0, 108, 228, 1);
             margin: 10px;
-    padding: 10px;
-    color: white;
-    border: none;
-    cursor: pointer;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
-        /* Main Content styles */
-        .main-content {
-            text-align: center;
+         .second > .your_account:hover{
+            box-shadow: 2px 2px 10px gray;
+            background-color: #ff0000; /* Change to your desired color */
+            color: #ffffff; /* Change to your desired text color */
         }
 
-        .main-content img {
-            max-width: 100%;
+        .main-content h1{
+            text-align:center;
+            margin-top:20px;
+            font-style:italic;
+            font-weight:250;
+ 
+        }
+        .middle{
+            border:1px solid lightgray;
+            padding:30px;
+            margin-top:30px;
+         }
+
+         .desc{
+            width:300px;
+            max-width:80vw
+         }
+
+         .name{
+            color:rgba(0, 108, 228, 1);
+            font-weight:2px bold;
+         }
+        
+        .title h3{
+            text-decoration:underline;
+            margin-top:2px;
             
-            height: auto;
-             margin-top: 0;/* Add margin-top to create space between navbar and image */
         }
-
-        .second {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .middle .car .pictures {
-            display: flex;
-            /* flex-direction: row; Arrange images side by side */ 
-            margin:10px;
-        }
-
-        .middle .car img {
-            flex: 0 0 200px; /* Fixed height for the image container */
-            width: 80%; /* Each image takes 50% of the space */
-            margin-right: 10px; /* Add some space between images */
-        }
-        
-        .cards {
-            width: 30%; /* Adjust width as needed */
-            display: inline-block;
-            background-color: white;
-            border-radius: 5px;
-            margin: 0 10px 20px; /* Add margin to create space between cards */
-            box-shadow: 2px 2px 10px black;
-        }
-/*--*/
-    .middle .cards {
-       display: flex;
-       flex-direction: column; /* Arrange elements vertically */
-       align-items: center; /* Center align elements */
-       background-color: white;
-       border-radius: 5px;
-       box-shadow: 2px 2px 10px black;
-       margin: 0 10px 20px;
-    }
-        
-        .middle .cards .name {
-            padding: 10px;
-        }
-
-        
-        
-         
-        .middle .cards .img img {
-            width: 80%;
-            height: 100%;
-            object-fit: cover; /* Ensure the image covers the container */
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-        }
-        
-        .desc {
-            width: 80%; /* Adjust width as needed */
-            margin: 0 auto; /* Center the description */
-            text-align: justify; /* Justify the text */
-            overflow-wrap: break-word; /* Break long words */
-        }
-        
-
-
-        .middle .cards .title {
-            flex: 0 0 200px; /* Allow the details to grow as needed */
-            max-width: calc(100% - 200px); /* Set maximum width for description container */
-            max-height: 150px; /* Set maximum height for description container */
-            overflow-y: auto; /* Allow vertical overflow */
-            padding: 10px;
-            text-align: left; /* Center align text */
-        }
-        /*--*/
-
-        .cards img {
-            width: 80%; /* Adjust width as needed */
-            display: inline-block;
-            background-color: white;
-            border-radius: 5px;
-            margin: 0 10px 20px; /* Add margin to create space between cards */
-        }
-         
-        .img img[alt] {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-       .middle .car{
-        background-color: white;
-        border-radius: 1px;
-        box-shadow: 1px 1px 5px gray;
-        margin: 0 10px 20px;
-      } 
-
-      .middle .car .img img{
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 2px 2px 10px black;
-        margin-bottom: 10px; /* Add margin bottom to create a gap */
-      }
-
-
-
-        /*--*/
-        
-
-        {% comment %} .car :hover{
-            box-shadow: 2px 2px 10px black;
-        } {% endcomment %}
-
-        .title{
-            text-align: center;
-        }
-
-        .title h3 {
-            text-align: center;
-            font-size: 1rem;
-            color: black;
-        }
-        .title h4 {
-            text-align: center;
-            font-size: 1rem;
+        .title h4{
             color: gray;
-            margin:20px;
-            padding:0px;
+            font-weight:bold;
+            
         }
 
-        .middle {
-            display: inline-block;
-            justify-content: center;
-        }
+
+        /*--*/
+       
+
+        .second > .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+
+      
+      
         footer {
             background-color: rgba(0, 59, 149, 1);
             color: white;
@@ -225,6 +164,8 @@
             font-size: large;
          }
 
+
+         
 </style>
 </head>
 <body>
@@ -253,71 +194,39 @@
     </nav>
     <!-- Main Content -->
     <div class="main-content">
-        
-        <!-- Image below Navbar -->
-        {% comment %} <img src="{% static 'images/panel.png' %}" alt="Main Image">
-        
-        
-                <h2>Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h2>
-                <p>Find Hotels and Venue</p>
-                <p>Choose your customize decoration types</p>
-                <p>Easily navigate to the photographer style</p>
-                <p>Find Hotels and Venue</p>
-                
-                 </br>      {% endcomment %}
+        <h1> "You can easily explore and choose your perfect venue from here"</h1>
 
-        <!--we are using card layout horizontally-->
-
-        <div class="second">
-            <h2>You can go through your event type </h2>
+        <div class="second" style='display:flex;justify-content:space-between;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap'>
         {% for venue in venues %}
          <div class=" middle">
            <div class = "car">
             <div class="name">
-             <h3>{{venue.Name}} </h3>
+             <h2>{{venue.Name}} </h2>
             </div>
             <div class="pictures">
-            {% for image in venue.Venue_image.all %}
-             <div class = "img"> 
-                <img src="{{ image.image.url }}" alt="{{ venue.Name }}" width="200" height="150">
-             </div>
-            {% endfor %}
+                {% if venue.Venue_image.all %}
+                <div class="img"> 
+                    <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" width="300" height="150">
+                </div>
+            {% endif %}
             </div>
             
              {% comment %} <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}
              {% comment %} <img src="{% static 'media/' %}{{ venue.Venue_image }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}      
              
             <div class = "title">
-                <h3> {{ venue.Location }} <h3>
-                <h4> cost:{{ venue.Cost }} <h4>
-                <div class="desc">
-                 <h3>{{ venue.Description }}<h3>
-                 </div>
+                <h3> {{ venue.Location }} </h3>
                 
+                <div class="desc">
+                 <p>{{ venue.Description }}</p>
+                 </div>
+                 <h4> Approx. cost:{{ venue.Cost }} </h4>
                 <button class="your_account">Explore this venue</button>
             </div>
           </div>
          </div>
         {% endfor %}
-              {% comment %} <div class = "cards">
-            <div class = "img1">
-             <img src="{% static 'images/banquet.png' %}" alt="Icon">
-            </div>
-            <div class = "title">
-                <h3> Banquet Hall </h3>
-            </div>
-               </div>
-             
-
-               <div class = "cards">
-            <div class = "img2">
-             <img src="{% static 'images/conferenceroom.png' %}" alt="Icon">
-            </div>
-            <div class = "title">
-                <h3>Conference room</h3>
-            </div>
-                </div> {% endcomment %}
-            
+              
        </div>
     </div>
     
