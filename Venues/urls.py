@@ -15,7 +15,11 @@ urlpatterns = [
    
      path('<id>/view_venue', views.view_venue, name= "view_venue"),
      path('venue', views.venues, name= "venues"),
-         path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
+     path('filterform', views.filterform, name= "filterform"),
+     path('api/search_venue', views.search_venue, name= "search_venue"),
+     path('<int:id>/explorevenue', views.explorevenue, name="explorevenue"),
+     path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
 
+    # path('api/search-city',views.searchCity,name='searchcity')
 
 ]

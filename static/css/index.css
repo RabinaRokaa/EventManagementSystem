@@ -9,7 +9,7 @@ body {
 
 /* Navbar styles */
 nav {
-    background-color: rgba(0, 59, 149, 1);
+    background-color: #003b95;
     padding: 30px; /* Increase padding to make navbar larger */
     color: white;
     text-align: center;

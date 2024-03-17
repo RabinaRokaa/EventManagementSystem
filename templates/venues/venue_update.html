@@ -1,20 +1,42 @@
-
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Venue</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/updatevenue.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Update Venue</h1>
+    
+    
     {% if venue.id %}
-    <form method="post" action="{% url 'update_venue' venue_id=venue.id %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Update Venue</button>
-    </form>
+<div class="container">
+    <div class="card" style="width:30%" >
+        <div class="breadcrumbs" >
+            <ul>
+                <li><a href="{% url 'adminpanel' %}">Home</a></li><span class="material-symbols-outlined">
+                    navigate_next
+                    </span>
+                <li><a href="{% url 'venue_list' %}">Venues</a></li><span class="material-symbols-outlined">
+                    navigate_next
+                    </span>
+                <li>Update Venue</li>
+            </ul>
+        </div>
+        
+            <form method="post" action="{% url 'update_venue' venue_id=venue.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-primary">Update Venue</button>
+            </form>
+        
+    
     {% else %}
     <p>Error: Venue ID is empty.</p>
     {% endif %}
@@ -23,15 +45,15 @@
     <ul id="image-list">
         {% for image in venue.Venue_image.all %}
             <li id="image-{{ image.id }}">
-                <img src="{{ image.image.url }}" alt="Venue Image">
+                <img src="{{ image.image.url }}" alt="Venue Image" height=50; width=80;>
+                <br>
                 <button type="button" class="delete-image" data-image-id="{{ image.id }}">Delete</button>
             </li>
         {% endfor %}
     </ul>
     {% endif %}
-    <button type="submit">Update Venue</button>
-    </form>
-  
+ </div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

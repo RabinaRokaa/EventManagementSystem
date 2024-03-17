@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+/* 
+
+input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+input[type="number"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+input[type="float input"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+
+button[type="submit"] {
+    background-color:  rgba(0, 108, 228, 1);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+button[type="submit"]:hover {
+    background-color: #d6cfec;
+    color: blue;
+}
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d1d7f1;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight:lightblack;
+}
+ */
+/* addvenue.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d1d7f1;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: auto
+}
+
+.card {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 100px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 10px; /* Adjust margin as needed */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 70%; /* Adjust width as needed */
+    max-width: 800px;
+}
+
+
+
+.logo {
+    cursor : pointer;
+}
+.breadcrumbs {
+    margin-top: 30px; /* Add margin to create space between breadcrumbs and form elements */
+}
+.material-symbols-outlined {
+    vertical-align: middle; /* Adjust the vertical alignment */
+    margin-left: 5px; /* Optional: Add some horizontal spacing between the arrow and the label */
+}
+.breadcrumbs li{
+    display: inline;
+    
+    
+}
+.breadcrumbs ul{
+    margin: 0;
+    padding: 0; 
+    display:inline;
+    
+}
+
+h2 {
+    text-align: right;
+    color: #333333;
+    display: inline;
+    margin: 30px;
+    
+}
+
+.form-group {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: light;
+    margin-top: 200px;
+    color: #555555;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+

@@ -3,7 +3,8 @@
 /*css variables*/
 :root{
    --color-dark:#363949;
-   --color-light: rgba(132, 139, 200, 0.18);
+   --color-light: #848bc82e;
+   --color-light: #707df32e;
    --color-info-dark:rgb(161, 159, 159);
    --color-info-light:rgb(255, 255, 255);
 
@@ -63,11 +64,12 @@ img {
     display: block;
     width: 100%;
 }
-
 h1{
     font-weight: 800;
     font-size: 1.8rem;
+    
 }
+
 
 h2{
     
@@ -124,10 +126,7 @@ aside.top{
     margin-top: 1.4rem;
 }
 
-/* aside .close{
-    display: none;
 
-} */
 
 /* -------sidebar */
 aside .sidebar{
@@ -136,7 +135,7 @@ aside .sidebar{
     flex-direction: column;
     height: 86vh;
     position: relative;
-    top: 3rem;
+    top: 4.65rem;
 }
 
 aside h3{
@@ -223,7 +222,8 @@ aside .sidebar .message-count{
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.8rem; /* Adjust padding as needed */
+    margin-top: 50px;
+    padding: 0.5rem; /* Adjust padding as needed */
 }
 
 .menu-btn:focus {
@@ -263,42 +263,22 @@ aside .sidebar .message-count{
 }
 
 
-/* .sidebarGo{
-    transform: translate(-443px, 0px);
-    position: absolute;
-}
-
-
-.hamburger{
-    position:absolute;
-    cursor: pointer;
-    top: 8px;
-    left: 8px;
-
-}
-
-.ham{
-    margin: top 10px;
-    margin-left: 10px;
-}
-
-.cross{
-    margin-left: 145px;
-    margin-top: 1px;
-    
-} */
-
 /*main content*/
 main{
-    margin-top: 1.4rem;
+    margin-top: 2rem;
 
+}
+
+
+main .h1{
+   margin-top: 20px;
 }
 
 main .date{
     display: inline-block;
     background: var(--color-light);
     border-radius: var(--border-radius-1);
-    margin-top: 3rem;
+    margin-top: 2rem;
     padding: 0.5rem 1.6rem;
 }
 
@@ -377,12 +357,43 @@ main .insights small{
     right: 0;
 }
 
+
 .right .top{
     display: flex;
     justify-content: end;
+    height:4.6rem;
     gap: 2rem;
     
 }
+
+
+.right .top{
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    align-items: center;
+    padding: 0 0.8rem;
+    height: 4.6rem;
+    background: white;
+    width: 100%;
+    margin: 0;
+    z-index: 2;
+    box-shadow: 0 1rem var(--color-light);
+
+}
+.right .top .logo {
+    margin-right: 92.5rem; /* Add some space to the right of the logo */
+    width: 10rem; /* Adjust the width of the logo as needed */
+}
+
+.right .top .logo{
+    position: absolute;
+    right:100px;
+}
+
+
+
 /* .right .top{
         position: fixed;
         top: 0;

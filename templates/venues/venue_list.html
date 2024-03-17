@@ -27,22 +27,39 @@
         th {
             background-color: #f2f2f2;
         }
+
+        .addvenue a:hover {
+             /* Change 'red' to whatever color you desire */
+            background-color: #d6cfec;
+            color: blue;
+          }
+
+          
+
+        
     </style>
 </head>
 <body>
   <div class="container">
     <aside>
-            
         <div class="top">
             <!--for logo-->
-            <div>
-                <img src="./images/logo.png">
-                <h2>Venue <span class="danger">TOR</span></h2>
+
+            {% comment %} <div>
+                <img src="./images/Venuevistaln.png">
+                <h2>Venue <span class="danger">Vistaln</span></h2>
             </div>
+            <hr>
+           
             <!--using google close icon-->
-            <div class="close" id="close-btn">
-                <span class="material-symbols-outlined">close</span>
-            </div>
+           <div class="menu-bar">
+               <button class="menu-btn" onclick="toggleSidebar()">
+                   <span class="material-symbols-outlined">menu</span>
+               </button>
+               <button class="close-btn" onclick="closeSidebar()">
+                   <span class="material-symbols-outlined">close</span>
+               </button>
+           </div> {% endcomment %}
             <!--sidebar/sibling of the top-->
             <div class="sidebar">
                 <a href="/adminpanel">
@@ -53,7 +70,8 @@
                     <span class="material-symbols-outlined">group</span>
                     <h3> Users </h3>    
                 </a>         
-                <a href="/venue_list" onclick="loadVenueList()">
+                <!--background-color:#707df32e-->
+                <a href="/venue_list" class="sidebar-link" style="color:blue;" onclick="loadVenueList()">
                     <span class="material-symbols-outlined">roofing</span>
                     <h3> Venues </h3>    
                 </a>         
@@ -102,7 +120,7 @@
                 <th>Description</th>
                 <th>Capacity</th>
                 <th>Cost</th>
-                <th>Venue Image</th>
+                {% comment %} <th>Venue Image</th> {% endcomment %}
                 <th>Actions</th>
                 
             </tr>
@@ -117,7 +135,7 @@
                     <td>{{ venue.Description }}</td>
                     <td>{{ venue.Capacity }}</td>
                     <td>{{ venue.Cost }}</td>
-                    <td><img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"></td>
+                    {% comment %} <td><img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"></td> {% endcomment %}
                     <td>
                         <a href="{% url 'view_venue' venue.id %}" class="btn btn-info">View</a>
                         <a href="{% url 'update_venue' venue.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>

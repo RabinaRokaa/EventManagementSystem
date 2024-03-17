@@ -29,6 +29,8 @@ function closeSidebar() {
 
 // Function to toggle sidebar
 function toggleSidebar() {
+    console.log('Toggling sidebar...');
+
     var sidebar = document.getElementById('sidebar');
     if (sidebar) {
         if (sidebar.style.display === 'none') {
@@ -41,7 +43,7 @@ function toggleSidebar() {
 
 function highlightLink(link) {
     // Remove 'active' class from all links
-    var links = document.querySelectorAll('.sidebar-link');
+    var links = document.querySelectorAll('.sidebar a');
     links.forEach(function(item) {
         item.classList.remove('active');
     });
@@ -74,3 +76,19 @@ function loadUserList() {
         })
         .catch(error => console.error('Error:', error));
 }
+
+
+
+var sidebarLinks = document.querySelectorAll('sidebar-link');
+
+// Add click event listener to each link
+sidebarLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+        // Remove 'active' class from all links
+        sidebarLinks.forEach(function(item) {
+            item.classList.remove('active');
+        });
+        // Add 'active' class to the clicked link
+        this.classList.add('active');
+    });
+});

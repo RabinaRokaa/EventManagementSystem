@@ -1,70 +1,3 @@
-{% comment %} {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rabina Roka Official Website</title>
-    <title>Rabina Roka - Web developer</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">  <!--calling css-->
-    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
-    <link rel="stylesheet" href="/static/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-<div class="container">
-    <div class = "sidebar sidebarGo" style="transition: transform 1s ease in ;">
-        <nav>
-            <ul>
-                {{request.path}}
-
-                <li class="{% if request.path == '/' %} active {% endif %}"><a href="{% url 'home' %}">Home</a></li>        <!--using through URL templates tags-->
-                {% url 'intro' as url %} 
-                <li class="{% if request.path == url %} active {% endif %}"><a href="/intro.html">My introduction</a></li>     <!--#passing direct URL-->
-                <li><a href="/linkedln.html"> Linkedln</a></li>
-               <!-- <li class ="{% if request.path == '/projects/' %} active {% endif %}"><a href="/projects">Projects</a></li>--> 
-
-                {% url 'projects' as url %}        <!--next method for calling ACTIVE-->
-                <li class ="{% if request.path == url %} active {% endif %}"><a href ="/projects">Projects</a></li>
-
-                <li><a href="/blog.html">Blog</a></li>
-                <li><a href="/contact.html">Contact Me</a></li>
-                
-                <a href="/static/https://www.facebook.com/profile.php?id=100068678105777" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="/static/https://www.linkedin.com/in/rabina-roka-b39aa1248/" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                <a href="/static/https://github.com/RabinaRoka" class="github"></a><i class="fab fa-github"></i></a>              
-            </ul>
-
-            <div class="copyright py-4 text-center text-black">
-                <div class="copy"><small>Copyright &copy; 2023 <br/>
-                    by Rabina Roka</small></div>
-            </div>
-        </nav>
-    </div>   
-
-    <div class = "main" >
-        <div class ='hamburger'>
-            
-            <img class="ham" src="{% static 'images/hamburger.png' %}" alt="" width = "23">
-            <img class="cross" src="{% static 'images/cross.png' %}" alt="" width ="23" >
-
-        </div>
-         
-    </div>          
-        
-    </div>
-</div> 
-
-<script src="{% static 'scripts/script.js' %}"></script>
-  
-</body>
-</html>
-
- {% endcomment %}
-
 
  {% load static %}
  <!DOCTYPE html>
@@ -84,14 +17,15 @@
     
      <div class="container">
          <aside>
-            
              <div class="top">
                  <!--for logo-->
     
                  <div>
-                     <img src="./images/logo.png">
-                     <h2>Venue <span class="danger">TOR</span></h2>
+                     <img src="./images/Venuevistaln.png">
+                     <h2>Venue <span class="danger">Vistaln</span></h2>
                  </div>
+                 <hr>
+                
                  <!--using google close icon-->
                  <div class="menu-bar">
                     <button class="menu-btn" onclick="toggleSidebar()">
@@ -103,20 +37,21 @@
                 </div>
                 
                  <!--sidebar/sibling of the top-->
-                 <div class="sidebar" id="sidebar">
-                     <a href="/adminpanel" class="sidebar-link">
+                 <div style="margin-bottom:-10px;" class="sidebar" id="sidebar" >
+                    <!--background-color:#707df32e;-->
+                     <a href="/adminpanel" class="sidebar-link" style="color:blue;">
                          <span class="material-symbols-outlined">grid_view</span>
                          <h3> Home </h3>    
                      </a>         
-                     <a href="/user_list" onclick="loadUserList()">
+                     <a href="/user_list" class="sidebar-link" onclick="loadUserList()">
                         <span class="material-symbols-outlined">group</span>
                         <h3> Users </h3>    
                     </a>          
-                     <a href="/venue_list" onclick="loadVenueList()">
+                     <a href="/venue_list" class="sidebar-link" onclick="loadVenueList()">
                          <span class="material-symbols-outlined">roofing</span>
                          <h3> Venues </h3>    
                      </a>         
-                     <a href="a">
+                     <a href="a" >
                          <span class="material-symbols-outlined">celebration</span>
                          <h3> Decorations </h3>    
                      </a>         
@@ -149,9 +84,8 @@
          
 
          <!--start of main section-->   
-         <main>
-            
-           <h1> Dashboard </h1>
+         <main> 
+           <h1 style="margin-top: 80px;"> Dashboard </h1>
            <div class="date">
              <input type="date">
            </div> 
@@ -225,6 +159,9 @@
          
           <div class="right">
              <div class="top">
+                <div class="logo">
+                    <img src="{% static 'images/logoa.png' %}">
+                </div>
                   <button id="btn">
                      <span class="material-symbols-outlined">account_circle</span>
                  </button> 
@@ -237,6 +174,23 @@
           </div> 
      </div>
      <script src="{% static 'js/script.js' %}"></script>
+
+     {% comment %} <select id="citySelect">
+      {for city in cities}
+      <option>{city}</option>
+      </select> {% endcomment %}
+     {% comment %} <script>
+        let searched_elements=["pokhara","baglung",'kathmandu','syangja']
+        var citySelect = document.getElementById('citySelect');
+
+        // Add change event listener
+        citySelect.addEventListener('change', function() {
+            var selectedCity = this.value;
+            console.log('Selected city:', selectedCity);
+            searched_elements.push(selectedCity)
+            // You can perform further actions based on the selected city
+        });
+     </script> {% endcomment %}
  </body>
  </html>
  

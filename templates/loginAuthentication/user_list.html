@@ -30,18 +30,32 @@
     </style>
 </head>
 <body>
-  <div class="container">
-    <aside>
-            
-        <div class="top">
-            <!--for logo-->
-            <div>
-                <img src="./images/logo.png">
-                <h2>Venue <span class="danger">TOR</span></h2>
+  <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logoa.png' %}">
+        </div>
+        <div class="profile">
+            <button id="btn">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+            <div class="info">
+                <small class="text-muted">Admin </small>
             </div>
+        </div>
+  </div>  
+  <div class="container">
+
+    <aside>
+        <div class="top">    
+           
             <!--using google close icon-->
-            <div class="close" id="close-btn">
-                <span class="material-symbols-outlined">close</span>
+            <div class="menu-bar">
+               <button class="menu-btn" onclick="toggleSidebar()">
+                   <span class="material-symbols-outlined">menu</span>
+               </button>
+               <button class="close-btn" onclick="closeSidebar()">
+                   <span class="material-symbols-outlined">close</span>
+               </button>
             </div>
             <!--sidebar/sibling of the top-->
             <div class="sidebar">
@@ -49,9 +63,10 @@
                     <span class="material-symbols-outlined">grid_view</span>
                     <h3> Home </h3>    
                 </a>         
-                <a href="/user_list" onclick="loadUserList()">
+                <!--background-color:#707df32e-->
+                <a href="/user_list" class="sidebar-link" style="color:blue;" onclick="loadUserList()" style="color:blue">
                     <span class="material-symbols-outlined">group</span>
-                    <h3> Users </h3>    
+                    <h3 style="color:blue"> Users </h3>    
                 </a>         
                 <a href="/venue_list" onclick="loadVenueList()">
                     <span class="material-symbols-outlined">roofing</span>
@@ -123,6 +138,8 @@
       </table>
     </div>
     </main>
+    </div>    
    </div>
+   <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

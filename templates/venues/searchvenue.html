@@ -1,0 +1,276 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    
+<style>
+    h1{
+        font-weight: 800;
+        font-size: 2rem;
+    }
+    
+    h2{
+        
+        font-size: 1.8rem;
+    }
+    
+    h3{
+        
+        font-size: 1.2rem;
+    }
+    
+    h4{
+        
+        font-size: 1rem;
+    }
+    
+    h5{
+        
+        font-size: 0.8rem;
+    }
+    small{
+        font-size: 0.75rem;
+    }
+    
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+        }
+        /* Navbar styles */
+        nav {
+            background-color: rgba(0, 59, 149, 1);
+            padding: 30px; /* Increase padding to make navbar larger */
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #eee;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        button a{
+            color:white;
+        }
+
+        .your_account{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+         
+        button a:hover{
+             color:black;
+        }
+
+        button your_account:hover{
+             color:red;
+        }
+
+
+
+
+         .second > .your_account:hover{
+            box-shadow: 2px 2px 10px gray;
+            
+        }
+
+        .main-content h1{
+            text-align:center;
+            margin-top:20px;
+            font-style:italic;
+            font-weight:250;
+ 
+        }
+        .middle{
+            border:1px solid lightgray;
+            padding:30px;
+            margin-top:30px;
+         }
+
+         .desc{
+            width:300px;
+            max-width:80vw
+         }
+
+         .name{
+            color:rgba(0, 108, 228, 1);
+            font-weight:2px bold;
+         }
+        
+        .title h3{
+            text-decoration:underline;
+            margin-top:2px;
+            
+        }
+        .title h4{
+            color: gray;
+            font-weight:bold;
+            
+        }
+
+
+        /*--*/
+       
+
+        .second > .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+
+      
+      
+        footer {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: right;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+         }
+        
+         .copy {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: left;
+            padding-bottom: 10px;
+         }
+        
+         .company {
+            display: flex;
+            flex-direction: column;
+         }
+        
+         .company a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: small;
+         }
+        
+         .company p {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: large;
+         }
+
+
+         
+</style>
+</head>
+<body>
+
+        <!-- To display the messages, use the following tag -->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <!-- For displaying as bold -->
+            <strong>Message:</strong> {{ message }}
+            <!-- For closing the message tag -->
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %} 
+    
+<!-- After clicking on the home and other text, they follow the following URLs -->
+        
+    <nav>
+        <a href="/">Home</a>
+        <a href="/viewvenue">View Venue</a>
+        <a href="/bookanevent">Book an venue</a>
+        <a href="/bokkinghistory">Booking History</a>
+        <a href="/feedback">Feedback</a>
+        <a href="/settings">Settings</a>
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+        {% if searched %}
+           <h1>you searched for {{ searched }}</h1>
+           <br/>
+        <!--loop through what to returns after searched -->
+           {% for venue in venues %}
+            {% comment %} {{ venue }} - {{ venue.Name}} - {{ venue.Description}} </br> {% endcomment %}
+                <a href="{% url 'explorevenue' venue.id %}">{{ venue.Name }}</a></br>
+            {% endfor %}
+        {% else %}
+           <h1> hey! you forget to search the venue </h1>
+        {% endif %}
+    </div>
+        <div class="second" style='display:flex;justify-content:left;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap'>
+        {% for venue in venues %}
+         <div class=" middle">
+           <div class = "car">
+            <div class="name">
+             <h2>{{venue.Name}} </h2>
+            </div>
+            <div class="pictures">
+                {% if venue.Venue_image.all %}
+                <div class="img"> 
+                    <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" width="300" height="150">
+                </div>
+            {% endif %}
+            </div>
+            
+             {% comment %} <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}
+             {% comment %} <img src="{% static 'media/' %}{{ venue.Venue_image }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}      
+             
+            <div class = "title">
+                <h3> {{ venue.Location }} </h3>
+                
+                <div class="desc">
+                 <p>{{ venue.Description }}</p>
+                 </div>
+                 <h4> Approx. cost:{{ venue.Cost }} </h4>
+                 <button class="your_account">
+                    <a href="{% url 'explorevenue' venue.id %}">Explore this venue</a>
+                </button>
+            </div>
+          </div>
+         </div>
+        {% endfor %}
+              
+       </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka.</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

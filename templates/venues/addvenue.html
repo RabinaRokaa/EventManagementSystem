@@ -1,10 +1,92 @@
-<!-- add_venue.html -->
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-   {% comment %} <div class="form-group m-3">
-    <input required name="images" type="file" multiple class="form-control-file">
-   </div> {% endcomment %}
-    <button type="submit">Submit</button> 
-</form>
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Form</title>
+    <link rel="stylesheet" href="{% static 'css/addvenue.css' %}">
+    {% comment %} <style>
+        /* CSS for the navbar */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .logo {
+            float: left;
+            padding: 10px;
+        }
+        <nav>
+    
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </style> {% endcomment %}
+</head>
+<body>
+
+
+
+<div class="container">
+    <div class="card">
+        <a href="{% url 'venue_list' %}">
+         <img src="{% static 'images/logo.png' %}" alt="Your Logo" class="logo" height="auto" width="100px">
+        </a>
+        <h2>Add Venue</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_Name">Name:</label>
+                {{ form.Name }}
+            </div>
+            <div class="form-group">
+                <label for="id_Location">Location:</label>
+                {{ form.Location }}
+            </div>
+            <div class="form-group">
+                <label for="id_Type">Type:</label>
+                {{ form.Type }}
+            </div>
+            <div class="form-group">
+                <label for="id_Description">Description:</label>
+                {{ form.Description }}
+            </div>
+            <div class="form-group">
+                <label for="id_Capacity">Capacity:</label>
+                {{ form.Capacity }}
+            </div>
+            <div class="form-group">
+                <label for="id_Cost">Cost:</label>
+                {{ form.Cost }}
+            </div>
+            <div class="form-group">
+                <label for="id_Venue_image">Venue Image:</label>
+                {{ form.Venue_image }}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+

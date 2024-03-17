@@ -8,6 +8,9 @@
     <title>Your Event Management System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 <style>
     h1{
@@ -66,20 +69,45 @@
             width: 100%;
             text-align: center;
         }
-
-        .your_account{
-            background-color: rgba(0, 108, 228, 1);
-            margin: 10px;
-            padding: 10px;
-            color: white;
-            border: none;
-            cursor: pointer;
+        
+        button a{
+            color:white;
+        }
+        .desc{
+        
+            margin-top:10px;
+            
+        }
+        .cost{
+               border-radius: 1px solid black; 
+                 /* Adjust as needed */
+                width: 100%; /* Ensure button spans the entire width */
+                /* Center the button horizontally */
         }
 
-         .second > .your_account:hover{
-            box-shadow: 2px 2px 10px gray;
-            background-color: #ff0000; /* Change to your desired color */
-            color: #ffffff; /* Change to your desired text color */
+       
+
+        
+        button[type="submit"] {
+            background-color: #007bff;
+            margin-top:10px;
+            margin-right:170px;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            color: blue;
+        }
+        
+    
+        .btn-primary a:hover {
+            color: white; /* color change on hover */
         }
 
         .main-content h1{
@@ -89,14 +117,34 @@
             font-weight:250;
  
         }
+
+        .search {
+            
+            align-items: center;
+        }
+
+        #searched {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+        margin-left:32rem;
+        margin-top:25px;
+        width:500px;
+    }
+
         .middle{
             border:1px solid lightgray;
             padding:30px;
             margin-top:30px;
+            position:relative;
+            width:320px;
+            max-width:90vw;
+            margin:20px;
          }
 
          .desc{
-            width:300px;
+            
             max-width:80vw
          }
 
@@ -111,8 +159,9 @@
             
         }
         .title h4{
-            color: gray;
+            color: green;
             font-weight:bold;
+            position:relative;
             
         }
 
@@ -127,6 +176,7 @@
       
       
         footer {
+            
             background-color: rgba(0, 59, 149, 1);
             color: white;
             text-align: right;
@@ -164,7 +214,39 @@
             font-size: large;
          }
 
+       
+        .search-container {
+         
+            display: flex;
+            align-items: center;
+           
+            width:500px;
+            max-width:90vw;
+            margin:auto;
+            margin-top:40px
+        }
 
+        .material-symbols-outlined {
+            font-size: 20px; /* Adjust the size of the icon */
+            color: gray; /* Adjust the color of the icon */
+            margin-right: 10px; /* Adjust spacing between the icon and the input field */
+        }
+
+        #searching{
+            padding:12px 25px;
+            border-radius:10px;
+
+             border:1px solid lightgray
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* vertically center items */
+        }
+    
+        .btn-primary {
+            margin-right: 10px; /* adjust spacing between button and text */
+        }
          
 </style>
 </head>
@@ -185,28 +267,55 @@
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
     <nav>
+        
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="/venue">Venues</a>
+           
+            <a href="#">Register</a>
+            <a href="#">Login</a>
+        {% comment %} </nav> 
         <a href="/">Home</a>
         <a href="/viewvenue">View Venue</a>
         <a href="/bookanevent">Book an venue</a>
         <a href="/bokkinghistory">Booking History</a>
         <a href="/feedback">Feedback</a>
-        <a href="/settings">Settings</a>
+        <a href="/settings">Settings</a> {% endcomment %}
+      
     </nav>
     <!-- Main Content -->
     <div class="main-content">
         <h1> "You can easily explore and choose your perfect venue from here"</h1>
+        <form class="search" method= "GET" action="{% url 'search_venue' %}">
+            {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+            <div class="search-container">
+                {% comment %} <span class="material-symbols-outlined">
+                    search
+                    </span> {% endcomment %}
+                    <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+            </div>
+            <div id="result"></div>
+            {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
+            {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
+        </form>
+        {% comment %} <h1>Search City</h1>
+        <input type="text" id="location" name="location" placeholder="Enter Location">
+    
+        <div id="result"></div> {% endcomment %}
 
-        <div class="second" style='display:flex;justify-content:space-between;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap'>
+        <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
+            
         {% for venue in venues %}
          <div class=" middle">
            <div class = "car">
             <div class="name">
              <h2>{{venue.Name}} </h2>
             </div>
-            <div class="pictures">
-                {% if venue.Venue_image.all %}
+            <div class="pictures"> 
+                {% if venue.Venue_image.all %}   
                 <div class="img"> 
-                    <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" width="300" height="150">
+                    <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover" >
                 </div>
             {% endif %}
             </div>
@@ -217,11 +326,17 @@
             <div class = "title">
                 <h3> {{ venue.Location }} </h3>
                 
-                <div class="desc">
+                {% comment %} <div class="desc">
                  <p>{{ venue.Description }}</p>
-                 </div>
-                 <h4> Approx. cost:{{ venue.Cost }} </h4>
-                <button class="your_account">Explore this venue</button>
+                </div> {% endcomment %}
+                
+                <div class="cost">
+                    <h4> NPR:{{ venue.Cost }} </h4>
+                </div>    
+                <div class="btn-container"> 
+                    <button type="submit" class="btn-primary"><a href="/{{ venue.id }}/explorevenue">Explore</a></button>
+                    
+                </div>
             </div>
           </div>
          </div>
@@ -242,9 +357,69 @@
             <a href="#">About us</a>
             <a href="#">FAQs</a>
         </div>
+
+
+
     </footer>
+   
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById("searching").addEventListener("input", function(event) {
+            const searched = event.target.value;
+            if (searched.length > 0) {
+                fetch(`/api/search_venue?searched=${searched}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        const resultContainer = document.getElementById("result");
+                        resultContainer.innerHTML = ""; // Clear previous results
+                        data.venues.forEach(venue => {
+                            const venueHTML = `
+                              <div class="second" style='display:flex;justify-content:space-between;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
+                                <div class="middle" style = 'display: flex;'>
+                                    <div class="car">
+                                        <div class="name">
+                                            <h2>${venue.Name}</h2>
+                                        </div>
+                                        <div class="pictures">
+                                            ${venue.Venue_images && venue.Venue_images.length > 0 ?
+                                                venue.Venue_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                    `
+                                                    <div class="img">
+                                                        <img src="${image}" alt="${venue.Name}" width="280" height="150">
+                                                    </div>
+                                                    ` : '').join('') : ''}
+                                        </div>
+                                        <div class="title">
+                                            <h3>${venue.Location}</h3>
+                                            <div class="desc">
+                                                <p>${venue.Description}</p>
+                                            </div>
+                                            <div class ="cost">
+                                                <h4>NPR: ${venue.Cost}</h4>
+                                            </div>
+                                            <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  `;
+                            resultContainer.innerHTML += venueHTML;
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                document.getElementById("result").innerHTML = "";
+            }
+        });
+        
+        
+        
+    
+        
+    </script>
+    <!--location instead of searched-->
 </body>
 </html>
