@@ -16,6 +16,7 @@ urlpatterns = [
      path('<id>/view_venue', views.view_venue, name= "view_venue"),
      path('venue', views.venues, name= "venues"),
      path('filterform', views.filterform, name= "filterform"),
+     path('api/filter_venues', views.filter_venues, name= "filter_venues"),
      path('api/search_venue', views.search_venue, name= "search_venue"),
      path('<int:id>/explorevenue', views.explorevenue, name="explorevenue"),
      path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),

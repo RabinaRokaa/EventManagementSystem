@@ -364,6 +364,45 @@ def view_venue(request, id):
 #     results = Venues.objects.filter(Location__icontains=location).values()  # Assuming location is a field in YourModel
 #     return JsonResponse(list(results), safe=False)
 
+from django.http import JsonResponse
+from django.db.models import Q
+from .models import Venues
+@require_GET
+def filter_venues(request):
+    venues = Venues.objects.all()
+    name_contains_query = request.GET.get('Name_contains')
+    location_contains_query = request.GET.get('Location_exact')
+    title_or_author_query = request.GET.get('Name_or_Location')
+    min_cost = request.GET.get('view_count_min')
+    max_cost = request.GET.get('view_count_max')
+
+    if name_contains_query != '' and name_contains_query is not None:
+        venues = venues.filter(Name__icontains=name_contains_query)
+
+    if location_contains_query != '' and location_contains_query is not None:
+        venues = venues.filter(Location__icontains=location_contains_query)
+
+    if title_or_author_query != '' and title_or_author_query is not None:
+        venues = venues.filter(Q(Name__icontains=title_or_author_query) | Q(Location__icontains=title_or_author_query)).distinct()
+    
+    if min_cost:
+        venues = venues.filter(Cost__gte=min_cost)
+
+    if max_cost:
+        venues = venues.filter(Cost__lte=max_cost)
+
+    data = [{
+        'Name': venue.Name,
+        'Location': venue.Location,
+        'Description': venue.Description,
+        'Cost': venue.Cost,
+        'Venue_images': [image.image.url for image in venue.Venue_image.all()]
+        
+    } for venue in venues]
+
+
+    # Return JSON response
+    return JsonResponse({'venues': data})
 
 #name chanage k sanga change garnye ho tei
 def filterform(request):

@@ -75,7 +75,7 @@
         }
         .desc{
         
-            margin-top:10px;
+            margin-top:12px;
             
         }
         .cost{
@@ -155,13 +155,14 @@
         
         .title h3{
             text-decoration:underline;
-            margin-top:2px;
+            margin-top:8px;
             
         }
         .title h4{
             color: green;
             font-weight:bold;
             position:relative;
+            margin-top:15px;
             
         }
 
@@ -170,6 +171,10 @@
        
 
         .second > .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+
+        .middle:hover{
             box-shadow: 2px 2px 10px gray;
         } 
 
@@ -219,7 +224,15 @@
          
             display: flex;
             align-items: center;
-           
+            width:500px;
+            max-width:90vw;
+            margin:auto;
+            margin-top:40px
+        }
+
+        .whole{
+            display:flex;
+            align-items: center;
             width:500px;
             max-width:90vw;
             margin:auto;
@@ -247,6 +260,18 @@
         .btn-primary {
             margin-right: 10px; /* adjust spacing between button and text */
         }
+
+        .venue-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Adjust as needed */
+          }
+          
+          
+          
+          
+          
+          
          
 </style>
 </head>
@@ -285,20 +310,110 @@
     </nav>
     <!-- Main Content -->
     <div class="main-content">
-        <h1> "You can easily explore and choose your perfect venue from here"</h1>
+       <div class="whole"> 
+        <div class="filter-container">
+            <div class="filters">
+                <a href="#" id="filterLink"><h1> Filters </h1></a>
+            </div>
+            <!-- Add the filter form here -->
+            
+                <form method="GET"  id="filterForm" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" type="search" name="Name_or_Location" placeholder="Name or location..." />
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>        
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="viewCountMin">Minimum cost</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                      </div>
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="viewCountMax">Maximum cost</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                      </div>
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="publishDateMin">Available date</label>
+                        <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                      </div>
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="publishDateMax">Publish date maximum</label>
+                        <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="category">Type</label>
+                        <select id="category" class="form-control" name="category">
+                          <option selected>Choose...</option>
+                          {% for cat in categories %}
+                          
+                          <option value="{{ cat }}">{{ cat }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                        <label class="form-check-label" for="reviewed">
+                          Reviewed
+                        </label>
+                        <button id="filterSearch" class="btn btn-primary">Search</button>
+                      </div>
+                    </div>
+                    </div>
+                  </form>
+        </div>
+        {% comment %} <div id="result" class="filter-container"></div> {% endcomment %}
+        
+        
         <form class="search" method= "GET" action="{% url 'search_venue' %}">
             {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
             <div class="search-container">
+                {% comment %} <div class="filters">
+                    <a href="/filterform"><h1> Filters </h1></a>
+                </div>  {% endcomment %}
                 {% comment %} <span class="material-symbols-outlined">
                     search
                     </span> {% endcomment %}
                     <input type="text" id="searching" name="searched" placeholder="Enter Location" >
                     <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
             </div>
-            <div id="result"></div>
+            <div id="result" class="venue-container"></div>
             {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
             {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
         </form>
+       </div> 
         {% comment %} <h1>Search City</h1>
         <input type="text" id="location" name="location" placeholder="Enter Location">
     
@@ -376,13 +491,17 @@
                         const resultContainer = document.getElementById("result");
                         resultContainer.innerHTML = ""; // Clear previous results
                         data.venues.forEach(venue => {
+                            console.log(venue)
                             const venueHTML = `
-                              <div class="second" style='display:flex;justify-content:space-between;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
-                                <div class="middle" style = 'display: flex;'>
+                              
+                                  <div class="middle" style = 'display: flex;'>
                                     <div class="car">
                                         <div class="name">
                                             <h2>${venue.Name}</h2>
                                         </div>
+
+
+                                        
                                         <div class="pictures">
                                             ${venue.Venue_images && venue.Venue_images.length > 0 ?
                                                 venue.Venue_images.map((image, index) => index === 0 ? // Corrected syntax here
@@ -394,18 +513,21 @@
                                         </div>
                                         <div class="title">
                                             <h3>${venue.Location}</h3>
-                                            <div class="desc">
+                                            <div class="desc" style = 'position:relative'>
                                                 <p>${venue.Description}</p>
                                             </div>
-                                            <div class ="cost">
+                                            <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
                                                 <h4>NPR: ${venue.Cost}</h4>
                                             </div>
-                                            <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
                                             
+                                            <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
+                                                <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
+                                                
+                                            </div>
                                         </div>
+                                        
                                     </div>
-                                </div>
-                            </div>  `;
+                                  </div> `;
                             resultContainer.innerHTML += venueHTML;
                         });
                     })
@@ -414,12 +536,8 @@
                 document.getElementById("result").innerHTML = "";
             }
         });
-        
-        
-        
-    
-        
     </script>
     <!--location instead of searched-->
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
