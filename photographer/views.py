@@ -122,4 +122,18 @@ def view_photographer(request, id):
     photographers = get_object_or_404(photographer, id=id)
     
     # Render the template with the photographers data
-    return render(request, "photographer/view_photographer.html", {'photographers': photographers})    
+    return render(request, "photographer/view_photographer.html", {'photographers': photographers})   
+
+
+
+def venues(req):
+    venues = photographer.objects.all()  #fetch venues from the database
+    print('lol')
+    return render(req, 'venues/venue.html', {'venues': venues})
+
+def explorevenue(request, id):
+    # Fetch the venue with the given ID from the database(euta venue click garda tesko matra data display garna)
+    venue = get_object_or_404(photographer, id=id)
+    
+    # Render the template with the venue data
+    return render(request, 'venues/explorevenue.html', {'venue': venue})

@@ -100,3 +100,17 @@ def view_decoration(request, id):
     
     # Render the template with the decorations data
     return render(request, "decoration/view_decoration.html", {'decorations': decorations})    
+
+
+
+def decorations(req):
+    decorations = decoration.objects.all()  #fetch decorations from the database
+    print('lol')
+    return render(req, 'decoration/decorations.html', {'decorations': decorations})
+
+def exploredecoration(request, id):
+    # Fetch the venue with the given ID from the database(euta venue click garda tesko matra data display garna)
+    decorations = get_object_or_404(decoration, id=id)
+    
+    # Render the template with the venue data
+    return render(request, 'decoration/exploredecoration.html', {'decoration': decorations})

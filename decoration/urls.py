@@ -10,6 +10,9 @@ from .views import view_decoration
 urlpatterns = [
     path('adddecoration', views.adddecoration, name= "adddecoration"),  #Path for the register page
     path('decoration_list', views.decoration_list, name= "decoration_list"),  #Path for the register page
+    path('decorations', views.decorations, name= "decorations"),  #Path for the register page
+    path('<int:id>/exploredecoration', views.exploredecoration, name="exploredecoration"),
+    path('decoration_list', views.decoration_list, name= "decoration_list"),  #Path for the register page
     path('<id>/view_decoration', views.view_decoration, name= "view_decoration"),  #Path for the register page
     path('<decoration_id>/update_decoration', views.update_decoration, name= "update_decoration"),  #Path for the register page
     path('<id>/delete_decoration', views.delete_decoration, name= "delete_decoration"),  #Path for the register page
