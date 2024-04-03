@@ -13,5 +13,7 @@ urlpatterns = [
     path('<photographer_id>/delete_photographer', views.delete_photographer, name= "delete_photographer"),  #Path for the register page
     path('<id>/view_photographer', views.view_photographer, name= "view_photographer"),  #Path for the register page
     path('<photographer_id>/update_photographer', views.update_photographer, name= "update_photographer"),  #Path for the register
+    path('photographers', views.photographers, name= "photographers"),  #Path for the register page
+    path('<int:id>/explorephotographer', views.explorephotographer, name="explorephotographer"),
 
 ]    

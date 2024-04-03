@@ -1,0 +1,544 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    
+<style>
+    h1{
+        font-weight: 800;
+        font-size: 2rem;
+    }
+    
+    h2{
+        
+        font-size: 1.8rem;
+    }
+    
+    h3{
+        
+        font-size: 1.2rem;
+    }
+    
+    h4{
+        
+        font-size: 1rem;
+    }
+    
+    h5{
+        
+        font-size: 0.8rem;
+    }
+    small{
+        font-size: 0.75rem;
+    }
+    
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+        }
+
+        
+        /* Navbar styles */
+        nav {
+            background-color: rgba(0, 59, 149, 1);
+            padding: 30px; /* Increase padding to make navbar larger */
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            text-photographer: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #eee;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .main-content{
+            align:center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .your_account{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+         .second > .your_account:hover{
+            box-shadow: 2px 2px 10px gray;
+            background-color: #ff0000; /* Change to your desired color */
+            color: #ffffff; /* Change to your desired text color */
+        }
+
+        .main-content h1{
+            text-align:center;
+            margin-top:20px;
+            font-style:italic;
+            font-weight:250;
+ 
+        }
+        .middle{
+            border:1px solid lightgray;
+            padding:30px;
+            margin-top:30px;
+         }
+
+         .desc{
+            width:300px;
+            max-width:80vw
+         }
+
+         .name{
+            color:rgba(0, 108, 228, 1);
+            font-weight:2px bold;
+         }
+        
+        .title h3{
+            text-photographer:underline;
+            margin-top:2px;
+            
+        }
+        .title h4{
+            color: gray;
+            font-weight:bold;
+            
+        }
+        button a{
+            color:black;
+        }
+
+        .your_account{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button[type="submit"] {
+            
+            color: black;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #007bff;
+        }
+        
+        button a:hover{
+             color:white;
+        }
+
+        button your_account:hover{
+             color:red;
+        }
+
+
+        /*--*/
+       
+        .material-symbols-outlined{
+            font-size:15px;
+        }
+        .second > .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+        
+        .photographer-details{
+            margin:20px;
+        }
+        
+        .photographer-location{
+            margin-top:15px;
+        }
+        .main-content img {
+            
+             margin-top: 0;/* Add margin-top to create space between navbar and image */
+        }
+      
+        footer {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: right;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+         }
+        
+         .copy {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: left;
+            padding-bottom: 10px;
+         }
+        
+         .company {
+            display: flex;
+            flex-direction: column;
+         }
+        
+         .company a {
+            color: white;
+            text-photographer: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: small;
+         }
+        
+         .company p {
+            color: white;
+            text-photographer: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: large;
+         }
+
+         .facility li {
+            display:inline;
+            color:gray;
+            margin-top:20px;
+            margin-right:2rem;
+        }
+         .facility ul {
+            display:inline;
+            margin-right:1rem;
+            border-radius: 1px solid black;
+        }
+        
+        .facility h3{
+            margin-top: 30px;
+        }
+
+        .Contact{
+            background-color:white;
+            text-align:center;
+        }
+        .more {
+            position: relative;
+        }
+        
+        .image-container {
+            background-image: url("{% static 'images/image.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 200px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .image-container h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            
+        }
+        
+        .btn-primary {
+            background-color:white;
+            color:black;
+            
+        }
+        .hi{
+            background-color:white;
+            color:black;
+        }
+        .h2{
+            color:blue;
+        }
+        
+        .mix{
+            display: flex;
+            justify-content: space-around;
+        }
+        form{
+            display: flex;
+            flex: 0.4 1 auto;
+            flex-direction: column;
+        }
+
+        .input-div{
+            flex: 1 1 auton;
+            margin: 1 rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        input, button{
+            flex:1;
+            width: 300px;
+            border-radius:0.5rem;
+            line-height: 1.5;
+            font-size: 1.5rem;
+            color: blue;
+        }
+         
+        button{
+            background-color: blue;
+            color:blue;
+            outline:none;
+            margin-top:5px;
+
+        }
+        button:hover{
+           color: white;
+           background-color:blue;
+        }
+
+</style>
+</head>
+<body>
+
+        <!-- To display the messages, use the following tag -->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <!-- For displaying as bold -->
+            <strong>Message:</strong> {{ message }}
+            <!-- For closing the message tag -->
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %} 
+    
+<!-- After clicking on the home and other text, they follow the following URLs -->
+        
+    <nav>
+        <a href="/">Home</a>
+        <a href="/viewphotographer">View photographer</a>
+        <a href="/bookanevent">Book an photographer</a>
+        <a href="/bokkinghistory">Booking History</a>
+        <a href="/feedback">Feedback</a>
+        <a href="/settings">Settings</a>
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!--to show image below the navbar-->
+        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" height="50%">
+
+       
+        <!-- Single photographer Details -->
+        <div class="photographer-details">
+            <h2>{{ photographer.Username }}</h2>
+            <hr>   <!--for horizontal line-->
+            <div class="photographer-description">
+                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Username}} </span><br> <br> {{ photographer.Description }}</p>
+            </div>
+            <!-- Loop through all images -->
+            <div class="photographer-images">
+                <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >photographer</span></p>
+                {% for image in photographer.Photographer_image.all %}
+                    <img src="{{ image.image.url }}" alt="{{ photographer.Username }}" width="300" height="150">
+                {% endfor %}
+            </div>
+            <div class="facility">
+                <h3>Facilities</h3>
+                
+                    <li> <span class="material-symbols-outlined">
+                        wifi
+                        </span>Free wifi </li>
+                    <li> <span class="material-symbols-outlined">
+                        lock
+                        </span>Security</li>
+                    <li><span class="material-symbols-outlined">
+                        restaurant
+                        </span>Restaurants</li>
+                    <li><span class="material-symbols-outlined">
+                        garage_home
+                        </span>Free Parking </li>
+                    <li><span class="material-symbols-outlined">
+                        mode_fan
+                        </span>AC </a></li>
+                
+            </div>
+           
+
+            <div class="photographer-location">
+                <h3>Location: {{ photographer.Phone_Number }}</h3>
+            </div>
+            <div class="photographer-capacity">
+                <h4>Capacity: {{ photographer.Email }}</h4>
+            </div>
+            <div class="photography_type">
+                <h4>Category: {{ photographer.Photography_type }}</h4>
+            </div>
+            <div class="event_type">
+                <h4>Category: {{ photographer.Event_type }}</h4>
+            </div>
+            
+            <div class="photographer-cost">
+                <h4>Approx. cost: {{ photographer.Cost }}</h4>
+            </div>
+            <form id="booking-form" action="" method="POST">
+              
+                  <div class="input-div">
+                    <label form="id_check_incheck_in"> check_in: </label>
+                    <input type="datetime-local" id="id_check_in" name="check_in">
+                  </div>  
+                  <div class="input-div">
+                    <label form="id_check_out"> check_out: </label>
+                    <input type="datetime-local" id="id_check_out" name="check_out">
+                  </div>  
+                  {% comment %} <div class="input-div">
+                    <button type="submit"> Book the photographer </Button>
+                  </div>   {% endcomment %}
+                  <button class="your_account" id="formBook">
+                      <a href="">Book Now</a>
+                      {% comment %} <a href="{% url 'login'  %}">Book Now</a> {% endcomment %}
+                  </button>
+                </form>  
+
+        </div>
+       
+    </div>
+    <hr>
+    <div class="mix">
+
+     <div class="Contact">
+        <p><span style="font-size:1.6rem;"> Contact</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+        
+        <li> <span class="material-symbols-outlined">
+            wifi
+            </span>{{photographer.Name}}</li>
+            <br>
+        <li> <span class="material-symbols-outlined">
+            wifi
+            </span>{{photographer.Location}}</li>
+            <br>
+        <li> <span class="material-symbols-outlined">
+            wifi
+            </span>{{photographer.Name}}</li>
+     </div> 
+    
+         
+    </div> 
+     <hr>
+    <div class="more">
+        <div class="image-container">
+            <h2>Need more than just a photographer?</h2>
+            <div class="btn-container"> 
+                <button type="submit" class="hi"><a href="/{{ photographer.id }}/explorephotographer">photographer</a></button>
+                <button type="submit" class="hi"><a href="/{{ photographer.id }}/explorephotographer">Photography</a></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka.</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% comment %} <script>
+      
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookingForm = document.getElementById('formBook');
+        
+            bookingForm.addEventListener('click', function (event) {
+                console.log("oye oye oye")
+                event.preventDefault(); // Prevent the default form submission behavior
+                // Gather data from HTML elements
+                const event_type = document.getElementById('event_type').innerText;
+                console.log(document.getElementById('event_type').innerText)
+                const name = document.getElementById('photographer-details').innerText;
+                const location = document.getElementById('photographer-location').innerText;
+                const capacity = document.getElementById('photographer-capacity').innerText;
+                const description = document.getElementById('photographer-description').innerText;
+               // const photographer = document.getElementById('photographer').innerText;
+               // const photography = document.getElementById('photography').innerText;
+                const date = document.getElementById('id_check_in').value;
+                const end_date = document.getElementById('id_check_out').value;
+                const cost = document.getElementById('photographer-cost').innerText;
+                console.log("hello",event_type,name,locatin,capacity)
+                // Prepare data to be sent to the backend
+                const formData = new FormData();
+                formData.append('event_type', event_type);
+                formData.append('name', name);
+                formData.append('location', location);
+                formData.append('capacity', capacity);
+                formData.append('description', description);
+                //formData.append('photographer', photographer);
+                //formData.append('photography', photography);
+                formData.append('date', date);
+                formData.append('end_date', end_date);
+                formData.append('cost', cost);
+        console.log(formData.name)
+                // Send data to the backend using a POST request
+                fetch('/book_event', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    // Handle success response from the backend
+                    console.log(data.message); // Log the success message
+                    // You can perform any other actions here upon successful booking
+                })
+                .catch(error => {
+                    // Handle error response from the backend
+                    console.error('There was a problem with the booking:', error.message);
+                    // You can display an error message to the user or perform other actions
+                });
+            });
+        });
+        
+    </script>  {% endcomment %}
+</body>
+</html>

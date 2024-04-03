@@ -1,0 +1,591 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+<style>
+    h1{
+        font-weight: 800;
+        font-size: 2rem;
+    }
+    
+    h2{
+        
+        font-size: 1.8rem;
+    }
+    
+    h3{
+        
+        font-size: 1.2rem;
+    }
+    
+    h4{
+        
+        font-size: 1rem;
+    }
+    
+    h5{
+        
+        font-size: 0.8rem;
+    }
+    small{
+        font-size: 0.75rem;
+    }
+    
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+        }
+        /* Navbar styles */
+        nav {
+            background-color: rgba(0, 59, 149, 1);
+            padding: 30px; /* Increase padding to make navbar larger */
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            text-photographer: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #eee;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        button a{
+            color:white;
+        }
+        .desc{
+        
+            margin-top:12px;
+            
+        }
+        .cost{
+               border-radius: 1px solid black; 
+                 /* Adjust as needed */
+                width: 100%; /* Ensure button spans the entire width */
+                /* Center the button horizontally */
+                
+        }
+
+       
+
+        
+        button[type="submit"] {
+            background-color: #007bff;
+            margin-top:10px;
+            margin-right:170px;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            color: blue;
+        }
+        
+    
+        .btn-primary a:hover {
+            color: white; /* color change on hover */
+        }
+
+        .main-content{
+               display:flex;
+               justify-content: flex-start;
+        }
+
+        .main-content h1{
+            margin-right:30px;
+            margin-top:20px;
+            font-style:italic;
+            font-weight:250;
+ 
+        }
+        .form-row>.col, .form-row>[class*=col-]{
+            padding:0px;
+        }
+        
+
+        .search {
+            
+            align-items: center;
+        }
+
+        #searched {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+        margin-left:32rem;
+        margin-top:25px;
+        width:500px;
+    }
+
+        .middle{
+            border:1px solid lightgray;
+            padding:30px;
+            margin-top:30px;
+            position:relative;
+            width:320px;
+            max-width:90vw;
+            margin:20px;
+         }
+
+         .desc{
+            
+            max-width:80vw
+         }
+
+         .name{
+            color:rgba(0, 108, 228, 1);
+            font-weight:2px bold;
+         }
+        
+        .title h3{
+            text-photographer:underline;
+            margin-top:8px;
+            
+        }
+        .title h4{
+            color: green;
+            font-weight:bold;
+            position:relative;
+            margin-top:15px;
+            
+        }
+
+
+        /*--*/
+       
+
+        .second > .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+
+        .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+
+      
+      
+        footer {
+            
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: right;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+         }
+        
+         .copy {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: left;
+            padding-bottom: 10px;
+         }
+        
+         .company {
+            display: flex;
+            flex-direction: column;
+         }
+        
+         .company a {
+            color: white;
+            text-photographer: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: small;
+         }
+        
+         .company p {
+            color: white;
+            text-photographer: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: large;
+         }
+
+       
+        .search-container {
+         
+            display: flex;
+            align-items: center;
+            width:500px;
+            max-width:90vw;
+            margin:auto;
+            margin-top:-65px;
+            margin-left:30%;
+        }
+
+        .whole{
+           
+            align-items: center;
+            width:100%;
+            max-width:90vw;
+            margin:auto;
+            margin-top:40px;
+            margin-left:100px;
+        }
+
+        .material-symbols-outlined {
+            font-size: 20px; /* Adjust the size of the icon */
+            color: gray; /* Adjust the color of the icon */
+            margin-right: 10px; /* Adjust spacing between the icon and the input field */
+        }
+
+        #searching{
+            padding:12px 25px;
+            border-radius:10px;
+
+             border:1px solid lightgray
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* vertically center items */
+        }
+    
+        .btn-primary {
+            margin-right: 10px; /* adjust spacing between button and text */
+        }
+
+        .photographer-container {
+            display: flex;
+            margin-top:0px;
+            flex-wrap: wrap;
+            margin-left:50px;
+          }
+           
+        /* Style for the input box */
+        .form-control {
+             width: 150px; /* Set the width of the input box */
+        }
+
+
+        .input-group{
+            width:45%;
+        }
+
+          
+          /* Style for the input box */
+   .form-control {
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    border-color: #ced4da; /* Add border color */
+   }
+
+/* Style for the search icon */
+   .input-group-text {
+    background-color: transparent; /* Set background color of the search icon container */
+    border-color: #ced4da; /* Set border color */
+   }
+
+/* Adjust padding and border for the search icon */
+   .input-group-text > .fa {
+    padding: 0.375rem 0.75rem; /* Adjust padding */
+    border-left: 1px solid #ced4da; /* Add left border */
+   }
+
+          
+          
+          
+          
+         
+</style>
+</head>
+<body>
+
+        <!-- To display the messages, use the following tag -->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <!-- For displaying as bold -->
+            <strong>Message:</strong> {{ message }}
+            <!-- For closing the message tag -->
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %} 
+    
+<!-- After clicking on the home and other text, they follow the following URLs -->
+        
+    <nav>
+        
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="/photographer">Photographers</a>
+           
+            <a href="#">Register</a>
+            <a href="#">Login</a>
+        {% comment %} </nav> 
+        <a href="/">Home</a>
+        <a href="/viewphotographer">View photographer</a>
+        <a href="/bookanevent">Book an photographer</a>
+        <a href="/bokkinghistory">Booking History</a>
+        <a href="/feedback">Feedback</a>
+        <a href="/settings">Settings</a> {% endcomment %}
+      
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+       <div class="whole"> 
+        {% comment %} <div class="filter-container">
+            <div class="filters">
+                <a href="#" id="filterLink"><h1> Filters </h1></a>
+            </div>
+            <!-- Add the filter form here -->
+            
+                <form method="GET"  action="{% url 'filter_photographers' %}" id="filterForm" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="photographer Name.." />
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent">
+                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                    </div>
+                                </span>
+                            </div>
+                        </div>        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                <span class="input-group-append">
+                                    <div class="input-group-text bg-transparent">
+                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                    </div>
+                                </span>
+                            </div>
+                        </div>        
+                    </div>
+                   
+                    <div class="form-row">
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="viewCountMin">Minimum cost</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                      </div>
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="viewCountMax">Maximum cost</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                      </div>
+                      {% comment %} <div class="form-group col-md-2 col-lg-2">
+                        <label for="publishDateMin">Available date</label>
+                        <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                      </div>
+                      <div class="form-group col-md-2 col-lg-2">
+                        <label for="publishDateMax">Publish date maximum</label>
+                        <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                      </div> {% endcomment %}
+                      <div class="form-group col-md-4">
+                        {% comment %} <label for="category">Category</label>
+                        <select id="category" class="form-control" name="category">
+                          <option selected>Choose...</option>
+                          {% for cat in categories %}
+                          
+                          <option value="{{ cat }}">{{ cat }}</option>
+                          {% endfor %}
+                        </select> {% endcomment %}
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label for="category">Category</label>
+                            <select id="category" class="form-control" name="category">
+                              <option selected>Choose...</option>
+                              {% for cat in categories %}
+                              
+                              <option value="{{ cat }}">{{ cat }}</option>
+                              {% endfor %}
+                            </select>
+                        </div>        
+                    </div>
+                    <div class="form-group">
+                      
+                        {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                        <label class="form-check-label" for="reviewed">
+                          Reviewed
+                        </label> {% endcomment %}
+                        <button id="filterSearch" class="btn btn-primary" style="margin-right:30px;">Search</button>
+                      
+                    </div> 
+                    </div>
+                    
+                  </form>
+                  {% comment %} <div id="result" class="photographer-container"></div> {% endcomment %}
+                  {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
+        <!--</div>-->
+         
+        
+        
+        {% comment %} <form class="search" method= "GET" action="{% url 'search_photographer' %}">
+            {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+            <div class="search-container">
+                {% comment %} <div class="filters">
+                    <a href="/filterform"><h1> Filters </h1></a>
+                </div>  {% endcomment %}
+                {% comment %} <span class="material-symbols-outlined">
+                    search
+                    </span> {% endcomment %}
+                    {% comment %} <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+            </div> {% endcomment %}
+            
+            {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search photographers.." aria-label="Search" name ="searched"> {% endcomment %}
+            {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
+        {% comment %} </form>
+       </div> 
+       <div id="result" class="photographer-container"></div> {% endcomment %} 
+        {% comment %} <h1>Search City</h1>
+        <input type="text" id="location" name="location" placeholder="Enter Location">
+    
+        <div id="result"></div> {% endcomment %}
+
+        <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
+            
+        {% for photographer in photographers %}
+         <div class=" middle">
+           <div class = "car">
+            <div class="name">
+             <h2>{{photographer.Name}} </h2>
+            </div>
+            <div class="pictures"> 
+                {% if photographer.Photographer_image.all %}   
+                <div class="img"> 
+                    <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Name }}" style="width:280px;height:150px;object-fit:cover" >
+                </div>
+            {% endif %}
+            </div>
+            
+             {% comment %} <img src="{{ photographers.photographer_image.url }}" alt="{{ photographer.Name }}" width="100"> {% endcomment %}
+             {% comment %} <img src="{% static 'media/' %}{{ photographer.photographer_image }}" alt="{{ photographer.Name }}" width="100"> {% endcomment %}      
+             
+            <div class = "title">
+                <h3> {{ photographer.Type }} </h3>
+                
+                {% comment %} <div class="desc">
+                 <p>{{ photographer.Description }}</p>
+                </div> {% endcomment %}
+                
+                <div class="cost">
+                    <h4> NPR:{{ photographer.Cost }} </h4>
+                </div>    
+                <div class="btn-container"> 
+                    <button type="submit" class="btn-primary"><a href="/{{ photographer.id }}/explorephotographer">Explore</a></button>
+                    
+                </div> 
+                
+                
+            </div>
+          </div>
+         </div>
+        {% endfor %}
+              
+       </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka.</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+
+
+
+    </footer>
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById("searching").addEventListener("input", function(event) {
+            const searched = event.target.value;
+            if (searched.length > 0) {
+                fetch(`/api/search_photographer?searched=${searched}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        const resultContainer = document.getElementById("result");
+                        resultContainer.innerHTML = ""; // Clear previous results
+                        data.photographers.forEach(photographer => {
+                            console.log(photographer)
+                            const photographerHTML = `
+                              
+                                  <div class="middle" style = 'display: flex;'>
+                                    <div class="car">
+                                        <div class="name">
+                                            <h2>${photographer.Name}</h2>
+                                        </div>
+
+
+                                        
+                                        <div class="pictures">
+                                            ${photographer.photographer_images && photographer.photographer_images.length > 0 ?
+                                                photographer.Photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                    `
+                                                    <div class="img">
+                                                        <img src="${image}" alt="${photographer.Name}" width="280" height="150">
+                                                    </div>
+                                                    ` : '').join('') : ''}
+                                        </div>
+                                        <div class="title">
+                                            <h3>${photographer.Location}</h3>
+                                            <div class="desc" style = 'position:relative'>
+                                                <p>${photographer.Description}</p>
+                                            </div>
+                                            <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
+                                                <h4>NPR: ${photographer.Cost}</h4>
+                                            </div>
+                                            
+                                            <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
+                                                <button type="submit" class="btn-primary"><a href="/${ photographer.id }/explorephotographer">Explore</a></button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                  </div> `;
+                            resultContainer.innerHTML += photographerHTML;
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                document.getElementById("result").innerHTML = "";
+            }
+        });
+    </script>
+    
+    <!--location instead of searched-->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
