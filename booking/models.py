@@ -1,11 +1,12 @@
 from django.db import models
 from django.db import models
 from django.db import models
+from django.utils import timezone
+
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
+from django.conf import settings
 class booking(models.Model): #making class
-    Booking_id = models.IntegerField(default=0, null=True, blank=True)
-
     Event_Type = models.CharField(max_length=100) #making field
     Name = models.CharField(max_length=100) #making field
     Location = models.CharField(max_length=100) #making field
@@ -14,8 +15,10 @@ class booking(models.Model): #making class
     Decoration = models.CharField(max_length=100) #making field
     Photography = models.CharField(max_length=100) #making field
     #for adding editor in description in admin page
-    Date = models.DateTimeField()
+    # Date = models.DateTimeField(default=timezone.now)
+    # EndDate = models.DateTimeField(timezone.now() + timezone.timedelta(days=1))
     Cost= models.IntegerField(default=0, null=True, blank=True)
-    #field for uploading image 
-    Image=models.FileField(upload_to="decoration/", max_length=250,null=True,default=None)
-   
+
+# class book(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     venue = models.ForeignKey(Venues, on_delete=models.CASCADE)

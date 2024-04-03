@@ -126,7 +126,7 @@ def user_login(request , backend=None):
             if user_param.is_superuser:
                 return redirect('adminpanel')
             else:  
-                return render(request, "loginAuthentication/organizerpanel.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
+                return render(request, "venues/venue.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
         else:
             messages.error(request, "Wrong Credentials!!")
 
@@ -156,7 +156,7 @@ def activate(request,uidb64,token):
         myuser.save()
         auth_login(request, myuser)
         messages.success(request, "Your Account has been activated!!Now, you can login")
-        return render(request,'loginAuthentication/index.html',{'done':1})
+        return render(request,'loginAuthentication/login.html',{'done':1})
     else:
         print("Invalid activation attempt")
         return render(request,'activation_failed.html')

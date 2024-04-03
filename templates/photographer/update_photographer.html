@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Decoration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/updateDecoration.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    
+    {% if photographers.id %}
+<div class="container">
+    <div class="card" style="width:30%" >
+        <div class="breadcrumbs" >
+            <ul>
+                <li><a href="{% url 'adminpanel' %}">Home</a></li><span class="material-symbols-outlined">
+                    navigate_next
+                    </span>
+                <li><a href="{% url 'photographer_list' %}">Photographers/a></li><span class="material-symbols-outlined">
+                    navigate_next
+                    </span>
+                <li>Update Decoration</li>
+            </ul>
+        </div>
+        
+            <form method="post" action="{% url 'update_decoration' decoration_id=photographers.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-primary">Update Decoration</button>
+            </form>
+        
+    
+    {% else %}
+    <p>Error: Decoration ID is empty.</p>
+    {% endif %}
+    {% if image_urls %}
+    <h3>Images:</h3>
+    <ul id="image-list">
+        {% for image in decoration.Decoration_image.all %}
+            <li id="image-{{ image.id }}">
+                <img src="{{ image.image.url }}" alt="Decoration Image" height=50; width=80;>
+                <br>
+                <button type="button" class="delete-image" data-image-id="{{ image.id }}">Delete</button>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+ </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.delete-image').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var imageId = this.getAttribute('data-image-id');
+                deleteImage(imageId);
+            });
+        });
+
+        function deleteImage(imageId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/delete_image/' + imageId + '/');
+            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var imageElement = document.getElementById('image-' + imageId);
+                    imageElement.parentNode.removeChild(imageElement);
+                }
+            };
+            xhr.send();
+        }
+    });
+</script>
+</body>
+</html>

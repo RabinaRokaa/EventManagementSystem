@@ -24,6 +24,10 @@ urlpatterns = [
     # path('adminpanel/', admin.views, name='admin'),
     path('', include('loginAuthentication.urls')),  #url for the loginapp
     path('', include('Venues.urls')),  #url for the venueapp
+    path('', include('checking.urls')),  #url for the venueapp
+    path('', include('booking.urls')),  #url for the bookingapp
+    path('', include('decoration.urls')),  #url for the decorationapp
+    path('', include('photographer.urls'))  #url for the decorationapp
     
 ]
 if settings.DEBUG:

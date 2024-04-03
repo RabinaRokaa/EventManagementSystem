@@ -55,7 +55,10 @@ INSTALLED_APPS = [
     'Venues',
     'decoration',
     'photographer',
-    'booking'
+    'booking',
+    'checking',
+    #used only by checking app
+    'checking.booking_functions'
 ]
 
 MIDDLEWARE = [

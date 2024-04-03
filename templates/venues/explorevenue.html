@@ -133,7 +133,7 @@
             
         }
         button a{
-            color:white;
+            color:black;
         }
 
         .your_account{
@@ -145,8 +145,8 @@
             cursor: pointer;
         }
         button[type="submit"] {
-            background-color: #007bff;
-            color: #ffffff;
+            
+            color: black;
             border: none;
             border-radius: 4px;
             padding: 10px 20px;
@@ -155,11 +155,11 @@
         }
         
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #007bff;
         }
         
         button a:hover{
-             color:black;
+             color:white;
         }
 
         button your_account:hover{
@@ -169,7 +169,9 @@
 
         /*--*/
        
-
+        .material-symbols-outlined{
+            font-size:15px;
+        }
         .second > .middle:hover{
             box-shadow: 2px 2px 10px gray;
         } 
@@ -240,7 +242,90 @@
             margin-top: 30px;
         }
 
+        .Contact{
+            background-color:white;
+            text-align:center;
+        }
+        .more {
+            position: relative;
+        }
+        
+        .image-container {
+            background-image: url("{% static 'images/image.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 200px; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .image-container h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            
+        }
+        
+        .btn-primary {
+            background-color:white;
+            color:black;
+            
+        }
+        .hi{
+            background-color:white;
+            color:black;
+        }
+        .h2{
+            color:blue;
+        }
+        
+        .mix{
+            display: flex;
+            justify-content: space-around;
+        }
+        form{
+            display: flex;
+            flex: 0.4 1 auto;
+            flex-direction: column;
+        }
+
+        .input-div{
+            flex: 1 1 auton;
+            margin: 1 rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        input, button{
+            flex:1;
+            width: 300px;
+            border-radius:0.5rem;
+            line-height: 1.5;
+            font-size: 1.5rem;
+            color: blue;
+        }
          
+        button{
+            background-color: blue;
+            color:blue;
+            outline:none;
+            margin-top:5px;
+
+        }
+        button:hover{
+           color: white;
+           background-color:blue;
+        }
+
 </style>
 </head>
 <body>
@@ -274,10 +359,10 @@
 
        
         <!-- Single Venue Details -->
-        <div class="venue-details">
+        <div id="venue-details">
             <h2>{{ venue.Name }}</h2>
             <hr>   <!--for horizontal line-->
-            <div class="venue-description">
+            <div id="venue-description">
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{venue.Name}} </span><br> <br> {{ venue.Description }}</p>
             </div>
             <!-- Loop through all images -->
@@ -307,21 +392,72 @@
                         </span>AC </a></li>
                 
             </div>
+           
 
-            <div class="venue-location">
+            <div id="venue-location">
                 <h3>Location: {{ venue.Location }}</h3>
             </div>
-            <div class="venue-capacity">
+            <div id="venue-capacity">
                 <h4>Capacity: {{ venue.Capacity }}</h4>
             </div>
+            <div id="event_type">
+                <h4>Category: {{ venue.Type }}</h4>
+            </div>
             
-            <div class="venue-cost">
+            <div id="venue-cost">
                 <h4>Approx. cost: {{ venue.Cost }}</h4>
             </div>
+            <form id="booking-form" action="" method="POST">
+              
+                  <div class="input-div">
+                    <label form="id_check_incheck_in"> check_in: </label>
+                    <input type="datetime-local" id="id_check_in" name="check_in">
+                  </div>  
+                  <div class="input-div">
+                    <label form="id_check_out"> check_out: </label>
+                    <input type="datetime-local" id="id_check_out" name="check_out">
+                  </div>  
+                  {% comment %} <div class="input-div">
+                    <button type="submit"> Book the venue </Button>
+                  </div>   {% endcomment %}
+                  <button class="your_account" id="formBook">
+                      <a href="">Book Now</a>
+                      {% comment %} <a href="{% url 'login'  %}">Book Now</a> {% endcomment %}
+                  </button>
+                </form>  
 
-            <button class="your_account">
-                <a href="{% url 'explorevenue' venue.id %}">Book Now</a>
-            </button>
+        </div>
+       
+    </div>
+    <hr>
+    <div class="mix">
+
+     <div class="Contact">
+        <p><span style="font-size:1.6rem;"> Contact</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+        
+        <li> <span class="material-symbols-outlined">
+            wifi
+            </span>{{venue.Name}}</li>
+            <br>
+        <li> <span class="material-symbols-outlined">
+            wifi
+            </span>{{venue.Location}}</li>
+            <br>
+        <li> <span class="material-symbols-outlined">
+            wifi
+            </span>{{venue.Name}}</li>
+     </div> 
+    
+         
+    </div> 
+     <hr>
+    <div class="more">
+        <div class="image-container">
+            <h2>Need more than just a venue?</h2>
+            <div class="btn-container"> 
+                <button type="submit" class="hi"><a href="/{{ venue.id }}/explorevenue">Decoration</a></button>
+                <button type="submit" class="hi"><a href="/{{ venue.id }}/explorevenue">Photography</a></button>
+            </div>
         </div>
     </div>
     
@@ -341,5 +477,65 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+      
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookingForm = document.getElementById('formBook');
+        
+            bookingForm.addEventListener('click', function (event) {
+                console.log("oye oye oye")
+                event.preventDefault(); // Prevent the default form submission behavior
+                // Gather data from HTML elements
+                const event_type = document.getElementById('event_type').innerText;
+                console.log(document.getElementById('event_type').innerText)
+                const name = document.getElementById('venue-details').innerText;
+                const location = document.getElementById('venue-location').innerText;
+                const capacity = document.getElementById('venue-capacity').innerText;
+                const description = document.getElementById('venue-description').innerText;
+               // const decoration = document.getElementById('decoration').innerText;
+               // const photography = document.getElementById('photography').innerText;
+                const date = document.getElementById('id_check_in').value;
+                const end_date = document.getElementById('id_check_out').value;
+                const cost = document.getElementById('venue-cost').innerText;
+                console.log("hello",event_type,name,locatin,capacity)
+                // Prepare data to be sent to the backend
+                const formData = new FormData();
+                formData.append('event_type', event_type);
+                formData.append('name', name);
+                formData.append('location', location);
+                formData.append('capacity', capacity);
+                formData.append('description', description);
+                //formData.append('decoration', decoration);
+                //formData.append('photography', photography);
+                formData.append('date', date);
+                formData.append('end_date', end_date);
+                formData.append('cost', cost);
+        console.log(formData.name)
+                // Send data to the backend using a POST request
+                fetch('/book_event', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    // Handle success response from the backend
+                    console.log(data.message); // Log the success message
+                    // You can perform any other actions here upon successful booking
+                })
+                .catch(error => {
+                    // Handle error response from the backend
+                    console.error('There was a problem with the booking:', error.message);
+                    // You can display an error message to the user or perform other actions
+                });
+            });
+        });
+        
+    </script> 
 </body>
 </html>

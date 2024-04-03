@@ -34,7 +34,10 @@ filterLink.addEventListener("click", function(event) {
 });
 
 
+    
 
+
+{
 // Get references to the filter form and the result container
 const filterform = document.getElementById("filterSearch");
 console.log(filterform)
@@ -58,6 +61,8 @@ filterForm.addEventListener("click", function(event) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            
+
             if(data.venues.length==0){
                 console.log("data not found!")
                 resultContainer.innerHTML=""
@@ -69,7 +74,7 @@ filterForm.addEventListener("click", function(event) {
             data.venues.forEach(venue => {
                 console.log(venue)
                 const venueHTML = `
-                    <div class="middle">
+                    <div class="middle" style = 'display: flex;'>
                         <div class="car">
                             <div class="name">
                                 <h2>${venue.Name}</h2>
@@ -85,14 +90,14 @@ filterForm.addEventListener("click", function(event) {
                             </div>
                             <div class="title">
                                 <h3>${venue.Location}</h3>
-                                <div class="desc">
+                                <div class="desc" style = 'position:relative;'>
                                     <p>${venue.Description}</p>
                                 </div>
-                                <div class="cost">
+                                <div class="cost" style = 'position:absolute; bottom: 10px; left: 60%;'>
                                     <h4>NPR: ${venue.Cost}</h4>
                                 </div>
-                                <div class="btn-container">
-                                    <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
+                                <div class="btn-container" style = 'position:absolute; bottom: 7px;'> 
+                                   <button type="submit" class="btn-primary"><a href="/${venue.id}/explorevenue">Explore</a></button>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +107,8 @@ filterForm.addEventListener("click", function(event) {
         })
         .catch(error => console.error('Error fetching data:', error));
 
-});
+}); 
+}
 
 
 // Function to close sidebar

@@ -2,14 +2,23 @@ from django.shortcuts import get_object_or_404, render
 from django.core.mail import EmailMessage, send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
-
 from .forms import VenuesForm
-
 from Venues.models import Venues
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
+from django.core.serializers import serialize
+from django.http import JsonResponse
+from django.db.models import Q
+from django.http import JsonResponse
+from django.db.models import Q
+from .models import Venues
+from django.http import JsonResponse
+from django.db.models import Q
+from django.views.decorators.http import require_GET
+from .models import Venues
 
+from django.core.serializers import serialize
 
 
 def venues(req):
@@ -25,16 +34,6 @@ def explorevenue(request, id):
     return render(request, 'venues/explorevenue.html', {'venue': venue})
 
 
-
-from django.core.serializers import serialize
-from django.http import JsonResponse
-
-from django.db.models import Q
-from django.http import JsonResponse
-from django.db.models import Q
-from .models import Venues
-
-from django.core.serializers import serialize
 @require_GET
 def search_venue(request):
     searched = request.GET.get('searched', '')
@@ -66,10 +65,7 @@ def search_venue(request):
     return JsonResponse({'venues': venues_data})
 
 
-from django.http import JsonResponse
-from django.db.models import Q
-from django.views.decorators.http import require_GET
-from .models import Venues
+
 
 # @require_GET
 # def search_venue(request):
@@ -396,7 +392,8 @@ def filter_venues(request):
         'Location': venue.Location,
         'Description': venue.Description,
         'Cost': venue.Cost,
-        'Venue_images': [image.image.url for image in venue.Venue_image.all()]
+        'Venue_images': [image.image.url for image in venue.Venue_image.all()],
+        'id':venue.id
         
     } for venue in venues]
 
