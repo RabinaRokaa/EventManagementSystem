@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import view_decoration 
+
 
 urlpatterns = [
     path('adddecoration', views.adddecoration, name= "adddecoration"),  #Path for the register page

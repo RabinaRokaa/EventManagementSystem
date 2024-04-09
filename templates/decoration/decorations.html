@@ -474,9 +474,9 @@
              <h2>{{decoration.Name}} </h2>
             </div>
             <div class="pictures"> 
-                {% if decoration.Decoration_image.all %}   
+            {% if decoration.Decoration_image.all %}   
                 <div class="img"> 
-                    <img src="{{ decoration.decoration_image.first.image.url }}" alt="{{ decoration.Name }}" style="width:280px;height:150px;object-fit:cover" >
+                    <img src="{{ decoration.Decoration_image.first.image.url }}" alt="{{ decoration.Name }}" style="width:280px;height:150px;object-fit:cover" >
                 </div>
             {% endif %}
             </div>

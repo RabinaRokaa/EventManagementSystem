@@ -29,12 +29,25 @@
         <!-- After clicking on the home and other text, they follow the following URLs -->
         <nav>
             <a href="/">Home</a>
+            
+            <a href="#" class="hover-trigger">Services</a>
+            <div class="hover-content">
+              <div class="service-item">
+                <a href="/venue">Venues</a>
+              </div>
+              <div class="service-item">
+                <a href="/decorations">Decoration</a>
+              </div>
+              <div class="service-item">
+                <a href="/photographers">Photographer</a>
+              </div>
+            </div>
             <a href="/aboutus">About Us</a>
-            <a href="/venue">Venues</a>
             <a href="/contact">Contact</a>
             <a href="/Register">Register</a>
             <a href="/Login">LogIn</a>
-        </nav>
+          </nav>
+          
         
    
 
@@ -77,6 +90,20 @@
             <a href="#">FAQs</a>
         </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var trigger = document.querySelector('.hover-trigger');
+            var content = document.querySelector('.hover-content');
+            trigger.addEventListener('click', function() {
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        });
+        
+    </script>
 
     <!-- Bootstrap JavaScript dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

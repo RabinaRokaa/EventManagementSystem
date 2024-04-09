@@ -39,7 +39,7 @@ filterLink.addEventListener("click", function(event) {
 
 {
 // Get references to the filter form and the result container
-const filterform = document.getElementById("filterSearch");
+const filterform = document.getElementById("filterForm");
 console.log(filterform)
 const resultContainer = document.getElementById("result");
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+<style>
+  /* CSS for tabs and content */
+  .tab-content {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <!-- Venues tab -->
+  <a href="#" onclick="showTab('venues')" class="sidebar-link">
+    <span class="material-symbols-outlined">roofing</span>
+    <h3>Venues</h3>
+  </a>
+  <!-- Add more anchor tags for additional tabs as needed -->
+</div>
+
+<!-- Main content -->
+<div class="content">
+  <!-- Venues tab content -->
+  <div id="venues" class="tab-content active">
+    <h2>Loading...</h2>
+    <p>Loading content from API...</p>
+  </div>
+  <!-- Add more divs with unique IDs for additional tabs as needed -->
+</div>
+
+
+
+
+
+<script>
+    // JavaScript function to switch tabs and load content from API
+    function showTab(tabId) {
+      // Hide all tab contents
+      var tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(function(tabContent) {
+        tabContent.classList.remove('active');
+      });
+  
+      // Show the selected tab content
+      var selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
+  
+      // Make an API request to fetch content for the selected tab
+      fetchContentFromAPI(tabId);
+  
+      // Prevent the default behavior of the anchor tag (navigation)
+      event.preventDefault();
+    }
+  
+    // Function to fetch content from API
+    function fetchContentFromAPI(tabId) {
+      // Replace 'your-api-endpoint' with the actual endpoint of your API
+      var apiUrl = 'venues/' + tabId;
+  
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Update the content of the selected tab with the data retrieved from API
+          var selectedTabContent = document.getElementById(tabId);
+          if (selectedTabContent) {
+            selectedTabContent.innerHTML = '<h2>' + data.title + '</h2>' + '<p>' + data.content + '</p>';
+          }
+        })
+        .catch(error => console.error('Error fetching data from API:', error));
+    }
+</script>

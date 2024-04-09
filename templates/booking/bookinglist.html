@@ -1,4 +1,4 @@
-<!-- photographer_list.html -->
+<!-- booking_list.html -->
 
 {% load static %}
  <!DOCTYPE html>
@@ -6,8 +6,8 @@
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>photographer list</title>
-     <link rel="stylesheet" href="{% static 'css/photographerlist.css' %}">
+     <title>booking list</title>
+     <link rel="stylesheet" href="{% static 'css/bookinglist.css' %}">
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,7 +28,7 @@
             background-color: #f2f2f2;
         }
 
-        .addphotographer a:hover {
+        .addbooking a:hover {
              /* Change 'red' to whatever color you desire */
             background-color: #d6cfec;
             color: blue;
@@ -46,7 +46,7 @@
             <!--for logo-->
 
             {% comment %} <div>
-                <img src="./images/photographervistaln.png">
+                <img src="./images/bookingvistaln.png">
                 <h2>Venue <span class="danger">Vistaln</span></h2>
             </div>
             <hr>
@@ -75,15 +75,15 @@
                     <span class="material-symbols-outlined">roofing</span>
                     <h3> Venues </h3>    
                 </a>         
-                <a href="/photographer_list">
+                <a href="/decoration_list">
                     <span class="material-symbols-outlined">celebration</span>
-                    <h3> photographers </h3>    
+                    <h3> bookings </h3>    
                 </a>         
-                <a href="/photographer_list"class="sidebar-link" style="color:blue;" onclick="loadVenueList()">
+                <a href="/photographer_list" class="sidebar-link" style="color:blue;" onclick="loadVenueList()">
                     <span class="material-symbols-outlined"> person_book</span>
-                    <h3> photographer </h3>    
+                    <h3> booking </h3>    
                 </a>         
-                <a href="/booking_list">
+                <a href="/booking_list" class="sidebar-link" style="color:blue;" onclick="loadVenueList()">
                     <span class="material-symbols-outlined">book_online</span>
                     <h3> Booking </h3>    
                 </a>         
@@ -109,47 +109,55 @@
             </div>
         {% endfor %}
         {% endif %}
-      <h1>photographer List</h1>
+      <h1>booking List</h1>
 
-     <div class="addphotographer">
-      <a href="{% url 'addphotographer' %}" class="btn btn-primary">Add photographer</a>
-    {% comment %} <a href="{% url 'update_photographer' photographer.id %}" class="btn btn-primary">Update photographer</a> {% endcomment %}
-    {% comment %} <a href="{% url 'delete_photographer ' photographer.id %}" class="btn btn-primary">Delete photographer</a> {% endcomment %}
-     </div>
     <div class="tab">
 
       <table>
         <thead>
             <tr>
+              
 
                 <th>Id</th>
-                <th>UserName</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>photography Type</th>
-                <th>Event Type</th>
+                <th>Event_Type</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Decoration</th>
+                <th>Photography</th>
+                
+                
+                <th> Date</th>
+                <th> EndDate</th>
                 <th>Cost</th>
-                {% comment %} <th>photographer Image</th> {% endcomment %}
                 <th>Actions</th>
+                {% comment %} <th>booking Image</th> {% endcomment %}
+                {% comment %} <th>Actions</th> {% endcomment %}
                 
             </tr>
         </thead>
         <tbody>
-            {% for photographer in photographers %}
+            {% for booking in bookings %}
                 <tr>
-                    <td>{{ photographer.id }}</td>
-                    <td>{{ photographer.Username }}</td>
-                    <td>{{ photographer.Phone_Number }}</td>
-                    <td>{{ photographer.Email }}</td>
-                    <td>{{ photographer.Photography_type }}</td>
-                    <td>{{ photographer.Event_type }}</td>
-                    <td>{{ photographer.Cost }}</td>
-                    {% comment %} <td><img src="{{ photographers.photographer_image.url }}" alt="{{ photographer.Name }}" width="100"></td> {% endcomment %}
+                    <td>{{ booking.id }}</td>
+                    <td>{{ booking.Event_type }}</td>
+                    <td>{{ booking.Name }}</td>
+                    <td>{{ booking.Location}}</td>
+                    <td>{{ booking.Capacity }}</td>                   
+                    <td>{{ booking.Decoration }}</td>
+                    <td>{{ booking.Photography }}</td>
+                    <td>{{ booking.Date }}</td>
+                    <td>{{ booking.EndDate}}</td>
+                    <td>{{ booking.Cost}}</td>
+                    
                     <td>
-                        <a href="{% url 'view_photographer' photographer.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'update_photographer' photographer.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
-                        <a href="{% url 'delete_photographer' photographer.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info">View</a>
+                        <a href="{% url 'booking:booking_update' booking.id %}" class="btn btn-primary">Update</a>
+                        <a href="{% url 'booking:booking_delete' booking.id %}" class="btn btn-danger">Delete</a>
                     </td>
+                    
+                    
+                     
                 </tr>
             {% endfor %}
         </tbody>

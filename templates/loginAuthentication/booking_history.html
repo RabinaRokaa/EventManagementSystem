@@ -1,0 +1,50 @@
+<!-- booking_history.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History</title>
+</head>
+<style>
+    #bookings{
+        margin-top:100px;
+    }
+</style>
+<body>
+    <h1>Booking History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Event Type</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Description</th>
+                <th>Decoration</th>
+                <th>Photography</th>
+                <th>Date</th>
+                <th>End Date</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in user_bookings %}
+            <tr>
+                <td>{{ booking.Event_Type }}</td>
+                <td>{{ booking.Name }}</td>
+                <td>{{ booking.Location }}</td>
+                <td>{{ booking.Capacity }}</td>
+                <td>{{ booking.Description }}</td>
+                <td>{{ booking.Decoration }}</td>
+                <td>{{ booking.Photography }}</td>
+                <td>{{ booking.Date }}</td>
+                <td>{{ booking.EndDate }}</td>
+                <td>{{ booking.Cost }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

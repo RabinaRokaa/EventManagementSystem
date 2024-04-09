@@ -17,7 +17,10 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView , PasswordResetConfirmView
 from django.contrib.messages.views import SuccessMessageMixin
-
+from Venues.models import Venues  # Import your models
+from decoration.models import decoration   # Import your models
+from django.views.decorators.http import require_GET
+from photographer.models import photographer  # Import your models
 
 # Create your views here.
 #cretaing function for home page
@@ -126,7 +129,8 @@ def user_login(request , backend=None):
             if user_param.is_superuser:
                 return redirect('adminpanel')
             else:  
-                return render(request, "venues/venue.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
+                print("hello")
+                return render(request, "LoginAuthentication/userdashboard.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
         else:
             messages.error(request, "Wrong Credentials!!")
 
@@ -189,6 +193,31 @@ def landingpage(req):
 def organizerpanel(req):
     return render(req, 'loginAuthentication/organizerpanel.html')
 
+def userdashboard(req):    
+    venues = Venues.objects.all()  #fetch venues from the database
+    decorations = decoration.objects.all() 
+    decorations = decoration.objects.all() 
+    photographers = photographer.objects.all()
+
+     # Fetch booking data related to the current user
+    if req.user.is_authenticated:
+        user_bookings = booking.objects.filter(User=req.user)
+    else:
+        user_bookings = None  # Provide an empty queryset if the user is not authent
+
+    print('lol')
+    context = {
+        'venues': venues,
+        'decorations': decorations,
+        'photographers': photographers,
+        'user_bookings': user_bookings,
+    }
+    
+    return render(req, 'loginAuthentication/userdashboard.html', context)
+
+def userdashboards(req):
+    return render(req, 'loginAuthentication/userdashboards.html')
+
 def adminpanel(req):
     return render(req, 'loginAuthentication/adminpanel.html')
 
@@ -224,3 +253,87 @@ def view_user(request, id):
     # add the dictionary during initialization
     context["data"] = User.objects.get(id = id)    
     return render(request, "loginAuthentication/view_user.html", context)
+
+
+from django.http import JsonResponse
+from django.db.models import Q
+from Venues.models import Venues
+@require_GET
+def filter_venues(request):
+    venues = Venues.objects.all()
+    name_contains_query = request.GET.get('Name_contains')
+    location_contains_query = request.GET.get('Location_exact')
+    title_or_author_query = request.GET.get('Name_or_Location')
+    min_cost = request.GET.get('view_count_min')
+    max_cost = request.GET.get('view_count_max')
+
+    if name_contains_query != '' and name_contains_query is not None:
+        venues = venues.filter(Name__icontains=name_contains_query)
+
+    if location_contains_query != '' and location_contains_query is not None:
+        venues = venues.filter(Location__icontains=location_contains_query)
+
+    if title_or_author_query != '' and title_or_author_query is not None:
+        venues = venues.filter(Q(Name__icontains=title_or_author_query) | Q(Location__icontains=title_or_author_query)).distinct()
+    
+    if min_cost:
+        venues = venues.filter(Cost__gte=min_cost)
+
+    if max_cost:
+        venues = venues.filter(Cost__lte=max_cost)
+
+    data = [{
+        'Name': venue.Name,
+        'Location': venue.Location,
+        'Description': venue.Description,
+        'Cost': venue.Cost,
+        'Venue_images': [image.image.url for image in venue.Venue_image.all()],
+        'id':venue.id
+        
+    } for venue in venues]
+
+
+    # Return JSON response
+    return JsonResponse({'venues': data})
+
+#name chanage k sanga change garnye ho tei
+def filterform(request):
+    venues = Venues.objects.all()
+    name_contains_query = request.GET.get('Name_contains')
+    location_contains_query = request.GET.get('Location_exact')
+    title_or_author_query = request.GET.get('Name_or_Location')
+    min_cost = request.GET.get('view_count_min')
+    max_cost = request.GET.get('view_count_max')
+
+    if name_contains_query != '' and name_contains_query is not None:
+        venues = venues.filter(Name__icontains=name_contains_query)
+
+    if location_contains_query != '' and location_contains_query is not None:
+        venues = venues.filter(Location__icontains=location_contains_query)
+
+    if title_or_author_query != '' and title_or_author_query is not None:
+        venues = venues.filter(Q(Name__icontains=title_or_author_query) | Q(Location__icontains=title_or_author_query)).distinct()
+    
+    if min_cost:
+        venues = venues.filter(Cost__gte=min_cost)
+
+    if max_cost:
+        venues = venues.filter(Cost__lte=max_cost)
+
+    context = {
+        'venues': venues,
+        'categories':['Marriage','Birthday','Conference','Anniversary']
+    }
+    return render(request, "venues/filterform.html", context)
+
+# views.py
+
+from django.shortcuts import render
+from booking.models import booking
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def booking_history(request):
+    user_bookings = booking.objects.filter(User=request.user)
+    return render(request, "loginAuthentication/booking_history.html", {'user_bookings': user_bookings})

@@ -1,0 +1,210 @@
+// Create container element
+const container = document.createElement('div');
+container.classList.add('booking-container');
+
+// Create heading element for booking details
+const heading = document.createElement('h2');
+heading.textContent = 'Booking Details';
+
+container.appendChild(heading);
+// Append the container to the event container (assuming eventContainer is already defined)
+eventContainer.appendChild(container);
+// Create sub-box for check-in and check-out
+const bookingDetailsBox = document.createElement('div');
+bookingDetailsBox.classList.add('booking-details-box');
+
+// Check-in date
+const checkInLabel = document.createElement('h2');
+checkInLabel.textContent = 'Date: ';
+checkInLabel.style.fontWeight = '100'; 
+const checkInDate = document.createElement('span');
+checkInDate.textContent = formData.date; // Assuming formData.date contains check-in date
+checkInDate.style.marginTop = '10px';
+bookingDetailsBox.appendChild(checkInLabel);
+bookingDetailsBox.appendChild(checkInDate);
+
+
+// Check-out date
+const checkOutLabel = document.createElement('h2');
+checkOutLabel.textContent = 'End Date: ';
+checkOutLabel.style.marginTop = '10px';
+checkOutLabel.style.fontWeight = '100'; 
+const checkOutDate = document.createElement('span');
+checkOutDate.textContent = formData.end_date; // Assuming formData.end_date contains check-out date
+checkOutDate.style.marginTop = '10px';
+bookingDetailsBox.appendChild(checkOutLabel);
+bookingDetailsBox.appendChild(checkOutDate);
+
+// Append the booking details box to the container
+container.appendChild(bookingDetailsBox);
+
+// Append the container to the event container (assuming eventContainer is already defined)
+eventContainer.appendChild(container);
+
+    // Create container element
+const containert = document.createElement('div');
+containert.classList.add('cost-container');
+
+// Create heading element for booking details
+const headingt = document.createElement('h2');
+headingt.textContent = 'Your price details';
+
+containert.appendChild(headingt);
+
+// Create sub-box for check-in and check-out
+const costDetailsBox = document.createElement('div');
+costDetailsBox.classList.add('cost-details-box');
+
+// Check-in date
+const costInLabel = document.createElement('h2');
+costInLabel.textContent = 'Total price ';
+costInLabel.style.fontWeight = '100'; 
+const costInDate = document.createElement('span');
+
+
+costInDate.textContent = `NPR ${formData.cost}`; // Assuming formData.date contains cost-in date
+costInDate.style.marginTop = '10px';
+costInDate.style.color = 'green';
+costDetailsBox.appendChild(costInLabel);
+costDetailsBox.appendChild(costInDate);
+
+
+
+
+// Append the cost details box to the container
+containert.appendChild(costDetailsBox);
+document.getElementById('priceDetails').appendChild(containert);
+
+// Append the container to the event container (assuming eventContainer is already defined)
+eventContainer.appendChild(containert);
+
+
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking List</title>
+    <link rel="stylesheet" href="{% static 'css/bookinglist.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        /* bookinglist.css */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-details {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkin-checkout,
+        .other-details {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .checkin-checkout h2,
+        .other-details h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .checkin-checkout p,
+        .other-details p {
+            margin: 5px 0;
+        }
+
+        .btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="booking-details">
+        <div class="checkin-checkout">
+            <h2>Check-in & Check-out</h2>
+            <p><strong>Check-in:</strong> {{ formData.checkin }}</p>
+            <p><strong>Check-out:</strong> {{ formData.checkout }}</p>
+        </div>
+        <div class="other-details">
+            <h2>Other Details</h2>
+            <p><strong>Location:</strong> {{ formData.location }}</p>
+            <p><strong>Date:</strong> {{ formData.date }}</p>
+            <p><strong>End Date:</strong> {{ formData.end_date }}</p>
+            <p><strong>Capacity:</strong> {{ formData.capacity }}</p>
+            <p><strong>Description:</strong> {{ formData.description }}</p>
+            <p><strong>Cost:</strong> {{ formData.cost }}</p>
+        </div>
+    </div>
+    <button id="btn">Book Now</button>
+</div>
+<script>
+    document.getElementById("btn").addEventListener('click', ((e) => {
+        const storedFormDataJson = localStorage.getItem('formData');
+        const formData = JSON.parse(storedFormDataJson);
+        console.log(formData.name)
+        // Create HTML elements to display the data
+
+        fetch('/bookingprocess/', {
+            method: 'POST',
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                // Handle success response from the backend
+
+                console.log(data.message); // Log the success message
+                window.alert("Booking successful")
+                // You can perform any other actions here upon successful booking
+                localStorage.removeItem('formData');
+
+            })
+            .catch(error => {
+                // Handle error response from the backend
+                console.error('There was a problem with the booking:', error.message);
+                // You can display an error message to the user or perform other actions
+            });
+    }))
+</script>
+</body>
+</html> {% endcomment %}

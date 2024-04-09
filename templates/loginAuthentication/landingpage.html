@@ -130,7 +130,31 @@
             }
         
         
-
+            .hover-content {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+              }
+              
+              .hover-trigger:hover + .hover-content {
+                display: block;
+              }
+              
+              .service-item {
+                margin-bottom: 5px;
+              }
+              
+              .service-item a {
+                text-decoration: none;
+                color: #333;
+              }
+              
+              .service-item a:hover {
+                color: blue;
+              }
+              
 
 
     </style>
@@ -139,13 +163,27 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-        <a href="/venue">Venues</a>
-       
-        <a href="#">Register</a>
-        <a href="#">Login</a>
-    </nav> 
+        <a href="/">Home</a>
+        <a href="/aboutus">About Us</a>
+        <div class="dropdown">
+            <a href="#" class="hover-trigger">Services</a>
+            <div class="hover-content">
+                <div class="service-item">
+                    <a href="/venue">Venues</a>
+                </div>
+                <div class="service-item">
+                    <a href="/decorations">Decoration</a>
+                </div>
+                <div class="service-item">
+                    <a href="/photographers">Photographer</a>
+                </div>
+            </div>
+        </div>
+        <a href="/contact">Contact</a>
+        <a href="/Register">Register</a>
+        <a href="/Login">LogIn</a>
+    </nav>
+    
 
     <!-- Main Content -->
     <div class="main-content">
