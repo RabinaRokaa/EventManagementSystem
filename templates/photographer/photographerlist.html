@@ -33,7 +33,19 @@
             background-color: #d6cfec;
             color: blue;
           }
+        
 
+          main .addphotographer{
+            display: inline-block;
+            background: rgb(227, 232, 236);
+            background-color: #d6cfec;
+            color: blue;
+            border-radius: var(--border-radius-1);
+            margin-top: 3rem;
+            padding: 0.5rem 1.6rem;
+            left: 0;
+            
+        } 
           
 
         
@@ -75,9 +87,9 @@
                     <span class="material-symbols-outlined">roofing</span>
                     <h3> Venues </h3>    
                 </a>         
-                <a href="/photographer_list">
+                <a href="/decoration_listt">
                     <span class="material-symbols-outlined">celebration</span>
-                    <h3> photographers </h3>    
+                    <h3> Decorations </h3>    
                 </a>         
                 <a href="/photographer_list"class="sidebar-link" style="color:blue;" onclick="loadVenueList()">
                     <span class="material-symbols-outlined"> person_book</span>
@@ -109,7 +121,7 @@
             </div>
         {% endfor %}
         {% endif %}
-      <h1>photographer List</h1>
+      <h1>Photographer List</h1>
 
      <div class="addphotographer">
       <a href="{% url 'addphotographer' %}" class="btn btn-primary">Add photographer</a>
@@ -148,7 +160,8 @@
                     <td>
                         <a href="{% url 'view_photographer' photographer.id %}" class="btn btn-info">View</a>
                         <a href="{% url 'update_photographer' photographer.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
-                        <a href="{% url 'delete_photographer' photographer.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'delete_photographer' photographer.id %}" onclick="return confirmDelete('{{ photographer.Username }}');" class="btn btn-danger">Delete</a>
+                        {% comment %} <a href="{% url 'delete_photographer' photographer.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
                     </td>
                 </tr>
             {% endfor %}
@@ -157,5 +170,10 @@
     </div>
     </main>
    </div>
+   <script>
+    function confirmDelete(Username) {
+        return confirm("Are you sure you want to delete this '' " + Username + "?");
+    }
+   </script>
 </body>
 </html>

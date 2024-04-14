@@ -15,5 +15,6 @@ urlpatterns = [
     path('<photographer_id>/update_photographer', views.update_photographer, name= "update_photographer"),  #Path for the register
     path('photographers', views.photographers, name= "photographers"),  #Path for the register page
     path('<int:id>/explorephotographer', views.explorephotographer, name="explorephotographer"),
-
+    path('api/filter_photographers', views.filter_photographers, name= "filter_photographers"),
+     path('api/search_photographer', views.search_photographer, name= "search_photographer"),
 ]    

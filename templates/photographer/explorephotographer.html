@@ -60,7 +60,7 @@
         }
 
         nav a {
-            text-photographer: none;
+            text-decoration: none;
             color: white;
             margin: 0 15px;
             font-weight: bold;
@@ -123,7 +123,7 @@
          }
         
         .title h3{
-            text-photographer:underline;
+            text-decoration:underline;
             margin-top:2px;
             
         }
@@ -168,6 +168,74 @@
 
 
         /*--*/
+        .Contact {
+            display: flex;
+            
+            align-items: flex-start;
+          }
+          
+          .Contact p {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+          }
+          
+          .material-symbols-outlined {
+            display: inline-block;
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+          }
+
+        
+          .Contact .material-symbols-outlined {
+            color:white;
+            display: inline-block;
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            background-color: lightgray; /* Adjust color as needed */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+          }
+          .material-symbols-outlined {
+            
+            display: inline-block;
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            background-color: lightgray; /* Adjust color as needed */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+          }
+
+          main .insights > div span {
+            background: rgba(93, 93, 246, 0.91);
+            padding: 0.5rem;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+        
+        }
+          
+          #photographer-location,
+          #photographer-capacity,
+          #event_type {
+            margin-bottom: 20px;
+          }
+          
+          #photographer-location h3,
+          #photographer-capacity h4,
+          #event_type h4 {
+            margin: 0;
+            font-size: 1.2rem;
+          }
+          
        
         .material-symbols-outlined{
             font-size:15px;
@@ -176,11 +244,11 @@
             box-shadow: 2px 2px 10px gray;
         } 
         
-        .photographer-details{
+        #photographer-details{
             margin:20px;
         }
         
-        .photographer-location{
+        #photographer-location{
             margin-top:15px;
         }
         .main-content img {
@@ -212,7 +280,7 @@
         
          .company a {
             color: white;
-            text-photographer: none;
+            text-decoration: none;
             margin: 5px 0;
             padding-right: 30px;
             font-size: small;
@@ -220,7 +288,7 @@
         
          .company p {
             color: white;
-            text-photographer: none;
+            text-decoration: none;
             margin: 5px 0;
             padding-right: 30px;
             font-size: large;
@@ -244,12 +312,49 @@
 
         .Contact{
             background-color:white;
-            text-align:center;
+            
         }
         .more {
             position: relative;
         }
-        
+        #booking-form {
+            display: flex;
+            flex-direction: column;
+           
+            margin-left:310px;
+          }
+          
+          .input-div {
+            margin-bottom: 10px;
+          }
+          
+          .input-div label {
+            font-weight: bold;
+          }
+          
+          .input-div input {
+            width: 70%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+          }
+          
+          .your_account {
+            background-color: blue; /* Adjust color as needed */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+          }
+          
+          .your_account a {
+            color: white;
+            text-decoration: none;
+          }
+          
         .image-container {
             background-image: url("{% static 'images/image.jpg' %}");
             background-size: cover;
@@ -291,6 +396,7 @@
             display: flex;
             justify-content: space-around;
         }
+
         form{
             display: flex;
             flex: 0.4 1 auto;
@@ -306,8 +412,8 @@
         }
 
         input, button{
-            flex:1;
-            width: 300px;
+            
+            width: 200px;
             border-radius:0.5rem;
             line-height: 1.5;
             font-size: 1.5rem;
@@ -355,21 +461,20 @@
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" height="50%">
+        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" height="20%">
 
-       
         <!-- Single photographer Details -->
-        <div class="photographer-details">
-            <h2>{{ photographer.Username }}</h2>
+        <div id="photographer-details">
+            <h2 id="photographer_name">{{ photographer.Name }}</h2>
             <hr>   <!--for horizontal line-->
-            <div class="photographer-description">
-                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Username}} </span><br> <br> {{ photographer.Description }}</p>
+            <div id="photographer-description">
+                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Name}} </span><br> <br> {{ photographer.Description }}</p>
             </div>
             <!-- Loop through all images -->
             <div class="photographer-images">
                 <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >photographer</span></p>
                 {% for image in photographer.Photographer_image.all %}
-                    <img src="{{ image.image.url }}" alt="{{ photographer.Username }}" width="300" height="150">
+                    <img src="{{ image.image.url }}" alt="{{ photographer.Name }}" width="300" height="150">
                 {% endfor %}
             </div>
             <div class="facility">
@@ -393,41 +498,21 @@
                 
             </div>
            
-
-            <div class="photographer-location">
-                <h3>Location: {{ photographer.Phone_Number }}</h3>
+            {% comment %} <div id="photographer-location">
+                <h3>{{ photographer.Location }}</h3>
             </div>
-            <div class="photographer-capacity">
-                <h4>Capacity: {{ photographer.Email }}</h4>
+            <div id="photographer-capacity">
+                <h4>Capacity: {{ photographer.Capacity }}</h4>
             </div>
-            <div class="photography_type">
-                <h4>Category: {{ photographer.Photography_type }}</h4>
-            </div>
-            <div class="event_type">
-                <h4>Category: {{ photographer.Event_type }}</h4>
+            <div id="event_type">
+                <h4>Category: {{ photographer.Type }}</h4>
+            </div> {% endcomment %}
+            
+            
+            <div id="photographer-cost" style="color:green; margin-top:15px;">
+                <h4>NPR: <span id="costphotographer">{{ photographer.Cost }}</span></h4>
             </div>
             
-            <div class="photographer-cost">
-                <h4>Approx. cost: {{ photographer.Cost }}</h4>
-            </div>
-            <form id="booking-form" action="" method="POST">
-              
-                  <div class="input-div">
-                    <label form="id_check_incheck_in"> check_in: </label>
-                    <input type="datetime-local" id="id_check_in" name="check_in">
-                  </div>  
-                  <div class="input-div">
-                    <label form="id_check_out"> check_out: </label>
-                    <input type="datetime-local" id="id_check_out" name="check_out">
-                  </div>  
-                  {% comment %} <div class="input-div">
-                    <button type="submit"> Book the photographer </Button>
-                  </div>   {% endcomment %}
-                  <button class="your_account" id="formBook">
-                      <a href="">Book Now</a>
-                      {% comment %} <a href="{% url 'login'  %}">Book Now</a> {% endcomment %}
-                  </button>
-                </form>  
 
         </div>
        
@@ -435,21 +520,51 @@
     <hr>
     <div class="mix">
 
-     <div class="Contact">
-        <p><span style="font-size:1.6rem;"> Contact</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+     <div class="Contact" style="flex-direction:column;">
         
-        <li> <span class="material-symbols-outlined">
-            wifi
-            </span>{{photographer.Name}}</li>
+        
+        <p><span style="font-size:1.6rem;"> Additional</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+        
+         <li> <span class="material-symbols-outlined" style="background-color: lightblue;">
+            place</span>
+            <div id="photographer-location">
+                <h3>{{ photographer.Location }}</h3>
+            </div>
+        </li>
+
             <br>
-        <li> <span class="material-symbols-outlined">
-            wifi
-            </span>{{photographer.Location}}</li>
+        <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
+            groups </span>
+            <div id="photographer-capacity">
+                <h4>Capacity: {{ photographer.Capacity }}</h4>
+            </div>
+        </li> 
             <br>
-        <li> <span class="material-symbols-outlined">
-            wifi
-            </span>{{photographer.Name}}</li>
+        <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
+            category </span>
+            <div id="event_type">
+                <h4>Category: {{ photographer.Type }}</h4>
+            </div>
+        </li>
      </div> 
+            <form id="booking-form" action="" method="POST">
+              
+                <div class="input-div">
+                  <label form="id_check_incheck_in"> <h2>check_in</h2> </label>
+                  <input type="datetime-local" id="id_check_in" name="check_in">
+                </div>  
+                <div class="input-div">
+                  <label form="id_check_out"> <h2> check_out <h2> </label>
+                  <input type="datetime-local" id="id_check_out" name="check_out">
+                </div>  
+                {% comment %} <div class="input-div">
+                  <button type="submit"> Book the photographer </Button>
+                </div>   {% endcomment %}
+                <button class="your_account" id="formBook">
+                    <a href="">Book Now</a>
+                    {% comment %} <a href="{% url 'login'  %}">Book Now</a> {% endcomment %}
+                </button>
+            </form>  
     
          
     </div> 
@@ -458,8 +573,8 @@
         <div class="image-container">
             <h2>Need more than just a photographer?</h2>
             <div class="btn-container"> 
-                <button type="submit" class="hi"><a href="/{{ photographer.id }}/explorephotographer">photographer</a></button>
-                <button type="submit" class="hi"><a href="/{{ photographer.id }}/explorephotographer">Photography</a></button>
+                <button type="submit" class="hi"><a href="/decorations">Decoration</a></button>
+                <button type="submit" class="hi"><a href="/photographers">Photography</a></button>
             </div>
         </div>
     </div>
@@ -480,28 +595,27 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    {% comment %} <script>
+    <script>
       
 
         document.addEventListener('DOMContentLoaded', function () {
             const bookingForm = document.getElementById('formBook');
-        
+            console.log(window.location.href)
             bookingForm.addEventListener('click', function (event) {
-                console.log("oye oye oye")
+             
                 event.preventDefault(); // Prevent the default form submission behavior
                 // Gather data from HTML elements
                 const event_type = document.getElementById('event_type').innerText;
                 console.log(document.getElementById('event_type').innerText)
-                const name = document.getElementById('photographer-details').innerText;
+                const name = document.getElementById('photographer_name').textContent;
                 const location = document.getElementById('photographer-location').innerText;
                 const capacity = document.getElementById('photographer-capacity').innerText;
                 const description = document.getElementById('photographer-description').innerText;
-               // const photographer = document.getElementById('photographer').innerText;
+               // const decoration = document.getElementById('decoration').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
                 const end_date = document.getElementById('id_check_out').value;
-                const cost = document.getElementById('photographer-cost').innerText;
-                console.log("hello",event_type,name,locatin,capacity)
+                const cost = document.getElementById('costphotographer').textContent;
                 // Prepare data to be sent to the backend
                 const formData = new FormData();
                 formData.append('event_type', event_type);
@@ -509,14 +623,26 @@
                 formData.append('location', location);
                 formData.append('capacity', capacity);
                 formData.append('description', description);
-                //formData.append('photographer', photographer);
+                //formData.append('decoration', decoration);
                 //formData.append('photography', photography);
                 formData.append('date', date);
                 formData.append('end_date', end_date);
                 formData.append('cost', cost);
-        console.log(formData.name)
+                formData.append('url', window.location.href);
+
+                formData.forEach((value, key) => {
+                    console.log(`${key}: ${value}`);
+                });
+                // Convert FormData to JSON
+                const formDataJson = {};
+                formData.forEach((value, key) => {
+                formDataJson[key] = value;
+                });
+
+// Store JSON data in local storage
+ localStorage.setItem('formData', JSON.stringify(formDataJson));
                 // Send data to the backend using a POST request
-                fetch('/book_event', {
+                fetch('/book_event/', {
                     method: 'POST',
                     body: formData
                 })
@@ -528,7 +654,13 @@
                 })
                 .then(data => {
                     // Handle success response from the backend
-                    console.log(data.message); // Log the success message
+                    if (!data.status){
+                        window.location.href = "/Login"
+        
+                    }
+                    else{
+                        window.location.href = "/bookingprocess"
+                    }
                     // You can perform any other actions here upon successful booking
                 })
                 .catch(error => {
@@ -539,6 +671,6 @@
             });
         });
         
-    </script>  {% endcomment %}
+    </script> 
 </body>
 </html>

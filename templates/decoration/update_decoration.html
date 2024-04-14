@@ -43,7 +43,7 @@
     {% if image_urls %}
     <h3>Images:</h3>
     <ul id="image-list">
-        {% for image in decoration.Decoration_image.all %}
+        {% for image in decorations.Decoration_image.all %}
             <li id="image-{{ image.id }}">
                 <img src="{{ image.image.url }}" alt="Decoration Image" height=50; width=80;>
                 <br>

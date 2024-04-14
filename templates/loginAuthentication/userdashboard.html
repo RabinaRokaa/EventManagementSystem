@@ -194,118 +194,114 @@
             <h2>Venues Content</h2>
             <div class="main-content1">
                 <div class="whole"> 
-                 <div class="filter-container">
-                     <div class="filters">
-                         <a href="#" id="filterLink"><h1> Filters </h1></a>
-                     </div>
-                     <!-- Add the filter form here -->
-                     
-                         <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" style="display: none;">
-                             <div class="form-row">
-                                 <div class="form-group col-12">
-                                     <div class="input-group">
-                                         <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
-                                         <span class="input-group-append">
-                                             <div class="input-group-text bg-transparent">
-                                                 {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                             </div>
-                                         </span>
-                                     </div>
-                                 </div>        
-                             </div>
-                             <div class="form-row">
-                                 <div class="form-group col-12">
-                                     <div class="input-group">
-                                         <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
-                                         <span class="input-group-append">
-                                             <div class="input-group-text bg-transparent">
-                                                 {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                             </div>
-                                         </span>
-                                     </div>
-                                 </div>        
-                             </div>
-                            
-                             <div class="form-row">
-                               <div class="form-group col-md-2 col-lg-2">
-                                 <label for="viewCountMin">Minimum cost</label>
-                                 <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
-                               </div>
-                               <div class="form-group col-md-2 col-lg-2">
-                                 <label for="viewCountMax">Maximum cost</label>
-                                 <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
-                               </div>
-                               {% comment %} <div class="form-group col-md-2 col-lg-2">
-                                 <label for="publishDateMin">Available date</label>
-                                 <input type="date" class="form-control" id="publishDateMin" name="date_min">
-                               </div>
-                               <div class="form-group col-md-2 col-lg-2">
-                                 <label for="publishDateMax">Publish date maximum</label>
-                                 <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                               </div> {% endcomment %}
-                               <div class="form-group col-md-4">
-                                 {% comment %} <label for="category">Category</label>
-                                 <select id="category" class="form-control" name="category">
-                                   <option selected>Choose...</option>
-                                   {% for cat in categories %}
-                                   
-                                   <option value="{{ cat }}">{{ cat }}</option>
-                                   {% endfor %}
-                                 </select> {% endcomment %}
-                               </div>
-                             </div>
-                             <div class="form-row">
-                                 <div class="form-group col-12">
-                                     <label for="category">Category</label>
-                                     <select id="category" class="form-control" name="category">
-                                       <option selected>Choose...</option>
-                                       {% for cat in categories %}
-                                       
-                                       <option value="{{ cat }}">{{ cat }}</option>
-                                       {% endfor %}
-                                     </select>
-                                 </div>        
-                             </div>
-                             <div class="form-group">
+                    <div class="filter-container">
+                        <div class="filters">
+                            <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                        </div>
+                        <!-- Add the filter form here -->
+                        
+                            <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <div class="input-group">
+                                            <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
+                                            <span class="input-group-append">
+                                                <div class="input-group-text bg-transparent">
+                                                    {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>        
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <div class="input-group">
+                                            <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                            <span class="input-group-append">
+                                                <div class="input-group-text bg-transparent">
+                                                    {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>        
+                                </div>
                                
-                                 {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
-                                 <label class="form-check-label" for="reviewed">
-                                   Reviewed
-                                 </label> {% endcomment %}
-                                 <button id="filterSearch" class="btn btn-primary" style="margin-right:30px;">Search</button>
-                               
-                             </div> 
-                             </div>
-                             
-                           </form>
-                           {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
-                           {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
-                 </div>
+                                <div class="form-row">
+                                  <div class="form-group col-md-2 col-lg-2">
+                                    <label for="viewCountMin">Minimum cost</label>
+                                    <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                                  </div>
+                                  <div class="form-group col-md-2 col-lg-2">
+                                    <label for="viewCountMax">Maximum cost</label>
+                                    <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                                  </div>
+                                  {% comment %} <div class="form-group col-md-2 col-lg-2">
+                                    <label for="publishDateMin">Available date</label>
+                                    <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                                  </div>
+                                  <div class="form-group col-md-2 col-lg-2">
+                                    <label for="publishDateMax">Publish date maximum</label>
+                                    <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                                  </div> {% endcomment %}
+                                  <div class="form-group col-md-4">
+                                    {% comment %} <label for="category">Category</label>
+                                    <select id="category" class="form-control" name="category">
+                                      <option selected>Choose...</option>
+                                      {% for cat in categories %}
+                                      
+                                      <option value="{{ cat }}">{{ cat }}</option>
+                                      {% endfor %}
+                                    </select> {% endcomment %}
+                                  </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label for="category">Category</label>
+                                        <select id="category" class="form-control" name="category">
+                                          <option selected>Choose...</option>
+                                          {% for cat in categories %}
+                                          
+                                          <option value="{{ cat }}">{{ cat }}</option>
+                                          {% endfor %}
+                                        </select>
+                                    </div>        
+                                </div>
+                                <div class="form-group">
+                                  
+                                    {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                                    <label class="form-check-label" for="reviewed">
+                                      Reviewed
+                                    </label> {% endcomment %}
+                                    <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
+                                  
+                                </div> 
+                                </div>
+                                
+                              </form>
+                                 <div class="overlay" id="overlay"></div>
+                              {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
+                              {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
+                    </div>
                  
                  
                  
-                 <form class="search" method= "GET" action="{% url 'search_venue' %}">
-                     {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
-                     <div class="search-container">
-                         {% comment %} <div class="filters">
-                             <a href="/filterform"><h1> Filters </h1></a>
-                         </div>  {% endcomment %}
-                         {% comment %} <span class="material-symbols-outlined">
-                             search
-                             </span> {% endcomment %}
-                             <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                             <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
-                     </div>
-                     
-                     {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
-                     {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
-                 </form>
-                </div> 
-                <div id="result" class="venue-container"></div>
-                 {% comment %} <h1>Search City</h1>
-                 <input type="text" id="location" name="location" placeholder="Enter Location">
-             
-                 <div id="result"></div> {% endcomment %}
+                    <form class="search" method= "GET" action="{% url 'search_venue' %}">
+                        {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+                        <div class="search-container">
+                            {% comment %} <div class="filters">
+                                <a href="/filterform"><h1> Filters </h1></a>
+                            </div>  {% endcomment %}
+                            {% comment %} <span class="material-symbols-outlined">
+                                search
+                                </span> {% endcomment %}
+                                <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                                <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                        </div>
+                        
+                        
+                    </form>
+                   </div> 
+                   <div id="result" class="venue-container"></div>
          
                  <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
                      
@@ -353,118 +349,114 @@
                 <h2>Decoration Content</h2>
                 <div class="main-content1">
                     <div class="whole"> 
-                     <div class="filter-container">
-                         <div class="filters">
-                             <a href="#" id="filterLink"><h1> Filters </h1></a>
-                         </div>
-                         <!-- Add the filter form here -->
-                         
-                             <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" style="display: none;">
-                                 <div class="form-row">
-                                     <div class="form-group col-12">
-                                         <div class="input-group">
-                                             <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
-                                             <span class="input-group-append">
-                                                 <div class="input-group-text bg-transparent">
-                                                     {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                                 </div>
-                                             </span>
-                                         </div>
-                                     </div>        
-                                 </div>
-                                 <div class="form-row">
-                                     <div class="form-group col-12">
-                                         <div class="input-group">
-                                             <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
-                                             <span class="input-group-append">
-                                                 <div class="input-group-text bg-transparent">
-                                                     {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                                 </div>
-                                             </span>
-                                         </div>
-                                     </div>        
-                                 </div>
-                                
-                                 <div class="form-row">
-                                   <div class="form-group col-md-2 col-lg-2">
-                                     <label for="viewCountMin">Minimum cost</label>
-                                     <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
-                                   </div>
-                                   <div class="form-group col-md-2 col-lg-2">
-                                     <label for="viewCountMax">Maximum cost</label>
-                                     <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
-                                   </div>
-                                   {% comment %} <div class="form-group col-md-2 col-lg-2">
-                                     <label for="publishDateMin">Available date</label>
-                                     <input type="date" class="form-control" id="publishDateMin" name="date_min">
-                                   </div>
-                                   <div class="form-group col-md-2 col-lg-2">
-                                     <label for="publishDateMax">Publish date maximum</label>
-                                     <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                                   </div> {% endcomment %}
-                                   <div class="form-group col-md-4">
-                                     {% comment %} <label for="category">Category</label>
-                                     <select id="category" class="form-control" name="category">
-                                       <option selected>Choose...</option>
-                                       {% for cat in categories %}
-                                       
-                                       <option value="{{ cat }}">{{ cat }}</option>
-                                       {% endfor %}
-                                     </select> {% endcomment %}
-                                   </div>
-                                 </div>
-                                 <div class="form-row">
-                                     <div class="form-group col-12">
-                                         <label for="category">Category</label>
-                                         <select id="category" class="form-control" name="category">
-                                           <option selected>Choose...</option>
-                                           {% for cat in categories %}
-                                           
-                                           <option value="{{ cat }}">{{ cat }}</option>
-                                           {% endfor %}
-                                         </select>
-                                     </div>        
-                                 </div>
-                                 <div class="form-group">
+                        <div class="filter-container">
+                            <div class="filters">
+                                <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                            </div>
+                            <!-- Add the filter form here -->
+                            
+                                <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <div class="input-group">
+                                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
+                                                <span class="input-group-append">
+                                                    <div class="input-group-text bg-transparent">
+                                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>        
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <div class="input-group">
+                                                <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                                <span class="input-group-append">
+                                                    <div class="input-group-text bg-transparent">
+                                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>        
+                                    </div>
                                    
-                                     {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
-                                     <label class="form-check-label" for="reviewed">
-                                       Reviewed
-                                     </label> {% endcomment %}
-                                     <button id="filterSearch" class="btn btn-primary" style="margin-right:30px;">Search</button>
-                                   
-                                 </div> 
-                                 </div>
-                                 
-                               </form>
-                               {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
-                               {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
-                     </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-2 col-lg-2">
+                                        <label for="viewCountMin">Minimum cost</label>
+                                        <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                                      </div>
+                                      <div class="form-group col-md-2 col-lg-2">
+                                        <label for="viewCountMax">Maximum cost</label>
+                                        <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                                      </div>
+                                      {% comment %} <div class="form-group col-md-2 col-lg-2">
+                                        <label for="publishDateMin">Available date</label>
+                                        <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                                      </div>
+                                      <div class="form-group col-md-2 col-lg-2">
+                                        <label for="publishDateMax">Publish date maximum</label>
+                                        <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                                      </div> {% endcomment %}
+                                      <div class="form-group col-md-4">
+                                        {% comment %} <label for="category">Category</label>
+                                        <select id="category" class="form-control" name="category">
+                                          <option selected>Choose...</option>
+                                          {% for cat in categories %}
+                                          
+                                          <option value="{{ cat }}">{{ cat }}</option>
+                                          {% endfor %}
+                                        </select> {% endcomment %}
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <label for="category">Category</label>
+                                            <select id="category" class="form-control" name="category">
+                                              <option selected>Choose...</option>
+                                              {% for cat in categories %}
+                                              
+                                              <option value="{{ cat }}">{{ cat }}</option>
+                                              {% endfor %}
+                                            </select>
+                                        </div>        
+                                    </div>
+                                    <div class="form-group">
+                                      
+                                        {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                                        <label class="form-check-label" for="reviewed">
+                                          Reviewed
+                                        </label> {% endcomment %}
+                                        <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
+                                      
+                                    </div> 
+                                    </div>
+                                    
+                                  </form>
+                                     <div class="overlay" id="overlay"></div>
+                                  {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
+                                  {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
+                        </div>
                      
                      
-                     
-                     <!-- <form class="search" method= "GET" action="{% url 'search_venue' %}">
-                         {% csrf_token %}  cross site request forgery token helps keep hackers from hijacking your form 
-                         <div class="search-container">
-                             {% comment %} <div class="filters">
-                                 <a href="/filterform"><h1> Filters </h1></a>
-                             </div>  {% endcomment %}
-                             {% comment %} <span class="material-symbols-outlined">
-                                 search
-                                 </span> {% endcomment %}
-                                 <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                                 <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
-                         </div>
-                         
-                         {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
-                         {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
-                     </form> -->
-                    </div> 
-                    <div id="result" class="venue-container"></div>
-                     {% comment %} <h1>Search City</h1>
-                     <input type="text" id="location" name="location" placeholder="Enter Location">
-                 
-                     <div id="result"></div> {% endcomment %}
+                        <form class="search" method= "GET" action="{% url 'search_venue' %}">
+                            {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+                            <div class="search-container">
+                                {% comment %} <div class="filters">
+                                    <a href="/filterform"><h1> Filters </h1></a>
+                                </div>  {% endcomment %}
+                                {% comment %} <span class="material-symbols-outlined">
+                                    search
+                                    </span> {% endcomment %}
+                                    <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                            </div>
+                            
+                            
+                        </form>
+                       </div> 
+                       <div id="result" class="venue-container"></div>
+                    
              
                      <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
                          
@@ -514,131 +506,128 @@
                     <h2>Venues Content</h2>
                     <div class="main-content1">
                         <div class="whole"> 
-                         <div class="filter-container">
-                             <div class="filters">
-                                 <a href="#" id="filterLink"><h1> Filters </h1></a>
-                             </div>
-                             <!-- Add the filter form here -->
-                             
-                                 <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" style="display: none;">
-                                     <div class="form-row">
-                                         <div class="form-group col-12">
-                                             <div class="input-group">
-                                                 <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
-                                                 <span class="input-group-append">
-                                                     <div class="input-group-text bg-transparent">
-                                                         {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                                     </div>
-                                                 </span>
-                                             </div>
-                                         </div>        
-                                     </div>
-                                     <div class="form-row">
-                                         <div class="form-group col-12">
-                                             <div class="input-group">
-                                                 <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
-                                                 <span class="input-group-append">
-                                                     <div class="input-group-text bg-transparent">
-                                                         {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                                     </div>
-                                                 </span>
-                                             </div>
-                                         </div>        
-                                     </div>
-                                    
-                                     <div class="form-row">
-                                       <div class="form-group col-md-2 col-lg-2">
-                                         <label for="viewCountMin">Minimum cost</label>
-                                         <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
-                                       </div>
-                                       <div class="form-group col-md-2 col-lg-2">
-                                         <label for="viewCountMax">Maximum cost</label>
-                                         <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
-                                       </div>
-                                       {% comment %} <div class="form-group col-md-2 col-lg-2">
-                                         <label for="publishDateMin">Available date</label>
-                                         <input type="date" class="form-control" id="publishDateMin" name="date_min">
-                                       </div>
-                                       <div class="form-group col-md-2 col-lg-2">
-                                         <label for="publishDateMax">Publish date maximum</label>
-                                         <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                                       </div> {% endcomment %}
-                                       <div class="form-group col-md-4">
-                                         {% comment %} <label for="category">Category</label>
-                                         <select id="category" class="form-control" name="category">
-                                           <option selected>Choose...</option>
-                                           {% for cat in categories %}
-                                           
-                                           <option value="{{ cat }}">{{ cat }}</option>
-                                           {% endfor %}
-                                         </select> {% endcomment %}
-                                       </div>
-                                     </div>
-                                     <div class="form-row">
-                                         <div class="form-group col-12">
-                                             <label for="category">Category</label>
-                                             <select id="category" class="form-control" name="category">
-                                               <option selected>Choose...</option>
-                                               {% for cat in categories %}
-                                               
-                                               <option value="{{ cat }}">{{ cat }}</option>
-                                               {% endfor %}
-                                             </select>
-                                         </div>        
-                                     </div>
-                                     <div class="form-group">
+                            <div class="filter-container">
+                                <div class="filters">
+                                    <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                                </div>
+                                <!-- Add the filter form here -->
+                                
+                                    <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
+                                        <div class="form-row">
+                                            <div class="form-group col-12">
+                                                <div class="input-group">
+                                                    <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
+                                                    <span class="input-group-append">
+                                                        <div class="input-group-text bg-transparent">
+                                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>        
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-12">
+                                                <div class="input-group">
+                                                    <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                                    <span class="input-group-append">
+                                                        <div class="input-group-text bg-transparent">
+                                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>        
+                                        </div>
                                        
-                                         {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
-                                         <label class="form-check-label" for="reviewed">
-                                           Reviewed
-                                         </label> {% endcomment %}
-                                         <button id="filterSearch" class="btn btn-primary" style="margin-right:30px;">Search</button>
-                                       
-                                     </div> 
-                                     </div>
-                                     
-                                   </form>
-                                   {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
-                                   {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
-                         </div>
+                                        <div class="form-row">
+                                          <div class="form-group col-md-2 col-lg-2">
+                                            <label for="viewCountMin">Minimum cost</label>
+                                            <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                                          </div>
+                                          <div class="form-group col-md-2 col-lg-2">
+                                            <label for="viewCountMax">Maximum cost</label>
+                                            <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                                          </div>
+                                          {% comment %} <div class="form-group col-md-2 col-lg-2">
+                                            <label for="publishDateMin">Available date</label>
+                                            <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                                          </div>
+                                          <div class="form-group col-md-2 col-lg-2">
+                                            <label for="publishDateMax">Publish date maximum</label>
+                                            <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                                          </div> {% endcomment %}
+                                          <div class="form-group col-md-4">
+                                            {% comment %} <label for="category">Category</label>
+                                            <select id="category" class="form-control" name="category">
+                                              <option selected>Choose...</option>
+                                              {% for cat in categories %}
+                                              
+                                              <option value="{{ cat }}">{{ cat }}</option>
+                                              {% endfor %}
+                                            </select> {% endcomment %}
+                                          </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-12">
+                                                <label for="category">Category</label>
+                                                <select id="category" class="form-control" name="category">
+                                                  <option selected>Choose...</option>
+                                                  {% for cat in categories %}
+                                                  
+                                                  <option value="{{ cat }}">{{ cat }}</option>
+                                                  {% endfor %}
+                                                </select>
+                                            </div>        
+                                        </div>
+                                        <div class="form-group">
+                                          
+                                            {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                                            <label class="form-check-label" for="reviewed">
+                                              Reviewed
+                                            </label> {% endcomment %}
+                                            <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
+                                          
+                                        </div> 
+                                        </div>
+                                        
+                                      </form>
+                                         <div class="overlay" id="overlay"></div>
+                                      {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
+                                      {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
+                            </div>
                          
                          
                          
-                         <form class="search" method= "GET" action="{% url 'search_venue' %}">
-                             {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
-                             <div class="search-container">
-                                 {% comment %} <div class="filters">
-                                     <a href="/filterform"><h1> Filters </h1></a>
-                                 </div>  {% endcomment %}
-                                 {% comment %} <span class="material-symbols-outlined">
-                                     search
-                                     </span> {% endcomment %}
-                                     <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                                     <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
-                             </div>
-                             
-                             {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
-                             {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
-                         </form>
-                        </div> 
-                        <div id="result" class="venue-container"></div>
-                         {% comment %} <h1>Search City</h1>
-                         <input type="text" id="location" name="location" placeholder="Enter Location">
-                     
-                         <div id="result"></div> {% endcomment %}
+                            <form class="search" method= "GET" action="{% url 'search_venue' %}">
+                                {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+                                <div class="search-container">
+                                    {% comment %} <div class="filters">
+                                        <a href="/filterform"><h1> Filters </h1></a>
+                                    </div>  {% endcomment %}
+                                    {% comment %} <span class="material-symbols-outlined">
+                                        search
+                                        </span> {% endcomment %}
+                                        <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                                        <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                                </div>
+                                
+                                
+                            </form>
+                           </div> 
+                           <div id="result" class="venue-container"></div>
+                         
                  
                          <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
                              
-                         {% for venue in photographers %}
+                         {% for photographer in photographers %}
                           <div class=" middle">
                             <div class = "car">
                              <div class="name">
-                              <h2>{{venue.Username}} </h2>
+                              <h2>{{photographer.Username}} </h2>
                              </div>
                              <div class="pictures"> 
-                                 {% if venue.Photographer_image.all %}   
+                                 {% if photographer.Photographer_image.all %}   
                                  <div class="img"> 
-                                     <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover" >
+                                     <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover" >
                                  </div>
                              {% endif %}
                              </div>
@@ -768,6 +757,63 @@
     event.preventDefault();
   }
  </script>
+
+ <script>
+    document.getElementById("searching").addEventListener("input", function(event) {
+        const searched = event.target.value;
+        if (searched.length > 0) {
+            fetch(`/api/search_venue?searched=${searched}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const resultContainer = document.getElementById("result");
+                    resultContainer.innerHTML = ""; // Clear previous results
+                    data.venues.forEach(venue => {
+                        console.log(venue)
+                        const venueHTML = `
+                          
+                              <div class="middle" style = 'display: flex;'>
+                                <div class="car">
+                                    <div class="name">
+                                        <h2>${venue.Name}</h2>
+                                    </div>
+
+
+                                    
+                                    <div class="pictures">
+                                        ${venue.Venue_images && venue.Venue_images.length > 0 ?
+                                            venue.Venue_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                `
+                                                <div class="img">
+                                                    <img src="${image}" alt="${venue.Name}" width="280" height="150">
+                                                </div>
+                                                ` : '').join('') : ''}
+                                    </div>
+                                    <div class="title">
+                                        <h3>${venue.Location}</h3>
+                                        <div class="desc" style = 'position:relative'>
+                                            <p>${venue.Description}</p>
+                                        </div>
+                                        <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
+                                            <h4>NPR: ${venue.Cost}</h4>
+                                        </div>
+                                        
+                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
+                                            <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                              </div> `;
+                        resultContainer.innerHTML += venueHTML;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            document.getElementById("result").innerHTML = "";
+        }
+    });
+</script>
  <script>
         // Retrieve JSON data from local storage
     const storedFormDataJson = localStorage.getItem('formData');

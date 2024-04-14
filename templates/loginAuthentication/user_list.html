@@ -72,11 +72,11 @@
                     <span class="material-symbols-outlined">roofing</span>
                     <h3> Venues </h3>    
                 </a>         
-                <a href="a">
+                <a href="/decoration_list">
                     <span class="material-symbols-outlined">celebration</span>
                     <h3> Decorations </h3>    
                 </a>         
-                <a href="a">
+                <a href="/photographer_list">
                     <span class="material-symbols-outlined"> person_book</span>
                     <h3> photographer </h3>    
                 </a>         
@@ -99,6 +99,13 @@
     </aside>
     
     <main>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
       <h1>Users List</h1>
      
     <div class="tab">
@@ -130,7 +137,8 @@
                     <td>{{ myuser.is_active }}</td>
                     <td>
                         <a href="{% url 'view_user' myuser.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'delete_user' myuser.id %}">Delete </a>
+                        <a href="{% url 'delete_user' myuser.id %}" onclick="return confirmDelete('{{ myuser.username }}');" class="btn btn-danger">Delete</a>
+                        {% comment %} <a href="{% url 'delete_user' myuser.id %}">Delete </a> {% endcomment %}
                     </td>
                 </tr>
             {% endfor %}
@@ -140,6 +148,11 @@
     </main>
     </div>    
    </div>
+   <script>
+    function confirmDelete(username) {
+        return confirm("Are you sure you want to delete this user" + username + "?");
+    }
+   </script>
    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

@@ -40,9 +40,6 @@ def addphotographer(request):
     
 
 
-
-
-
 def update_photographer(request, photographer_id):
     from django.conf import settings
 
@@ -78,7 +75,7 @@ def delete_image(request, image_id):
         image.delete()
         return JsonResponse({'message': 'Image deleted successfully'}, status=200)
     else:
-        return JsonResponse({'error': 'Invalid request method'}, status=400)
+        return JsonResponse({'error': 'Invalid request m ethod'}, status=400)
     
 from django.contrib import messages
 from django.http import HttpResponse
@@ -87,10 +84,7 @@ def delete_photographer(request, photographer_id):
     photographers = get_object_or_404(photographer, id=photographer_id)
     if request.method == 'POST':
         photographers.delete()
-        message = "Photographer deleted successfully!"
-        return HttpResponse(f'<script>alert("{message}"); window.location.href = "/photographer_list";</script>')
-
-    return render(request, "photographer/delete_photographer.html", {'photographers': photographers})
+        return redirect('/photographer_list')
 
 
 # def delete_photographer(request, photographer_id):
@@ -137,3 +131,75 @@ def explorephotographer(request, id):
     
     # Render the template with the photographers data
     return render(request, 'photographer/explorephotographer.html', {'photographer': photographers})
+
+
+@require_GET
+def search_photographer(request):
+    searched = request.GET.get('searched', '')
+    
+    # Search through Name, Location, and Cost fields
+    photographers = photographer.objects.filter(
+        Q(Username__icontains=searched) | 
+        Q(Photography_type__icontains=searched) | 
+        Q(Cost__icontains=searched)
+    ).prefetch_related('Photographer_image')
+
+    # Serialize Photographer data including the paths of multiple images
+    Photographers_data = []
+    for photo in photographers:
+        Photographer_data = {
+            'id': photo.id,
+            'Name': photo.Username,
+            'Type': photo.Photography_Type,
+            'Description': photo.Description,
+            
+            'Cost': photo.Cost,
+            # Retrieve paths of associated images
+            'Photographer_images': [image.image.url for image in photo.Photographer_image.all()]
+        }
+        Photographers_data.append(Photographer_data)
+
+    # Return JSON response
+    return JsonResponse({'Photographer': Photographers_data})
+
+
+from django.http import JsonResponse
+from django.db.models import Q
+from .models import photographer
+@require_GET
+def filter_photographers(request):
+    photographers = photographer.objects.all()
+    name_contains_query = request.GET.get('Name_contains')
+    # location_contains_query = request.GET.get('Location_exact')
+    # title_or_author_query = request.GET.get('Name_or_Location')
+    min_cost = request.GET.get('view_count_min')
+    max_cost = request.GET.get('view_count_max')
+
+    if name_contains_query != '' and name_contains_query is not None:
+        photographers = photographers.filter(Name__icontains=name_contains_query)
+
+    # if location_contains_query != '' and location_contains_query is not None:
+    #     photographers = photographers.filter(Location__icontains=location_contains_query)
+
+    # if title_or_author_query != '' and title_or_author_query is not None:
+    #     photographers = photographers.filter(Q(Name__icontains=title_or_author_query) | Q(Location__icontains=title_or_author_query)).distinct()
+    
+    if min_cost:
+        photographers = photographers.filter(Cost__gte=min_cost)
+
+    if max_cost:
+        photographers = photographers.filter(Cost__lte=max_cost)
+
+    data = [{
+        'Name': photo.Name,
+        
+        'Description': photo.Description,
+        'Cost': photo.Cost,
+        'Venue_images': [image.image.url for image in photo.Photographer_image.all()],
+        'id':photo.id
+        
+    } for photo in photographers]
+
+
+    # Return JSON response
+    return JsonResponse({'photographers': data})

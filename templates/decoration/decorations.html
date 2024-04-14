@@ -123,6 +123,32 @@
             font-weight:250;
  
         }
+
+        .form-row{
+            justify-content:space-around;
+            gap:50px;
+            margin-left:30px;
+        }
+        .form-row>.col, .form-row>[class*=col-]{
+            padding:0px;
+        }
+        
+       
+
+        .search {
+            
+            align-items: center;
+        }
+
+        #searched {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+        margin-left:32rem;
+        margin-top:25px;
+        width:500px;
+    }
         .form-row>.col, .form-row>[class*=col-]{
             padding:0px;
         }
@@ -141,6 +167,43 @@
         margin-left:32rem;
         margin-top:25px;
         width:500px;
+    }
+
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 30px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 9999; /* Ensure the pop-up is above other content */
+        display: none; /* Initially hide the pop-up */
+        width: 430px; 
+    }
+
+    /* Styling for the close button */
+    .popup:target {
+        display: block; /* Show the pop-up when it is targeted */
+    }
+
+    /* Dim background when pop-up is open */
+    .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: red; /* Adjust opacity as needed */
+        z-index: 999; /* Ensure it's above other content */
+        display: none; /* Initially hide the overlay */
+    }
+
+    /* Show the overlay when the pop-up is targeted */
+    .popup:target + .overlay {
+        display: block;
     }
 
         .middle{
@@ -241,6 +304,13 @@
             margin-left:30%;
         }
 
+        .decoration-container {
+            display: flex;
+            margin-top:0px;
+            flex-wrap: wrap;
+            margin-left:50px;
+          }
+
         .whole{
            
             align-items: center;
@@ -290,6 +360,32 @@
             width:45%;
         }
 
+        .filters{
+            text-align:center;
+            margin-left:400px;
+            margin-top:27px;
+        }
+
+        .whole{
+           
+            align-items: center;
+            width:100%;
+            max-width:90vw;
+            margin:auto;
+            margin-top:40px;
+            margin-left:100px;
+        }
+
+        .search-container {
+         
+            display: flex;
+            align-items: center;
+            width:500px;
+            max-width:90vw;
+            margin:auto;
+            margin-top:60px;
+            margin-right:350px;
+        }
           
           /* Style for the input box */
    .form-control {
@@ -351,119 +447,117 @@
     </nav>
     <!-- Main Content -->
     <div class="main-content">
-       <div class="whole"> 
-        {% comment %} <div class="filter-container">
-            <div class="filters">
-                <a href="#" id="filterLink"><h1> Filters </h1></a>
-            </div>
-            <!-- Add the filter form here -->
-            
-                <form method="GET"  action="{% url 'filter_decorations' %}" id="filterForm" style="display: none;">
-                    <div class="form-row">
-                        <div class="form-group col-12">
-                            <div class="input-group">
-                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Decoration Name.." />
-                                <span class="input-group-append">
-                                    <div class="input-group-text bg-transparent">
-                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                    </div>
-                                </span>
-                            </div>
-                        </div>        
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-12">
-                            <div class="input-group">
-                                <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
-                                <span class="input-group-append">
-                                    <div class="input-group-text bg-transparent">
-                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                    </div>
-                                </span>
-                            </div>
-                        </div>        
-                    </div>
-                   
-                    <div class="form-row">
-                      <div class="form-group col-md-2 col-lg-2">
-                        <label for="viewCountMin">Minimum cost</label>
-                        <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
-                      </div>
-                      <div class="form-group col-md-2 col-lg-2">
-                        <label for="viewCountMax">Maximum cost</label>
-                        <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
-                      </div>
-                      {% comment %} <div class="form-group col-md-2 col-lg-2">
-                        <label for="publishDateMin">Available date</label>
-                        <input type="date" class="form-control" id="publishDateMin" name="date_min">
-                      </div>
-                      <div class="form-group col-md-2 col-lg-2">
-                        <label for="publishDateMax">Publish date maximum</label>
-                        <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                      </div> {% endcomment %}
-                      <div class="form-group col-md-4">
-                        {% comment %} <label for="category">Category</label>
-                        <select id="category" class="form-control" name="category">
-                          <option selected>Choose...</option>
-                          {% for cat in categories %}
-                          
-                          <option value="{{ cat }}">{{ cat }}</option>
-                          {% endfor %}
-                        </select> {% endcomment %}
-                      </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-12">
-                            <label for="category">Category</label>
+        <div class="whole"> 
+            <div class="filter-container">
+                <div class="filters">
+                    <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                </div>
+                <!-- Add the filter form here -->
+                
+                    <form method="GET"  action="{% url 'filter_decorations' %}" id="filterForm" class="popup" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <div class="input-group">
+                                    <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Name.." />
+                                    <span class="input-group-append">
+                                        <div class="input-group-text bg-transparent">
+                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>        
+                        </div>
+                        {% comment %} <div class="form-row">
+                            <div class="form-group col-12">
+                                <div class="input-group">
+                                    <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                    <span class="input-group-append">
+                                        <div class="input-group-text bg-transparent">
+                                            <i class="fa fa-search"></i> 
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>        
+                        </div> {% endcomment %}
+                       
+                        <div class="form-row">
+                          <div class="form-group col-md-2 col-lg-2">
+                            <label for="viewCountMin">Minimum cost</label>
+                            <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                          </div>
+                          <div class="form-group col-md-2 col-lg-2">
+                            <label for="viewCountMax">Maximum cost</label>
+                            <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                          </div>
+                          {% comment %} <div class="form-group col-md-2 col-lg-2">
+                            <label for="publishDateMin">Available date</label>
+                            <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                          </div>
+                          <div class="form-group col-md-2 col-lg-2">
+                            <label for="publishDateMax">Publish date maximum</label>
+                            <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                          </div> {% endcomment %}
+                          <div class="form-group col-md-4">
+                            {% comment %} <label for="category">Category</label>
                             <select id="category" class="form-control" name="category">
                               <option selected>Choose...</option>
                               {% for cat in categories %}
                               
                               <option value="{{ cat }}">{{ cat }}</option>
                               {% endfor %}
-                            </select>
-                        </div>        
-                    </div>
-                    <div class="form-group">
-                      
-                        {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
-                        <label class="form-check-label" for="reviewed">
-                          Reviewed
-                        </label> {% endcomment %}
-                        <button id="filterSearch" class="btn btn-primary" style="margin-right:30px;">Search</button>
-                      
-                    </div> 
-                    </div>
-                    
-                  </form>
-                  {% comment %} <div id="result" class="decoration-container"></div> {% endcomment %}
-                  {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
-        <!--</div>-->
-         
-        
-        
-        {% comment %} <form class="search" method= "GET" action="{% url 'search_decoration' %}">
-            {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
-            <div class="search-container">
-                {% comment %} <div class="filters">
-                    <a href="/filterform"><h1> Filters </h1></a>
-                </div>  {% endcomment %}
-                {% comment %} <span class="material-symbols-outlined">
-                    search
-                    </span> {% endcomment %}
-                    {% comment %} <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
-            </div> {% endcomment %}
+                            </select> {% endcomment %}
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label for="category">Category</label>
+                                <select id="category" class="form-control" name="category">
+                                  <option selected>Choose...</option>
+                                  {% for cat in categories %}
+                                  
+                                  <option value="{{ cat }}">{{ cat }}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>        
+                        </div>
+                        <div class="form-group">
+                          
+                            {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
+                            <label class="form-check-label" for="reviewed">
+                              Reviewed
+                            </label> {% endcomment %}
+                            <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
+                          
+                        </div> 
+                        </div>
+                        
+                      </form>
+                         <div class="overlay" id="overlay"></div>
+                      {% comment %} <div id="result" class="decoration-container"></div> {% endcomment %}
+                      {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
+            </div>
             
-            {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search decorations.." aria-label="Search" name ="searched"> {% endcomment %}
-            {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
-        {% comment %} </form>
-       </div> 
-       <div id="result" class="decoration-container"></div> {% endcomment %} 
-        {% comment %} <h1>Search City</h1>
-        <input type="text" id="location" name="location" placeholder="Enter Location">
-    
-        <div id="result"></div> {% endcomment %}
+            
+            
+            <form class="search" method= "GET" action="{% url 'search_decoration' %}">
+                {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+                <div class="search-container">
+                    {% comment %} <div class="filters">
+                        <a href="/filterform"><h1> Filters </h1></a>
+                    </div>  {% endcomment %}
+                    {% comment %} <span class="material-symbols-outlined">
+                        search
+                        </span> {% endcomment %}
+                        <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                        <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                </div>
+                
+                {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search decorations.." aria-label="Search" name ="searched"> {% endcomment %}
+                {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
+            </form>
+           </div> 
+           <div id="result" class="decoration-container"></div>
+        
 
         <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
             
@@ -560,7 +654,7 @@
                                                     ` : '').join('') : ''}
                                         </div>
                                         <div class="title">
-                                            <h3>${decoration.Location}</h3>
+                                            
                                             <div class="desc" style = 'position:relative'>
                                                 <p>${decoration.Description}</p>
                                             </div>
@@ -583,6 +677,79 @@
                 document.getElementById("result").innerHTML = "";
             }
         });
+    </script>
+    <script>
+        {
+            // Get references to the filter form and the result container
+            const filterform = document.getElementById("filterForm");
+            console.log(filterform)
+            const resultContainer = document.getElementById("result");
+            
+            // Add event listener to the filter form
+            filterForm.addEventListener("click", function(event) {
+                event.preventDefault()
+                console.log("console")
+                // Prevent the default form submission behavior
+                // Get the filter values from the form inputs
+                //const location = document.getElementById("location").value;
+                const Name = document.getElementById("Name").value;
+                const view_count_max = document.getElementById("viewCountMax").value; 
+                const view_count_min = document.getElementById("viewCountMin").value;
+            
+            
+                // Perform the filtering using AJAX
+                fetch(`api/filter_decorations?view_count_max=${view_count_max}&view_count_min=${view_count_min}&Name_contains=${Name}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        
+            
+                        if(data.decorations.length==0){
+                            console.log("data not found!")
+                            resultContainer.innerHTML=""
+                            return
+                        }
+                        // Clear previous search results
+                        resultContainer.innerHTML = "";
+                        // Display new search results
+                        data.decorations.forEach(decoration => {
+                            console.log(decoration)
+                            const decorationHTML = `
+                                <div class="middle" style = 'display: flex;'>
+                                    <div class="car">
+                                        <div class="name">
+                                            <h2>${decoration.Name}</h2>
+                                        </div>
+                                        <div class="pictures">
+                                                        ${decoration.decoration_images && decoration.decoration_images.length > 0 ?
+                                                            decoration.decoration_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                                `
+                                                                <div class="img">
+                                                                    <img src="${image}" alt="${decoration.Name}" width="280" height="150">
+                                                                </div>
+                                                                ` : '').join('') : ''}
+                                        </div>
+                                        <div class="title">
+                                            <div class="desc" style = 'position:relative;'>
+                                                <p>${decoration.Description}</p>
+                                            </div>
+                                            <div class="cost" style = 'position:absolute; bottom: 10px; left: 60%;'>
+                                                <h4>NPR: ${decoration.Cost}</h4>
+                                            </div>
+                                            <div class="btn-container" style = 'position:absolute; bottom: 7px;'> 
+                                               <button type="submit" class="btn-primary"><a href="/${decoration.id}/exploredecoration">Explore</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            resultContainer.innerHTML += decorationHTML;
+                        });
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            
+            }); 
+            }
+            
     </script>
     
     <!--location instead of searched-->

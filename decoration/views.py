@@ -37,8 +37,38 @@ def adddecoration(request):
         form = DecorationForm()
     return render(request, "decoration/adddecoration.html" , {'form': form})
     
+from django.shortcuts import render, redirect, get_object_or_404
+# from .forms import VenuesForm
+from .models import ImageFile
+
+# def update_venue(request, venue_id):
+#     from django.conf import settings
+
+#     venue = get_object_or_404(decoration, pk=venue_id)
+
+#     if request.method == 'POST':
+#         form = VenuesForm(request.POST, request.FILES, instance=venue)
+#         if form.is_valid():
+#             venue = form.save(commit=False)
+#             venue.save()
+
+#             # Clear existing images associated with the venue
+#             # venue.Venue_image.clear()
+
+#             # Handle multiple uploaded files and associate them with the venue
+#             for image in request.FILES.getlist('Venue_image'):
+#                 image_instance = ImageFile.objects.create(image=image)
+#                 venue.Venue_image.add(image_instance)
+
+#             return HttpResponse('<script>alert("Venue updated successfully!"); window.location.href = "/venue_list";</script>')  # Redirect to a success page or wherever you want
+#     else:
+#         form = VenuesForm(instance=venue)
+    
+#         # Fetch image URLs associated with the venue
+#     image_urls = [request.build_absolute_uri(settings.MEDIA_URL + str(image.image)) for image in venue.Venue_image.all()]
 
 
+#     return render(request, "Venues/venue_update.html", {'form': form, 'venue': venue,'image_urls': image_urls})
 
 
 
@@ -67,6 +97,7 @@ def update_decoration(request, decoration_id):
     
         # Fetch image URLs associated with the decorations
     image_urls = [request.build_absolute_uri(settings.MEDIA_URL + str(image.image)) for image in decorations.Decoration_image.all()]
+
     return render(request, "decoration/update_decoration.html", {'form': form, 'decorations': decorations,'image_urls': image_urls})
 
 from django.http import JsonResponse
@@ -83,10 +114,10 @@ def delete_image(request, image_id):
 
 def delete_decoration(request, id):
     decorations = get_object_or_404(decoration, id= id)
-    if request.method == 'POST':
+    if request.method == 'GET':
         decorations.delete()
-        return HttpResponseRedirect('/decoration_list')  # Redirect to decorations list page after delete
-    return render(request, "decoration/delete_decoration.html", {'decorations': decorations})
+        return redirect('/decoration_list')  # Redirect to decorations list page after delete
+    
 
 
 
@@ -114,3 +145,71 @@ def exploredecoration(request, id):
     
     # Render the template with the venue data
     return render(request, 'decoration/exploredecoration.html', {'decoration': decorations})
+
+@require_GET
+def search_decoration(request):
+    searched = request.GET.get('searched', '')
+    
+    # Search through Name, Location, and Cost fields
+    decorations = decoration.objects.filter(
+        Q(Name__icontains=searched) |  
+        Q(Cost__icontains=searched)
+    ).prefetch_related('Decoration_image')
+
+    # Serialize decoration data including the paths of multiple images
+    decorations_data = []
+    for decor in decorations:
+        decoration_data = {
+            'id': decor.id,
+            'Name': decor.Name,
+            'Type': decor.Type,
+            'Description': decor.Description,
+            'Cost': decor.Cost,
+            # Retrieve paths of associated images
+            'decoration_images': [image.image.url for image in decor.Decoration_image.all()]
+        }
+        decorations_data.append(decoration_data)
+
+    # Return JSON response
+    return JsonResponse({'decoration': decoration_data})
+
+from django.http import JsonResponse
+from django.db.models import Q
+from .models import decoration
+@require_GET
+def filter_decorations(request):
+    decorations = decorations.objects.all()
+    name_contains_query = request.GET.get('Name_contains')
+   
+    # title_or_author_query = request.GET.get('Name_or_Location')
+    min_cost = request.GET.get('view_count_min')
+    max_cost = request.GET.get('view_count_max')
+
+    if name_contains_query != '' and name_contains_query is not None:
+        decorations = decorations.filter(Name__icontains=name_contains_query)
+
+    # if location_contains_query != '' and location_contains_query is not None:
+    #     decorations = decorations.filter(Location__icontains=location_contains_query)
+
+    # if title_or_author_query != '' and title_or_author_query is not None:
+    #     decorations = decorations.filter(Q(Name__icontains=title_or_author_query) | Q(Location__icontains=title_or_author_query)).distinct()
+    
+    if min_cost:
+        decorations = decorations.filter(Cost__gte=min_cost)
+
+    if max_cost:
+        decorations = decorations.filter(Cost__lte=max_cost)
+
+    data = [{
+        'Name': decoration.Name,
+        
+        'Description': decoration.Description,
+        'Cost': decoration.Cost,
+        'Decoration_images': [image.image.url for image in decoration.Decoration_image.all()],
+        'id':decoration.id
+        
+    } for decoration in decorations]
+
+
+    # Return JSON response
+    return JsonResponse({'decorations': data})

@@ -33,6 +33,7 @@ def register(request):
         
         fname = request.POST['fname']
         lname = request.POST['lname']
+        # phoneno = request.POST['phoneno']
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
@@ -54,6 +55,10 @@ def register(request):
             messages.error(request, "Username must be under 15 charcters!!")
             return redirect('home')
         
+        # if len(phoneno)>15:
+        #     messages.error(request, "Username must be under 10 charcters!!")
+        #     return redirect('home')
+        
         if pass1 != pass2:
             messages.error(request, "Password mismatch. Please make sure both passwords match and try again.")
             return redirect('home')
@@ -67,6 +72,7 @@ def register(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
+       
         myuser.is_active = False
         myuser.save()
         messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
@@ -219,7 +225,8 @@ def userdashboards(req):
     return render(req, 'loginAuthentication/userdashboards.html')
 
 def adminpanel(req):
-    return render(req, 'loginAuthentication/adminpanel.html')
+    total_bookings=booking.objects.count()
+    return render(req, 'loginAuthentication/adminpanel.html',{'total_bookings':total_bookings})
 
 def userlist(request):
     users = User.objects.all()  #fetch users from the database
@@ -229,10 +236,10 @@ def userlist(request):
 
 def delete_user(request, id):
     user = get_object_or_404(User, id= id)
-    if request.method == 'POST':
+    if request.method == 'GET':
         user.delete()
-        return HttpResponseRedirect('/user_list')  # Redirect to venue list page after delete
-    return render(request, 'loginAuthentication/delete_user.html', {'myuser': user})
+        return redirect('/user_list')  # Redirect to venue list page after delete
+    # return render(request, 'loginAuthentication/delete_user.html', {'myuser': user})
 
 # def delete_user(request, id):
 #     try:

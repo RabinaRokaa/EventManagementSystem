@@ -168,6 +168,74 @@
 
 
         /*--*/
+        .Contact {
+            display: flex;
+            
+            align-items: flex-start;
+          }
+          
+          .Contact p {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+          }
+          
+          .material-symbols-outlined {
+            display: inline-block;
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+          }
+
+        
+          .Contact .material-symbols-outlined {
+            color:white;
+            display: inline-block;
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            background-color: lightgray; /* Adjust color as needed */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+          }
+          .material-symbols-outlined {
+            
+            display: inline-block;
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+            background-color: lightgray; /* Adjust color as needed */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+          }
+
+          main .insights > div span {
+            background: rgba(93, 93, 246, 0.91);
+            padding: 0.5rem;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+        
+        }
+          
+          #decoration-location,
+          #decoration-capacity,
+          #event_type {
+            margin-bottom: 20px;
+          }
+          
+          #decoration-location h3,
+          #decoration-capacity h4,
+          #event_type h4 {
+            margin: 0;
+            font-size: 1.2rem;
+          }
+          
        
         .material-symbols-outlined{
             font-size:15px;
@@ -176,11 +244,11 @@
             box-shadow: 2px 2px 10px gray;
         } 
         
-        .decoration-details{
+        #decoration-details{
             margin:20px;
         }
         
-        .decoration-location{
+        #decoration-location{
             margin-top:15px;
         }
         .main-content img {
@@ -244,12 +312,49 @@
 
         .Contact{
             background-color:white;
-            text-align:center;
+            
         }
         .more {
             position: relative;
         }
-        
+        #booking-form {
+            display: flex;
+            flex-direction: column;
+           
+            margin-left:310px;
+          }
+          
+          .input-div {
+            margin-bottom: 10px;
+          }
+          
+          .input-div label {
+            font-weight: bold;
+          }
+          
+          .input-div input {
+            width: 70%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+          }
+          
+          .your_account {
+            background-color: blue; /* Adjust color as needed */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+          }
+          
+          .your_account a {
+            color: white;
+            text-decoration: none;
+          }
+          
         .image-container {
             background-image: url("{% static 'images/image.jpg' %}");
             background-size: cover;
@@ -291,6 +396,7 @@
             display: flex;
             justify-content: space-around;
         }
+
         form{
             display: flex;
             flex: 0.4 1 auto;
@@ -306,8 +412,8 @@
         }
 
         input, button{
-            flex:1;
-            width: 300px;
+            
+            width: 200px;
             border-radius:0.5rem;
             line-height: 1.5;
             font-size: 1.5rem;
@@ -355,14 +461,13 @@
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ decoration.Decoration_image.first.image.url }}" alt="Main Image" width="50%" height="50%">
+        <img src="{{ decoration.Decoration_image.first.image.url }}" alt="Main Image" width="50%" height="600px">
 
-       
         <!-- Single decoration Details -->
-        <div class="decoration-details">
-            <h2>{{ decoration.Name }}</h2>
+        <div id="decoration-details">
+            <h2 id="decoration_name">{{ decoration.Name }}</h2>
             <hr>   <!--for horizontal line-->
-            <div class="decoration-description">
+            <div id="decoration-description">
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{decoration.Name}} </span><br> <br> {{ decoration.Description }}</p>
             </div>
             <!-- Loop through all images -->
@@ -393,38 +498,21 @@
                 
             </div>
            
-
-            <div class="decoration-location">
-                <h3>Location: {{ decoration.Location }}</h3>
+            {% comment %} <div id="decoration-location">
+                <h3>{{ decoration.Location }}</h3>
             </div>
-            <div class="decoration-capacity">
+            <div id="decoration-capacity">
                 <h4>Capacity: {{ decoration.Capacity }}</h4>
             </div>
-            <div class="event_type">
+            <div id="event_type">
                 <h4>Category: {{ decoration.Type }}</h4>
+            </div> {% endcomment %}
+            
+            
+            <div id="decoration-cost" style="color:green; margin-top:15px;">
+                <h4>NPR: <span id="costdecoration">{{ decoration.Cost }}</span></h4>
             </div>
             
-            <div class="decoration-cost">
-                <h4>Approx. cost: {{ decoration.Cost }}</h4>
-            </div>
-            <form id="booking-form" action="" method="POST">
-              
-                  <div class="input-div">
-                    <label form="id_check_incheck_in"> check_in: </label>
-                    <input type="datetime-local" id="id_check_in" name="check_in">
-                  </div>  
-                  <div class="input-div">
-                    <label form="id_check_out"> check_out: </label>
-                    <input type="datetime-local" id="id_check_out" name="check_out">
-                  </div>  
-                  {% comment %} <div class="input-div">
-                    <button type="submit"> Book the decoration </Button>
-                  </div>   {% endcomment %}
-                  <button class="your_account" id="formBook">
-                      <a href="">Book Now</a>
-                      {% comment %} <a href="{% url 'login'  %}">Book Now</a> {% endcomment %}
-                  </button>
-                </form>  
 
         </div>
        
@@ -432,21 +520,51 @@
     <hr>
     <div class="mix">
 
-     <div class="Contact">
-        <p><span style="font-size:1.6rem;"> Contact</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+     <div class="Contact" style="flex-direction:column;">
         
-        <li> <span class="material-symbols-outlined">
-            wifi
-            </span>{{decoration.Name}}</li>
+        
+        <p><span style="font-size:1.6rem;"> Additional</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+        
+         <li> <span class="material-symbols-outlined" style="background-color: lightblue;">
+            place</span>
+            <div id="decoration-location">
+                <h3>{{ decoration.Location }}</h3>
+            </div>
+        </li>
+
             <br>
-        <li> <span class="material-symbols-outlined">
-            wifi
-            </span>{{decoration.Location}}</li>
+        <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
+            groups </span>
+            <div id="decoration-capacity">
+                <h4>Capacity: {{ decoration.Capacity }}</h4>
+            </div>
+        </li> 
             <br>
-        <li> <span class="material-symbols-outlined">
-            wifi
-            </span>{{decoration.Name}}</li>
+        <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
+            category </span>
+            <div id="event_type">
+                <h4>Category: {{ decoration.Type }}</h4>
+            </div>
+        </li>
      </div> 
+            <form id="booking-form" action="" method="POST">
+              
+                <div class="input-div">
+                  <label form="id_check_incheck_in"> <h2>check_in</h2> </label>
+                  <input type="datetime-local" id="id_check_in" name="check_in">
+                </div>  
+                <div class="input-div">
+                  <label form="id_check_out"> <h2> check_out <h2> </label>
+                  <input type="datetime-local" id="id_check_out" name="check_out">
+                </div>  
+                {% comment %} <div class="input-div">
+                  <button type="submit"> Book the decoration </Button>
+                </div>   {% endcomment %}
+                <button class="your_account" id="formBook">
+                    <a href="">Book Now</a>
+                    {% comment %} <a href="{% url 'login'  %}">Book Now</a> {% endcomment %}
+                </button>
+            </form>  
     
          
     </div> 
@@ -455,8 +573,8 @@
         <div class="image-container">
             <h2>Need more than just a decoration?</h2>
             <div class="btn-container"> 
-                <button type="submit" class="hi"><a href="/{{ decoration.id }}/exploredecoration">Decoration</a></button>
-                <button type="submit" class="hi"><a href="/{{ decoration.id }}/exploredecoration">Photography</a></button>
+                <button type="submit" class="hi"><a href="/decorations">Decoration</a></button>
+                <button type="submit" class="hi"><a href="/photographers">Photography</a></button>
             </div>
         </div>
     </div>
@@ -477,19 +595,19 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    {% comment %} <script>
+    <script>
       
 
         document.addEventListener('DOMContentLoaded', function () {
             const bookingForm = document.getElementById('formBook');
-        
+            console.log(window.location.href)
             bookingForm.addEventListener('click', function (event) {
-                console.log("oye oye oye")
+             
                 event.preventDefault(); // Prevent the default form submission behavior
                 // Gather data from HTML elements
                 const event_type = document.getElementById('event_type').innerText;
                 console.log(document.getElementById('event_type').innerText)
-                const name = document.getElementById('decoration-details').innerText;
+                const name = document.getElementById('decoration_name').textContent;
                 const location = document.getElementById('decoration-location').innerText;
                 const capacity = document.getElementById('decoration-capacity').innerText;
                 const description = document.getElementById('decoration-description').innerText;
@@ -497,8 +615,7 @@
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
                 const end_date = document.getElementById('id_check_out').value;
-                const cost = document.getElementById('decoration-cost').innerText;
-                console.log("hello",event_type,name,locatin,capacity)
+                const cost = document.getElementById('costdecoration').textContent;
                 // Prepare data to be sent to the backend
                 const formData = new FormData();
                 formData.append('event_type', event_type);
@@ -511,9 +628,21 @@
                 formData.append('date', date);
                 formData.append('end_date', end_date);
                 formData.append('cost', cost);
-        console.log(formData.name)
+                formData.append('url', window.location.href);
+
+                formData.forEach((value, key) => {
+                    console.log(`${key}: ${value}`);
+                });
+                // Convert FormData to JSON
+                const formDataJson = {};
+                formData.forEach((value, key) => {
+                formDataJson[key] = value;
+                });
+
+// Store JSON data in local storage
+ localStorage.setItem('formData', JSON.stringify(formDataJson));
                 // Send data to the backend using a POST request
-                fetch('/book_event', {
+                fetch('/book_event/', {
                     method: 'POST',
                     body: formData
                 })
@@ -525,7 +654,13 @@
                 })
                 .then(data => {
                     // Handle success response from the backend
-                    console.log(data.message); // Log the success message
+                    if (!data.status){
+                        window.location.href = "/Login"
+        
+                    }
+                    else{
+                        window.location.href = "/bookingprocess"
+                    }
                     // You can perform any other actions here upon successful booking
                 })
                 .catch(error => {
@@ -536,6 +671,6 @@
             });
         });
         
-    </script>  {% endcomment %}
+    </script> 
 </body>
 </html>

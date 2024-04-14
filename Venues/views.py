@@ -262,6 +262,7 @@ from django.http import JsonResponse
 
 def delete_image(request, image_id):
     if request.method == 'POST':
+        print("helloo")
         image = get_object_or_404(ImageFile, pk=image_id)
         image.delete()
         return JsonResponse({'message': 'Image deleted successfully'}, status=200)
@@ -331,10 +332,10 @@ def delete_image(request, image_id):
 
 def delete_venue(request, id):
     venue = get_object_or_404(Venues, id= id)
-    if request.method == 'POST':
+    if request.method == 'GET':
         venue.delete()
-        return HttpResponseRedirect('/venue_list')  # Redirect to venue list page after delete
-    return render(request, 'Venues/delete_venue.html', {'venue': venue})
+        return redirect('/venue_list')  # Redirect to venue list page after delete
+    # return render(request, 'Venues/delete_venue.html', {'venue': venue})
 
 
 

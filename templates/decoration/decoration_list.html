@@ -33,7 +33,18 @@
             background-color: #d6cfec;
             color: blue;
           }
-
+        
+          main .adddecoration{
+            display: inline-block;
+            background: rgb(227, 232, 236);
+            background-color: #d6cfec;
+            color: blue;
+            border-radius: var(--border-radius-1);
+            margin-top: 3rem;
+            padding: 0.5rem 1.6rem;
+            left: 0;
+            
+        } 
           
 
         
@@ -102,7 +113,7 @@
     </aside>
     
     <main>
-      <h1>decoration List</h1>
+      <h1>Decoration List</h1>
      <div class="adddecoration">
       <a href="{% url 'adddecoration' %}" class="btn btn-primary">Add decoration</a>
     {% comment %} <a href="{% url 'update_decoration' decoration.id %}" class="btn btn-primary">Update decoration</a> {% endcomment %}
@@ -135,7 +146,8 @@
                     <td>
                         <a href="{% url 'view_decoration' decoration.id %}" class="btn btn-info">View</a>
                         <a href="{% url 'update_decoration' decoration.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
-                        <a href="{% url 'delete_decoration' decoration.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'delete_decoration' decoration.id %}" onclick="return confirmDelete('{{ decoration.Name }}');" class="btn btn-danger">Delete</a>
+                        {% comment %} <a href="{% url 'delete_decoration' decoration.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
                     </td>
                 </tr>
             {% endfor %}
@@ -144,5 +156,10 @@
     </div>
     </main>
    </div>
+   <script>
+    function confirmDelete(UserName) {
+        return confirm("Are you sure you want to delete this '' " + UserName + "?");
+    }
+   </script>
 </body>
 </html>

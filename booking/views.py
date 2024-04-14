@@ -166,12 +166,12 @@ from django.http import JsonResponse
 
 
 
-def delete_booking(request, id):
-    bookings = get_object_or_404(booking, id=id)
-    if request.method == 'POST':
-        bookings.delete()
-        return HttpResponseRedirect('/booking_list')  # Redirect to booking list page after delete
-    return render(request, 'booking/delete_booking.html', {'bookings': bookings})
+# def delete_booking(request, id):
+#     bookings = get_object_or_404(booking, id=id)
+#     if request.method == 'POST':
+#         bookings.delete()
+#         return HttpResponseRedirect('/booking_list')  # Redirect to booking list page after delete
+#     return render(request, 'booking/delete_booking.html', {'bookings': bookings})
 
 
 
@@ -208,13 +208,38 @@ def booking_update(request, pk):
     # else:
     #     form = BookingForm(instance=booking)
        return render(request, 'booking/update_booking.html', {'bookings': bookings})
+    
 
-def booking_delete(request, pk):
-    bookings = get_object_or_404(booking, pk=pk)
-    if request.method == 'POST':
-        booking.delete()
-        return redirect('booking_list')
-    return render(request, 'booking/deletebooking.html', {'booking': bookings})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import booking
+#from .forms import BookingForm   Assuming you have a form defined
+
+# def booking_update(request, pk):
+#     booking_instance = get_object_or_404(booking, pk=pk)
+    
+#     if request.method == 'POST':
+#         form = BookingForm(request.POST, instance=booking_instance)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('booking_list')  # Assuming you have a URL named 'booking_list'
+#     else:
+#         form = BookingForm(instance=booking_instance)
+    
+#     return render(request, 'booking/update_booking.html', {'form': form})
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import booking
+
+def delete_booking(request, id):
+    
+    bookings = get_object_or_404(booking, id=id)
+    if request.method == 'GET':
+        bookings.delete()
+        return redirect('/booking_list')  # Redirect to the booking list page after deletion
+    # return render(request, 'booking/deletebooking.html', {'bookings': bookings})
+
 
 @csrf_exempt
 def booking_process(request):
@@ -222,7 +247,6 @@ def booking_process(request):
         data = json.loads(request.body.decode('utf-8'))
   
         name = data.get('name')
-
         location = data.get('location')
         capacity = data.get('capacity')
         event_type = data.get('event_type')
@@ -249,9 +273,10 @@ def booking_process(request):
  # Construct a dictionary containing the data
         data = {
             'User': request.user.username,
-            # 'FirstName': request.user.username,
-            # 'User': request.user.username,
-            # 'User': request.user.username,
+            'FirstName': request.user.first_name,
+            'LastName': request.user.last_name,
+            'Email': request.user.email,
+            
             'Name': name,
             'Location': location,
             'Capacity': capacity,
@@ -265,8 +290,17 @@ def booking_process(request):
         return JsonResponse({'data': data, 'message': 'Booking successful'})
     else:
         print(request.user.username)
+        print(request.user.first_name)
 
         # If the request method is not POST, return an error message
         return render(request, 'booking/bookingprocess.html',{'username':request.user.username})
     
-    
+
+from django.shortcuts import render
+from .models import booking
+
+def total_bookings_view(request):
+    total_bookings = booking.total_bookings()
+    print("chor",total_bookings)
+    return render(request, 'loginAuthentication/adminpanel.html', {'total_bookings': total_bookings})
+
