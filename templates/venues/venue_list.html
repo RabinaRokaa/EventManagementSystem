@@ -19,10 +19,15 @@
             border-collapse: collapse;
             width: 100%;
         }
+        td.desc {
+            white-space: normal; /* Override nowrap for the description field */
+        }
         th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
+            border: 1px solid #727272;
+            text-align:left;
+            white-space: nowrap;
+            
+            padding: 10px;
         }
         th {
             background-color: #f2f2f2;
@@ -32,6 +37,16 @@
              /* Change 'red' to whatever color you desire */
             background-color: #d6cfec;
             color: blue;
+          }
+          .btn btn-info{
+            color:green;
+          }
+
+          .btn btn-primary{
+            color:blue;
+          }
+          .btn btn-danger{
+            color:red;
           }
 
           
@@ -132,14 +147,14 @@
                     <td>{{ venue.Name }}</td>
                     <td>{{ venue.Location }}</td>
                     <td>{{ venue.Type }}</td>
-                    <td>{{ venue.Description }}</td>
+                    <td class="desc">{{ venue.Description }}</td>
                     <td>{{ venue.Capacity }}</td>
                     <td>{{ venue.Cost }}</td>
                     {% comment %} <td><img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"></td> {% endcomment %}
                     <td>
-                        <a href="{% url 'view_venue' venue.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'update_venue' venue.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
-                        <a href="{% url 'delete_venue' venue.id %}" onclick="return confirmDelete('{{ venue.Name }}');" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'view_venue' venue.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
+                        <a href="{% url 'update_venue' venue.id %}" enctype="multipart/form-data" class="btn btn-primary"><span class="material-symbols-outlined" style="color:#4141a2">edit</span></a>
+                        <a href="{% url 'delete_venue' venue.id %}" onclick="return confirmDelete('{{ venue.Name }}');" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
                         {% comment %} <a href="{% url 'delete_venue' venue.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
                     </td>
                 </tr>

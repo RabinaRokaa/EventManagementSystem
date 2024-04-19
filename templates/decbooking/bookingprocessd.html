@@ -1,0 +1,517 @@
+<!-- booking_list.html -->
+
+{% load static %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>booking list</title>
+     <link rel="stylesheet" href="{% static 'css/bookinglist.css' %}">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Font Awesome icons (free version)-->
+    
+     <style>
+
+        .modal-content, .modal-header, .modal-body, .modal-footer {
+            font-family: 'Inter', sans-serif;
+          }
+        
+          .modal-content {
+            background-color: #ffffff; /* Change background color to white */
+          }
+
+          #bookingSuccessModal{
+            background-color: #ffffff;
+          }
+       
+
+        /* Inline CSS styles */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.2rem;
+
+        }
+        
+        #btn{
+            padding: 10px;
+            margin-left:600px;
+            color:white;
+            background-color:blue;
+
+        }
+
+        #close_btn{
+            color:white;
+            background-color:blue;
+
+        }
+        
+        .left-column{
+            
+            padding: 10px;
+            margin-left:145px;
+
+        }
+        .right-column {
+            flex: 1;
+            padding: 10px;
+            margin-right:100px;
+        }
+        
+        #bookingDetails,
+        #priceDetails {
+            
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #eventDetails{
+            padding: 10px;
+            margin-bottom: 0px;
+        }
+
+        #userDetails {
+            border: 1px solid #e7e7e7;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .event-container {
+            border: 1px solid #e7e7e7;
+            padding: 10px;
+            margin-bottom: 20px;
+            align-items:center;
+            display:flex;
+        }
+        .event-heading {
+            font-size: 20px;
+            font-weight: bold;
+            /*margin-left:50%;*/
+            margin:10px;
+        }
+        .event-detail {
+            font-size: 16px;
+            margin-bottom: 5px;
+            /*margin-left:50%;*/
+        }
+        .user-heading {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left:50%;
+            margin:10px;
+        }
+        .user-detail {
+            font-size: 16px;
+            margin-bottom: 5px;
+            margin-left:50%;
+        }
+
+        event-check{
+            border : 1px solid black;
+        }
+        .booking-container {
+            border: 1px solid #e7e7e7;
+            padding: 10px;
+            width:300px;
+        }
+        .booking-details-container{
+            border: 1px solid #e7e7e7;
+
+        }
+        .cost-details-container{
+            border: 1px solid #e7e7e7;
+
+        }
+        
+        
+        .booking-details-box {
+            margin-top:9px;
+            display: flex;
+            flex-direction: column;
+        }
+        .cost-container {
+            border: 1px solid #e7e7e7;
+            padding: 10px;
+            width:300px;
+        }
+        
+        .cost-details-box {
+            margin-top:9px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .date-label {
+            font-weight: bold;
+        }
+        
+        .date {
+            margin-left: 5px;
+        }
+        .span{
+            margin-top:13px;
+        }
+        .facility ul {
+            list-style-type: none; /* Remove default bullet points */
+            padding: 0;
+        }
+        
+        .facility ul li {
+            display: inline-block; /* Display list items horizontally */
+            margin-right: 20px; /* Add space between list items */
+        }
+        
+        .facility ul li:last-child {
+            margin-right: 0; /* Remove margin for the last list item */
+        }
+        .material-symbols-outlined{
+            font-size:14px;
+
+        }
+        
+    </style>
+ </head>
+ <body>
+   {% comment %} <div id="eventDetails"></div> 
+   <div id="userDetails"></div>  {% endcomment %}
+   <p id='usernames' style="opacity:0">{{ username }}</p>
+   {% comment %} <p id='firstname' style="opacity:0">{{ first_name }}</p>
+   <p id='lastname' style="opacity:0">{{ last_name }}</p>
+   <p id='email' style="opacity:0">{{ email }}</p> {% endcomment %}
+   <p id='firstname' style="opacity:0">{{ request.user.first_name }}</p>
+   <p id='lastname' style="opacity:0">{{ request.user.last_name }}</p>
+   <p id='email' style="opacity:0">{{ request.user.email }}</p>
+   {% comment %} <p id='phonenumber' style="opacity:0">{{ request.user.phone_number }}</p> {% endcomment %}
+   <div class="container">
+    <div class="left-column">
+        <div id="bookingDetails"></div>
+        <div id="priceDetails"></div>
+    </div>
+    <div class="right-column">
+        <div id="eventDetails"></div>
+        <div id="userDetails"></div>
+    </div>
+   </div>
+
+   
+    <button id="btn">Book Now </button>
+
+    <div class="modal fade" id="bookingSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left:150px; display:block;">Booking Successful</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="margin:auto; display:block;">
+              Your booking has been successfully submitted.
+            </div>
+            <div class="color">
+                <img src="{% static 'images/success.png' %}" style="width: 50px; height: 50px; margin:auto; display:block;">
+                </div>
+            <div class="modal-footer" style="font-size:100px;">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_btn" >Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Bootstrap JS and jQuery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ </body>
+ 
+
+ <script>
+        const storedFormDataJson = localStorage.getItem('formData');
+        const formData = JSON.parse(storedFormDataJson);
+        const eventContainer = document.createElement('div');
+        eventContainer.classList.add('event-container');
+
+        /*const eventHeading = document.createElement('div');
+        eventHeading.classList.add('event-heading');
+        eventHeading.textContent = formData.name;
+        eventContainer.appendChild(eventHeading);
+
+        /*const eventCheck = document.createElement('div');
+        eventCheck.classList.add('venue-image');
+        eventCheck.textContent = `Start Date: ${formData.venue_image}, End Date: ${formData.end_date}`;
+        eventContainer.appendChild(eventCheck);*/
+
+        const eventDetails = document.createElement('div');
+        eventDetails.classList.add('event-detail');
+        eventDetails.innerHTML = `
+        <p><strong> <h2>${formData.name}</h2></strong></p>
+        <br>
+        <p ><strong></strong> ${formData.description} </p>
+        <br>
+            
+            <br>
+            <div class="facility">   
+                <ul>
+                    <li><span class="material-symbols-outlined">wifi</span>Free wifi</li>
+                    <li><span class="material-symbols-outlined">lock</span>Security</li>
+                    <li><span class="material-symbols-outlined">restaurant</span>Restaurants</li>
+                    <li><span class="material-symbols-outlined">garage_home</span>Free Parking</li>
+                    <li><span class="material-symbols-outlined">mode_fan</span>AC</li>
+                </ul>
+            </div>
+            
+            
+            <br>
+            
+            
+            
+            <p><strong>Cost:</strong> ${formData.cost}</p>
+            
+        `;
+        eventContainer.appendChild(eventDetails);
+
+
+        document.getElementById('eventDetails').appendChild(eventContainer);
+ </script>
+<script>
+            // Create booking details container
+        const bookingDetailsContainer = document.createElement('div');
+        bookingDetailsContainer.classList.add('booking-details-container');
+
+        // Create heading element for booking details
+        const bookingDetailsHeading = document.createElement('h2');
+        bookingDetailsHeading.textContent = 'Booking Details';
+
+        // Append the heading to the booking details container
+        bookingDetailsContainer.appendChild(bookingDetailsHeading);
+
+        // Create booking container
+        const bookingContainer = document.createElement('div');
+        bookingContainer.classList.add('booking-container');
+
+        // Create sub-box for check-in and check-out
+        const bookingDetailsBox = document.createElement('div');
+        bookingDetailsBox.classList.add('booking-details-box');
+
+        // Check-in date
+        const checkInLabel = document.createElement('h2');
+        checkInLabel.textContent = 'Date: ';
+        checkInLabel.style.fontWeight = '100'; 
+        const checkInDate = document.createElement('span');
+        checkInDate.textContent = formData.date; // Assuming formData.date contains check-in date
+        checkInDate.style.marginTop = '10px';
+        bookingDetailsBox.appendChild(checkInLabel);
+        bookingDetailsBox.appendChild(checkInDate);
+
+        // Check-out date
+        const checkOutLabel = document.createElement('h2');
+        checkOutLabel.textContent = 'End Date: ';
+        checkOutLabel.style.marginTop = '10px';
+        checkOutLabel.style.fontWeight = '100'; 
+        const checkOutDate = document.createElement('span');
+        checkOutDate.textContent = formData.end_date; // Assuming formData.end_date contains check-out date
+        checkOutDate.style.marginTop = '10px';
+        bookingDetailsBox.appendChild(checkOutLabel);
+        bookingDetailsBox.appendChild(checkOutDate);
+
+        // Append the booking details box to the booking container
+        bookingContainer.appendChild(bookingDetailsBox);
+
+        // Append the booking container to the booking details container
+        bookingDetailsContainer.appendChild(bookingContainer);
+        // Append the booking details container to the event container (assuming eventContainer is already defined)
+        eventContainer.appendChild(bookingDetailsContainer);
+        document.getElementById('bookingDetails').appendChild(bookingDetailsContainer);
+
+</script>
+<script>
+            // Create booking details container
+        const costDetailsContainer = document.createElement('div');
+        costDetailsContainer.classList.add('cost-details-container');
+
+        // Create heading element for cost details
+        const costDetailsHeading = document.createElement('h2');
+        costDetailsHeading.textContent = 'Cost Details';
+
+        // Append the heading to the cost details container
+        costDetailsContainer.appendChild(costDetailsHeading);
+
+        // Create cost container
+        const costContainer = document.createElement('div');
+        costContainer.classList.add('cost-container');
+
+
+
+        // Create heading element for booking details
+        const headingt = document.createElement('h2');
+        costContainer.textContent = 'Your price details';
+        
+        costContainer.appendChild(headingt);
+
+        // Create sub-box for check-in and check-out
+        const costDetailsBox = document.createElement('div');
+        costDetailsBox.classList.add('cost-details-box');
+
+        // Check-in date
+        const costInLabel = document.createElement('h2');
+        costInLabel.textContent = 'Total price ';
+        costInLabel.style.fontWeight = '100'; 
+        const costInDate = document.createElement('span');
+
+        costInDate.textContent = `NPR ${formData.cost}`; // Assuming formData.date contains cost-in date
+        costInDate.style.marginTop = '10px';
+        costInDate.style.color = 'green';
+        costDetailsBox.appendChild(costInLabel);
+        costDetailsBox.appendChild(costInDate);
+
+        // Append the cost details box to the cost container
+        costContainer.appendChild(costDetailsBox);
+
+        // Append the cost container to the cost details container
+        costDetailsContainer.appendChild(costContainer);
+        // Append the cost details container to the event container (assuming eventContainer is already defined)
+        eventContainer.appendChild(costDetailsContainer);
+        document.getElementById('priceDetails').appendChild(costDetailsContainer);
+
+</script>
+
+ <script> 
+
+     
+        // Create container element for user details
+        const userDetailsContainer = document.createElement('div');
+        userDetailsContainer.classList.add('registration-form');
+
+        // Create heading for user details
+        const userDetailsHeading = document.createElement('h2');
+        userDetailsHeading.textContent = 'Your Details';
+        userDetailsHeading.style.margin = '10px';
+        userDetailsContainer.appendChild(userDetailsHeading);
+
+        // Function to create input elements
+        function createInput(labelText, value, type) {
+        const inputGroup = document.createElement('div');
+        inputGroup.classList.add('input-group');
+
+        const label = document.createElement('label');
+        label.textContent = labelText + ':';
+        label.style.fontSize = '16px';
+        inputGroup.appendChild(label);
+
+        const input = document.createElement('input');
+        input.type = type;
+        input.value = value;
+        input.style.width = '95%';
+        input.style.padding = '10px';
+        input.style.marginTop = '10px';
+        input.style.fontSize = '14px';
+        input.style.borderRadius = '5px';
+        input.style.border = '1px solid #ccc';
+
+        inputGroup.appendChild(input);
+        userDetailsContainer.appendChild(inputGroup);
+        }
+
+        // Create input elements for user details
+    createInput('Username',document.getElementById('usernames').textContent,'text')
+    createInput('First Name',document.getElementById('firstname').textContent,'text')
+    createInput('Last Name',document.getElementById('lastname').textContent,'text')
+    createInput('Email',document.getElementById('email').textContent,'text'),
+    //createInput('Phone Number',document.getElementById('phonenumber').textContent,'text');
+        //createInput('Phone Number', formData.PhoneNumber, 'text');
+    
+
+        // Append the userDetailsContainer to the event container (assuming eventContainer is already defined)
+        eventContainer.appendChild(userDetailsContainer);
+        document.getElementById('userDetails').appendChild(userDetailsContainer);
+
+ </script> 
+ {% comment %} <script>
+    document.getElementById("btn").addEventListener('click',((e)=>{
+        const storedFormDataJson = localStorage.getItem('formData');
+        const formData = JSON.parse(storedFormDataJson);
+        console.log(formData.name)
+        // Create HTML elements to display the data
+        
+        
+        fetch('/bookingprocess/', {
+            method: 'POST',
+            body: JSON.stringify(formData) 
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            // Handle success response from the backend
+            
+            console.log(data.message); // Log the success message
+            window.alert("Booking successful")
+            // You can perform any other actions here upon successful booking
+            localStorage.removeItem('formData');
+
+        })
+        .catch(error => {
+            // Handle error response from the backend
+            console.error('There was a problem with the booking:', error.message);
+            // You can display an error message to the user or perform other actions
+        });
+    }))
+</script> {% endcomment %}
+<script>
+    document.getElementById("btn").addEventListener('click', ((e) => {
+      const storedFormDataJson = localStorage.getItem('formData');
+      const formData = JSON.parse(storedFormDataJson);
+      console.log(formData.name)
+      // Create HTML elements to display the data
+
+
+      fetch('/bookingprocessd/', {
+          method: 'POST',
+          body: JSON.stringify(formData)
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+          // Handle success response from the backend
+
+          console.log(data.message); // Log the success message
+          var modal = document.getElementById('bookingSuccessModal');
+          modal.classList.add('show');
+          modal.style.display = 'block';
+          var backdrop = document.createElement('div');
+          backdrop.classList.add('modal-backdrop');
+          document.body.appendChild(backdrop);
+          document.body.classList.add('modal-open');
+          // You can perform any other actions here upon successful booking
+          localStorage.removeItem('formData');
+          // You can perform any other actions here upon successful booking
+
+        })
+        .catch(error => {
+          // Handle error response from the backend
+          console.error('There was a problem with the booking:', error.message);
+          // You can display an error message to the user or perform other actions
+        });
+    }))
+
+
+    document.getElementById("close_btn").addEventListener('click',(()=>{
+        window.location.href='/userdashboard';
+    }))
+  </script>
+</html>

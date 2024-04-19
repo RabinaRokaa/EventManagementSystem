@@ -1,0 +1,275 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    
+<style>
+    h1{
+        font-weight: 800;
+        font-size: 2rem;
+    }
+    
+    h2{
+        
+        font-size: 1.8rem;
+    }
+    
+    h3{
+        
+        font-size: 1.2rem;
+    }
+    
+    h4{
+        
+        font-size: 1rem;
+    }
+    
+    h5{
+        
+        font-size: 0.8rem;
+    }
+    small{
+        font-size: 0.75rem;
+    }
+    
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+        }
+        /* Navbar styles */
+        nav {
+            background-color: rgba(0, 59, 149, 1);
+            padding: 30px; /* Increase padding to make navbar larger */
+            color: white;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #eee;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .your_account{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+         .second > .your_account:hover{
+            box-shadow: 2px 2px 10px gray;
+            background-color: #ff0000; /* Change to your desired color */
+            color: #ffffff; /* Change to your desired text color */
+        }
+
+        .main-content h1{
+            text-align:center;
+            margin-top:20px;
+            font-style:italic;
+            font-weight:250;
+ 
+        }
+        .middle{
+            border:1px solid lightgray;
+            padding:30px;
+            margin-top:30px;
+         }
+
+         .desc{
+            width:300px;
+            max-width:80vw
+         }
+
+         .name{
+            color:rgba(0, 108, 228, 1);
+            font-weight:2px bold;
+         }
+        
+        .title h3{
+            text-decoration:underline;
+            margin-top:2px;
+            
+        }
+        .title h4{
+            color: gray;
+            font-weight:bold;
+            
+        }
+        button a{
+            color:white;
+        }
+
+        .your_account{
+            background-color: rgba(0, 108, 228, 1);
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+         
+        button a:hover{
+             color:black;
+        }
+
+        button your_account:hover{
+             color:red;
+        }
+
+
+        /*--*/
+       
+
+        .second > .middle:hover{
+            box-shadow: 2px 2px 10px gray;
+        } 
+        
+        .photographer-details{
+            margin:20px;
+        }
+        
+        .photographer-location{
+            margin-top:15px;
+        }
+        .main-content img {
+            max-width: 100%;
+            height: 50%;
+             margin-top: 0;/* Add margin-top to create space between navbar and image */
+        }
+      
+        footer {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: right;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+         }
+        
+         .copy {
+            background-color: rgba(0, 59, 149, 1);
+            color: white;
+            text-align: left;
+            padding-bottom: 10px;
+         }
+        
+         .company {
+            display: flex;
+            flex-direction: column;
+         }
+        
+         .company a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: small;
+         }
+        
+         .company p {
+            color: white;
+            text-decoration: none;
+            margin: 5px 0;
+            padding-right: 30px;
+            font-size: large;
+         }
+
+
+         
+</style>
+</head>
+<body>
+
+        <!-- To display the messages, use the following tag -->
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <!-- For displaying as bold -->
+            <strong>Message:</strong> {{ message }}
+            <!-- For closing the message tag -->
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %} 
+    
+<!-- After clicking on the home and other text, they follow the following URLs -->
+        
+    <nav>
+        <a href="/adminpanel">Home</a>
+        <a href="/viewphotographer">View photographer</a>
+        <a href="/about_us">About Us</a>
+        <a href="/settings">Contact</a>
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!--to show image below the navbar-->
+        {% comment %} <img src="{{ photographer.photographer_image.first.image.url }}" alt="Main Image" width="100%" height="250"> {% endcomment %}
+
+        <h1>photographer</h1>
+        <!-- Single photographer Details -->
+        <div class="photographer-details">
+            <h2>{{ photographers.Username }}</h2>
+            <hr>   <!--for horizontal line-->
+            <div class="photographer-description">
+                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographers.Username}} </span><br> <br> {{ photographer.Description }}</p>
+            </div>
+            <!-- Loop through all images -->
+            <div class="photographer-images">
+                <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >photography</span></p>
+                {% for image in photographers.Photographer_image.all %}
+                    <img src="{{ image.image.url }}" alt="{{ photographer.Name }}" width="300" height="150">
+                {% endfor %}
+            </div>
+           
+            
+            <div class="photographer-cost">
+                <h4>Approx. cost: {{ photographers.Cost }}</h4>
+            </div>
+
+            <button class="your_account">
+                
+                <a href="{% url 'update_photographer' photographers.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
+                <a href="{% url 'delete_photographer' photographers.id %}" class="btn btn-danger">Delete</a>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka.</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

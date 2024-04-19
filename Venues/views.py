@@ -17,7 +17,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.views.decorators.http import require_GET
 from .models import Venues
-
+from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 
 
@@ -26,6 +26,7 @@ def venues(req):
     print('lol')
     return render(req, 'venues/venue.html', {'venues': venues})
 
+@csrf_exempt
 def explorevenue(request, id):
     # Fetch the venue with the given ID from the database(euta venue click garda tesko matra data display garna)
     venue = get_object_or_404(Venues, id=id)
@@ -336,6 +337,28 @@ def delete_venue(request, id):
         venue.delete()
         return redirect('/venue_list')  # Redirect to venue list page after delete
     # return render(request, 'Venues/delete_venue.html', {'venue': venue})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

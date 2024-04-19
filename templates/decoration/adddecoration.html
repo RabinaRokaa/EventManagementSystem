@@ -68,14 +68,40 @@
                 <label for="id_Cost">Cost:</label>
                 {{ form.Cost }}
             </div>
-            <div class="form-group">
+            {% comment %} <div class="form-group">
                 <label for="id_decoration_image">decoration Image:</label>
                 {{ form.Decoration_image }}
-            </div>
+            </div> {% endcomment %}
+            <div class="form-group">
+                <label for="id_decoration_image">Decoration Image:</label>               
+                <input type="file" name="Decoration_image" id="id_Decoration_image" onchange="previewImages(this);" multiple>
+                <div id="imagePreview"></div>
+            </div> 
             <button type="submit">Submit</button>
         </form>
     </div>
 </div>
+<script>
+    function previewImages(input) {
+        var preview = document.getElementById('imagePreview');
+        preview.innerHTML = '';
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (var i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    var img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.setAttribute('class', 'preview-image');
+                    img.style.height = '200px'; // Change height here
+                    img.style.width = '200px'; // Change width here
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    }
+</script> 
 
 </body>
 </html>

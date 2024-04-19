@@ -407,7 +407,7 @@
                 </div>
                 <!-- Add the filter form here -->
                 
-                    <form method="GET"  action="{% url 'filter_photographers' %}" id="filterForm" class="popup" style="display: none;">
+                    <form method="GET" id="filterForm" class="popup" style="display: none;">
                         <div class="form-row">
                             <div class="form-group col-12">
                                 <div class="input-group">
@@ -492,7 +492,7 @@
             
             
             
-            <form class="search" method= "GET" action="{% url 'search_photographer' %}">
+            <form class="search" method= "GET" >
                 {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
                 <div class="search-container">
                     {% comment %} <div class="filters">
@@ -584,6 +584,9 @@
                         console.log(data);
                         const resultContainer = document.getElementById("result");
                         resultContainer.innerHTML = ""; // Clear previous results
+                        if (data.photographers){
+
+                        
                         data.photographers.forEach(photographer => {
                             console.log(photographer)
                             const photographerHTML = `
@@ -623,12 +626,156 @@
                                   </div> `;
                             resultContainer.innerHTML += photographerHTML;
                         });
+                        console.log('hello')
+                    }
                     })
                     .catch(error => console.error('Error:', error));
             } else {
                 document.getElementById("result").innerHTML = "";
             }
         });
+    </script>
+    {% comment %} <script>
+        {
+            // Get references to the filter form and the result container
+            const filterform = document.getElementById("filterForm");
+            console.log(filterform)
+            const resultContainer = document.getElementById("result");
+            
+            // Add event listener to the filter form
+            filterForm.addEventListener("click", function(event) {
+                event.preventDefault()
+                console.log("console")
+                // Prevent the default form submission behavior
+                // Get the filter values from the form inputs
+                //const location = document.getElementById("location").value;
+                const Username = document.getElementById("Name").value;
+                const view_count_max = document.getElementById("viewCountMax").value; 
+                const view_count_min = document.getElementById("viewCountMin").value;
+            
+            
+                // Perform the filtering using AJAX
+                fetch(`api/filter_photographers?view_count_max=${view_count_max}&view_count_min=${view_count_min}&Name_contains=${Name}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        
+            
+                        if(data.photographers.length==0){
+                            console.log("data not found!")
+                            resultContainer.innerHTML=""
+                            return
+                        }
+                        // Clear previous search results
+                        resultContainer.innerHTML = "";
+                        // Display new search results
+                        data.photographers.forEach(photographer => {
+                            console.log(photographer)
+                            const photographerHTML = `
+                                <div class="middle" style = 'display: flex;'>
+                                    <div class="car">
+                                        <div class="name">
+                                            <h2>${photographer.Username}</h2>
+                                        </div>
+                                        <div class="pictures">
+                                                        ${photographer.photographer_images && photographer.photographer_images.length > 0 ?
+                                                            photographer.photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                                `
+                                                                <div class="img">
+                                                                    <img src="${image}" alt="${photographer.Name}" width="280" height="150">
+                                                                </div>
+                                                                ` : '').join('') : ''}
+                                        </div>
+                                        <div class="title">
+                                            <div class="desc" style = 'position:relative;'>
+                                                <p>${photographer.Description}</p>
+                                            </div>
+                                            <div class="cost" style = 'position:absolute; bottom: 10px; left: 60%;'>
+                                                <h4>NPR: ${photographer.Cost}</h4>
+                                            </div>
+                                            <div class="btn-container" style = 'position:absolute; bottom: 7px;'> 
+                                               <button type="submit" class="btn-primary"><a href="/${photographer.id}/explorephotographer">Explore</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            resultContainer.innerHTML += photographerHTML;
+                        });
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            
+            }); 
+            }
+            
+    </script>  {% endcomment %}
+    <script>
+        {
+            // Get references to the filter form and the result container
+            const filterForm = document.getElementById("filterForm");
+            const resultContainer = document.getElementById("result");
+            
+            // Add event listener to the filter form
+            filterForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                // Get the filter values from the form inputs
+                const name_contains = document.getElementById("Name").value; // Corrected ID
+                const view_count_max = document.getElementById("viewCountMax").value; 
+                const view_count_min = document.getElementById("viewCountMin").value;
+            
+                // Perform the filtering using AJAX
+                fetch(`/api/filter_photographers?view_count_max=${view_count_max}&view_count_min=${view_count_min}&Name_contains=${name_contains}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        
+                        if(data.photographers.length === 0) {
+                            console.log("data not found!");
+                            resultContainer.innerHTML = "";
+                            return;
+                        }
+                        
+                        // Clear previous search results
+                        resultContainer.innerHTML = "";
+                        
+                        // Display new search results
+                        data.photographers.forEach(photographer => {
+                            console.log(photographer);
+                            const photographerHTML = `
+                                <div class="middle" style="display: flex;">
+                                    <div class="car">
+                                        <div class="name">
+                                            <h2>${photographer.Name}</h2>
+                                        </div>
+                                        
+                                        <div class="pictures">
+                                            ${photographer.Photographer_images && photographer.Photographer_images.length > 0 ?
+                                                photographer.Photographer_images.map((image, index) => index === 0 ?
+                                                    `
+                                                    <div class="img">
+                                                        <img src="${image}" alt="${photographer.Name}" width="280" height="150">
+                                                    </div>
+                                                    ` : '').join('') : ''}
+                                        </div>
+                                        <div class="title">
+                                            
+                                            <div class="cost" style="position: absolute; bottom: 10px; left: 60%;">
+                                                <h4>NPR: ${photographer.Cost}</h4>
+                                            </div>
+                                            <div class="btn-container" style="position: absolute; bottom: 7px;"> 
+                                                <button type="submit" class="btn-primary"><a href="/${photographer.id}/explorephotographer">Explore</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            resultContainer.innerHTML += photographerHTML;
+                        });
+                    
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }); 
+        }
+        
     </script>
     
     <!--location instead of searched-->

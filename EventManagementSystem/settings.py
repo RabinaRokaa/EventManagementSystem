@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'decoration',
     'photographer',
     'booking',
+    'decbooking',
+    'photographerbooking',
     'checking',
     #used only by checking app
     'checking.booking_functions'

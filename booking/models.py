@@ -1,12 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
 from django.conf import settings
 # from django.contrib.auth.models import User
 class booking(models.Model): #making class
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     User = models.CharField(max_length=100, default='')
+    Type = models.CharField(max_length=100, default='')
     Event_Type = models.CharField(max_length=100) #making field
     Name = models.CharField(max_length=100) #making field
     Location = models.CharField(max_length=100) #making field

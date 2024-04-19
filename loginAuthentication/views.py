@@ -115,34 +115,62 @@ def register(request):
         
     return render(request, "LoginAuthentication/register.html")  #rendering html page
 
-
-
-def user_login(request , backend=None):
+def user_login(request, backend=None):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
         
-        #To authenticate the users with the username and password passed by user
+        # To authenticate the users with the username and password passed by the user
         user_param = authenticate(username=username, password=pass1)
 
-        #checking for the correct info
+        # Checking for the correct info
         if user_param is not None:
             auth_login(request, user_param)
             fname = user_param.first_name
-            messages.success(request, "Logged In Sucessfully!!")
+            messages.success(request, "Logged In Successfully!!")
 
-      #for admin login to redirect admin panel after login
+            # For admin login to redirect to the admin panel after login
             if user_param.is_superuser:
                 return redirect('adminpanel')
-            else:  
+            else:
                 print("hello")
-                return render(request, "LoginAuthentication/userdashboard.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
+                return redirect(f"/userdashboard/?fname={fname}&done=1")   # Using dictionary with the keyname fname
+                   # Using dictionary with the keyname fname
         else:
             messages.error(request, "Wrong Credentials!!")
 
-            #redirect to homepage if the passed credentials are incorrect
+            # Redirect to the homepage if the passed credentials are incorrect
             return redirect('home')
-    return render(request, "LoginAuthentication/login.html")  #rendering html page
+
+    return render(request, "LoginAuthentication/login.html")  # Rendering HTML page while logging in through normal username and password
+
+
+# def user_login(request , backend=None):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         pass1 = request.POST['pass1']
+        
+#         #To authenticate the users with the username and password passed by user
+#         user_param = authenticate(username=username, password=pass1)
+
+#         #checking for the correct info
+#         if user_param is not None:
+#             auth_login(request, user_param)
+#             fname = user_param.first_name
+#             messages.success(request, "Logged In Sucessfully!!")
+
+#       #for admin login to redirect admin panel after login
+#             if user_param.is_superuser:
+#                 return redirect('adminpanel')
+#             else:  
+#                 print("hello")
+#                 return render(request, "LoginAuthentication/userdashboard.html",{'fname':fname,'done':1})   #using dictionary with the keyname fname
+#         else:
+#             messages.error(request, "Wrong Credentials!!")
+
+#             #redirect to homepage if the passed credentials are incorrect
+#             return redirect('home')
+#     return render(request, "LoginAuthentication/login.html")  #rendering html page
 
 
 
@@ -199,30 +227,59 @@ def landingpage(req):
 def organizerpanel(req):
     return render(req, 'loginAuthentication/organizerpanel.html')
 
-def userdashboard(req):    
-    venues = Venues.objects.all()  #fetch venues from the database
-    decorations = decoration.objects.all() 
-    decorations = decoration.objects.all() 
+# def userdashboard(req):    
+#     venues = Venues.objects.all()  #fetch venues from the database
+#     decorations = decoration.objects.all() 
+#     decorations = decoration.objects.all() 
+#     photographers = photographer.objects.all()
+
+#     recent_bookings = None
+#     if req.user.is_authenticated:
+#         recent_bookings = booking.objects.filter(User=req.user).order_by('-Date')[:5]  
+
+#      # Fetch booking data related to the current user
+#     elif req.user.is_authenticated:
+#         user_bookings = booking.objects.filter(User=req.user)
+#     else:
+#         user_bookings = None  # Provide an empty queryset if the user is not authent
+
+#     print('lol')
+#     context = {
+#         'venues': venues,
+#         'decorations': decorations,
+#         'photographers': photographers,
+        
+#         'recent_bookings':recent_bookings,
+#         'user_bookings': user_bookings,
+#     }
+    
+#     return render(req, 'loginAuthentication/userdashboard.html', context)
+def userdashboard(request):
+    venues = Venues.objects.all()  # Fetch venues from the database
+    decorations = decoration.objects.all()
     photographers = photographer.objects.all()
 
-     # Fetch booking data related to the current user
-    if req.user.is_authenticated:
-        user_bookings = booking.objects.filter(User=req.user)
-    else:
-        user_bookings = None  # Provide an empty queryset if the user is not authent
+    recent_bookings = None
+    user_bookings = None
 
-    print('lol')
+    if request.user.is_authenticated:
+        recent_bookings = booking.objects.filter(User=request.user).order_by('-Date')[:5]  # Fetch recent bookings for the current user
+        user_bookings = booking.objects.filter(User=request.user)  # Fetch all booking history for the current user
+
     context = {
         'venues': venues,
         'decorations': decorations,
         'photographers': photographers,
+        'recent_bookings': recent_bookings,
         'user_bookings': user_bookings,
     }
-    
-    return render(req, 'loginAuthentication/userdashboard.html', context)
+
+    return render(request, 'loginAuthentication/userdashboard.html', context)
+
 
 def userdashboards(req):
-    return render(req, 'loginAuthentication/userdashboards.html')
+    recent_bookings = booking.objects.filter(user=req.user).order_by('-booking_date')[:5] 
+    return render(req, 'loginAuthentication/userdashboards.html', {'recent_bookings': recent_bookings})
 
 def adminpanel(req):
     total_bookings=booking.objects.count()
@@ -344,3 +401,10 @@ from django.contrib.auth.decorators import login_required
 def booking_history(request):
     user_bookings = booking.objects.filter(User=request.user)
     return render(request, "loginAuthentication/booking_history.html", {'user_bookings': user_bookings})
+
+
+def about_us(request):
+    return render(request, "loginAuthentication/Aboutus.html")
+
+def contact(request):
+    return render(request, "loginAuthentication/contact.html")

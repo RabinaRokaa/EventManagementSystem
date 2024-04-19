@@ -461,7 +461,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ venue.Venue_image.first.image.url }}" alt="Main Image" width="50%" height="50%">
+        <img src="{{ venue.Venue_image.first.image.url }}" alt="Main Image" width="50%" style="height: 90vh">
 
         <!-- Single Venue Details -->
         <div id="venue-details">
@@ -474,7 +474,7 @@
             <div class="venue-images">
                 <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >venue</span></p>
                 {% for image in venue.Venue_image.all %}
-                    <img src="{{ image.image.url }}" alt="{{ venue.Name }}" width="300" height="150">
+                    <img src="{{ image.image.url }}" alt="{{ venue.Name }}" width="300" height="150" style="object-fit:cover;">
                 {% endfor %}
             </div>
             <div class="facility">
@@ -548,7 +548,7 @@
         </li>
      </div> 
             <form id="booking-form" action="" method="POST">
-              
+              <input type="hidden" value="venue" >
                 <div class="input-div">
                   <label form="id_check_incheck_in"> <h2>check_in</h2> </label>
                   <input type="datetime-local" id="id_check_in" name="check_in">
@@ -596,14 +596,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-      
+        
+        let status = 0;
 
+        async function checkbooking(event_type, name, location, capacity, description, date) {
+            try {
+                const data = new URLSearchParams();
+                date = new Date(date);
+                date = date.toISOString().split('.')[0];
+        
+                data.append('event_type', event_type);
+                data.append('name', name);
+                data.append('location', location);
+                data.append('capacity', capacity);
+                data.append('description', description);
+                data.append('date', date);
+        
+                const response = await fetch('/check-booking-availability/', {
+                    method: 'POST',
+                    body: data
+                });
+        
+                const responseData = await response.json();
+                console.log(responseData);
+        
+                if (responseData.available) {
+                    console.log(10);
+                    status = 1;
+                } else {
+                    window.alert("Booking not available");
+                    console.log(1);
+                    status = 0;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
         document.addEventListener('DOMContentLoaded', function () {
             const bookingForm = document.getElementById('formBook');
+
             console.log(window.location.href)
-            bookingForm.addEventListener('click', function (event) {
-             
+            bookingForm.addEventListener('click',async function (event) {
+
                 event.preventDefault(); // Prevent the default form submission behavior
+                
                 // Gather data from HTML elements
                 const event_type = document.getElementById('event_type').innerText;
                 console.log(document.getElementById('event_type').innerText)
@@ -614,6 +650,18 @@
                // const decoration = document.getElementById('decoration').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
+              
+                await checkbooking(event_type,name,location,capacity,description,date)
+
+                console.log(status)
+
+                if (status==0){
+
+                        return 0;
+
+                }
+               
+
                 const end_date = document.getElementById('id_check_out').value;
                 const cost = document.getElementById('costVenue').textContent;
                 // Prepare data to be sent to the backend

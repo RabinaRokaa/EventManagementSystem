@@ -42,7 +42,7 @@
                 <a href="/photographers">Photographer</a>
               </div>
             </div>
-            <a href="/aboutus">About Us</a>
+            <a href="/about_us">About Us</a>
             <a href="/contact">Contact</a>
             <a href="/Register">Register</a>
             <a href="/Login">LogIn</a>
@@ -62,7 +62,8 @@
             <div>
                 <h2>How we work?</h2>
                 <p>"Our Event Management System operates through a streamlined process, empowering users to create, manage, and execute successful events effortlessly. Our user-centric approach ensures a seamless event management experience, providing you with the tools and support needed to organize successful events from start to finish. Join our platform today and elevate your event planning process!"</p>
-                <button class="how_we_works">Learn more</button>
+                {% comment %} <button class="how_we_works">Learn more</button> {% endcomment %}
+                <a href="{% url 'about_us' %}" class="how_we_works">Learn more</a>
             </div>
         </div>
 
@@ -72,7 +73,8 @@
             <div>
                 <h2>Create Your Account</h2>
                 <p>With our intuitive interface, you can easily create, manage, and customize events to suit your unique requirements. From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers unparalleled flexibility to cater to diverse event types.</p>
-                <button class="your_account">Get Started</button>
+                
+                <a href="{% url 'login' %}" class="your_account">Get Started</a>
             </div>
         </div>
     </div>

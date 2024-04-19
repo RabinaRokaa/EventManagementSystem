@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="booking_details.css">
+    <style>
+      .container {
+        justify-content: center;
+        margin: 20px;
+        
+        display:flex;
+        width:fit-content;
+        margin-left:35%;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+  }
+  
+  .container {
+      display: flex;
+      justify-content: center;
+      margin: 50px;
+      
+      width: fit-content;
+      margin-left: 35%;
+      background-color: #f9f9f9; /* Add a light background color */
+      padding: 50px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+   .right-side {
+      margin-left:50px;
+  }
+
+  .cost{
+    margin-top: 50px;
+  }
+  
+  h3 {
+      margin-bottom: 10px;
+      color: #333;
+  }
+  
+  p {
+      margin-bottom: 5px;
+  }
+  
+  footer {
+      background-color: #003b95;
+      color: white;
+      text-align: right;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20%;
+  }
+  
+  .copy, .company {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  .copy p, .company a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+  }
+  
+  h1, h2, h3, h4, h5 {
+      font-weight: 800;
+  }
+  
+  nav {
+      background-color: #003b95;
+      padding: 30px;
+      color: white;
+      text-align: center;
+  }
+  
+  nav a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+      font-weight: bold;
+  }
+  
+    
+
+   /* 
+    .right-side {
+        padding-left: 20px;
+    }
+    
+    h2 {
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    p {
+        margin-bottom: 5px;
+    }
+
+    footer {
+      background-color: rgba(0, 59, 149, 1);
+      color: white;
+      text-align: right;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; /* Align items vertically in the center */
+      margin-top:20%;
+   }
+  
+   .copy {
+      background-color: rgba(0, 59, 149, 1);
+      color: white;
+      text-align: left;
+      padding-bottom: 10px;
+   }
+  
+   .company {
+      display: flex;
+      flex-direction: column;
+   }
+  
+   .company a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      padding-right: 30px;
+      font-size: small;
+   }
+  
+   .company p {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      padding-right: 30px;
+      font-size: large;
+   }
+   
+   h1{
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+h2{
+    
+    font-size: 1.8rem;
+}
+
+h3{
+    
+    font-size: 1.2rem;
+}
+
+h4{
+    
+    font-size: 1rem;
+    color:blue;
+    font-weight: normal;
+}
+
+h5{
+    
+    font-size: 0.8rem;
+}
+small{
+    font-size: 0.75rem;
+}
+
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;  Add this line to prevent horizontal scrolling 
+    }
+    Navbar styles 
+    nav {
+        background-color: rgba(0, 59, 149, 1);
+        padding: 30px;  Increase padding to make navbar larger 
+        color: white;
+        text-align: center;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: white;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+     Header styles 
+    header {
+        background-color: #eee;
+        padding: 0px;
+       
+        text-align: center;
+    }Add more styling as needed */
+    
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/adminpanel">Home</a>
+    <a href="/view_booking">View booking</a>
+    <a href="/about_us">About Us</a>
+    <a href="/settings">Contact</a>
+  </nav>
+    <div class="container">
+        <div class="left-side">
+            
+            <div class="date">
+              <h3>Booking Date:</h3>
+              <h4> Start Date</h4>
+              
+                <p>{{ bookings.Date }}</p>
+              
+              <h4> End Date</h4>
+                <p>{{ bookings.EndDate}}</p>
+            </div>
+            <div class="cost">
+            <h3>Booking Cost:</h3>
+              <h4>Total price </h4>NPR{{ bookings.Cost }}</p>
+            </div>
+        </div>
+        <div class="right-side">
+            <h3>Venue Details:</h3>
+            <h4>Venue Name</h4>
+              <p>{{ bookings.Name }}</p>
+            <p> {{ bookings.Description }}</p>
+            <h4>Venue Address </h4>
+              <p>{{ bookings.Location }}</p>
+            <p>{{ bookings.Capacity }}</p>
+            <h3>User Details:</h3>
+            <h4>User Name</h4>
+            <p> {{ bookings.User}}</p>
+           
+        </div>
+    </div>
+<footer>
+      <div class="copy">
+          <p>Copyright © 2023
+              by Rabina Roka.</p>
+      </div>
+      <div class="company">
+          <p>Company</p>
+          <a href="#">Contact Us</a>
+          <a href="#">About us</a>
+          <a href="#">FAQs</a>
+      </div>
+</footer>
+    <script src="booking_details.js"></script>
+</body>
+</html>

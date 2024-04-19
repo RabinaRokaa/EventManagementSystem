@@ -216,19 +216,17 @@
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
     <nav>
-        <a href="/">Home</a>
+        <a href="/adminpanel">Home</a>
         <a href="/viewvenue">View Venue</a>
-        <a href="/bookanevent">Book an venue</a>
-        <a href="/bokkinghistory">Booking History</a>
-        <a href="/feedback">Feedback</a>
-        <a href="/settings">Settings</a>
+        <a href="/about_us">About Us</a>
+        <a href="/settings">Contact</a>
     </nav>
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ venue.Venue_image.first.image.url }}" alt="Main Image" width="100%" height="250">
+        {% comment %} <img src="{{ venue.Venue_image.first.image.url }}" alt="Main Image" width="100%" height="250"> {% endcomment %}
 
-        <h1>Explore Venue</h1>
+        <h1>Venue</h1>
         <!-- Single Venue Details -->
         <div class="venue-details">
             <h2>{{ venue.Name }}</h2>

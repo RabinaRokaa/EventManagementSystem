@@ -720,14 +720,15 @@
                                         <div class="name">
                                             <h2>${decoration.Name}</h2>
                                         </div>
+                                        
                                         <div class="pictures">
-                                                        ${decoration.decoration_images && decoration.decoration_images.length > 0 ?
-                                                            decoration.decoration_images.map((image, index) => index === 0 ? // Corrected syntax here
-                                                                `
-                                                                <div class="img">
-                                                                    <img src="${image}" alt="${decoration.Name}" width="280" height="150">
-                                                                </div>
-                                                                ` : '').join('') : ''}
+                                            ${decoration.decoration_images && decoration.decoration_images.length > 0 ?
+                                                decoration.decoration_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                    `
+                                                    <div class="img">
+                                                        <img src="${image}" alt="${decoration.Name}" width="280" height="150">
+                                                    </div>
+                                                    ` : '').join('') : ''}
                                         </div>
                                         <div class="title">
                                             <div class="desc" style = 'position:relative;'>

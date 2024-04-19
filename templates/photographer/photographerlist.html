@@ -20,9 +20,10 @@
             width: 100%;
         }
         th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
+            border: 1px solid #727272;
+            text-align:left;
+           
+            padding: 10px;
         }
         th {
             background-color: #f2f2f2;
@@ -158,9 +159,9 @@
                     <td>{{ photographer.Cost }}</td>
                     {% comment %} <td><img src="{{ photographers.photographer_image.url }}" alt="{{ photographer.Name }}" width="100"></td> {% endcomment %}
                     <td>
-                        <a href="{% url 'view_photographer' photographer.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'update_photographer' photographer.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
-                        <a href="{% url 'delete_photographer' photographer.id %}" onclick="return confirmDelete('{{ photographer.Username }}');" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'view_photographer' photographer.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
+                        <a href="{% url 'update_photographer' photographer.id %}" enctype="multipart/form-data" class="material-symbols-outlined" style="color:#4141a2">edit</span></a>
+                        <a href="{% url 'delete_photographer' photographer.id %}" onclick="return confirmDelete('{{ photographer.Username }}');" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
                         {% comment %} <a href="{% url 'delete_photographer' photographer.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
                     </td>
                 </tr>

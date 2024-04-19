@@ -20,6 +20,24 @@ def decoration_list(request):
     decorations = decoration.objects.all()  #fetch decorationss from the database
     return render(request, 'decoration/decoration_list.html', {'decorations': decorations})
 
+from django.shortcuts import redirect
+
+# def adddecoration(request):
+#     if request.method == 'POST':
+#         form = DecorationForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             decoration = form.save()  # Save the form data to the database
+#             print(decoration)
+           
+#             # Handle multiple uploaded files and associate them with the decoration
+#             for image in request.FILES.getlist('Decoration_image'):
+#                 image_instance = ImageFile.objects.create(image=image)
+#                 decoration.Decoration_image.add(image_instance)
+            
+#             return redirect('decoration_list')  # Redirect to a success page
+#     else:
+#         form = DecorationForm()
+#     return render(request, "decoration/adddecoration.html", {'form': form})
 
 def adddecoration(request):
     if request.method == 'POST':
@@ -146,6 +164,10 @@ def exploredecoration(request, id):
     # Render the template with the venue data
     return render(request, 'decoration/exploredecoration.html', {'decoration': decorations})
 
+from django.http import JsonResponse
+from django.db.models import Q
+from .models import decoration  # Assuming your model is named 'Decoration'
+
 @require_GET
 def search_decoration(request):
     searched = request.GET.get('searched', '')
@@ -170,15 +192,16 @@ def search_decoration(request):
         }
         decorations_data.append(decoration_data)
 
-    # Return JSON response
-    return JsonResponse({'decoration': decoration_data})
+    # Return JSON response containing all decoration data
+    return JsonResponse({'decorations': decorations_data})
+
 
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import decoration
 @require_GET
 def filter_decorations(request):
-    decorations = decorations.objects.all()
+    decorations = decoration.objects.all()
     name_contains_query = request.GET.get('Name_contains')
    
     # title_or_author_query = request.GET.get('Name_or_Location')
@@ -201,11 +224,10 @@ def filter_decorations(request):
         decorations = decorations.filter(Cost__lte=max_cost)
 
     data = [{
-        'Name': decoration.Name,
-        
+        'Name': decoration.Name,        
         'Description': decoration.Description,
         'Cost': decoration.Cost,
-        'Decoration_images': [image.image.url for image in decoration.Decoration_image.all()],
+        'decoration_images': [image.image.url for image in decoration.Decoration_image.all()],
         'id':decoration.id
         
     } for decoration in decorations]

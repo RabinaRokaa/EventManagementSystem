@@ -461,14 +461,14 @@
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" height="20%">
+        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="40%" height="600px">
 
         <!-- Single photographer Details -->
         <div id="photographer-details">
-            <h2 id="photographer_name">{{ photographer.Name }}</h2>
+            <h2 id="photographer_name">{{ photographer.Username }}</h2>
             <hr>   <!--for horizontal line-->
             <div id="photographer-description">
-                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Name}} </span><br> <br> {{ photographer.Description }}</p>
+                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Username}} </span><br> <br> {{ photographer.Description }}</p>
             </div>
             <!-- Loop through all images -->
             <div class="photographer-images">
@@ -533,19 +533,18 @@
         </li>
 
             <br>
-        <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
+        {% comment %} <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
             groups </span>
             <div id="photographer-capacity">
                 <h4>Capacity: {{ photographer.Capacity }}</h4>
             </div>
-        </li> 
-            <br>
-        <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
+        </li>  {% endcomment %}
+        {% comment %} <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
             category </span>
             <div id="event_type">
                 <h4>Category: {{ photographer.Type }}</h4>
             </div>
-        </li>
+        </li> {% endcomment %}
      </div> 
             <form id="booking-form" action="" method="POST">
               
@@ -605,11 +604,11 @@
              
                 event.preventDefault(); // Prevent the default form submission behavior
                 // Gather data from HTML elements
-                const event_type = document.getElementById('event_type').innerText;
-                console.log(document.getElementById('event_type').innerText)
+                //const event_type = document.getElementById('event_type').innerText;
+                //console.log(document.getElementById('event_type').innerText)
                 const name = document.getElementById('photographer_name').textContent;
                 const location = document.getElementById('photographer-location').innerText;
-                const capacity = document.getElementById('photographer-capacity').innerText;
+                //const capacity = document.getElementById('photographer-capacity').innerText;
                 const description = document.getElementById('photographer-description').innerText;
                // const decoration = document.getElementById('decoration').innerText;
                // const photography = document.getElementById('photography').innerText;
@@ -618,10 +617,10 @@
                 const cost = document.getElementById('costphotographer').textContent;
                 // Prepare data to be sent to the backend
                 const formData = new FormData();
-                formData.append('event_type', event_type);
+                //formData.append('event_type', event_type);
                 formData.append('name', name);
                 formData.append('location', location);
-                formData.append('capacity', capacity);
+                //formData.append('capacity', capacity);
                 formData.append('description', description);
                 //formData.append('decoration', decoration);
                 //formData.append('photography', photography);
@@ -659,7 +658,7 @@
         
                     }
                     else{
-                        window.location.href = "/bookingprocess"
+                        window.location.href = "/bookingprocessp"
                     }
                     // You can perform any other actions here upon successful booking
                 })

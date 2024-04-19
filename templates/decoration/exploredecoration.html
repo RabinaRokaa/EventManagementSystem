@@ -533,12 +533,12 @@
         </li>
 
             <br>
-        <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
+        {% comment %} <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
             groups </span>
             <div id="decoration-capacity">
                 <h4>Capacity: {{ decoration.Capacity }}</h4>
             </div>
-        </li> 
+        </li>  {% endcomment %}
             <br>
         <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
             category </span>
@@ -596,8 +596,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-      
-
         document.addEventListener('DOMContentLoaded', function () {
             const bookingForm = document.getElementById('formBook');
             console.log(window.location.href)
@@ -609,10 +607,8 @@
                 console.log(document.getElementById('event_type').innerText)
                 const name = document.getElementById('decoration_name').textContent;
                 const location = document.getElementById('decoration-location').innerText;
-                const capacity = document.getElementById('decoration-capacity').innerText;
+                //const capacity = document.getElementById('decoration-capacity').innerText;
                 const description = document.getElementById('decoration-description').innerText;
-               // const decoration = document.getElementById('decoration').innerText;
-               // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
                 const end_date = document.getElementById('id_check_out').value;
                 const cost = document.getElementById('costdecoration').textContent;
@@ -621,7 +617,7 @@
                 formData.append('event_type', event_type);
                 formData.append('name', name);
                 formData.append('location', location);
-                formData.append('capacity', capacity);
+                //formData.append('capacity', capacity);
                 formData.append('description', description);
                 //formData.append('decoration', decoration);
                 //formData.append('photography', photography);
@@ -659,7 +655,9 @@
         
                     }
                     else{
-                        window.location.href = "/bookingprocess"
+                        //const date = formData.get('date'); // Retrieve the date from the form data
+                        //window.location.href = `/bookingprocessd/${date}`; // Redirect to the booking process with the date parameter
+                        window.location.href = "/bookingprocessd"
                     }
                     // You can perform any other actions here upon successful booking
                 })

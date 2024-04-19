@@ -19,13 +19,21 @@
             border-collapse: collapse;
             width: 100%;
         }
+        td.desc {
+            white-space: normal; /* Override nowrap for the description field */
+        }
         th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
+            border: 1px solid #727272;
+            text-align:left;
+            white-space: nowrap;
+            
+            padding: 10px;
         }
         th {
             background-color: #f2f2f2;
+        }
+        tr {
+            text-align:left;
         }
 
         .adddecoration a:hover {
@@ -139,14 +147,15 @@
                 <tr>
                     <td>{{ decoration.id }}</td>
                     <td>{{ decoration.Name }}</td>
-                    <td>{{ decoration.Type }}</td>
+                    <td class="desc">{{ decoration.Type }}</td>
                     <td>{{ decoration.Description }}</td>
                     <td>{{ decoration.Cost }}</td>
                     {% comment %} <td><img src="{{ decorations.decoration_image.url }}" alt="{{ decoration.Name }}" width="100"></td> {% endcomment %}
                     <td>
-                        <a href="{% url 'view_decoration' decoration.id %}" class="btn btn-info">View</a>
-                        <a href="{% url 'update_decoration' decoration.id %}" enctype="multipart/form-data" class="btn btn-primary">Update</a>
-                        <a href="{% url 'delete_decoration' decoration.id %}" onclick="return confirmDelete('{{ decoration.Name }}');" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'view_decoration' decoration.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
+                        <a href="{% url 'update_decoration' decoration.id %}" enctype="multipart/form-data" class="material-symbols-outlined" style="color:#4141a2">edit</span></a>
+
+                        <a href="{% url 'delete_decoration' decoration.id %}" onclick="return confirmDelete('{{ decoration.Name }}');" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
                         {% comment %} <a href="{% url 'delete_decoration' decoration.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
                     </td>
                 </tr>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">-->
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/aboutus.css' %}">
+    {% comment %} <title>Contact Us</title> {% endcomment %}
+    <style>
+    .navbar .dropdown-menu li{
+        margin: 0;
+        justify-content: center;
+        padding: 3px 10px;
+    }
+    .navbar .dropdown-menu li a:hover{
+        text-decoration: none;
+        color: #ffffff;
+    }
+    .navbar .dropdown-menu li:hover{
+        background: #007bff;
+        color: #ffffff;
+    }
+    .navbar .btn-secondary.active, .btn-secondary:active, .show>.btn-secondary.dropdown-toggle {
+    background-color: #007bff;
+    background-image: none;
+    border-color: #007bff;
+}
+    .pageheader button:hover {
+    background-color: #345feb;
+    color: #fff;
+    border: none;
+}
+    .button-color a:hover{
+        color: #ffffff !important;
+    }
+
+</style>
+    <title>About Us</title>
+</head>
+
+<body>
+    <div class="aboutus bg-body">
+       
+            
+        <nav>
+            <a href="/">Home</a>
+            
+            <a href="#" class="hover-trigger">Services</a>
+            <div class="hover-content">
+              <div class="service-item">
+                <a href="/venue">Venues</a>
+              </div>
+              <div class="service-item">
+                <a href="/decorations">Decoration</a>
+              </div>
+              <div class="service-item">
+                <a href="/photographers">Photographer</a>
+              </div>
+            </div>
+            <a href="/about_us">About Us</a>
+            <a href="/contact">Contact</a>
+            <a href="/Register">Register</a>
+            <a href="/Login">LogIn</a>
+          </nav>
+        <main class="flex justify-around">
+            <div class="aboutuscontent">
+                
+                <h1>Welcome to VenuevistaIn</h1>
+                <p class="whowearetext">At VenuevistaIn, we believe that planning your perfect event should be as enjoyable as the event itself. We're dedicated to simplifying the event planning process by offering a user-friendly platform where you can explore, choose, and book everything you need for a memorable occasion.
+                </p>
+                <div class="aboutusboxes flex justify-between">
+                    <div class="aboutusbox">
+                        <img src="{% static 'images/lightbulb-regular.svg' %}" alt="solutions">
+                        <h3>Who we are</h3>
+                        <p>
+                            At VenuevistaIn, we are passionate about transforming your event planning experience. Founded in 20XX by a team of dedicated professionals with a shared vision, EventPro was born out of a desire to simplify and enhance the way events are organized and executed.
+                        </p>
+                    </div>
+                    <div class="aboutusbox">
+                        <img src="{% static 'images/rocket-solid.svg' %}" alt="mission">
+                        <h3>Our Mission</h3>
+                        <p>Our mission at VenuevistaIn is to empower individuals and organizations to create unforgettable events effortlessly. 
+                            We strive to streamline the planning process, providing a one-stop platform for venue selection, decoration options, and photographer booking
+                        </p>
+                    </div>
+                    <div class="aboutusbox">
+                        <img src="{% static 'images/lightbulb-regular.svg' %}" alt="solutions">
+                        <h3>We help to get solutions</h3>
+                        <p>
+                            Explore a diverse range of venues, from elegant ballrooms to cozy cafes, tailored to suit any occasion and budget. Choose from our curated selection of decorations to add a personal touch to your event space. And capture every moment with our network of talented photographers who specialize in capturing the magic of your event.
+                        </p>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </main>
+    <!-- Footer -->
+    <footer>
+        <div class="copy">
+            <p>Copyright © 2023
+                by Rabina Roka</p>
+        </div>
+        <div class="company">
+            <p>Company</p>
+            <a href="#">Contact Us</a>
+            <a href="#">About us</a>
+            <a href="#">FAQs</a>
+        </div>
+    </footer>
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var trigger = document.querySelector('.hover-trigger');
+            var content = document.querySelector('.hover-content');
+            trigger.addEventListener('click', function() {
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        });
+        
+    </script>
+
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

@@ -1,62 +1,18 @@
 from django.shortcuts import render,HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.core.mail import EmailMessage, send_mail
-
+from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import redirect, render
 from django.db.models import Q
-from django.http import JsonResponse
-from django.http import JsonResponse
-from django.db.models import Q
 from django.views.decorators.http import require_GET
+
+from EventManagementSystem import settings
 from .models import booking
-
 import json
-
 from django.core.serializers import serialize
-
-# Create your views here.
-# from django.shortcuts import render
-# from django.http import JsonResponse
-# from .models import booking
-
-# def book_event(request):
-#     if request.method == 'POST':
-#         event_type = request.POST.get('event_type')
-#         name = request.POST.get('name')
-#         location = request.POST.get('location')
-#         capacity = request.POST.get('capacity')
-#         description = request.POST.get('description')
-#         decoration = request.POST.get('decoration')
-#         photography = request.POST.get('photography')
-#         date = request.POST.get('date')
-#         end_date = request.POST.get('end_date')
-#         cost = request.POST.get('cost')
-
-#         # Create and save the booking object
-#         booking_obj = booking(
-#             Event_Type=event_type,
-#             Name=name,
-#             Location=location,
-#             Capacity=capacity,
-#             Description=description,
-#             Decoration=decoration,
-#             Photography=photography,
-#             Date=date,
-#             EndDate=end_date,
-#             Cost=cost
-#         )
-#         booking_obj.save()
-
-#         # Assuming the booking was successful, you can return a success message
-#         return JsonResponse({'message': 'Booking successful'})
-#     else:
-#         # If the request method is not POST, return an error message
-#         return JsonResponse({'error': 'Invalid request method'})
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import booking
 from django.views.decorators.csrf import csrf_exempt
-
 from datetime import datetime
 @csrf_exempt
 def book_event(request):
@@ -84,13 +40,38 @@ def booking_list(request):
 
 
 
-from django.shortcuts import render, redirect, get_object_or_404
+@csrf_exempt
+def check_booking_availability(request):
+    if request.method=="POST":
+        event_type = request.POST.get('event_type')
+        name = request.POST.get('name')
+        location = request.POST.get('location')
+        capacity = request.POST.get('capacity')
+        description = request.POST.get('description')
+        date_str = request.POST.get('date')
+
+        # Parse date string to datetime object
+        date = datetime.fromisoformat(date_str)
+
+        # Extract the date part
+        date = date.date()
+
+        print(date)
+        print(event_type,name,location,date_str,request.user.username)
+        # Check if there are any previous bookings
+        previous_bookings = booking.objects.filter(
+            Event_Type=event_type,
+            Name=name,
+            Location=location,
+            EndDate__gt=date, 
+        )
+
+        if previous_bookings.exists():
+            return JsonResponse({'available': False, 'message': 'Booking not available for the selected date.'})
+        else:
+            return JsonResponse({'available': True, 'message': 'Booking available for the selected date.'})
+
 # from .forms import bookingsForm
-
-
-
-
-
 
 def update_booking(request, id):
     return render(request, "booking/booking_update.html", )
@@ -244,8 +225,7 @@ def delete_booking(request, id):
 @csrf_exempt
 def booking_process(request):
     if request.method=='POST':  
-        data = json.loads(request.body.decode('utf-8'))
-  
+        data = json.loads(request.body.decode('utf-8'))  
         name = data.get('name')
         location = data.get('location')
         capacity = data.get('capacity')
@@ -275,8 +255,7 @@ def booking_process(request):
             'User': request.user.username,
             'FirstName': request.user.first_name,
             'LastName': request.user.last_name,
-            'Email': request.user.email,
-            
+            'Email': request.user.email,            
             'Name': name,
             'Location': location,
             'Capacity': capacity,
@@ -286,8 +265,13 @@ def booking_process(request):
             'EndDate': check_out
         }
 
+        print("Booking data:", data)
+
+         # Send booking confirmation email with PDF attachment
+        send_confirmation(request.user.email, data)
+
         # Return the data in a JSON response
-        return JsonResponse({'data': data, 'message': 'Booking successful'})
+        return JsonResponse({'data': data, 'message': 'Booking successful.confirmation email sent.'})
     else:
         print(request.user.username)
         print(request.user.first_name)
@@ -304,3 +288,24 @@ def total_bookings_view(request):
     print("chor",total_bookings)
     return render(request, 'loginAuthentication/adminpanel.html', {'total_bookings': total_bookings})
 
+from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+
+# def generate_pdf(data):
+
+#     print("Generating PDF content with data:", data)
+#     # Generate PDF content
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename="booking_confirmation.pdf"'
+#     p = canvas.Canvas(response, pagesize=letter)
+#     p.drawString(100, 750, "Booking Confirmation")
+#     # Add more content as needed
+#     p.showPage()
+#     p.save()
+
+#     return response.getvalue()
