@@ -30,6 +30,7 @@ urlpatterns = [
     path('user_list/',views.userlist,name='userlist'),
     path('about_us/',views.about_us,name='about_us'),
     path('contact/',views.contact,name='contact'),
+    path('profile/',views.profile,name='profile'),
     path('<id>/view_user',views.view_user,name='view_user'),
     # path('<id>/delete_venue',views.delete_user,name='delete_user'),
      path('<id>/delete_user', views.delete_user, name='delete_user'),

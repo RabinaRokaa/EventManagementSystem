@@ -16,11 +16,14 @@ from . tokens import generate_token
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView , PasswordResetConfirmView
-from django.contrib.messages.views import SuccessMessageMixin
 from Venues.models import Venues  # Import your models
+from profiles.models import profiles  # Import your models
 from decoration.models import decoration   # Import your models
 from django.views.decorators.http import require_GET
 from photographer.models import photographer  # Import your models
+from django.shortcuts import render
+from booking.models import booking
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 #cretaing function for home page
@@ -80,6 +83,9 @@ def register(request):
         if is_superuser:
             myuser.is_superuser = True
             myuser.save()
+
+            # Create a profile for the user
+       #profiles.objects.create(user=myuser)
 
       #sending simple Welcome Email
         subject = "Welcome to VenueVistaIn Login!!"
@@ -227,33 +233,6 @@ def landingpage(req):
 def organizerpanel(req):
     return render(req, 'loginAuthentication/organizerpanel.html')
 
-# def userdashboard(req):    
-#     venues = Venues.objects.all()  #fetch venues from the database
-#     decorations = decoration.objects.all() 
-#     decorations = decoration.objects.all() 
-#     photographers = photographer.objects.all()
-
-#     recent_bookings = None
-#     if req.user.is_authenticated:
-#         recent_bookings = booking.objects.filter(User=req.user).order_by('-Date')[:5]  
-
-#      # Fetch booking data related to the current user
-#     elif req.user.is_authenticated:
-#         user_bookings = booking.objects.filter(User=req.user)
-#     else:
-#         user_bookings = None  # Provide an empty queryset if the user is not authent
-
-#     print('lol')
-#     context = {
-#         'venues': venues,
-#         'decorations': decorations,
-#         'photographers': photographers,
-        
-#         'recent_bookings':recent_bookings,
-#         'user_bookings': user_bookings,
-#     }
-    
-#     return render(req, 'loginAuthentication/userdashboard.html', context)
 def userdashboard(request):
     venues = Venues.objects.all()  # Fetch venues from the database
     decorations = decoration.objects.all()
@@ -298,14 +277,7 @@ def delete_user(request, id):
         return redirect('/user_list')  # Redirect to venue list page after delete
     # return render(request, 'loginAuthentication/delete_user.html', {'myuser': user})
 
-# def delete_user(request, id):
-#     try:
-#         user = User.objects.get(id=id)
-#         user.delete()
-#         messages.success(request, f"User {user.username} has been deleted successfully.")
-#     except User.DoesNotExist:
-#         messages.error(request, "User does not exist.")
-#     return redirect('user_list')
+
 
  
 # pass id attribute from urls
@@ -392,11 +364,6 @@ def filterform(request):
 
 # views.py
 
-from django.shortcuts import render
-from booking.models import booking
-from django.contrib.auth.decorators import login_required
-
-
 @login_required
 def booking_history(request):
     user_bookings = booking.objects.filter(User=request.user)
@@ -408,3 +375,14 @@ def about_us(request):
 
 def contact(request):
     return render(request, "loginAuthentication/contact.html")
+
+def profile(request):
+    profile = profiles.objects.get(user=request.user)
+
+    context = {
+        "Profile" : profile
+
+    }
+
+    return render(request, "loginAuthentication/editprofile.html" ,context )
+

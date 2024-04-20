@@ -282,5 +282,19 @@ footer {
         <a href="#">FAQs</a>
     </div>
 </footer>
+<script>
+  let url = window.location.href
+  let splitted = url.split("/")
+  console.log(splitted)
+  if (splitted.length > 4){
+    setTimeout(function() {
+      window.location.href = "/Login"
+    }, 2000);
+    
+  }
+     
+  
+</script> 
 </body>
 </html>  
+

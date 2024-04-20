@@ -194,12 +194,12 @@
         .middle:hover{
             box-shadow: 2px 2px 10px gray;
         } 
-         
-        /* CSS for the pop-up box */
+
+                /* CSS for the pop-up box */
         .popup {
             position: fixed;
             top: 50%;
-            left: 40%;
+            left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
             padding: 30px;
@@ -208,6 +208,7 @@
             z-index: 9999; /* Ensure the pop-up is above other content */
             display: none; /* Initially hide the pop-up */
             width: 430px; 
+           
         }
 
         /* Styling for the close button */
@@ -222,8 +223,9 @@
             height: 100%;
             top: 0;
             left: 0;
-            background-color: red; /* Adjust opacity as needed */
-            z-index: 999; /* Ensure it's above other content */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            backdrop-filter: blur(5px); /* Add blur effect */
+            z-index: 998; /* Ensure it's above other content but below pop-up */
             display: none; /* Initially hide the overlay */
         }
 
@@ -231,6 +233,9 @@
         .popup:target + .overlay {
             display: block;
         }
+
+         
+        /* CSS for the pop-up box */
 
       
       
@@ -285,11 +290,43 @@
             margin-right:350px;
         }
 
+        
         .filters{
-            text-align:center;
-            margin-left:400px;
-            margin-top:27px;
-        }
+                text-align:center;
+                margin-left: 360px;
+                margin-top: 25px;
+            }
+
+            .filter-container {
+                display: flex; /* Use Flexbox to align items */
+                align-items: center; /* Vertically center items */
+            }
+            
+            .filters {
+                text-align: center; /* Center the content horizontally */
+                margin-left: 370px; /* Adjust margin as needed */
+                margin-top: 25px; /* Adjust margin as needed */
+            }
+            
+            /* Style the link and span inside .filters */
+            .filters a {
+                text-decoration: none;
+                color: black; /* Change to desired color */
+                font-size: 18px; /* Adjust font size as needed */
+                display: flex; /* Use Flexbox for link contents */
+                align-items: center; /* Align items vertically */
+            }
+            
+            .filters a:hover {
+                color: blue; /* Change to desired color on hover */
+            }
+            
+            .filters .material-symbols-outlined {
+                font-size: 45px; /* Adjust font size as needed */
+                margin-left: 5px; /* Adjust margin as needed */
+                /* Change to desired color */
+            }
+            
 
         .whole{
            
@@ -421,6 +458,7 @@ nav a:hover {
 <nav>
     <a href="/">Home</a>
     
+    
     <a href="#" class="hover-trigger">Services</a>
     <div class="hover-content">
       <div class="service-item">
@@ -443,7 +481,9 @@ nav a:hover {
        <div class="whole"> 
         <div class="filter-container">
             <div class="filters">
-                <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                <a href="#" id="filterLink"><h2> Filters by </h2><span class="material-symbols-outlined" style="font-size:45px; ">
+                    arrow_drop_down
+                    </span></a>
             </div>
             <!-- Add the filter form here -->
             
@@ -525,7 +565,7 @@ nav a:hover {
                     </div>
                     
                   </form>
-                     <div class="overlay" id="overlay">hello</div>
+                <div class="overlay" id="overlay">hello</div>
                   {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
                   {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
         </div>

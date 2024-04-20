@@ -8,9 +8,9 @@ body {
 }
 /* Navbar styles */
 nav {
-    background-color: #003b95;
+    /* background-color: #003b95; */
     padding: 30px; /* Increase padding to make navbar larger */
-    color: white;
+    color: black;
     text-align: center;
     position: relative; /* Ensure proper positioning for absolute elements */
 }
@@ -23,7 +23,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #eef1f1a4; /* Change to the desired color when hovering */
+    color: blue; /* Change to the desired color when hovering */
 }
 
 /* Dropdown content */
@@ -53,11 +53,13 @@ nav a:hover {
 /* Navbar styles */
 nav {
     transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
-    background-color: #003b95;
-    padding: 30px; /* Increase padding to make navbar larger */
-    color: white;
+    /* background-color: #003b95; */
+    padding: 20px; /* Increase padding to make navbar larger */
+    color: black;
     text-align: center;
     position: relative; /* Ensure proper positioning for absolute elements */
+    border: 1px black;
+    box-shadow: 2px 2px 4px 2px rgba(139, 69, 19, 0.5);
 }
 
 nav button {
@@ -66,14 +68,13 @@ nav button {
 
 nav a {
     text-decoration: none;
-    color: white;
+    /* color: rgb(110, 110, 108); */
+    color: black;
     margin: 0 15px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
-nav a:hover {
-    color: #eef1f1a4; /* Change to the desired color when hovering */
-}
+
 .nav a:after,
 .nav a:before {
   content: "";
@@ -185,8 +186,10 @@ header {
 
 /* Footer styles */
 footer {
-    background-color: rgba(0, 59, 149, 1);
-    color: white;
+    color: black;
+    border: 1px black;
+    box-shadow: 2px 2px 4px 2px rgba(139, 69, 19, 0.5);
+    color:black;
     text-align: right;
     padding: 30px;
     display: flex;
@@ -195,8 +198,8 @@ footer {
 }
 
 .copy {
-    background-color: rgba(0, 59, 149, 1);
-    color: white;
+    /* background-color: rgba(0, 59, 149, 1); */
+    color: black;
     text-align: left;
     padding-bottom: 10px;
 }
@@ -207,7 +210,7 @@ footer {
 }
 
 .company a {
-    color: white;
+    color: black;
     text-decoration: none;
     margin: 5px 0;
     padding-right: 30px;
@@ -215,7 +218,7 @@ footer {
 }
 
 .company p {
-    color: white;
+    color: black;
     text-decoration: none;
     margin: 5px 0;
     padding-right: 30px;
@@ -245,5 +248,7 @@ nav {
   .service-item a:hover {
     color: blue;
   }
+
+  
   
  

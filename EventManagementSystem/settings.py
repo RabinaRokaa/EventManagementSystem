@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'photographerbooking',
     'checking',
     #used only by checking app
-    'checking.booking_functions'
+    
+    'profiles'
 ]
 
 MIDDLEWARE = [

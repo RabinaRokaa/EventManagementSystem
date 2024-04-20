@@ -86,18 +86,13 @@
                         <span class="material-symbols-outlined">book_online</span>
                         <h3> Booking History</h3>    
                     </a>         
-                    <a href="#" data-tab="feedback" class="sidebar-link">
-                        <span class="material-symbols-outlined">mail_outline</span>
-                        <h3> Feedback </h3> 
-                        <span class="message-count">7</span>  
-                    </a>     
-                    <a href="#" data-tab="showTab('venues')" class="sidebar-link" onclick="loadUserList()">
+                    <a href="{% url 'profile' %}" data-tab="settings" class="sidebar-link">
                         <span class="material-symbols-outlined">
                             settings
                             </span>
-                        <h3> Settings </h3>    
-                    </a>     
-                    <a href="/LogOut">
+                        <h3> Settings </h3> 
+                    </a>          
+                    <a href="/LogOut" class="sideba-link">
                         <span class="material-symbols-outlined">logout</span>
                         <h3> Logout </h3> 
                         
@@ -739,9 +734,54 @@
                 </tbody>
             </table>
         </div>  
-        <div id="feedback" class="tab-content active">
-            <h2>Tab 1 Content</h2>
-            <p>This is the content for Tab 1.</p>
+        <div id="settings" class="tab-content active">
+            <h2>Edit profile</h2>
+            <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress2">Address 2</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                      Check me out
+                    </label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+              </form>
         </div>  
         
       </main>

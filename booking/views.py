@@ -309,3 +309,48 @@ from django.utils.html import strip_tags
 #     p.save()
 
 #     return response.getvalue()
+def generate_pdf(data):
+    print("Generating PDF content with data:", data)
+    
+    # Generate PDF content
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="booking_confirmation.pdf"'
+    
+    p = canvas.Canvas(response, pagesize=letter)
+    p.drawString(100, 750, "Booking Confirmation")
+
+    # Add booking details to the PDF
+    y_offset = 700
+    for key, value in data.items():
+        if key != 'User':  # Skip 'User' field
+            text = f"{key}: {value}"
+            p.drawString(100, y_offset, text)
+            y_offset -= 20  # Adjust vertical position for next line
+
+    p.showPage()
+    p.save()
+
+    return response.getvalue()
+
+
+
+def send_confirmation(user_email, data):
+
+    print("Sending confirmation email to:", user_email)
+    print("Booking data:", data)
+    # Generate PDF content
+    pdf_content = generate_pdf(data)
+    # Send email with PDF attachment
+    email_subject = 'Booking Confirmation'
+    email_body = 'Please find your booking confirmation attached.'
+    from_email = settings.EMAIL_HOST_USER  # Update with your email
+    to_email = [user_email]
+
+    email = EmailMessage(
+        email_subject,
+        email_body,
+        from_email,
+        to_email
+    )
+    email.attach('booking_confirmation.pdf', pdf_content, 'application/pdf')
+    email.send()

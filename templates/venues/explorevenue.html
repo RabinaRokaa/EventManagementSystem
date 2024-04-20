@@ -703,6 +703,8 @@
                 .then(data => {
                     // Handle success response from the backend
                     if (!data.status){
+                        // Store JSON data in local storage
+ localStorage.setItem('formData', JSON.stringify(formDataJson));
                         window.location.href = "/Login"
         
                     }
