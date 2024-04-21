@@ -7,6 +7,7 @@ class photographer(models.Model): #making class
     Username = models.CharField(max_length=100) #making field
     Phone_Number = models.IntegerField(null=True,default=None)
     Email = models.CharField(max_length=100) #making field
+    Description = models.CharField(max_length=200,null=True) #making field
     Photography_type = models.CharField(max_length=200) #making field
     Event_type = models.CharField(max_length=200) #making field
     #for adding editor in description in admin page

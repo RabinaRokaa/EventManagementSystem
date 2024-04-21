@@ -49,6 +49,7 @@ def check_booking_availability(request):
         capacity = request.POST.get('capacity')
         description = request.POST.get('description')
         date_str = request.POST.get('date')
+        Venue_image = request.POST.get('Venue_image')
 
         # Parse date string to datetime object
         date = datetime.fromisoformat(date_str)
@@ -212,6 +213,8 @@ from .models import booking
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import booking
+from django.http import JsonResponse, HttpResponseServerError
+
 
 def delete_booking(request, id):
     
@@ -220,11 +223,12 @@ def delete_booking(request, id):
         bookings.delete()
         return redirect('/booking_list')  # Redirect to the booking list page after deletion
     # return render(request, 'booking/deletebooking.html', {'bookings': bookings})
-
-
+import logging
+logger = logging.getLogger(__name__)
 @csrf_exempt
 def booking_process(request):
     if request.method=='POST':  
+       try:
         data = json.loads(request.body.decode('utf-8'))  
         name = data.get('name')
         location = data.get('location')
@@ -232,6 +236,7 @@ def booking_process(request):
         event_type = data.get('event_type')
         cost = data.get('cost')
         check_in = data.get('date')
+        Venue_image = request.FILES.get('Venue_image')
 
         check_out = data.get('end_date')
         print(check_in,check_out)
@@ -247,8 +252,12 @@ def booking_process(request):
             Event_Type=event_type,
             Cost=int(cost),
             Date=check_in,
+           
             EndDate=check_out
         )
+        if Venue_image:  # Check if an image was uploaded
+            booking_obj.Venue_image = Venue_image # Associate the image with the venue
+        
         booking_obj.save()
  # Construct a dictionary containing the data
         data = {
@@ -262,6 +271,7 @@ def booking_process(request):
             'Event_Type': event_type,
             'Cost': int(cost),
             'Date': check_in,
+            'Venue_image': Venue_image,
             'EndDate': check_out
         }
 
@@ -272,6 +282,9 @@ def booking_process(request):
 
         # Return the data in a JSON response
         return JsonResponse({'data': data, 'message': 'Booking successful.confirmation email sent.'})
+       except Exception as e:
+            logger.exception("Error in booking process view: %s", e)
+            return HttpResponseServerError('An error occurred while processing the booking request.')
     else:
         print(request.user.username)
         print(request.user.first_name)

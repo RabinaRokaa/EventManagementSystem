@@ -365,6 +365,15 @@ aside .sidebar .message-count{
 #settings{
     margin-top: 100px;
 }
+
+.left{
+    background: white;
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
 /*main content*/
 main{
     margin-top: 2rem;
@@ -550,7 +559,7 @@ border-left: 1px solid #ced4da; /* Add left border */
 
 .search-container {
     display: flex;
-    margin-left:250px;   
+    margin-left: 30%; 
     
 }
 
@@ -596,3 +605,6 @@ button[type="submit"] {
     width: 30px; /* Example width */
     height: auto; /* Maintain aspect ratio */
 }
+
+
+  

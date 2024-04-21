@@ -316,9 +316,10 @@ main ,table{
 .navbar {
     display: flex;
     justify-content: end;
+
     height:4.6rem;
     gap: 2rem;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;

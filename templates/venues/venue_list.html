@@ -48,6 +48,67 @@
           .btn btn-danger{
             color:red;
           }
+          .navbar {
+            display: flex;
+            justify-content: end;
+            height:4.6rem;
+            gap: 2rem;
+            position: fixed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 1rem var(--color-light);
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        
+        .navbar .logo {
+            margin-left: 1rem; /* Adjust the margin as needed */
+        }
+        
+        .navbar .logo img {
+            width: 100px; /* Adjust the width of the logo as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
+        .navbar .profile {
+            margin-right: 1rem; /* Adjust the margin as needed */
+        }
+        
+        .navbar .profile button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        aside{
+            height: 100vh;
+            width: 32vh;
+            margin-top: 40%;
+            background: rgb(243, 243, 243);
+        }
+        
+        aside.top{
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10rem;
+        }
+        
+        aside .close{
+            display: none;
+        
+        }
+        h1{
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-top: 4rem;
+        }
+        
 
           
 
@@ -55,27 +116,23 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logoa.png' %}">
+        </div>
+        <div class="profile">
+            <button id="btn">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+            <div class="info">
+                <small class="text-muted">Admin </small>
+            </div>
+        </div>
+  </div>
   <div class="container">
     <aside>
         <div class="top">
-            <!--for logo-->
 
-            {% comment %} <div>
-                <img src="./images/Venuevistaln.png">
-                <h2>Venue <span class="danger">Vistaln</span></h2>
-            </div>
-            <hr>
-           
-            <!--using google close icon-->
-           <div class="menu-bar">
-               <button class="menu-btn" onclick="toggleSidebar()">
-                   <span class="material-symbols-outlined">menu</span>
-               </button>
-               <button class="close-btn" onclick="closeSidebar()">
-                   <span class="material-symbols-outlined">close</span>
-               </button>
-           </div> {% endcomment %}
-            <!--sidebar/sibling of the top-->
             <div class="sidebar">
                 <a href="/adminpanel">
                     <span class="material-symbols-outlined">grid_view</span>

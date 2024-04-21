@@ -14,6 +14,79 @@
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     
 </head>
+<style>
+/* Styling for recent bookings */
+.left {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.left h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.booking-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+}
+
+.booking {
+  width: calc(50% - 20px); /* Adjust the width as needed */
+  margin: 10px;
+  padding: 70px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left; /* Align text to the left */
+}
+
+.booking h2, .booking h3 {
+  display: inline; /* Display headings inline */
+  margin-right: 10px; /* Add some space between headings */
+}
+
+.booking h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.booking h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #888;
+}
+
+/* Style for the date input
+.date {
+  margin-bottom: 20px;
+}
+
+.date input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+} */
+.icon{
+    width: 30px;
+    margin-left: -55px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.search-container {
+    display: flex;
+    margin-left: 30%; 
+    
+}
+
+
+  
+</style>
 <body>
         <!-- To display the messages, use the following tag -->
         {% for message in messages %}
@@ -114,32 +187,34 @@
           <div class="date">
             <input type="date">
           </div> 
-          
-          <div class="insights">
+
+        
+          <div class="left">   
+            <h1>Your Recent Bookings</h1>
+            {% if recent_bookings %}
+                <div class="booking-container">
+                    {% for booking in recent_bookings %}
+                        <div class="booking" style="display: inline;">
+                            <h2>{{ booking.Name }}</h2>
+                            <h3>{{ booking.Description }}</h3>
+                            <h3>{{ booking.Date }}</h3>
+                            <h3>{{ booking.Cost }}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No recent bookings</p>
+            {% endif %}
+        </div>
+        <!-- <div class="insights" style="padding:100px;">
             <div class="Booking">
                 <span class="material-symbols-outlined">book_online</span>
                 <div class="middle">
-                    <div class="left">
-                        
-                        <h2>Your Recent Bookings</h2>
-                        <ul>
-                            {% if recent_bookings %}
-                                {% for booking in recent_bookings %}
-                                    <h2>{{ booking.Name }}</h2>
-                                    <h2>{{ booking.Description }}</h2>
-                                     <h3>{{ booking.Date }}</h3>
-                                     <h3>{{ booking.User }}</h3>
-                                    <!-- Adjust the fields you want to display -->
-                                {% endfor %}
-                            {% else %}
-                                <li>No recent bookings</li>
-                            {% endif %}
-                        </ul>
-                    </div>   
+                     
                 </div>
                 <small class="text-muted">last 24 hours </small>
             </div>
-            <div class="pending">
+            {% comment %} <div class="pending">
                 <span class="material-symbols-outlined">pending_actions</span>
                 <div class="middle">
                     <div class="left">
@@ -158,7 +233,7 @@
                     </div>   
                 </div>
                 <small class="text-muted">last 24 hours </small>
-            </div>
+            </div> {% endcomment %}
             <div class = "cards">
                <div class = "img">
                 <img src="{% static 'images/hotel.png' %}" alt="Icon">
@@ -187,22 +262,25 @@
                </div>
             {% comment %} <div id="venue-list-container"></div> {% endcomment %}
            <div class="second">
-            <div class=" middle">
+            <div class=" middle"> -->
                
-                 </div>
+                 <!-- </div>
              </div>
            </div>
          </div> 
-        </div>
+        </div> -->
+    </div> 
+          
+
  
         <div id="venues" class="tab-content active">
-            <h2>Venues Content</h2>
+            <!-- <h2>Venues Content</h2> -->
             <div class="main-content1">
                 <div class="whole"> 
                     <div class="filter-container">
-                        <div class="filters">
+                        <!-- <div class="filters">
                             <a href="#" id="filterLink"><h2> Filters by:</h2></a>
-                        </div>
+                        </div> -->
                         <!-- Add the filter form here -->
                         
                             <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
@@ -351,13 +429,13 @@
                 </div>
              </div>
              <div id="decorations" class="tab-content active">
-                <h2>Decoration Content</h2>
+                <h2></h2>
                 <div class="main-content1">
                     <div class="whole"> 
                         <div class="filter-container">
-                            <div class="filters">
+                            <!-- <div class="filters">
                                 <a href="#" id="filterLink"><h2> Filters by:</h2></a>
-                            </div>
+                            </div> -->
                             <!-- Add the filter form here -->
                             
                                 <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
@@ -454,7 +532,7 @@
                                     search
                                     </span> {% endcomment %}
                                     <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
                             </div>
                             
                             
@@ -507,14 +585,14 @@
                  </div>
 
       
-                 <div id="photographers" class="tab-content active">
-                    <h2>Venues Content</h2>
+        <div id="photographers" class="tab-content active">
+                    <!-- <h2>Venues Content</h2> -->
                     <div class="main-content1">
                         <div class="whole"> 
                             <div class="filter-container">
-                                <div class="filters">
+                                <!-- <div class="filters">
                                     <a href="#" id="filterLink"><h2> Filters by:</h2></a>
-                                </div>
+                                </div> -->
                                 <!-- Add the filter form here -->
                                 
                                     <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
@@ -612,7 +690,7 @@
                                         search
                                         </span> {% endcomment %}
                                         <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                                        <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;>
                                 </div>
                                 
                                 
@@ -662,7 +740,8 @@
                          {% endfor %}
                                
                         </div>
-                     </div> 
+                     </div>
+        </div> 
         <div id="bookings" class="tab-content active" style="margin-top:100px;">
             <h1>Booking History</h1>
             <table>

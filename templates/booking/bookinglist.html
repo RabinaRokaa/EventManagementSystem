@@ -40,13 +40,85 @@
             background-color: #d6cfec;
             color: blue;
           }
-
+          aside{
+            height: 100vh;
+            width: 32vh;
+            margin-top: 40%;
+            background: rgb(243, 243, 243);
+        }
+        
+        aside.top{
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10rem;
+        }
+        
+        aside .close{
+            display: none;
+        
+        }
+        .navbar {
+            display: flex;
+            justify-content: end;
+            height:4.6rem;
+            gap: 2rem;
+            position: fixed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 1rem var(--color-light);
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        
+        .navbar .logo {
+            margin-left: 1rem; /* Adjust the margin as needed */
+        }
+        
+        .navbar .logo img {
+            width: 100px; /* Adjust the width of the logo as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
+        .navbar .profile {
+            margin-right: 1rem; /* Adjust the margin as needed */
+        }
+        
+        .navbar .profile button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        h1{
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-top: 4rem;
+        }
+        
           
 
         
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logoa.png' %}">
+        </div>
+        <div class="profile">
+            <button id="btn">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+            <div class="info">
+                <small class="text-muted">Admin </small>
+            </div>
+        </div>
+  </div>
   <div class="container">
     <aside>
         <div class="top">
@@ -131,8 +203,8 @@
                 <th>Name</th>
                 <th>Location</th>
                 <th>Capacity</th>
-                <th>Decoration</th>
-                <th>Photography</th>
+                {% comment %} <th>Decoration</th>
+                <th>Photography</th> {% endcomment %}
 
                 <th> Date</th>
                 <th> EndDate</th>
@@ -151,8 +223,8 @@
                     <td>{{ booking.Name }}</td>
                     <td>{{ booking.Location}}</td>
                     <td>{{ booking.Capacity }}</td>                   
-                    <td>{{ booking.Decoration }}</td>
-                    <td>{{ booking.Photography }}</td>
+                    {% comment %} <td>{{ booking.Decoration }}</td>
+                    <td>{{ booking.Photography }}</td> {% endcomment %}
                     <td>{{ booking.Date }}</td>
                     <td>{{ booking.EndDate}}</td>
                     <td>{{ booking.Cost}}</td>

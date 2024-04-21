@@ -112,23 +112,7 @@ b {
     color: rgb(24, 24, 24);
 }
 
-aside{
-    height: 100vh;
-    background: rgb(243, 243, 243);
-}
 
-aside.top{
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1.4rem;
-}
-
-aside .close{
-    display: none;
-
-}
 
 /* -------sidebar */
 aside .sidebar{

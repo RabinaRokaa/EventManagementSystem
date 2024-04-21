@@ -215,6 +215,7 @@
             </div>
             <div class="modal-body" style="margin:auto; display:block;">
               Your booking has been successfully submitted.
+              <br>You can also check your mail for the further confirmation.
             </div>
             <div class="color">
                 <img src="{% static 'images/success.png' %}" style="width: 50px; height: 50px; margin:auto; display:block;">
@@ -249,15 +250,30 @@
         eventCheck.textContent = `Start Date: ${formData.venue_image}, End Date: ${formData.end_date}`;
         eventContainer.appendChild(eventCheck);*/
 
+        // Create and append the image element
+        /*if (formData.Venue_image) {
+            const imageElement = document.createElement('img');
+            imageElement.src = formData.Venue_image;
+            imageElement.alt = formData.name;
+            eventContainer.appendChild(imageElement);
+        }*/
+
+          // Create an img element for the venue image
+       /* const venueImage = document.createElement('img');
+        venueImage.src = formData.Venue_image; // Assuming Venue_image contains the URL of the image
+        venueImage.alt = 'Venue Image';
+        eventContainer.appendChild(venueImage); // Append the image to the eventContainer*/
+
+
         const eventDetails = document.createElement('div');
         eventDetails.classList.add('event-detail');
         eventDetails.innerHTML = `
         <p><strong> <h2>${formData.name}</h2></strong></p>
         <br>
         <p ><strong></strong> ${formData.description} </p>
+       
         <br>
             
-            <br>
             <div class="facility">   
                 <ul>
                     <li><span class="material-symbols-outlined">wifi</span>Free wifi</li>
@@ -270,7 +286,6 @@
             
             
             <br>
-            
             
             
             <p><strong>Cost:</strong> ${formData.cost}</p>

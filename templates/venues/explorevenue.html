@@ -471,7 +471,7 @@
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{venue.Name}} </span><br> <br> {{ venue.Description }}</p>
             </div>
             <!-- Loop through all images -->
-            <div class="venue-images">
+            <div id="Venue_image">
                 <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >venue</span></p>
                 {% for image in venue.Venue_image.all %}
                     <img src="{{ image.image.url }}" alt="{{ venue.Name }}" width="300" height="150" style="object-fit:cover;">
@@ -599,7 +599,7 @@
         
         let status = 0;
 
-        async function checkbooking(event_type, name, location, capacity, description, date) {
+        async function checkbooking(event_type, name, location, capacity, description, date,Venue_image) {
             try {
                 const data = new URLSearchParams();
                 date = new Date(date);
@@ -610,6 +610,7 @@
                 data.append('location', location);
                 data.append('capacity', capacity);
                 data.append('description', description);
+                data.append('Venue_image', Venue_image);
                 data.append('date', date);
         
                 const response = await fetch('/check-booking-availability/', {
@@ -647,6 +648,8 @@
                 const location = document.getElementById('venue-location').innerText;
                 const capacity = document.getElementById('venue-capacity').innerText;
                 const description = document.getElementById('venue-description').innerText;
+                const Venue_image = document.getElementById('Venue_image').getAttribute('src');
+
                // const decoration = document.getElementById('decoration').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
@@ -671,6 +674,7 @@
                 formData.append('location', location);
                 formData.append('capacity', capacity);
                 formData.append('description', description);
+                formData.append('Venue_image', Venue_image);
                 //formData.append('decoration', decoration);
                 //formData.append('photography', photography);
                 formData.append('date', date);

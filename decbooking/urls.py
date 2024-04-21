@@ -18,6 +18,7 @@ urlpatterns = [
     # path('booking/<int:pk>/update/', views.booking_update, name='booking_update'),
     # #path('booking/<int:pk>/delete/', views.booking_delete, name='booking_delete'),
     path('bookingprocessd/', views.booking_processd, name='bookingprocessd'),
-    path('book_event/', views.book_event, name= "book_event"),  #Path for book event
+    path('book_eventd/', views.book_eventd, name= "book_eventd"),  #Path for book event
+    path('check_booking_availabilityd/', views.check_booking_availabilityd, name= "check_booking_availabilityd") #Path for book event
     
 ]
