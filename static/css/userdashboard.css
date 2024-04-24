@@ -368,7 +368,7 @@ aside .sidebar .message-count{
 
 .left{
     background: white;
-    padding: var(--card-padding);
+    padding: 100%;
     border-radius: var(--card-border-radius);
     margin-top: 1rem;
     box-shadow: var(--box-shadow);

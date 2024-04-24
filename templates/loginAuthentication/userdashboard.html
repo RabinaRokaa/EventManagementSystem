@@ -84,6 +84,18 @@
     
 }
 
+.cards{
+    display:flex;
+    justify-content:space-around;
+    margin-top: 100px;
+}
+
+.card {
+    border-radius: 1px;
+    border: 1px solid white; /* Add border */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow */
+}
+
 
   
 </style>
@@ -205,6 +217,28 @@
             {% else %}
                 <p>No recent bookings</p>
             {% endif %}
+
+
+            <div class="cards">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'images/hotel.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- <div class="insights" style="padding:100px;">
             <div class="Booking">

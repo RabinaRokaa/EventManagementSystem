@@ -60,7 +60,7 @@
         }
 
         nav a {
-            text-decoration: none;
+            text-photographer: none;
             color: white;
             margin: 0 15px;
             font-weight: bold;
@@ -123,7 +123,7 @@
          }
         
         .title h3{
-            text-decoration:underline;
+            text-photographer:underline;
             margin-top:2px;
             
         }
@@ -223,14 +223,14 @@
         
         }
           
-          #decoration-location,
-          #decoration-capacity,
+          #photographer-location,
+          #photographer-capacity,
           #event_type {
             margin-bottom: 20px;
           }
           
-          #decoration-location h3,
-          #decoration-capacity h4,
+          #photographer-location h3,
+          #photographer-capacity h4,
           #event_type h4 {
             margin: 0;
             font-size: 1.2rem;
@@ -244,11 +244,11 @@
             box-shadow: 2px 2px 10px gray;
         } 
         
-        #decoration-details{
+        #photographer-details{
             margin:20px;
         }
         
-        #decoration-location{
+        #photographer-location{
             margin-top:15px;
         }
         .main-content img {
@@ -280,7 +280,7 @@
         
          .company a {
             color: white;
-            text-decoration: none;
+            text-photographer: none;
             margin: 5px 0;
             padding-right: 30px;
             font-size: small;
@@ -288,7 +288,7 @@
         
          .company p {
             color: white;
-            text-decoration: none;
+            text-photographer: none;
             margin: 5px 0;
             padding-right: 30px;
             font-size: large;
@@ -452,8 +452,8 @@
         
     <nav>
         <a href="/">Home</a>
-        <a href="/viewdecoration">View decoration</a>
-        <a href="/bookanevent">Book an decoration</a>
+        <a href="/viewphotographer">View photographer</a>
+        <a href="/bookanevent">Book an photographer</a>
         <a href="/bokkinghistory">Booking History</a>
         <a href="/feedback">Feedback</a>
         <a href="/settings">Settings</a>
@@ -461,20 +461,20 @@
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ decoration.Decoration_image.first.image.url }}" alt="Main Image" width="50%" style="height: 90vh">
+        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" style="height: 90vh">
 
-        <!-- Single decoration Details -->
-        <div id="decoration-details">
-            <h2 id="decoration_name">{{ decoration.Name }}</h2>
+        <!-- Single photographer Details -->
+        <div id="photographer-details">
+            <h2 id="photographer_name">{{ photographer.Username }}</h2>
             <hr>   <!--for horizontal line-->
-            <div id="decoration-description">
-                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{decoration.Name}} </span><br> <br> {{ decoration.Description }}</p>
+            <div id="photographer-description">
+                <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Username}} </span><br> <br> {{ photographer.Description }}</p>
             </div>
             <!-- Loop through all images -->
-            <div id="decoration_image">
-                <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >decoration</span></p>
-                {% for image in decoration.Decoration_image.all %}
-                    <img src="{{ image.image.url }}" alt="{{ decoration.Name }}" width="300" height="150" style="object-fit:cover;">
+            <div id="photographer_image">
+                <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >photographer</span></p>
+                {% for image in photographer.photographer_image.all %}
+                    <img src="{{ image.image.url }}" alt="{{ photographer.Username }}" width="300" height="150" style="object-fit:cover;">
                 {% endfor %}
             </div>
             <div class="facility">
@@ -498,19 +498,19 @@
                 
             </div>
            
-            {% comment %} <div id="decoration-location">
-                <h3>{{ decoration.Location }}</h3>
+            {% comment %} <div id="photographer-location">
+                <h3>{{ photographer.Location }}</h3>
             </div>
-            <div id="decoration-capacity">
-                <h4>Capacity: {{ decoration.Capacity }}</h4>
+            <div id="photographer-capacity">
+                <h4>Capacity: {{ photographer.Capacity }}</h4>
             </div>
             <div id="event_type">
-                <h4>Category: {{ decoration.Type }}</h4>
+                <h4>Category: {{ photographer.Type }}</h4>
             </div> {% endcomment %}
             
             
-            <div id="decoration-cost" style="color:green; margin-top:15px;">
-                <h4>NPR: <span id="costdecoration">{{ decoration.Cost }}</span></h4>
+            <div id="photographer-cost" style="color:green; margin-top:15px;">
+                <h4>NPR: <span id="costphotographer">{{ photographer.Cost }}</span></h4>
             </div>
             
 
@@ -527,28 +527,28 @@
         
          <li> <span class="material-symbols-outlined" style="background-color: lightblue;">
             place</span>
-            {% comment %} <div id="decoration-location">
-                <h3>{{ decoration.Location }}</h3>
+            {% comment %} <div id="photographer-location">
+                <h3>{{ photographer.Location }}</h3>
             </div> {% endcomment %}
         </li>
 
             <br>
         <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
             groups </span>
-            {% comment %} <div id="decoration-capacity">
-                <h4>Capacity: {{ decoration.Capacity }}</h4>
+            {% comment %} <div id="photographer-capacity">
+                <h4>Capacity: {{ photographer.Capacity }}</h4>
             </div> {% endcomment %}
         </li> 
             <br>
         <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
             category </span>
             <div id="event_type">
-                <h4>Category: {{ decoration.Type }}</h4>
+                <h4>Category: {{ photographer.Type }}</h4>
             </div>
         </li>
      </div> 
             <form id="booking-form" action="" method="POST">
-              <input type="hidden" value="decoration" >
+              <input type="hidden" value="photographer" >
                 <div class="input-div">
                   <label form="id_check_incheck_in"> <h2>check_in</h2> </label>
                   <input type="datetime-local" id="id_check_in" name="check_in">
@@ -558,7 +558,7 @@
                   <input type="datetime-local" id="id_check_out" name="check_out">
                 </div>  
                 {% comment %} <div class="input-div">
-                  <button type="submit"> Book the decoration </Button>
+                  <button type="submit"> Book the photographer </Button>
                 </div>   {% endcomment %}
                 <button class="your_account" id="formBook">
                     <a href="">Book Now</a>
@@ -571,9 +571,9 @@
      <hr>
     <div class="more">
         <div class="image-container">
-            <h2>Need more than just a decoration?</h2>
+            <h2>Need more than just a photographer?</h2>
             <div class="btn-container"> 
-                <button type="submit" class="hi"><a href="/decorations">Decoration</a></button>
+                <button type="submit" class="hi"><a href="/photographers">photographer</a></button>
                 <button type="submit" class="hi"><a href="/photographers">Photography</a></button>
             </div>
         </div>
@@ -599,19 +599,19 @@
         
         let status = 0;
 
-        async function checkbooking(name,description, date) {
+        async function checkbooking(username,description, date) {
             try {
                 const data = new URLSearchParams();
                 date = new Date(date);
                 date = date.toISOString().split('.')[0];
         
                 
-                data.append('name', name);
+                data.append('username', username);
                 data.append('description', description);
-                //data.append('decoration_image', decoration_image);
+                //data.append('photographer_image', photographer_image);
                 data.append('date', date);
         
-                const response = await fetch('/check_booking_availabilityd/', {
+                const response = await fetch('/check_booking_availabilityp/', {
                     method: 'POST',
                     body: data
                 });
@@ -641,15 +641,15 @@
                 
                 // Gather data from HTML elements
                
-                const name = document.getElementById('decoration_name').textContent;
-                const description = document.getElementById('decoration-description').innerText;
-                //const decoration_image = document.getElementById('decoration_image').getAttribute('src');
+                const username = document.getElementById('photographer_name').textContent;
+                const description = document.getElementById('photographer-description').innerText;
+                //const photographer_image = document.getElementById('photographer_image').getAttribute('src');
 
-               // const decoration = document.getElementById('decoration').innerText;
+               // const photographer = document.getElementById('photographer').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
               
-                await checkbooking(name,description,date)
+                await checkbooking(username,description,date)
 
                 console.log(status)
 
@@ -661,14 +661,14 @@
                
 
                 const end_date = document.getElementById('id_check_out').value;
-                const cost = document.getElementById('costdecoration').textContent;
+                const cost = document.getElementById('costphotographer').textContent;
                 // Prepare data to be sent to the backend
                 const formData = new FormData();
                
-                formData.append('name', name);                
+                formData.append('username', username);                
                 formData.append('description', description);
-                //formData.append('decoration_image', decoration_image);
-                //formData.append('decoration', decoration);
+                //formData.append('photographer_image', photographer_image);
+                //formData.append('photographer', photographer);
                 //formData.append('photography', photography);
                 formData.append('date', date);
                 formData.append('end_date', end_date);
@@ -687,7 +687,7 @@
 // Store JSON data in local storage
  localStorage.setItem('formData', JSON.stringify(formDataJson));
                 // Send data to the backend using a POST request
-                fetch('/book_eventd/', {
+                fetch('/book_eventp/', {
                     method: 'POST',
                     body: formData
                 })
@@ -706,7 +706,7 @@
         
                     }
                     else{
-                        window.location.href = "/bookingprocessd"
+                        window.location.href = "/bookingprocessp"
                     }
                     // You can perform any other actions here upon successful booking
                 })

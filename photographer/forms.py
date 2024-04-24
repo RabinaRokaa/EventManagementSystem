@@ -9,7 +9,7 @@ class PhotographerForm(forms.ModelForm):
 
     class Meta:
         model = photographer
-        fields = ['Username', 'Phone_Number', 'Email', 'Photography_type', 'Event_type','Cost','Photographer_image']
+        fields = ['Username', 'Phone_Number', 'Email', 'Description', 'Event_type','Cost','Photographer_image']
 
 
     # def __init__(self, *args, **kwargs):

@@ -9,7 +9,7 @@ body {
 /* Navbar styles */
 nav {
     /* background-color: #003b95; */
-    padding: 30px; /* Increase padding to make navbar larger */
+    padding: 20px; /* Increase padding to make navbar larger */
     color:black;
     text-align: center;
     position: relative; /* Ensure proper positioning for absolute elements */
@@ -152,7 +152,7 @@ header {
 
 .main-content img {
     max-width: 100%;
-    height: auto;
+    height: 190px;
     margin-top: 0;
 }
 
@@ -171,25 +171,33 @@ header {
     margin-right: 20px;
 }
 
-.your_account,
 .how_we_works {
-    background-color: rgba(0, 108, 228, 1);
-    margin: 10px;
-    padding: 10px;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+       
+    }
+.your_account {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
 /* Footer styles */
 footer {
-    color: white;
+    color: black;
     border: 1px black;
-    background-color: #003b95;
+    
     box-shadow: 2px 2px 4px 2px rgba(139, 69, 19, 0.5);
-    color:white;
+    color:black;
     text-align: right;
-    padding: 30px;
+    padding: 0px;
     display: flex;
     justify-content: space-between;
     align-items: center; /* Align items vertically in the center */
@@ -197,9 +205,10 @@ footer {
 
 .copy {
     /* background-color: rgba(0, 59, 149, 1); */
-    color: white;
-    text-align: left;
-    padding-bottom: 10px;
+    color: black;
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 20px;
 }
 
 .company {
@@ -208,18 +217,14 @@ footer {
 }
 
 .company a {
-    color: white;
+    color: black;
     text-decoration: none;
-    margin: 5px 0;
-    padding-right: 30px;
     font-size: small;
 }
 
 .company p {
-    color:white;
+    color:black;
     text-decoration: none;
-    margin: 5px 0;
-    padding-right: 30px;
     font-size: large;
 }
 
@@ -248,6 +253,70 @@ nav {
     color: blue;
   }
 
-  
+  .more {
+    background-image: url("{% static 'images/hotel.png' %}");
+   /* background-size: cover;
+    background-position: center;
+    height: 200px;  Adjust as needed 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+}
+
+.contactusheader{
+    min-height: 50px;
+}
+
+.contactusform h1 {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.contactusform h2 {
+	text-align: center;
+    margin-bottom: 20px;
+}
+
+.contactusform {
+    /*border-radius: 40px;*/
+	max-width: 500px;
+    margin: 30px auto;
+	padding: 20px;
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.contactusform input[type="text"], input[type="textarea"]{
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+
+.sec-container {
+    display: flex;
+    
+    align-items: center;
+    padding: 20px;
+}
+
+.cutxt{
+    width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+}
+
+.contactusbutton{
+    justify-content: space-around;
+    width: 30%;
+}
   
  

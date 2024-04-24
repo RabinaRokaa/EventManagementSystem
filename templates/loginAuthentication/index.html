@@ -10,6 +10,136 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+<style>
+    .image-container {
+        /*background-image: url("https://img.freepik.com/free-photo/bride-groom-celebrate-love-nature-generated-by-ai_188544-45296.jpg?t=st=1713945036~exp=1713948636~hmac=0c6671f1acdbb4b1a23f30c5c6e719e5f017fcd7d6e57104eebc787cff6cde37&w=1060");*/
+        background-image: url("static/images/index2.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 80vw;  
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center; 
+        border-radius:1px solid black;
+        box-shadow:2px solid black;
+    }
+    .card {
+        border-radius: 1px;
+        border: 1px solid white; /* Add border */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow */
+    }
+    
+    
+    .image-container img {
+        max-width: 100%;
+        height: 190px;
+        margin-top: 0;
+        border-radius:1px solid black;
+        box-shadow:1px solid black;
+    }
+
+    .btn-container{
+        margin-top:-285vh;
+    }
+    .btn-container h2{
+        margin-top:150vh;
+        color:white;
+    }
+
+    .image-container p {
+        color: white;
+        margin-top: 10px;
+    }
+    .cards{
+        display:flex;
+        justify-content:space-around;
+        margin-top: 100px;
+    }
+
+ 
+
+    .sec-container {
+        background-image: url("https://img.freepik.com/premium-vector/cute-background-with-clouds_363897-7983.jpg?w=360");
+        background-size: contain;
+        justify-content: center; /* Center the content horizontally */
+        align-items: center; /* Center the content vertically */
+        padding: 70px;
+        border-radius: 1px;
+        border: 1px solid white; /* Add border */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow */
+        
+    }
+    
+    .logo {
+        margin: 0;
+        
+    }
+    
+   
+    
+    .contactuscontent {
+        display:flex;
+        align-items: center;
+        gap:50px;
+       
+        
+        
+    }
+    
+    .contactusform {
+        width: 100%;
+        width:400px;
+        
+        
+    }
+    
+    /* Additional styles for form elements */
+    .contactusform h2 {
+        margin-bottom: 20px;
+    }
+    
+    .contactusform label {
+        display: block;
+        margin-bottom: 0px;
+        text-align:left;
+    }
+    
+    .contactusform input,
+    .contactusform textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .contactusform textarea {
+        resize: vertical; /* Allow vertical resizing of textarea */
+    }
+    
+    .contactusform button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .contactusform button:hover {
+        background-color: #0056b3;
+    }
+
+    .about{
+        display:flex;
+        margin:50px;
+    }
+
+    
+    
+    </style>
 <body>
 
     <!-- To display the messages, use the following tag -->
@@ -57,43 +187,99 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Image below Navbar -->
-        <img src="{% static 'images/image.jpg' %}" alt="Main Image">
+       
+        <div class="more">
+            <div class="image-container">
+                {% comment %} <img src="{% static 'images/image.jpg' %}" alt="Main Image"> {% endcomment %}
+                <div class="btn-container"> 
+                    <h2> "Transforming your vision into reality, one click at a time"</h2>
+                    <p> E V E R Y &nbsp E V E N T &nbsp S H O U L D &nbsp BE &nbsp P E R F E C T </p>
+                    {% comment %} <button type="submit" class="hi"><a href="/decorations">Decoration</a></button>
+                    <button type="submit" class="hi"><a href="/photographers">Photography</a></button> {% endcomment %}
+                </div>
+            </div>
+        </div>
+       <div class="cards">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{% static 'images/hotel.png' %}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec-container">
         
+        <div class="contactuscontent flex">
+            <div class="logo" style="margin-left:100px; flex-wrap: wrap;">
+                <img src="{% static 'images/contact.jpg' %}" alt="logo">
+            </div>
+            <form class="contactusform" method="post">
+                 {% csrf_token %}
+              <h2>Contact Us</h2>
+              <label for="username">Username</label><br>
+              <input type="text" id="username" name="username" placeholder="Name"><br>
+              <label for="email">Email</label><br>
+              <input type="text" id="email" name="email" placeholder="Email"><br>
+              <label for="message">Message</label><br>
+              <textarea class="cutxt" rows="4" name="message" placeholder="Enter your message here...">
+              </textarea><br>
+              <button class="confirm contactusbutton flex" type="submit" name="button">Submit</button>
+            </form>
+        </div>
+    </div>
+        
+      <div class="about">
         <!-- How we work section -->
         <div class="how-we-work">
             <img src="{% static 'images/iconn.png' %}" alt="Icon">
             <div>
                 <h2>How we work?</h2>
-                <p>"Our Event Management System operates through a streamlined process, empowering users to create, manage, and execute successful events effortlessly. Our user-centric approach ensures a seamless event management experience, providing you with the tools and support needed to organize successful events from start to finish. Join our platform today and elevate your event planning process!"</p>
+                <p>"Our Event Management System operates through a streamlined process empowering users to  manage and execute successful events effortlessly.
+                     Join our platform today and elevate your event planning process!"</p>
                 {% comment %} <button class="how_we_works">Learn more</button> {% endcomment %}
                 <a href="{% url 'about_us' %}" class="how_we_works">Learn more</a>
             </div>
-        </div>
+        </div> 
 
         <!-- Create Your Account section -->
         <div class="create-your-account">
             <img src="{% static 'images/icon.png' %}" alt="Icon">
             <div>
                 <h2>Create Your Account</h2>
-                <p>With our intuitive interface, you can easily create, manage, and customize events to suit your unique requirements. From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers unparalleled flexibility to cater to diverse event types.</p>
-                
-                <a href="{% url 'login' %}" class="your_account">Get Started</a>
+                <p>With our intuitive interface, you can easily create, manage, and customize events to suit your unique requirements. 
+                    From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers unparalleled flexibility to cater to diverse event types.</p>
+                <br>
+                    <a href="{% url 'login' %}" class="your_account">Get Started</a>
             </div>
         </div>
+    </div> 
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="copy">
             <p>Copyright © 2023
-                by Rabina Roka</p>
+                by Rabina Roka. All rights reserved.   LEGAL  |  PRIVACY POLICY  |  ACCESSIBILITY   |  TERMS OF USE  |  TRUSTe  YOUR PRIVACY CHOICES</p>
         </div>
-        <div class="company">
+        {% comment %} <div class="company">
             <p>Company</p>
             <a href="#">Contact Us</a>
             <a href="#">About us</a>
             <a href="#">FAQs</a>
-        </div>
+        </div> {% endcomment %}
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -107,9 +293,7 @@
                 }
             });
         });
-        
     </script>
-
     <!-- Bootstrap JavaScript dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

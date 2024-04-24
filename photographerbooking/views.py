@@ -1,17 +1,3 @@
-from django.shortcuts import render
-# Create your views here.
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import photographerbooking
-import json
-from django.core.serializers import serialize
-from django.shortcuts import render
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
-from django.shortcuts import render
-# Create your views here.
-from django.shortcuts import render, redirect, get_object_or_404
-from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
@@ -22,13 +8,11 @@ from reportlab.pdfgen import canvas
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from EventManagementSystem import settings
-
-from django.shortcuts import render, redirect, get_object_or_404
-
-from django.http import JsonResponse, HttpResponseServerError
+from .models import photographerbooking
+import json
 
 @csrf_exempt
-def book_event(request):
+def book_eventp(request):
     if request.method == 'POST':
         # Get data from the POST request
         try:
@@ -44,11 +28,17 @@ def book_event(request):
             return redirect('login')
             pass
    
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpResponseServerError
+
 @csrf_exempt
-def check_booking_availability(request):
+def check_booking_availabilityp(request):
     if request.method=="POST":
-        event_type = request.POST.get('event_type')
-        name = request.POST.get('name')
+        #event_type = request.POST.get('event_type')
+        username = request.POST.get('username')
         date_str = request.POST.get('date')
         #Venue_image = request.POST.get('Venue_image')
 
@@ -59,19 +49,28 @@ def check_booking_availability(request):
         date = date.date()
 
         print(date)
-        print(name,date_str,request.user.username)
+        print(username,date_str,request.user.username)
         # Check if there are any previous bookings
         previous_bookings = photographerbooking.objects.filter(
-            Event_Type=event_type,
-            Name=name,
-            EndDate__gt=date, 
+            #Event_Type=event_type,
+            username=username,
+            end_date__gt=date, 
         )
 
         if previous_bookings.exists():
             return JsonResponse({'available': False, 'message': 'Booking not available for the selected date.'})
         else:
             return JsonResponse({'available': True, 'message': 'Booking available for the selected date.'})
-
+    else:
+                # Handle GET requests here, maybe return a default response
+        return JsonResponse({'error': 'GET requests are not supported for this endpoint.'}, status=405)
+def delete_booking(request, id):
+    
+    bookings = get_object_or_404(photographerbooking, id=id)
+    if request.method == 'GET':
+        bookings.delete()
+        return redirect('/booking_list')  # Redirect to the booking list page after deletion
+    # return render(request, 'booking/deletebooking.html', {'bookings': bookings})
 import logging
 logger = logging.getLogger(__name__)
 @csrf_exempt
@@ -79,10 +78,10 @@ def booking_processp(request):
     if request.method=='POST':  
        try:
         data = json.loads(request.body.decode('utf-8'))  
-        Username = data.get('Username')
+        username = data.get('username')
         cost = data.get('cost')
         check_in = data.get('date')
-        Venue_image = request.FILES.get('Venue_image')
+        #Venue_image = request.FILES.get('Venue_image')
 
         check_out = data.get('end_date')
         print(check_in,check_out)
@@ -92,14 +91,14 @@ def booking_processp(request):
         # Create and save the booking object
         booking_obj = photographerbooking(
             User =request.user.username,
-            Username=Username,
-            Cost=int(cost),
-            Date=check_in,
+            username=username,
+            cost=int(cost),
+            date=check_in,
            
-            EndDate=check_out
+            end_date=check_out
         )
-        if Venue_image:  # Check if an image was uploaded
-            booking_obj.Venue_image = Venue_image # Associate the image with the venue
+        #if Venue_image:  # Check if an image was uploaded
+            #booking_obj.Venue_image = Venue_image # Associate the image with the venue
         
         booking_obj.save()
  # Construct a dictionary containing the data
@@ -108,11 +107,11 @@ def booking_processp(request):
             'FirstName': request.user.first_name,
             'LastName': request.user.last_name,
             'Email': request.user.email,            
-            'Username': Username,
-            'Cost': int(cost),
-            'Date': check_in,
+            'username': username,
+            'cost': int(cost),
+            'date': check_in,
             #'Venue_image': Venue_image,
-            'EndDate': check_out
+            'end_date': check_out
         }
 
         print("Booking data:", data)
@@ -179,3 +178,4 @@ def send_confirmation(user_email, data):
     )
     email.attach('booking_confirmation.pdf', pdf_content, 'application/pdf')
     email.send()
+
