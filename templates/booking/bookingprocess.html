@@ -309,6 +309,9 @@
         document.getElementById('eventDetails').appendChild(eventContainer);
  </script>
 <script>
+
+        let checkin=""
+        let checkout=""
             // Create booking details container
         const bookingDetailsContainer = document.createElement('div');
         bookingDetailsContainer.classList.add('booking-details-container');
@@ -334,11 +337,12 @@
         checkInLabel.style.fontWeight = '100'; 
         const checkInDate = document.createElement('span');
         checkInDate.textContent = formData.date.split("T")[0]; // Assuming formData.date contains check-in date
+        checkin=formData.date.split("T")[0];
         checkInDate.style.marginTop = '10px';
         bookingDetailsBox.appendChild(checkInLabel);
         bookingDetailsBox.appendChild(checkInDate);
         bookingDetailsBox.appendChild(breakline)
-
+        
         // Check-out date
         const checkOutLabel = document.createElement('h2');
         checkOutLabel.textContent = 'End Date ';
@@ -346,6 +350,7 @@
         checkOutLabel.style.fontWeight = '100'; 
         const checkOutDate = document.createElement('span');
         checkOutDate.textContent = formData.end_date.split("T")[0]; // Assuming formData.end_date contains check-out date
+        checkout=checkOutDate.textContent
         
         checkOutDate.style.marginTop = '10px';
         bookingDetailsBox.appendChild(checkOutLabel);
@@ -359,7 +364,6 @@
         // Append the booking details container to the event container (assuming eventContainer is already defined)
         eventContainer.appendChild(bookingDetailsContainer);
         document.getElementById('bookingDetails').appendChild(bookingDetailsContainer);
-
 </script>
 <script>
             // Create booking details container
@@ -380,7 +384,7 @@
 
 
         // Create heading element for booking details
-     
+         console.log("hello rabina",checkin,checkout)
 
         // Create sub-box for check-in and check-out
         const costDetailsBox = document.createElement('div');
@@ -391,12 +395,25 @@
         costInLabel.textContent = 'Total price ';
         costInLabel.style.fontWeight = '100'; 
         const costInDate = document.createElement('span');
+        var checkinDate = new Date(checkin);
+        var checkoutDate = new Date(checkout);
+        var timeDifference = checkoutDate.getTime() - checkinDate.getTime();
 
-        costInDate.textContent = `रू ${formData.cost}`; // Assuming formData.date contains cost-in date
+// Convert milliseconds to days
+var daysDifference = timeDifference / (1000 * 3600 * 24);
+        let totalcost=daysDifference*Number(formData.cost)
+        costInDate.textContent = `रू ${totalcost}`; // Assuming formData.date contains cost-in date
         costInDate.style.fontWeight="bold"
         costInDate.style.marginTop = '10px';
         costInDate.style.color = 'green';
         costDetailsBox.appendChild(costInLabel);
+        let costmsg = document.createElement("p")
+
+        if (daysDifference > 1){
+            costmsg.innerHTML = `Your cost per day is रू ${formData.cost} <br><br> Now, you have booked for ${daysDifference} days <br>so your total cost is रू ${totalcost}` 
+            costDetailsBox.appendChild(costmsg);
+        }
+      
         costDetailsBox.appendChild(costInDate);
 
         // Append the cost details box to the cost container

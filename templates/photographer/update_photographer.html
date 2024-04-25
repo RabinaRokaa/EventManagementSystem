@@ -42,7 +42,7 @@
     {% endif %}
     {% if image_urls %}
     <h3>Images:</h3>
-    <ul id="image-list" >
+    <ul id="image-list" style="display:flex;">
         {% for image in photographers.Photographer_image.all %}
         <p>{{ image.id }}</p>
             <li id="image-{{ image.id }}">

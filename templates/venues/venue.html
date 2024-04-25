@@ -20,7 +20,7 @@
     
     h2{
         
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         
     }
     
@@ -48,20 +48,128 @@
             padding: 0;
             overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
         }
-        /* Navbar styles */
-        nav {
-            background-color: rgba(0, 59, 149, 1);
-            padding: 30px; /* Increase padding to make navbar larger */
-            color: white;
-            text-align: center;
-        }
+/* Navbar styles */
+nav {
+    /* background-color: #003b95; */
+    padding: 20px; /* Increase padding to make navbar larger */
+    color:black;
+    text-align: center;
+    position: relative; /* Ensure proper positioning for absolute elements */
+    border-radius: 10px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
 
-        nav a {
-            text-decoration: none;
-            color: white;
-            margin: 0 15px;
-            font-weight: bold;
-        }
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: blue; /* Change to the desired color when hovering */
+}
+
+
+
+.service-item {
+    margin-bottom: 5px;
+}
+
+
+
+.service-item a:hover {
+    color: blue;
+}
+
+
+/* Navbar styles */
+nav {
+    transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    
+    padding: 30px; /* Increase padding to make navbar larger */
+    color: white;
+    text-align: center;
+    position: relative; /* Ensure proper positioning for absolute elements */
+    /* border: 1px black;
+    box-shadow: 2px 2px 4px 2px rgba(139, 69, 19, 0.5); */
+    
+    font-weight: normal;
+}
+
+nav button {
+    background-color: rgb(3, 10, 18);
+}
+
+nav a {
+    text-decoration: none;
+    /* color: rgb(110, 110, 108); */
+    color:black;
+    margin: 0 15px;
+    font-weight: normal;
+    
+}
+
+
+.nav a:after,
+.nav a:before {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 0px solid transparent;
+}
+
+.nav a:after {
+  width: 0%;
+  height: 80%;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.nav a:before {
+  width: 120%;
+  height: 0%;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transition: all 0.5s ease;
+}
+
+.nav a:hover::before {
+  height: 80%;
+}
+
+.nav a:hover::after {
+  width: 120%;
+}
+
+/* Dropdown content */
+.hover-content {
+    display: none;
+    position: absolute;
+    top: 85%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-left: 40px;
+}
+
+.hover-trigger:hover + .hover-content,
+.hover-content:hover {
+    display: block;
+}
+
+.service-item {
+    margin-bottom: 5px;
+}
+
+
+
+.service-item a:hover {
+    color: blue;
+}
+
 
         /* Header styles */
         header {
@@ -125,10 +233,9 @@
  
         }
         .form-row{
-            justify-content:space-around;
             gap:50px;
-            margin-left:30px;
         }
+
         .form-row>.col, .form-row>[class*=col-]{
             padding:0px;
         }
@@ -199,15 +306,15 @@
         .popup {
             position: fixed;
             top: 50%;
-            left: 50%;
+            left: 40%;
             transform: translate(-50%, -50%);
             background-color: white;
-            padding: 30px;
+            padding: 10px;
             border: 1px solid #ccc;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 9999; /* Ensure the pop-up is above other content */
             display: none; /* Initially hide the pop-up */
-            width: 430px; 
+            width: 300px; 
            
         }
 
@@ -394,49 +501,14 @@
     padding: 0.375rem 0.75rem; /* Adjust padding */
     border-left: 1px solid #ced4da; /* Add left border */
    }
-   nav {
-    background-color: #003b95;
-    padding: 30px; /* Increase padding to make navbar larger */
-    color: white;
-    text-align: center;
-    position: relative; /* Ensure proper positioning for absolute elements */
-}
 
-nav a {
-    text-decoration: none;
-    color: white;
-    margin: 0 15px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: #eef1f1a4; /* Change to the desired color when hovering */
-}
-
-/* Dropdown content */
-.hover-content {
-    display: none;
-    position: absolute;
-    left:550px;
-    top: calc(100% + 0px); /* Position below the "Services" link */
    
-    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
-    padding: 10px;
-}
+.logo_img {
+        height: auto;
+        width: 100px;
+        display: block;
 
-.service-item {
-    margin-bottom: 5px;
-}
-
-.service-item a {
-    text-decoration: none;
-    color: #397cf0;
-}
-
-.service-item a:hover {
-    color: blue;
-}
-        
+    } 
 </style>
 </head>
 <body>
@@ -455,27 +527,36 @@ nav a:hover {
     
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
-<nav>
-    <a href="/">Home</a>
+    <!-- After clicking on the home and other text, they follow the following URLs -->
+    <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; margin-bottom: -50px;">
+        <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
+            <img class="logo_img" src="{% static 'images/logoa.png' %}">
+            <div>
+                <a href="/">Home</a>
     
-    
-    <a href="#" class="hover-trigger">Services</a>
-    <div class="hover-content">
-      <div class="service-item">
-        <a href="/venue">Venues</a>
-      </div>
-      <div class="service-item">
-        <a href="/decorations">Decoration</a>
-      </div>
-      <div class="service-item">
-        <a href="/photographers">Photographer</a>
-      </div>
-    </div>
-    <a href="/about_us">About Us</a>
-    <a href="/contact">Contact</a>
-    <a href="/Register">Register</a>
-    <a href="/Login">LogIn</a>
-  </nav>
+                <a href="#" class="hover-trigger">Services</a>
+                <div class="hover-content">
+                    <div class="service-item">
+                        <a href="/venue">Venues</a>
+                    </div>
+                    <div class="service-item">
+                        <a href="/decorations">Decoration</a>
+                    </div>
+                    <div class="service-item">
+                        <a href="/photographers">Photographer</a>
+                    </div>
+                </div>
+                <a href="/about_us">About Us</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+
+
+        <div style="margin-bottom: -50px;">
+            <a href="/Register">Register</a>
+            <a href="/Login">LogIn</a>
+        </div>
+    </nav>
     <!-- Main Content -->
     <div class="main-content">
        <div class="whole"> 
@@ -541,7 +622,7 @@ nav a:hover {
                         </select> {% endcomment %}
                       </div>
                     </div>
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                         <div class="form-group col-12">
                             <label for="category">Category</label>
                             <select id="category" class="form-control" name="category">
@@ -552,7 +633,7 @@ nav a:hover {
                               {% endfor %}
                             </select>
                         </div>        
-                    </div>
+                    </div> -->
                     <div class="form-group">
                       
                         {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
@@ -757,7 +838,8 @@ nav a:hover {
             
                         if(data.venues.length==0){
                             console.log("data not found!")
-                            resultContainer.innerHTML=""
+                            // document.getElementById("result").innerHTML = "<p>No venues found</p>";
+                            resultContainer.innerHTML="<p>No venues found</p>"
                             return
                         }
                         // Clear previous search results
@@ -802,6 +884,7 @@ nav a:hover {
             }); 
             }
     </script>
+        
     
     <!--location instead of searched-->
     <script src="{% static 'js/script.js' %}"></script>

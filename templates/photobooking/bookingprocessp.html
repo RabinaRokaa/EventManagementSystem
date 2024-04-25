@@ -182,8 +182,8 @@
     </style>
  </head>
  <body>
-   {% comment %} <div id="eventDetails"></div> 
-   <div id="userDetails"></div>  {% endcomment %}
+    {% comment %} <div id="eventDetails"></div> 
+    <div id="userDetails"></div>  {% endcomment %}
    <p id='usernames' style="opacity:0">{{ username }}</p>
    {% comment %} <p id='firstname' style="opacity:0">{{ first_name }}</p>
    <p id='lastname' style="opacity:0">{{ last_name }}</p>
@@ -277,7 +277,6 @@
         eventDetails.innerHTML = `
         <p><strong> <h2>${formData.username}</h2></strong></p>
         <br>
-        <p ><strong></strong> ${formData.description} </p>
        
         <br>
             <div class="facility">   
@@ -462,39 +461,6 @@
         document.getElementById('userDetails').appendChild(userDetailsContainer);
 
  </script> 
- {% comment %} <script>
-    document.getElementById("btn").addEventListener('click',((e)=>{
-        const storedFormDataJson = localStorage.getItem('formData');
-        const formData = JSON.parse(storedFormDataJson);
-        console.log(formData.name)
-        // Create HTML elements to display the data
-        
-      
-        fetch('/bookingprocess/', {
-            method: 'POST',
-            body: JSON.stringify(formData) 
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        })
-        .then(data => {
-      
-            console.log(data.message); // Log the success message
-            window.alert("Booking successful")
-            // You can perform any other actions here upon successful booking
-            localStorage.removeItem('formData');
-
-        })
-        .catch(error => {
-            // Handle error response from the backend
-            console.error('There was a problem with the booking:', error.message);
-            // You can display an error message to the user or perform other actions
-        });
-    }))
-</script> {% endcomment %}
 <script>
     document.getElementById("btn").addEventListener('click', ((e) => {
       const storedFormDataJson = localStorage.getItem('formData');

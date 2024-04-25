@@ -79,8 +79,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: auto
 }
 
 .card {
@@ -166,3 +164,7 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+#image-list li {
+    display: inline-block; /* Display images horizontally */
+    margin-right: 10px; /* Adjust spacing between images */
+  }

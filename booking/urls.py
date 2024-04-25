@@ -14,6 +14,7 @@ urlpatterns = [
     # path('<booking_id>/update_booking', views.update_booking, name= "update_booking"),  #Path for the register page
     # path('<id>/delete_booking', views.delete_booking, name= "delete_booking"),  #Path for the register page  
     path('view_booking/<booking_id>', views.view_booking, name="view_booking"),
+    #path('view_recent/<booking_id>', views.view_recent, name="view_recent"),
     path('delete/<int:id>', views.delete_booking, name='delete_booking'),
     #path('delete_booking/<booking_id>/', views.delete_booking, name="delete_booking"),  
     path('view_booking/<booking_id>/', views.view_booking, name="view_booking"),

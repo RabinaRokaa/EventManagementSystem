@@ -71,7 +71,8 @@ nav a {
     /* color: rgb(110, 110, 108); */
     color:black;
     margin: 0 15px;
-    font-weight: bold;
+    font-weight: normal;
+    
 }
 
 
@@ -111,11 +112,11 @@ nav a {
 .hover-content {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 550px;
+    top: 67%;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
+    margin-left: 40px;
 }
 
 .hover-trigger:hover + .hover-content,

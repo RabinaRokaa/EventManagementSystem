@@ -298,7 +298,7 @@ from .models import booking
 
 def total_bookings_view(request):
     total_bookings = booking.total_bookings()
-    print("chor",total_bookings)
+    print("hi",total_bookings)
     return render(request, 'loginAuthentication/adminpanel.html', {'total_bookings': total_bookings})
 
 from django.http import HttpResponse
@@ -367,3 +367,10 @@ def send_confirmation(user_email, data):
     )
     email.attach('booking_confirmation.pdf', pdf_content, 'application/pdf')
     email.send()
+
+# def view_booking(request, id):
+#     # Fetch the booking with the given ID from the database(euta booking click garda tesko matra data display garna)
+#     bookings = get_object_or_404(booking, id=id)
+#     # Render the template with the booking data
+#     return render(request, 'booking/view_booking.html', {'bookings': bookings})
+

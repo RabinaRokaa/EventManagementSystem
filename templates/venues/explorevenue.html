@@ -49,22 +49,143 @@
             padding: 0;
             overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
         }
+/* Navbar styles */
+nav {
+    /* background-color: #003b95; */
+    padding: 20px; /* Increase padding to make navbar larger */
+    color:black;
+    text-align: center;
+    position: relative; /* Ensure proper positioning for absolute elements */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
 
-        
-        /* Navbar styles */
-        nav {
-            background-color: rgba(0, 59, 149, 1);
-            padding: 30px; /* Increase padding to make navbar larger */
-            color: white;
-            text-align: center;
-        }
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+}
 
-        nav a {
-            text-decoration: none;
-            color: white;
-            margin: 0 15px;
-            font-weight: bold;
-        }
+nav a:hover {
+    color: blue; /* Change to the desired color when hovering */
+}
+
+/* Dropdown content */
+.hover-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px); /* Position below the "Services" link */
+    background-color: #de5b6854;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.service-item {
+    margin-bottom: 5px;
+}
+
+
+
+.service-item a:hover {
+    color: blue;
+}
+
+
+/* Navbar styles */
+nav {
+    transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    
+    padding: 30px; /* Increase padding to make navbar larger */
+    color: white;
+    text-align: center;
+    position: relative; /* Ensure proper positioning for absolute elements */
+    /* border: 1px black;
+    box-shadow: 2px 2px 4px 2px rgba(139, 69, 19, 0.5); */
+    
+    font-weight: normal;
+}
+
+nav button {
+    background-color: rgb(3, 10, 18);
+}
+
+nav a {
+    text-decoration: none;
+    /* color: rgb(110, 110, 108); */
+    color:black;
+    margin: 0 15px;
+    font-weight: normal;
+    
+}
+
+
+.nav a:after,
+.nav a:before {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 0px solid transparent;
+}
+
+.nav a:after {
+  width: 0%;
+  height: 80%;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.nav a:before {
+  width: 120%;
+  height: 0%;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transition: all 0.5s ease;
+}
+
+.nav a:hover::before {
+  height: 80%;
+}
+
+.nav a:hover::after {
+  width: 120%;
+}
+
+/* Dropdown content */
+.hover-content {
+    display: none;
+    position: absolute;
+    top: 85%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-left: 40px;
+}
+
+.hover-trigger:hover + .hover-content,
+.hover-content:hover {
+    display: block;
+}
+
+.service-item {
+    margin-bottom: 5px;
+}
+
+
+
+.service-item a:hover {
+    color: blue;
+}
+
+
+.logo_img {
+        height: auto;
+        width: 100px;
+        display: block;
+
+    }
 
         /* Header styles */
         header {
@@ -75,7 +196,7 @@
         }
 
         .main-content{
-            align:center;
+            
             margin: 0;
             padding: 0;
             height: 100%;
@@ -340,7 +461,7 @@
           }
           
           .your_account {
-            background-color: blue; /* Adjust color as needed */
+            background-color: #007bff; /* Adjust color as needed */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -348,6 +469,8 @@
             cursor: pointer;
             text-decoration: none;
             text-align: center;
+            padding: 10px 20px;
+        
           }
           
           .your_account a {
@@ -427,6 +550,15 @@
             margin-top:5px;
 
         }
+        button{
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
         button:hover{
            color: white;
            background-color:blue;
@@ -450,13 +582,42 @@
     
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
-    <nav>
-        <a href="/">Home</a>
-        <a href="/viewvenue">View Venue</a>
-        <a href="/bookanevent">Book an venue</a>
-        <a href="/bokkinghistory">Booking History</a>
-        <a href="/feedback">Feedback</a>
-        <a href="/settings">Settings</a>
+    <!-- After clicking on the home and other text, they follow the following URLs -->
+    <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px;">
+        <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
+            <img class="logo_img" src="{% static 'images/logoa.png' %}">
+            <div>
+              {% if user.is_authenticated %}
+                <a href="/userdashboard">Home</a>
+              {% else %}
+                <a href="/">Home</a>
+              {% endif %}
+                <a href="#" class="hover-trigger">Services</a>
+                <div class="hover-content">
+                    <div class="service-item">
+                        <a href="/venue">Venues</a>
+                    </div>
+                    <div class="service-item">
+                        <a href="/decorations">Decoration</a>
+                    </div>
+                    <div class="service-item">
+                        <a href="/photographers">Photographer</a>
+                    </div>
+                </div>
+                <a href="/about_us">About Us</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+
+
+        <div style="margin-bottom: -50px;">
+          {% if user.is_authenticated %}
+            <!-- User is logged in, so don't show login and register links -->
+          {% else %}
+            <a href="/Register">Register</a>
+            <a href="/Login">LogIn</a>
+          {% endif %}
+        </div>
     </nav>
     <!-- Main Content -->
     <div class="main-content">
@@ -550,11 +711,11 @@
             <form id="booking-form" action="" method="POST">
               <input type="hidden" value="venue" >
                 <div class="input-div">
-                  <label form="id_check_incheck_in"> <h2>check_in</h2> </label>
+                  <label form="id_check_incheck_in"> <h3> Date</h3> </label>
                   <input type="datetime-local" id="id_check_in" name="check_in">
                 </div>  
                 <div class="input-div">
-                  <label form="id_check_out"> <h2> check_out <h2> </label>
+                  <label form="id_check_out"> <h3> End Date </h3> </label>
                   <input type="datetime-local" id="id_check_out" name="check_out">
                 </div>  
                 {% comment %} <div class="input-div">
@@ -726,5 +887,20 @@
         });
         
     </script> 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var trigger = document.querySelector('.hover-trigger');
+        var content = document.querySelector('.hover-content');
+        trigger.addEventListener('click', function() {
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    });
+    
+</script>
 </body>
 </html>

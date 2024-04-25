@@ -23,6 +23,8 @@ from django.views.decorators.http import require_GET
 from photographer.models import photographer  # Import your models
 from django.shortcuts import render
 from booking.models import booking
+from decbooking.models import decbooking
+from photographerbooking.models import photographerbooking
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -240,10 +242,14 @@ def userdashboard(request):
 
     recent_bookings = None
     user_bookings = None
+    decor_bookings = None
+    photographerbookings = None
 
     if request.user.is_authenticated:
-        recent_bookings = booking.objects.filter(User=request.user).order_by('-Date')[:5]  # Fetch recent bookings for the current user
+        recent_bookings = booking.objects.filter(User=request.user).order_by('-Date')[:3]  # Fetch recent bookings for the current user
         user_bookings = booking.objects.filter(User=request.user)  # Fetch all booking history for the current user
+        decor_bookings = decbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
+        photographerbookings = photographerbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
 
     context = {
         'venues': venues,
@@ -251,6 +257,9 @@ def userdashboard(request):
         'photographers': photographers,
         'recent_bookings': recent_bookings,
         'user_bookings': user_bookings,
+        'decor_bookings':decor_bookings,
+        'photographerbookings':photographerbookings,
+
     }
 
     return render(request, 'loginAuthentication/userdashboard.html', context)

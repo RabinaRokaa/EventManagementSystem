@@ -15,8 +15,8 @@
     
 </head>
 <style>
-/* Styling for recent bookings */
-.left {
+
+/* .left {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
@@ -27,12 +27,32 @@
 .left h1 {
   font-size: 24px;
   margin-bottom: 20px;
-}
+} */
 
 .booking-container {
   display: flex;
   /* flex-wrap: wrap; */
-  justify-content: center;
+   /* background-image: url("https://img.freepik.com/premium-vector/cute-background-with-clouds_363897-7983.jpg?w=360");*/
+    background-image: url("https://img.freepik.com/free-psd/view-lens-flare_23-2150682399.jpg?t=st=1714026553~exp=1714030153~hmac=ffe7fe4331a65192b4123b7ba4202354795f5d802a80ce01a4aee649f8dbd1ff&w=996");
+    background-size: contain;
+    align-items: center; /* Center the content vertically */
+    padding: 70px;
+    border-radius: 1px;
+    border: 1px solid white; /* Add border */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow */
+    width: 90vw;
+    flex-wrap: wrap;
+    gap:13rem;
+}
+
+.bookings{
+    border-radius: 1px;
+    border: 1px solid white; /* Add border */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow */
+   
+    background-size: cover;
+
+
 }
 
 .booking {
@@ -49,15 +69,13 @@
   margin-right: 10px; /* Add some space between headings */
 }
 
-.booking h2 {
-  font-size: 18px;
+.bookings h2 {
   margin-bottom: 5px;
 }
 
-.booking h3 {
-  font-size: 16px;
+.bookings h3 {
+  font-size: 13px;
   margin-bottom: 5px;
-  color: #888;
 }
 
 /* Style for the date input
@@ -85,15 +103,60 @@
 }
 
 .cards{
-    display:flex;
-    justify-content:space-around;
-    margin-top: 100px;
+    margin-top: 100px;;
+
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 50px; 
+    width: 95vw; 
+    margin-left: 1vw; 
+    margin-right: 3vw; 
+    flex-wrap: wrap;
+    gap:3rem;
+}
+.card:hover{
+    border: 2px solid rgb(209, 204, 204);
+        /* Add border */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+
 .card {
-    border-radius: 1px;
-    border: 1px solid white; /* Add border */
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow */
+        border-radius: 1px;
+        border: 1px solid whitesmoke;
+        /* Add border */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        /* Add box shadow */
+    }
+
+
+    .card img {
+        max-width: 100%;
+        height: 190px;
+        margin-top: 0;
+        border-radius: 1px solid black;
+        box-shadow: 1px solid black;
+    }
+    .card-text{
+        margin: 15px;
+        text-align: center;
+        font-size: 1.3rem;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .button{
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        padding: 3px 15px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    table {
+    border-collapse: collapse;
+    width: 60%;
 }
 
 
@@ -195,27 +258,31 @@
         <!--start of main section-->   
       <main> 
         <div id="home" class="tab-content active"> 
-          <h1 style="margin-top: 80px;"> Dashboard </h1>
-          <div class="date">
+          <div class="date" style="margin-top: 50px;">
             <input type="date">
           </div> 
-
-        
-          <div class="left">   
-            <h1>Your Recent Bookings</h1>
+          <div class="rec" style="margin: 50px;">   
+            <h2>Your Recent Bookings</h2>
+            <br>
             {% if recent_bookings %}
                 <div class="booking-container">
                     {% for booking in recent_bookings %}
-                        <div class="booking" style="display: inline;">
+                        <div class="bookings" style="display: inline;">
                             <h2>{{ booking.Name }}</h2>
                             <h3>{{ booking.Description }}</h3>
-                            <h3>{{ booking.Date }}</h3>
-                            <h3>{{ booking.Cost }}</h3>
+                            <h3>Address:</Address>{{ booking.Location }}</h3>
+                            <h3>Date:{{ booking.Date }}</h3>
+                            <h3>{{ booking.endDate }}</h3>
+                            <h3>Cost:{{ booking.Cost }}</h3>
+                            <!-- <button class="button">View</button>
+                            <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a> -->
                         </div>
                     {% endfor %}
                 </div>
             {% else %}
+                <img src="{% static 'images/no-data.png' %}" alt="No recent bookings image" style="height: auto; width:150px; margin-top: 20px;">
                 <p>No recent bookings</p>
+
             {% endif %}
 
 
@@ -223,86 +290,29 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{% static 'images/hotel.png' %}" alt="Card image cap">
                     <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <h3 class="card-text">Venues</h3>
                     </div>
                 </div>
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap">
                     <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <h3 class="card-text">Decorations</h3>
                     </div>
                 </div>
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap">
                     <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <h3 class="card-text">photographers</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{% static 'images/image.jpg' %}" alt="Card image cap">
+                    <div class="card-body">
+                      <h3 class="card-text">Hotels</h3>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="insights" style="padding:100px;">
-            <div class="Booking">
-                <span class="material-symbols-outlined">book_online</span>
-                <div class="middle">
-                     
-                </div>
-                <small class="text-muted">last 24 hours </small>
-            </div>
-            {% comment %} <div class="pending">
-                <span class="material-symbols-outlined">pending_actions</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total pending </h3>
-                        <h1> 10 </h1>
-                    </div>   
-                </div>
-                <small class="text-muted">last 24 hours </small>
-            </div>
-            <div class="approved">
-                <span class="material-symbols-outlined">select_check_box</span>
-                <div class="middle">
-                    <div class="left">
-                        <h3>Total approved </h3>
-                        <h1> 15 </h1>
-                    </div>   
-                </div>
-                <small class="text-muted">last 24 hours </small>
-            </div> {% endcomment %}
-            <div class = "cards">
-               <div class = "img">
-                <img src="{% static 'images/hotel.png' %}" alt="Icon">
-               </div>
-                
-               <div class = "title">
-                   <h3>Hotels </h3>
-               </div>
-                 </div>
-                 <div class = "cards">
-               <div class = "img1">
-                <img src="{% static 'images/banquet.png' %}" alt="Icon">
-               </div>
-               <div class = "title">
-                   <h3> Banquet Hall </h3>
-               </div>
-                  </div>
-                
-   
-             <div class = "cards">
-               <div class = "img2">
-                <img src="{% static 'images/conferenceroom.png' %}" alt="Icon">
-               </div>
-               <div class = "title">
-                   <h3>Conference room</h3>
-               </div>
-            {% comment %} <div id="venue-list-container"></div> {% endcomment %}
-           <div class="second">
-            <div class=" middle"> -->
-               
-                 <!-- </div>
-             </div>
-           </div>
-         </div> 
-        </div> -->
     </div> 
           
 
@@ -411,7 +421,7 @@
                             {% comment %} <span class="material-symbols-outlined">
                                 search
                                 </span> {% endcomment %}
-                                <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                                <input type="text" id="searching" name="searched" placeholder="search here" >
                                 <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
                         </div>
                         
@@ -462,7 +472,7 @@
                        
                 </div>
              </div>
-             <div id="decorations" class="tab-content active">
+        <div id="decorations" class="tab-content active">
                 <h2></h2>
                 <div class="main-content1">
                     <div class="whole"> 
@@ -554,6 +564,8 @@
                                   {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
                                   {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
                         </div>
+
+                       
                      
                      
                         <form class="search" method= "GET" action="{% url 'search_venue' %}">
@@ -565,17 +577,51 @@
                                 {% comment %} <span class="material-symbols-outlined">
                                     search
                                     </span> {% endcomment %}
-                                    <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                                    <input type="text" id="searching" name="searched" placeholder="search here.." >
                                     <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
                             </div>
-                            
-                            
                         </form>
                        </div> 
+
+                     <div class="dechistory" style="flex-wrap: wrap; margin:20px;">
+                        <h2> Your history of decoration booking </h2>
+                        <br>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> id </th>
+                                  
+                                    <th>Username</th>
+                                    <th>Decoration Name</th>
+                                    {% comment %} <th>Description</th>
+                                    <th>Decoration</th>
+                                    <th>Photography</th> {% endcomment %}
+                                    <th>Date</th>
+                                    <th>End Date</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in decor_bookings %}
+                                <tr> 
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{ booking.User }}
+                                    <td>{{ booking.name }}</td>
+                                    {% comment %} <td>{{ booking.Description }}</td>
+                                    <td>{{ booking.Decoration }}</td>
+                                    <td>{{ booking.Photography }}</td> {% endcomment %}
+                                    <td>{{ booking.date }}</td>
+                                    <td>{{ booking.end_date }}</td>
+                                    <td>{{ booking.cost }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                     </div>
                        <div id="result" class="venue-container"></div>
-                    
-             
-                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
+                       <br>
+                       
+                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:1vw;flex-wrap:wrap;'>
                          
                         {% for decoration in decorations %}
                         <div class=" middle">
@@ -725,13 +771,47 @@
                                         </span> {% endcomment %}
                                         <input type="text" id="searching" name="searched" placeholder="Enter Location" >
                                         <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;>
-                                </div>
-                                
-                                
+                                </div>   
                             </form>
                            </div> 
+                    
                            <div id="result" class="venue-container"></div>
-                         
+                           <div class="photohistory" style="margin:30px;">
+                            
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th> id </th>
+                                        <th>Username</th>
+                                        <th>photographer Name</th>
+                                        {% comment %} <th>Description</th>
+                                        <th>Decoration</th>
+                                        <th>Photography</th> {% endcomment %}
+                                        <th>Date</th>
+                                        <th>End Date</th>
+                                        <th>Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for booking in photographerbookings %}
+                                    <tr>
+                                        
+                                        <td>{{ booking.id }}</td>
+                                        <td>{{ booking.User }}
+                                        <td>{{ booking.username }}</td>
+                                        
+                                        {% comment %} <td>{{ booking.Description }}</td>
+                                        <td>{{ booking.Decoration }}</td>
+                                        <td>{{ booking.Photography }}</td> {% endcomment %}
+                                        <td>{{ booking.date }}</td>
+                                        <td>{{ booking.end_date }}</td>
+                                        <td>{{ booking.cost }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                          </div>
+                          <br>
                  
                          <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
                              
@@ -760,7 +840,7 @@
                                  </div> {% endcomment %}
                                  
                                  <div class="cost">
-                                     <h4> NPR:{{ venue.Photography_type }} </h4>
+                                     <h4> NPR:{{ venue.cost }} </h4>
                                  </div>    
                                  <div class="btn-container"> 
                                      <button type="submit" class="btn-primary"><a href="/{{ venue.id }}/explorevenue">Explore</a></button>
@@ -805,37 +885,6 @@
                         <td>{{ booking.Name }}</td>
                         <td>{{ booking.Location }}</td>
                         <td>{{ booking.Capacity }}</td>
-                        {% comment %} <td>{{ booking.Description }}</td>
-                        <td>{{ booking.Decoration }}</td>
-                        <td>{{ booking.Photography }}</td> {% endcomment %}
-                        <td>{{ booking.Date }}</td>
-                        <td>{{ booking.EndDate }}</td>
-                        <td>{{ booking.Cost }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th> id </th>
-                        <th>Type</th>
-                        <th>Username</th>
-                        <th>Decoration name</th>
-                        <th>Date</th>
-                        <th>End Date</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for booking in user_bookings %}
-                    <tr>
-                        
-                        <td>{{ booking.id }}</td>
-                        <td>{{ booking.Event_Type }}</td>
-                        <td>{{booking.User}}                       
-                        <td>{{ booking.Decoration }}</td>
                         {% comment %} <td>{{ booking.Description }}</td>
                         <td>{{ booking.Decoration }}</td>
                         <td>{{ booking.Photography }}</td> {% endcomment %}
