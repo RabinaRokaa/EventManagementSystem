@@ -155,6 +155,13 @@
         display: block;
 
     }
+
+    .card-body{
+        text-align: left;
+        
+        text-decoration: underline blue;
+        font-weight: bold;
+    }
 </style>
 
 <body>
@@ -225,25 +232,30 @@
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{% static 'images/hotel.png' %}" alt="Card image cap">
                 <div class="card-body">
-                    <p class="card-text">Venues</p>
+                    <a href="/venue">Venues</a>
+                    
+                    
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap">
                 <div class="card-body">
-                    <p class="card-text">Decorations</p>
+                    <a href="/decorations">Decoration</a>
+                    
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap">
                 <div class="card-body">
-                    <p class="card-text">Photographers</p>
+                    <a href="/photographers">Photographer</a>
+                   
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap">
+                <img class="card-img-top" src="{% static 'images/image.jpg' %}" alt="Card image cap">
                 <div class="card-body">
-                    <p class="card-text">Hotels</p>
+                    <a href="/venue">Hotels</a>
+                   
                 </div>
             </div>
         </div>

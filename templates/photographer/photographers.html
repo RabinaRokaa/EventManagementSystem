@@ -349,6 +349,18 @@ nav a {
             margin-top:27px;
         }
 
+        .filters a {
+                text-decoration: none;
+                color: black; /* Change to desired color */
+                font-size: 18px; /* Adjust font size as needed */
+                display: flex; /* Use Flexbox for link contents */
+                align-items: center; /* Align items vertically */
+            }
+            
+            .filters a:hover {
+                color: blue; /* Change to desired color on hover */
+            }
+
         .whole{
            
             align-items: center;
@@ -500,7 +512,7 @@ nav a {
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
     <!-- After clicking on the home and other text, they follow the following URLs -->
-    <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; margin-bottom: -50px;">
+    <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; ">
         <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
             <img class="logo_img" src="{% static 'images/logoa.png' %}">
             <div>
@@ -534,7 +546,10 @@ nav a {
         <div class="whole"> 
             <div class="filter-container">
                 <div class="filters">
-                    <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                    <!-- <a href="#" id="filterLink"><h2> Filters by:</h2></a> -->
+                    <a href="#" id="filterLink"><h2> Filters by </h2><span class="material-symbols-outlined" style="font-size:45px; ">
+                        arrow_drop_down
+                        </span></a>
                 </div>
                 <!-- Add the filter form here -->
                 
@@ -715,6 +730,7 @@ nav a {
                         console.log(data);
                         const resultContainer = document.getElementById("result");
                         resultContainer.innerHTML = ""; // Clear previous results
+                        
                         if (data.photographers){
 
                         
@@ -731,8 +747,8 @@ nav a {
 
                                         
                                         <div class="pictures">
-                                            ${photographer.photographer_images && photographer.photographer_images.length > 0 ?
-                                                photographer.Photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                            ${photographer.Photographer_image && photographer.Photographer_image.length > 0 ?
+                                                photographer.Photographer_image.map((image, index) => index === 0 ? // Corrected syntax here
                                                     `
                                                     <div class="img">
                                                         <img src="${image}" alt="${photographer.Username}" width="280" height="150">
@@ -883,7 +899,7 @@ nav a {
                                             ${photographer.Photographer_images && photographer.Photographer_images.length > 0 ?
                                                 photographer.Photographer_images.map((image, index) => index === 0 ?
                                                     `
-                                                    <div class="img" style="object-fit:cover;">
+                                                    <div class="img" style="object-fit:contain;">
                                                         <img src="${image}" alt="${photographer.Name}" width="280" height="150">
                                                     </div>
                                                     ` : '').join('') : ''}

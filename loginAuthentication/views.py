@@ -251,6 +251,24 @@ def userdashboard(request):
         decor_bookings = decbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
         photographerbookings = photographerbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
 
+        if request.method == 'POST':
+        # Get form data
+            username = request.POST['username']
+            email = request.POST['email']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+
+            # Update user information
+            user = request.user
+            user.username = username
+            user.email = email
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
+            # Return JavaScript alert response
+            return HttpResponse('<script>alert("Your profile has been updated successfully!"); window.location.href = "/userdashboard/";</script>')
+
     context = {
         'venues': venues,
         'decorations': decorations,
@@ -259,6 +277,7 @@ def userdashboard(request):
         'user_bookings': user_bookings,
         'decor_bookings':decor_bookings,
         'photographerbookings':photographerbookings,
+        'user': request.user,
 
     }
 
@@ -382,8 +401,6 @@ def booking_history(request):
 def about_us(request):
     return render(request, "loginAuthentication/Aboutus.html")
 
-def contact(request):
-    return render(request, "loginAuthentication/contact.html")
 
 def profile(request):
     profile = profiles.objects.get(user=request.user)

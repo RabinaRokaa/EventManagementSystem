@@ -46,10 +46,11 @@
         }
         /* Navbar styles */
         nav {
-            background-color: rgba(0, 59, 149, 1);
+            background-color: white;
             padding: 30px; /* Increase padding to make navbar larger */
-            color: white;
+            color: black;
             text-align: center;
+            
         }
 
         nav a {
@@ -153,7 +154,7 @@
         }
         .main-content img {
             max-width: 100%;
-            height: 50%;
+            object-fit: cover;
              margin-top: 0;/* Add margin-top to create space between navbar and image */
         }
       
@@ -223,9 +224,10 @@
     </nav>
     <!-- Main Content -->
     <div class="main-content">
+
         <!--to show image below the navbar-->
         {% comment %} <img src="{{ photographer.photographer_image.first.image.url }}" alt="Main Image" width="100%" height="250"> {% endcomment %}
-
+        <a href="/photographer_list">back</a>
         <h1>photographer</h1>
         <!-- Single photographer Details -->
         <div class="photographer-details">

@@ -232,7 +232,7 @@
                     <td>
                         <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
                         {% comment %} <button type="button" class="btn btn-info view-btn" data-toggle="modal" data-target="#bookingModal{{ booking.id }}">View</button> {% endcomment %}
-                        <a href="{% url 'booking:booking_update' booking.id %}" class="material-symbols-outlined" style="color:#4141a2">edit</span></a>
+                        <!-- <a href="{% url 'booking:booking_update' booking.id %}" class="material-symbols-outlined" style="color:#4141a2">edit</span></a> -->
                         <a href="{% url 'booking:delete_booking' booking.id %}" onclick="return confirmDelete();" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
                     </td>   
                 </tr>

@@ -609,7 +609,7 @@ nav a {
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" style="height: 90vh">
+        <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" style="height: 85vh">
 
         <!-- Single photographer Details -->
         <div id="photographer-details">
@@ -621,7 +621,7 @@ nav a {
             <!-- Loop through all images -->
             <div id="photographer_image">
                 <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >photographer</span></p>
-                {% for image in photographer.photographer_image.all %}
+                {% for image in photographer.Photographer_image.all %}
                     <img src="{{ image.image.url }}" alt="{{ photographer.Username }}" width="300" height="150" style="object-fit:cover;">
                 {% endfor %}
             </div>

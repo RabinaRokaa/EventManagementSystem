@@ -18,6 +18,7 @@ urlpatterns = [
     path('<id>/delete_decoration', views.delete_decoration, name= "delete_decoration"),  #Path for the register page
     path('api/filter_decorations', views.filter_decorations, name= "filter_decorations"),
     path('api/search_decoration', views.search_decoration, name= "search_decoration"),
+    path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
    
     #  path('<id>/view_decoration', views.view_decoration, name= "view_decoration"),
     #  path('decoration', views.decorations, name= "decorations"),

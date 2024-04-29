@@ -143,7 +143,6 @@ def search_photographer(request):
     # Search through Name, Location, and Cost fields
     photographers = photographer.objects.filter(
         Q(Username__icontains=searched) | 
-        Q(Photography_type__icontains=searched) | 
         Q(Cost__icontains=searched)
     ).prefetch_related('Photographer_image')
 
@@ -153,7 +152,6 @@ def search_photographer(request):
         Photographer_data = {
             'id': photo.id,
             'Name': photo.Username,
-            'Type': photo.Photography_type,
             'Cost': photo.Cost,
             # Retrieve paths of associated images
             'Photographer_images': [image.image.url for image in photo.Photographer_image.all()]
@@ -191,5 +189,5 @@ def filter_photographers(request):
         'Photographer_images': [image.image.url for image in photographer.Photographer_image.all()],
         'id': photographer.id
     } for photographer in photographers]
-
+ 
     return JsonResponse({'photographers': data})

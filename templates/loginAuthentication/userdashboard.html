@@ -159,6 +159,102 @@
     width: 60%;
 }
 
+/* .both{
+    display: flex;
+    gap:100px;
+    margin-top: 20px;
+
+}
+
+.left{
+    border-radius:10px;
+    border:1px solid rgb(16, 15, 15);
+    width: auto;
+     padding: 10%;
+    /*padding-right: 25%; 
+    height: auto;
+
+}
+
+.rght{
+    border-radius:10px;
+    border:1px solid rgb(20, 20, 20);
+    width: auto;
+    height: auto;
+    
+} */
+    /* padding: 10%;
+    /* padding-right: 25%; 
+    */
+
+
+
+
+
+
+/* start: Global */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Mukta', sans-serif;
+    background-color: #f5f5f5;
+}
+.container {
+    max-width: 991px;
+    margin: 0 auto;
+    padding: 50px 10px;
+} */
+
+.editprofile {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: grid;
+      grid-gap: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"], 
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+
+
 
   
 </style>
@@ -260,8 +356,54 @@
         <div id="home" class="tab-content active"> 
           <div class="date" style="margin-top: 50px;">
             <input type="date">
-          </div> 
-          <div class="rec" style="margin: 50px;">   
+          </div>
+          
+         <div class="both">
+          <div class="left">  
+            <h2>Your Recent Bookings</h2>
+            <br>
+            {% if recent_bookings %}
+                <div class="booking-containers">
+                        <div class="recent" style="display: inline;">
+                            <table class="recentbook" style="margin-bottom:1000px;">
+                                    <thead>
+                                        <tr>
+                                            <th> id </th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Date</th>
+                                            
+                                            <th>Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in recent_bookings %}
+                                        <tr> 
+                                            <td>{{ booking.id }}</td>
+                                            <td>{{ booking.Name }}
+                                            <td>{{ booking.Location }}</td>
+                                            
+                                            <td>{{ booking.Date }}</td>
+                                            <td>{{ booking.Cost }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                        </div>
+                </div>
+            {% else %}
+                <img src="{% static 'images/no-data.png' %}" alt="No recent bookings image" style="height: auto; width:150px; margin-top: 20px;">
+                <p>No recent bookings</p>
+
+            {% endif %}
+            
+          </div>
+          <div class="rght">
+            
+          </div>
+         </div>
+          <!--
+          <div class="left" style="margin: 50px;">   
             <h2>Your Recent Bookings</h2>
             <br>
             {% if recent_bookings %}
@@ -274,8 +416,8 @@
                             <h3>Date:{{ booking.Date }}</h3>
                             <h3>{{ booking.endDate }}</h3>
                             <h3>Cost:{{ booking.Cost }}</h3>
-                            <!-- <button class="button">View</button>
-                            <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a> -->
+                             <button class="button">View</button>
+                            <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a> 
                         </div>
                     {% endfor %}
                 </div>
@@ -284,6 +426,7 @@
                 <p>No recent bookings</p>
 
             {% endif %}
+            -->
 
 
             <div class="cards">
@@ -313,7 +456,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+   
           
 
  
@@ -421,7 +564,7 @@
                             {% comment %} <span class="material-symbols-outlined">
                                 search
                                 </span> {% endcomment %}
-                                <input type="text" id="searching" name="searched" placeholder="search here" >
+                                <input type="search" id="searching" name="searched" placeholder="search here" >
                                 <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
                         </div>
                         
@@ -663,199 +806,182 @@
                            
                     </div>
                  </div>
-
-      
         <div id="photographers" class="tab-content active">
-                    <!-- <h2>Venues Content</h2> -->
-                    <div class="main-content1">
-                        <div class="whole"> 
-                            <div class="filter-container">
-                                <!-- <div class="filters">
-                                    <a href="#" id="filterLink"><h2> Filters by:</h2></a>
-                                </div> -->
-                                <!-- Add the filter form here -->
-                                
-                                    <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
-                                        <div class="form-row">
-                                            <div class="form-group col-12">
-                                                <div class="input-group">
-                                                    <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
-                                                    <span class="input-group-append">
-                                                        <div class="input-group-text bg-transparent">
-                                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                                        </div>
-                                                    </span>
-                                                </div>
-                                            </div>        
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-12">
-                                                <div class="input-group">
-                                                    <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
-                                                    <span class="input-group-append">
-                                                        <div class="input-group-text bg-transparent">
-                                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                                        </div>
-                                                    </span>
-                                                </div>
-                                            </div>        
-                                        </div>
-                                       
-                                        <div class="form-row">
-                                          <div class="form-group col-md-2 col-lg-2">
-                                            <label for="viewCountMin">Minimum cost</label>
-                                            <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
-                                          </div>
-                                          <div class="form-group col-md-2 col-lg-2">
-                                            <label for="viewCountMax">Maximum cost</label>
-                                            <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
-                                          </div>
-                                          {% comment %} <div class="form-group col-md-2 col-lg-2">
-                                            <label for="publishDateMin">Available date</label>
-                                            <input type="date" class="form-control" id="publishDateMin" name="date_min">
-                                          </div>
-                                          <div class="form-group col-md-2 col-lg-2">
-                                            <label for="publishDateMax">Publish date maximum</label>
-                                            <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                                          </div> {% endcomment %}
-                                          <div class="form-group col-md-4">
-                                            {% comment %} <label for="category">Category</label>
+                <h2></h2>
+                <div class="main-content1">
+                    <div class="whole"> 
+                        <div class="filter-container">
+                            <!-- <div class="filters">
+                                <a href="#" id="filterLink"><h2> Filters by:</h2></a>
+                            </div> -->
+                            <!-- Add the filter form here -->
+                            
+                                <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <div class="input-group">
+                                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Venue Name.." />
+                                                <span class="input-group-append">
+                                                    <div class="input-group-text bg-transparent">
+                                                        {% comment %} <i class="fa fa-search"></i> {% endcomment %}
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>        
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <div class="input-group">
+                                                <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
+                                                <span class="input-group-append">
+                                                    <div class="input-group-text bg-transparent">
+                                                       
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>        
+                                    </div>
+                                   
+                                    <div class="form-row">
+                                      <div class="form-group col-md-2 col-lg-2">
+                                        <label for="viewCountMin">Minimum cost</label>
+                                        <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                                      </div>
+                                      <div class="form-group col-md-2 col-lg-2">
+                                        <label for="viewCountMax">Maximum cost</label>
+                                        <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        {% comment %} <label for="category">Category</label>
+                                        <select id="category" class="form-control" name="category">
+                                          <option selected>Choose...</option>
+                                          {% for cat in categories %}
+                                          
+                                          <option value="{{ cat }}">{{ cat }}</option>
+                                          {% endfor %}
+                                        </select> {% endcomment %}
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <label for="category">Category</label>
                                             <select id="category" class="form-control" name="category">
                                               <option selected>Choose...</option>
                                               {% for cat in categories %}
                                               
                                               <option value="{{ cat }}">{{ cat }}</option>
                                               {% endfor %}
-                                            </select> {% endcomment %}
-                                          </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-12">
-                                                <label for="category">Category</label>
-                                                <select id="category" class="form-control" name="category">
-                                                  <option selected>Choose...</option>
-                                                  {% for cat in categories %}
-                                                  
-                                                  <option value="{{ cat }}">{{ cat }}</option>
-                                                  {% endfor %}
-                                                </select>
-                                            </div>        
-                                        </div>
-                                        <div class="form-group">
-                                          
-                                            {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
-                                            <label class="form-check-label" for="reviewed">
-                                              Reviewed
-                                            </label> {% endcomment %}
-                                            <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
-                                          
-                                        </div> 
-                                        </div>
-                                        
-                                      </form>
-                                         <div class="overlay" id="overlay"></div>
-                                      {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
-                                      {% comment %} <div id="result" class="filter-container"></div>  {% endcomment %}
-                            </div>
-                         
-                         
-                         
-                            <form class="search" method= "GET" action="{% url 'search_venue' %}">
-                                {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
-                                <div class="search-container">
-                                    {% comment %} <div class="filters">
-                                        <a href="/filterform"><h1> Filters </h1></a>
-                                    </div>  {% endcomment %}
-                                    {% comment %} <span class="material-symbols-outlined">
-                                        search
-                                        </span> {% endcomment %}
-                                        <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                                        <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;>
-                                </div>   
-                            </form>
-                           </div> 
-                    
-                           <div id="result" class="venue-container"></div>
-                           <div class="photohistory" style="margin:30px;">
-                            
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th> id </th>
-                                        <th>Username</th>
-                                        <th>photographer Name</th>
-                                        {% comment %} <th>Description</th>
-                                        <th>Decoration</th>
-                                        <th>Photography</th> {% endcomment %}
-                                        <th>Date</th>
-                                        <th>End Date</th>
-                                        <th>Cost</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for booking in photographerbookings %}
-                                    <tr>
-                                        
-                                        <td>{{ booking.id }}</td>
-                                        <td>{{ booking.User }}
-                                        <td>{{ booking.username }}</td>
-                                        
-                                        {% comment %} <td>{{ booking.Description }}</td>
-                                        <td>{{ booking.Decoration }}</td>
-                                        <td>{{ booking.Photography }}</td> {% endcomment %}
-                                        <td>{{ booking.date }}</td>
-                                        <td>{{ booking.end_date }}</td>
-                                        <td>{{ booking.cost }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                          </div>
-                          <br>
-                 
-                         <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
-                             
-                         {% for photographer in photographers %}
-                          <div class=" middle">
-                            <div class = "car">
-                             <div class="name">
-                              <h2>{{photographer.Username}} </h2>
-                             </div>
-                             <div class="pictures"> 
-                                 {% if photographer.Photographer_image.all %}   
-                                 <div class="img"> 
-                                     <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover" >
-                                 </div>
-                             {% endif %}
-                             </div>
-                             
-                              {% comment %} <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}
-                              {% comment %} <img src="{% static 'media/' %}{{ venue.Venue_image }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}      
-                              
-                             <div class = "title">
-                                 <h3> {{ venue.Phone_Number }} </h3>
-                                 
-                                 {% comment %} <div class="desc">
-                                  <p>{{ venue.Email }}</p>
-                                 </div> {% endcomment %}
-                                 
-                                 <div class="cost">
-                                     <h4> NPR:{{ venue.cost }} </h4>
-                                 </div>    
-                                 <div class="btn-container"> 
-                                     <button type="submit" class="btn-primary"><a href="/{{ venue.id }}/explorevenue">Explore</a></button>
-                                     
-                                 </div> 
-                                 
-                                 
-                             </div>
-                           </div>
-                          </div>
-                         {% endfor %}
-                               
+                                            </select>
+                                        </div>        
+                                    </div>
+                                    <div class="form-group">
+                                        <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
+                                      
+                                    </div> 
+                                    </div>
+                                    
+                                  </form>
+                                     <div class="overlay" id="overlay"></div>
                         </div>
+
+                       
+                     
+                     
+                        <form class="search" method= "GET" action="{% url 'search_venue' %}">
+                            {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
+                            <div class="search-container">
+                                {% comment %} <div class="filters">
+                                    <a href="/filterform"><h1> Filters </h1></a>
+                                </div>  {% endcomment %}
+                                {% comment %} <span class="material-symbols-outlined">
+                                    search
+                                    </span> {% endcomment %}
+                                    <input type="text" id="searching" name="searched" placeholder="search here.." >
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
+                            </div>
+                        </form>
+                       </div> 
+
+                     <div class="dechistory" style="flex-wrap: wrap; margin:20px;">
+                        <h2> Your history of decoration booking </h2>
+                        <br>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> id </th>
+                                  
+                                    <th>Username</th>
+                                    <th>Decoration Name</th>
+                                    {% comment %} <th>Description</th>
+                                    <th>Decoration</th>
+                                    <th>Photography</th> {% endcomment %}
+                                    <th>Date</th>
+                                    <th>End Date</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in decor_bookings %}
+                                <tr> 
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{ booking.User }}
+                                    <td>{{ booking.name }}</td>
+                                    {% comment %} <td>{{ booking.Description }}</td>
+                                    <td>{{ booking.Decoration }}</td>
+                                    <td>{{ booking.Photography }}</td> {% endcomment %}
+                                    <td>{{ booking.date }}</td>
+                                    <td>{{ booking.end_date }}</td>
+                                    <td>{{ booking.cost }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                      </div>
-        </div> 
+                       <div id="result" class="venue-container"></div>
+                       <br>
+                       
+                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:1vw;flex-wrap:wrap;'>
+                         
+                        {% for photographer in photographers %}
+                        <div class=" middle">
+                          <div class = "car">
+                           <div class="name">
+                            <h2>{{photographer.Username}} </h2>
+                           </div>
+                           <div class="pictures"> 
+                           {% if photographer.Photographer_image.all %}   
+                               <div class="img"> 
+                                   <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Username }}" style="width:280px;height:150px;object-fit:cover" >
+                               </div>
+                           {% endif %}
+                           </div>    
+                            
+                           <div class = "title">
+                               <h3> {{ decoration.Type }} </h3>
+                               
+                               <div class="desc">
+                                <p>{{ photographer.Description }}</p>
+                               </div> 
+                               
+                               <div class="cost">
+                                   <h4> NPR:{{ photographer.Cost }} </h4>
+                               </div>    
+                               <div class="btn-container"> 
+                                   <button type="submit" class="btn-primary"><a href="/{{ photographer.id }}/explorephotographer">Explore</a></button>
+                                   
+                               </div> 
+                               
+                               
+                           </div>
+                         </div>
+                        </div>
+                       {% endfor %}
+                           
+                    </div>
+                 </div>
+
+      
+        
         <div id="bookings" class="tab-content active" style="margin-top:100px;">
             <h1>Booking History</h1>
             <table>
@@ -897,56 +1023,31 @@
             </table>
         </div>  
         <div id="settings" class="tab-content active">
-            <h2>Edit profile</h2>
-            <form>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                  </div>
+                <div class="editprofile">
+                  <h2>Edit Profile</h2>
+                  <form method="post">
+                    {% csrf_token %}
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="{{ user.username }}" required>
+              
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+              
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+              
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+              
+                    <button type="submit">Save Changes</button>
+                  </form>
                 </div>
-                <div class="form-group">
-                  <label for="inputAddress">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-                <div class="form-group">
-                  <label for="inputAddress2">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                      <option selected>Choose...</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                      Check me out
-                    </label>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
-              </form>
+              
         </div>  
         
       </main>
+     
+    </div>   
         
          <div class="right">
             <div class="top">

@@ -528,7 +528,7 @@ nav a {
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
     <!-- After clicking on the home and other text, they follow the following URLs -->
-    <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; margin-bottom: -50px;">
+    <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px;">
         <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
             <img class="logo_img" src="{% static 'images/logoa.png' %}">
             <div>
@@ -839,7 +839,7 @@ nav a {
                         if(data.venues.length==0){
                             console.log("data not found!")
                             // document.getElementById("result").innerHTML = "<p>No venues found</p>";
-                            resultContainer.innerHTML="<p>No venues found</p>"
+                            resultContainer.innerHTML="<p style='color: red; font-weight: bold; margin:20px;'>No venues found</p>"
                             return
                         }
                         // Clear previous search results
