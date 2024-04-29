@@ -1,0 +1,149 @@
+<!-- venue_list.html -->
+
+{% load static %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Feedback list</title>
+     <link rel="stylesheet" href="{% static 'css/userlist.css' %}">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Font Awesome icons (free version)-->
+     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+ </head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #727272;
+            text-align:left;
+            
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+  <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logoa.png' %}">
+        </div>
+        <div class="profile">
+            <button id="btn">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+            <div class="info">
+                <small class="text-muted">Admin </small>
+            </div>
+        </div>
+  </div>  
+  <div class="container">
+
+    <aside>
+        <div class="top">    
+           
+            <!--using google close icon-->
+            {% comment %} <div class="menu-bar">
+               <button class="menu-btn" onclick="toggleSidebar()">
+                   <span class="material-symbols-outlined">menu</span>
+               </button>
+               <button class="close-btn" onclick="closeSidebar()">
+                   <span class="material-symbols-outlined">close</span>
+               </button>
+            </div> {% endcomment %}
+            <!--sidebar/sibling of the top-->
+            <div class="sidebar">
+                <a href="/adminpanel">
+                    <span class="material-symbols-outlined">grid_view</span>
+                    <h3> Home </h3>    
+                </a>         
+                <!--background-color:#707df32e-->
+                <a href="/user_list" class="sidebar-link" style="color:blue;" onclick="loadUserList()" style="color:blue">
+                    <span class="material-symbols-outlined">group</span>
+                    <h3 style="color:blue"> Users </h3>    
+                </a>         
+                <a href="/venue_list" onclick="loadVenueList()">
+                    <span class="material-symbols-outlined">roofing</span>
+                    <h3> Venues </h3>    
+                </a>         
+                <a href="/decoration_list">
+                    <span class="material-symbols-outlined">celebration</span>
+                    <h3> Decorations </h3>    
+                </a>         
+                <a href="/photographer_list">
+                    <span class="material-symbols-outlined"> person_book</span>
+                    <h3> photographer </h3>    
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined">book_online</span>
+                    <h3> Booking </h3>    
+                </a>         
+                <a href="/feedback">
+                    <span class="material-symbols-outlined">mail_outline</span>
+                    <h3> Feedback </h3> 
+                    <span class="message-count">7</span>  
+                </a>         
+                <a href="a">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3> Logout </h3> 
+                    
+                </a>         
+            </div>       
+        </div>
+    </aside>
+    
+    <main>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+      <h1>Users List</h1>
+     
+    <div class="tab">
+
+      <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+<!--                 
+                <th>Actions</th> -->
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in feedbacks %}
+                <tr>
+                    <!--come from views.py-->
+                    <td>{{ feedback.id }}</td>
+                    <td>{{ feedback.username }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.message }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </main>
+    </div>    
+   </div>
+   <!-- <script>
+    function confirmDelete(username) {
+        return confirm("Are you sure you want to delete this user" + username + "?");
+    }
+   </script> -->
+   <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
