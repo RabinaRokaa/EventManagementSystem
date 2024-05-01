@@ -830,6 +830,7 @@ nav a {
                 formData.forEach((value, key) => {
                 formDataJson[key] = value;
                 });
+                formDataJson['type'] = 'decoration'
 
 // Store JSON data in local storage
  localStorage.setItem('formData', JSON.stringify(formDataJson));

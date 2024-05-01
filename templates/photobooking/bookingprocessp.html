@@ -527,7 +527,7 @@ var daysDifference = timeDifference / (1000 * 3600 * 24);
       // Create HTML elements to display the data
 
       document.getElementById("loading_image").style.visibility="visible"
-      fetch('/bookingprocess/', {
+      fetch('/bookingprocessp/', {
           method: 'POST',
           body: JSON.stringify(formData)
         })
@@ -559,8 +559,6 @@ var daysDifference = timeDifference / (1000 * 3600 * 24);
           // You can display an error message to the user or perform other actions
         });
     }))
-
-
     document.getElementById("close_btn").addEventListener('click',(()=>{
         window.location.href='/userdashboard';
     }))

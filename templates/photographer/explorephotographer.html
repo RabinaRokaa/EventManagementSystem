@@ -646,15 +646,7 @@ nav a {
                 
             </div>
            
-            {% comment %} <div id="photographer-location">
-                <h3>{{ photographer.Location }}</h3>
-            </div>
-            <div id="photographer-capacity">
-                <h4>Capacity: {{ photographer.Capacity }}</h4>
-            </div>
-            <div id="event_type">
-                <h4>Category: {{ photographer.Type }}</h4>
-            </div> {% endcomment %}
+            
             
             
             <div id="photographer-cost" style="color:green; margin-top:15px;">
@@ -831,6 +823,7 @@ nav a {
                 formData.forEach((value, key) => {
                 formDataJson[key] = value;
                 });
+                formDataJson['type'] = 'photographer'
 
 // Store JSON data in local storage
  localStorage.setItem('formData', JSON.stringify(formDataJson));

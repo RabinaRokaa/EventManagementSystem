@@ -37,7 +37,7 @@ from django.http import JsonResponse, HttpResponseServerError
 @csrf_exempt
 def check_booking_availabilityp(request):
     if request.method=="POST":
-        #event_type = request.POST.get('event_type')
+        
         username = request.POST.get('username')
         date_str = request.POST.get('date')
         #Venue_image = request.POST.get('Venue_image')

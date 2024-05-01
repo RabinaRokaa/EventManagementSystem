@@ -156,10 +156,10 @@
 
     table {
     border-collapse: collapse;
-    width: 60%;
+   
 }
 
-/* .both{
+.both{
     display: flex;
     gap:100px;
     margin-top: 20px;
@@ -169,44 +169,27 @@
 .left{
     border-radius:10px;
     border:1px solid rgb(16, 15, 15);
-    width: auto;
+    /* width: auto;
      padding: 10%;
-    /*padding-right: 25%; 
-    height: auto;
+    padding-right: 25%; 
+    height: auto; */
 
 }
 
 .rght{
     border-radius:10px;
     border:1px solid rgb(20, 20, 20);
-    width: auto;
-    height: auto;
+    /* width: auto;
+    height: auto; */
     
-} */
-    /* padding: 10%;
-    /* padding-right: 25%; 
-    */
-
-
-
-
-
-
-/* start: Global */
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
-body {
-    font-family: 'Mukta', sans-serif;
-    background-color: #f5f5f5;
-}
-.container {
-    max-width: 991px;
-    margin: 0 auto;
-    padding: 50px 10px;
-} */
+
+
+
+
+
+
+
 
 .editprofile {
       max-width: 500px;
@@ -253,32 +236,13 @@ body {
       background-color: #0056b3;
     }
 
-
-
-
-  
 </style>
-<body>
-        <!-- To display the messages, use the following tag -->
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <!-- For displaying as bold -->
-            <strong>Message:</strong> {{ message }}
-            <!-- For closing the message tag -->
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %} 
+<body id="body">
+ 
 
     <!-- After successfully login -->
     
-        <div>
-            <h3 id='greetings'></h3>
-            <br>
-            
-           
-        </div>
+       
 
         <!-- After clicking on the home and other text, they follow the following URLs -->
         
@@ -336,26 +300,37 @@ body {
                             </span>
                         <h3> Settings </h3> 
                     </a>          
-                    <a href="/LogOut" class="sideba-link">
+                    <a href="/LogOut" class="sidebar-link">
                         <span class="material-symbols-outlined">logout</span>
-                        <h3> Logout </h3> 
-                        
+                        <h3> Logout </h3>  
                     </a>  
-                    {% comment %} <div class="close" onclick="toggleSidebar()">
-                       <span class="material-symbols-outlined">close</span>
-                   </div> {% endcomment %}
 
                 </div>
            
             </div>
         </aside>
-        
 
-        <!--start of main section-->   
-      <main> 
-        <div id="home" class="tab-content active"> 
-          <div class="date" style="margin-top: 50px;">
+        <!--start of main section style="height: 100vh;overflow-y: auto;"-->   
+      <main > 
+        <div id="home" class="tab-content active" style="margin-top: 50px;"> 
+          <!-- <div class="date" style="margin-top: 50px;">
             <input type="date">
+           </div>  -->
+                   <!-- To display the messages, use the following tag -->
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <!-- For displaying as bold -->
+                <strong>Message:</strong> {{ message }}
+                <!-- For closing the message tag -->
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          {% endfor %} 
+          
+          <div>
+            <h3 id='greetings'></h3>
+            <br>
           </div>
           
          <div class="both">
@@ -363,9 +338,9 @@ body {
             <h2>Your Recent Bookings</h2>
             <br>
             {% if recent_bookings %}
-                <div class="booking-containers">
-                        <div class="recent" style="display: inline;">
-                            <table class="recentbook" style="margin-bottom:1000px;">
+                <div class="b">
+                        <div class="rec" style="display: block; border:2px solid orange">
+                            <table style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th> id </th>
@@ -1159,18 +1134,26 @@ body {
 </script>
  <script>
         // Retrieve JSON data from local storage
-    const storedFormDataJson = localStorage.getItem('formData');
+    storedFormDataJson = localStorage.getItem('formData');
     console.log(storedFormDataJson)
     console.log("hello")
-    if (storedFormDataJson) {
+
+    let formData = JSON.parse(storedFormDataJson);
+
+    if (storedFormDataJson && formData.type == 'venue') {
+    
         // Prompt the user before redirecting
         const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
     
         // Check if the user confirmed
         if (confirmation) {
             // Redirect to the booking process page with the date parameter
-            const formData = JSON.parse(storedFormDataJson);
-            window.location.href = `/bookingprocess/?date=${formData.date}`;
+            
+            if (formData.type == "venue"){
+                document.getElementById("body").style.display='none'
+                window.location.href = `/bookingprocess/?date=${formData.date}`;
+            }
+            
         } else {
             // User cancelled the action, do nothing or provide alternative action
             console.log('User cancelled redirection.');
@@ -1178,7 +1161,43 @@ body {
     }
     
     // Parse JSON data back to object
-    const storedFormData = JSON.parse(storedFormDataJson);
+    storedFormData = JSON.parse(storedFormDataJson);
+
+    // Now you can access individual fields as properties of storedFormData
+    console.log(storedFormData.event_type);
+    console.log(storedFormData.name);
+    console.log(storedFormData.location);
+    // and so on...
+
+ </script>
+ <script>
+        // Retrieve JSON data from local storage
+    storedFormDataJson = localStorage.getItem('formData');
+    console.log(storedFormDataJson)
+    console.log("hello")
+    formData = JSON.parse(storedFormDataJson);
+
+    if (storedFormDataJson && formData.type == 'decoration') {
+
+        // Prompt the user before redirecting
+        const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
+    
+        // Check if the user confirmed
+        if (confirmation) {
+            // Redirect to the booking process page with the date parameter
+            if (formData.type == "decoration"){
+                document.getElementById("body").style.display='none'
+                window.location.href = `/bookingprocessd/?date=${formData.date}`;
+            }
+            
+        } else {
+            // User cancelled the action, do nothing or provide alternative action
+            console.log('User cancelled redirection.');
+        }
+    }
+    
+    // Parse JSON data back to object
+    storedFormData = JSON.parse(storedFormDataJson);
 
     // Now you can access individual fields as properties of storedFormData
     console.log(storedFormData.event_type);
@@ -1192,7 +1211,10 @@ body {
     const storedFormDataJson = localStorage.getItem('formData');
     console.log(storedFormDataJson)
     console.log("hello")
-    if (storedFormDataJson) {
+    formData = JSON.parse(storedFormDataJson);
+
+    if (storedFormDataJson && formData.type == 'photographer') {
+        document.getElementById("body").style.display='none'
         // Prompt the user before redirecting
         const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
     
@@ -1200,7 +1222,9 @@ body {
         if (confirmation) {
             // Redirect to the booking process page with the date parameter
             const formData = JSON.parse(storedFormDataJson);
-            window.location.href = `/bookingprocessd/?date=${formData.date}`;
+            if (formData.type == "photographer"){
+                window.location.href = `/bookingprocessp/?date=${formData.date}`;
+            }
         } else {
             // User cancelled the action, do nothing or provide alternative action
             console.log('User cancelled redirection.');
@@ -1208,37 +1232,7 @@ body {
     }
     
     // Parse JSON data back to object
-    const storedFormData = JSON.parse(storedFormDataJson);
-
-    // Now you can access individual fields as properties of storedFormData
-    console.log(storedFormData.event_type);
-    console.log(storedFormData.name);
-    console.log(storedFormData.location);
-    // and so on...
-
- </script>
- <script>
-        // Retrieve JSON data from local storage
-    const storedFormDataJson = localStorage.getItem('formData');
-    console.log(storedFormDataJson)
-    console.log("hello")
-    if (storedFormDataJson) {
-        // Prompt the user before redirecting
-        const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
     
-        // Check if the user confirmed
-        if (confirmation) {
-            // Redirect to the booking process page with the date parameter
-            const formData = JSON.parse(storedFormDataJson);
-            window.location.href = `/bookingprocessp/?date=${formData.date}`;
-        } else {
-            // User cancelled the action, do nothing or provide alternative action
-            console.log('User cancelled redirection.');
-        }
-    }
-    
-    // Parse JSON data back to object
-    const storedFormData = JSON.parse(storedFormDataJson);
 
     // Now you can access individual fields as properties of storedFormData
     console.log(storedFormData.event_type);

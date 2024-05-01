@@ -47,7 +47,6 @@ body{
 
 table {
     border-collapse: collapse;
-    width: 60%;
 }
 
 th, td {
@@ -168,7 +167,7 @@ aside .sidebar{
     
     display: flex;
     flex-direction: column;
-    height: 86vh;
+    /* height: 86vh; */
     position: relative;
     top: 4.65rem;
 }
@@ -195,12 +194,12 @@ aside .sidebar a span{
 
 }
 
-aside .sidebar a:last-child {
+/* aside .sidebar a:last-child {
     position: absolute;
     bottom: 2rem;
     width: 100%;
 
-}
+} */
  /* Add styles for the active link */
 .sidebar-link.active {
     background-color: #ddd;
@@ -375,14 +374,7 @@ aside .sidebar .message-count{
     background-image: url("https://img.freepik.com/free-psd/view-lens-flare_23-2150682399.jpg?t=st=1714026553~exp=1714030153~hmac=ffe7fe4331a65192b4123b7ba4202354795f5d802a80ce01a4aee649f8dbd1ff&w=996");
 }
 
-/* .left{
-    background: white;
-    padding: 100%;
-    border-radius: var(--card-border-radius);
-    margin-top: 1rem;
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
-} */
+
 
 /*main content*/
 main{
