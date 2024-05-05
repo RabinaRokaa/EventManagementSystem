@@ -24,6 +24,7 @@ urlpatterns = [
     path('bookingprocess/', views.booking_process, name='bookingprocess'),
     path('send_confirmation/', views.send_confirmation, name='send_confirmation'),
     path('generate_pdf/', views.generate_pdf, name='generate_pdf'),
+    path('payment/', views.payment, name='payment'),
     path('check-booking-availability/', views.check_booking_availability, name='check_booking_availability'),   
 ]
 

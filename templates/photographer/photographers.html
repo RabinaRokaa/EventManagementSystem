@@ -730,11 +730,7 @@ nav a {
                         console.log(data);
                         const resultContainer = document.getElementById("result");
                         resultContainer.innerHTML = ""; // Clear previous results
-                        
-                        if (data.photographers){
-
-                        
-                        data.photographers.forEach(photographer => {
+                        data.photographer.forEach(photographer => {
                             console.log(photographer)
                             const photographerHTML = `
                               
@@ -747,8 +743,8 @@ nav a {
 
                                         
                                         <div class="pictures">
-                                            ${photographer.Photographer_image && photographer.Photographer_image.length > 0 ?
-                                                photographer.Photographer_image.map((image, index) => index === 0 ? // Corrected syntax here
+                                            ${photographer.Photographer_images && photographer.Photographer_images.length > 0 ?
+                                                photographer.Photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
                                                     `
                                                     <div class="img">
                                                         <img src="${image}" alt="${photographer.Username}" width="280" height="150">
@@ -760,12 +756,12 @@ nav a {
                                             <div class="desc" style = 'position:relative'>
                                                 <p>${photographer.Description}</p>
                                             </div>
-                                            <div class ="cost" style = 'position:absolute; bottom: 0px; left: 60%;  '>
+                                            <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
                                                 <h4>NPR: ${photographer.Cost}</h4>
                                             </div>
                                             
-                                            <div class="btn-container" style = 'position:absolute; bottom: 0px; '> 
-                                                <button type="submit" class="btn-primary"><a href="/${ photographer.id }/explorephotographer">Explore</a></button>
+                                            <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
+                                                <button type="submit" class="btn-primary"><a href="/${ photographer.id }/exploredecoration">Explore</a></button>
                                             </div>
                                         </div>
                                         
@@ -773,8 +769,6 @@ nav a {
                                   </div> `;
                             resultContainer.innerHTML += photographerHTML;
                         });
-                        console.log('hello')
-                    }
                     })
                     .catch(error => console.error('Error:', error));
             } else {

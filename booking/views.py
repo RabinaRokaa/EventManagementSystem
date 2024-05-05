@@ -374,3 +374,5 @@ def send_confirmation(user_email, data):
 #     # Render the template with the booking data
 #     return render(request, 'booking/view_booking.html', {'bookings': bookings})
 
+def payment(request):
+    return render(request,"booking/payment.html")

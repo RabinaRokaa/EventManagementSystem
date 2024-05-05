@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     #used only by checking app
     
     'profiles',
-    'feedback'
+    'feedback',
+    'chat'
 ]
 
 MIDDLEWARE = [

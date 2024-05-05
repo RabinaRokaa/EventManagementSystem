@@ -237,71 +237,75 @@
     }
 
 </style>
+
+<nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; ">
+      <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
+        <img class="logo_img" src="{% static 'images/logoa.png' %}">
+       </div> 
+        <div style="margin-bottom: -50px;">
+            <a href="/">Home</a>
+
+            <a href="#" class="hover-trigger">Services</a>
+            <div class="hover-content">
+                <div class="service-item">
+                    <a href="/venue">Venues</a>
+                </div>
+                <div class="service-item">
+                    <a href="/decorations">Decoration</a>
+                </div>
+                <div class="service-item">
+                    <a href="/photographers">Photographer</a>
+                </div>
+            </div>
+            <a href="/about_us">About Us</a>
+            <a href="/contact">Contact</a>
+        </div>
+
+
+    <div style="margin-bottom: -50px;" >
+        <a href="/Register">Register</a>
+        <a href="/Login">LogIn</a>
+    </div>
+</nav>
 <body id="body">
- 
-
-    <!-- After successfully login -->
-    
-       
-
-        <!-- After clicking on the home and other text, they follow the following URLs -->
-        
-        
-    
-   
     <div class="container">
         <aside>
             <div class="top">
-                <!--for logo-->
-   
-                <div>
-                    <img src="./images/Venuevistaln.png">
-                    <h2>Venue <span class="danger">Vistaln</span></h2>
-                </div>
-                <hr>
-               
-                <!--using google close icon-->
-                <div class="menu-bar">
-                   <button class="menu-btn" onclick="toggleSidebar()">
-                       <span class="material-symbols-outlined">menu</span>
-                   </button>
-                   <button class="close-btn" onclick="closeSidebar()">
-                       <span class="material-symbols-outlined">close</span>
-                   </button>
-               </div>
                
                 <!--sidebar/sibling of the top-->
                 <div style="margin-bottom:-10px;" class="sidebar" id="sidebar" >
                    <!--background-color:#707df32e;-->
                     <a href="/userdashboard" data-tab="home" class="sidebar-link" style="color:blue;">
-                        <span class="material-symbols-outlined">grid_view</span>
+                        <span class="material-symbols-outlined" style="color:#aec6cf">grid_view</span>
                         <h3> Home </h3>    
                     </a>         
                             
                     <a href="#" data-tab="venues" class="sidebar-link"  onclick="handleSidebarLinkClick(this)">
-                        <span class="material-symbols-outlined">roofing</span>
+                        <span class="material-symbols-outlined" style="color:yellowgreen">roofing</span>
                         <h3> Venues </h3>    
                     </a>         
                     <a href="#" data-tab="decorations" class="sidebar-link" >
-                        <span class="material-symbols-outlined">celebration</span>
+                        <span class="material-symbols-outlined" style="color:red">celebration</span>
                         <h3> Decorations </h3>    
                     </a>         
                     <a href="#" data-tab="photographers" class="sidebar-link">
-                        <span class="material-symbols-outlined"> person_book</span>
+                        <span class="material-symbols-outlined" style="color:goldenrod" class="material-symbols-outlined">
+                            local_see
+                            </span>
                         <h3> photographer </h3>    
                     </a>         
                     <a href="#"data-tab="bookings" class="sidebar-link">
-                        <span class="material-symbols-outlined">book_online</span>
+                        <span class="material-symbols-outlined" style="color:rgb(2, 111, 237)">book_online</span>
                         <h3> Booking History</h3>    
                     </a>         
                     <a href="{% url 'profile' %}" data-tab="settings" class="sidebar-link">
-                        <span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined" >
                             settings
                             </span>
                         <h3> Settings </h3> 
                     </a>          
                     <a href="/LogOut" class="sidebar-link">
-                        <span class="material-symbols-outlined">logout</span>
+                        <span class="material-symbols-outlined" style="color:black">logout</span>
                         <h3> Logout </h3>  
                     </a>  
 
@@ -431,10 +435,6 @@
                 </div>
             </div>
         </div>
-   
-          
-
- 
         <div id="venues" class="tab-content active">
             <!-- <h2>Venues Content</h2> -->
             <div class="main-content1">
@@ -686,7 +686,7 @@
                        
                      
                      
-                        <form class="search" method= "GET" action="{% url 'search_venue' %}">
+                        <form class="search" method= "GET" action="{% url 'search_decoration' %}">
                             {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
                             <div class="search-container">
                                 {% comment %} <div class="filters">
@@ -695,9 +695,12 @@
                                 {% comment %} <span class="material-symbols-outlined">
                                     search
                                     </span> {% endcomment %}
-                                    <input type="text" id="searching" name="searched" placeholder="search here.." >
-                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
+                                    <input type="search" id="searching" name="searched" placeholder="Enter Location" >
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
                             </div>
+                            
+                            {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search decorations.." aria-label="Search" name ="searched"> {% endcomment %}
+                            {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
                         </form>
                        </div> 
 
@@ -862,7 +865,7 @@
                        
                      
                      
-                        <form class="search" method= "GET" action="{% url 'search_venue' %}">
+                        <form class="search" method= "GET" >
                             {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
                             <div class="search-container">
                                 {% comment %} <div class="filters">
@@ -871,9 +874,12 @@
                                 {% comment %} <span class="material-symbols-outlined">
                                     search
                                     </span> {% endcomment %}
-                                    <input type="text" id="searching" name="searched" placeholder="search here.." >
-                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
+                                    <input type="search" id="searching" name="searched" placeholder="Enter Location" >
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
                             </div>
+                            
+                            {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
+                            {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
                         </form>
                        </div> 
 
@@ -1024,7 +1030,7 @@
      
     </div>   
         
-         <div class="right">
+         <!-- <div class="right">
             <div class="top">
                <div class="logo">
                    <img src="{% static 'images/logoa.png' %}">
@@ -1033,7 +1039,7 @@
                     <span class="material-symbols-outlined">account_circle</span>
                 </button>                
             </div>
-         </div> 
+         </div>  -->
     </div>   
 
 <script>

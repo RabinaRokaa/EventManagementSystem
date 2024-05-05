@@ -30,7 +30,8 @@ urlpatterns = [
     path('', include('photographer.urls')),  #url for the decorationapp
     path('', include('photographerbooking.urls')),  #url for the photographer booking app
     path('', include('decbooking.urls')),  #url for the decoration booking app
-    path('', include('feedback.urls'))  #url for the decoration booking app
+    path('', include('feedback.urls')),  #url for the decoration booking app
+    path('', include('chat.urls'))  #url for the decoration booking app
     
 ]
 if settings.DEBUG:
