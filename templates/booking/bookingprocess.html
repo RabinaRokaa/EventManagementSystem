@@ -396,21 +396,6 @@ nav a {
         {% endif %}
     </div>
 </nav>
-
-<div class="breadcrumbs" >
-    <ul>
-        <li><a href="{% url 'adminpanel' %}">Home</a></li><span class="material-symbols-outlined">
-            navigate_next
-            </span>
-        <li><a href="{% url 'venues' %}">Venues</a></li><span class="material-symbols-outlined">
-            navigate_next
-            </span>
-        <li><a href="{% url '/{{ venue.id }}/explorevenue' %}">Venues</a></li><span class="material-symbols-outlined">
-            navigate_next
-            </span>
-        <li>Booking process</li>
-    </ul>
-</div>
  <body>
    {% comment %} <div id="eventDetails"></div> 
    <div id="userDetails"></div>  {% endcomment %}

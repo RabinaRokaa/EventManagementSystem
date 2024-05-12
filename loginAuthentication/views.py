@@ -23,6 +23,7 @@ from django.views.decorators.http import require_GET
 from photographer.models import photographer  # Import your models
 from django.shortcuts import render
 from booking.models import booking
+from chat.models import Message
 from decbooking.models import decbooking
 from photographerbooking.models import photographerbooking
 from django.contrib.auth.decorators import login_required
@@ -239,25 +240,26 @@ def userdashboard(request):
     venues = Venues.objects.all()  # Fetch venues from the database
     decorations = decoration.objects.all()
     photographers = photographer.objects.all()
+    messages = Message.objects.all()
 
     recent_bookings = None
     user_bookings = None
     decor_bookings = None
     photographerbookings = None
+    # messages = None
 
     if request.user.is_authenticated:
         recent_bookings = booking.objects.filter(User=request.user).order_by('-Date')[:3]  # Fetch recent bookings for the current user
         user_bookings = booking.objects.filter(User=request.user)  # Fetch all booking history for the current user
         decor_bookings = decbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
         photographerbookings = photographerbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
-
+        messages = Message.objects.filter(Q(user=request.user) | Q(messaged_to=request.user))
         if request.method == 'POST':
         # Get form data
             username = request.POST['username']
             email = request.POST['email']
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
-
             # Update user information
             user = request.user
             user.username = username
@@ -278,7 +280,7 @@ def userdashboard(request):
         'decor_bookings':decor_bookings,
         'photographerbookings':photographerbookings,
         'user': request.user,
-
+        'messages': messages,
     }
 
     return render(request, 'loginAuthentication/userdashboard.html', context)
@@ -304,8 +306,6 @@ def delete_user(request, id):
         user.delete()
         return redirect('/user_list')  # Redirect to venue list page after delete
     # return render(request, 'loginAuthentication/delete_user.html', {'myuser': user})
-
-
 
  
 # pass id attribute from urls

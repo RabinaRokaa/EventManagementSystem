@@ -63,10 +63,14 @@
                          <span class="material-symbols-outlined">book_online</span>
                          <h3> Booking </h3>    
                      </a>         
-                     <a href="a">
+                     <a href="/feedback">
                          <span class="material-symbols-outlined">mail_outline</span>
                          <h3> Feedback </h3> 
-                         <span class="message-count">7</span>  
+                         <span class="message-count"></span>  
+                     </a>         
+                     <a href="/chat">
+                         <span class="material-symbols-outlined"> message </span>
+                         <h3> chat </h3>  
                      </a>         
                      <a href="/LogOut">
                          <span class="material-symbols-outlined">logout</span>
@@ -421,5 +425,42 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        // Retrieve JSON data from local storage
+    storedFormDataJson = localStorage.getItem('formData');
+    console.log(storedFormDataJson)
+    console.log("hello")
+    formData = JSON.parse(storedFormDataJson);
+
+    if (storedFormDataJson && formData.type == 'decoration') {
+
+        // Prompt the user before redirecting
+        const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
+    
+        // Check if the user confirmed
+        if (confirmation) {
+            // Redirect to the booking process page with the date parameter
+            if (formData.type == "decoration"){
+                document.getElementById("body").style.display='none'
+                window.location.href = `/bookingprocessd/?date=${formData.date}`;
+            }
+            
+        } else {
+            // User cancelled the action, do nothing or provide alternative action
+            console.log('User cancelled redirection.');
+        }
+    }
+    
+    // Parse JSON data back to object
+    storedFormData = JSON.parse(storedFormDataJson);
+
+    // Now you can access individual fields as properties of storedFormData
+    console.log(storedFormData.event_type);
+    console.log(storedFormData.name);
+    console.log(storedFormData.location);
+    // and so on...
+
+ </script>
+
 </body>
 </html>  {% endcomment %}

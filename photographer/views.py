@@ -142,24 +142,25 @@ def search_photographer(request):
     
     # Search through Name, Location, and Cost fields
     photographers = photographer.objects.filter(
-        Q(Username__icontains=searched) | 
+        Q(Username__icontains=searched) |  
         Q(Cost__icontains=searched)
     ).prefetch_related('Photographer_image')
 
-    # Serialize Photographer data including the paths of multiple images
-    Photographers_data = []
+    # Serialize decoration data including the paths of multiple images
+    photographers_data = []
     for photo in photographers:
-        Photographer_data = {
+        photographer_data = {
             'id': photo.id,
             'Name': photo.Username,
+            'Description': photo.Description,
             'Cost': photo.Cost,
             # Retrieve paths of associated images
-            'Photographer_images': [image.image.url for image in photo.Photographer_image.all()]
+            'photographer_images': [image.image.url for image in photo.Photographer_image.all()]
         }
-        Photographers_data.append(Photographer_data)
+        photographers_data.append(photographer_data)
 
-    # Return JSON response
-    return JsonResponse({'Photographer': Photographers_data})
+    # Return JSON response containing all decoration data
+    return JsonResponse({'photographers': photographers_data})
 
 
 from django.http import JsonResponse

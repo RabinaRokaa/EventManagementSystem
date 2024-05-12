@@ -713,7 +713,7 @@ nav a {
             <a href="#">FAQs</a>
         </div>
 
-
+        
 
     </footer>
    
@@ -730,38 +730,39 @@ nav a {
                         console.log(data);
                         const resultContainer = document.getElementById("result");
                         resultContainer.innerHTML = ""; // Clear previous results
-                        data.photographer.forEach(photographer => {
+                        data.photographers.forEach(photographer => {
                             console.log(photographer)
                             const photographerHTML = `
                               
                                   <div class="middle" style = 'display: flex;'>
                                     <div class="car">
                                         <div class="name">
-                                            <h2>${photographer.Username}</h2>
+                                            <h2>${photographer.Name}</h2>
                                         </div>
 
 
                                         
                                         <div class="pictures">
-                                            ${photographer.Photographer_images && photographer.Photographer_images.length > 0 ?
-                                                photographer.Photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                            ${photographer.photographer_images && photographer.photographer_images.length > 0 ?
+                                                photographer.photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
                                                     `
                                                     <div class="img">
-                                                        <img src="${image}" alt="${photographer.Username}" width="280" height="150">
+                                                        <img src="${image}" alt="${photographer.Name}" width="280" height="150">
                                                     </div>
                                                     ` : '').join('') : ''}
                                         </div>
                                         <div class="title">
-                                            
                                             <div class="desc" style = 'position:relative'>
                                                 <p>${photographer.Description}</p>
-                                            </div>
+                                            </div> 
+                                            
+                                            
                                             <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
                                                 <h4>NPR: ${photographer.Cost}</h4>
                                             </div>
                                             
                                             <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
-                                                <button type="submit" class="btn-primary"><a href="/${ photographer.id }/exploredecoration">Explore</a></button>
+                                                <button type="submit" class="btn-primary"><a href="/${ photographer.id }/explorephotographer">Explore</a></button>
                                             </div>
                                         </div>
                                         

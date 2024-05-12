@@ -55,9 +55,12 @@ th, td {
     padding: 8px;
 }
 
-th {
-    background-color: #f2f2f2;
-}
+/* th {
+    background-color:#003b95;
+} */
+/* tr {
+    background-color:#003b95;
+} */
 
 .adddecoration a:hover {
      /* Change 'red' to whatever color you desire */
@@ -99,7 +102,7 @@ h2{
 
 h3{
     
-    font-size: 0.87rem;
+    font-size: 1.1rem;
 }
 
 h4{
@@ -175,8 +178,9 @@ aside .sidebar{
 }
 
 aside h3{
-    font-weight: 500;
+    font-weight: 300;
     color: #000;
+    font-size: 1.1rem;
 }
 
 aside .sidebar a{
@@ -188,6 +192,7 @@ aside .sidebar a{
     position: relative;
     height: 3.7rem;
     transition: all 300ms ease;
+    font-size: 1.1rem;
 }
 
 aside .sidebar a span{
@@ -351,7 +356,7 @@ aside .sidebar .message-count{
     right:100px;
 }
 
-#venues {
+/* #venues {
     margin-top: 100px;
 }
 
@@ -370,21 +375,16 @@ aside .sidebar .message-count{
 
 #settings{
     margin-top: 100px;
-}
+} */
 
 .booking-container{
     background-image: url("https://img.freepik.com/free-psd/view-lens-flare_23-2150682399.jpg?t=st=1714026553~exp=1714030153~hmac=ffe7fe4331a65192b4123b7ba4202354795f5d802a80ce01a4aee649f8dbd1ff&w=996");
 }
 
-
-
-/*main content*/
-main{
-    margin-top: 2rem;
-
+main {
+    margin-top: 0px;
+    
 }
-
-
 
 main .h1{
    margin-top: 20px;
@@ -394,7 +394,7 @@ main .date{
     display: inline-block;
     background: var(--color-light);
     border-radius: var(--border-radius-1);
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     padding: 0.5rem 1.6rem;
 }
 
@@ -563,7 +563,7 @@ border-left: 1px solid #ced4da; /* Add left border */
 
 .search-container {
     display: flex;
-    margin-left: 30%; 
+    margin-left: 5%; 
     
 }
 
@@ -659,6 +659,7 @@ nav a {
     color:black;
     margin: 0 15px;
     font-weight: normal;
+    font-size: 1.1rem;
     
 }
 

@@ -28,6 +28,60 @@
   font-size: 24px;
   margin-bottom: 20px;
 } */
+.chat-container {
+        width: 300px;
+        margin: 50px auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .chat-messages {
+        height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        background-color: #fff;
+    }
+    .message {
+        background-color: #e6e6e6;
+        padding: 8px 12px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .message {
+    background-color: #e6e6e6;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Add this line */
+}
+
+    .message.sent {
+        background-color: #d9f1ff;
+        text-align: right;
+    }
+    .input-container {
+        padding: 10px;
+        background-color: #fff;
+        border-top: 1px solid #ccc;
+    }
+    .input-container input[type="text"] {
+        width: calc(100% - 70px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        outline: none;
+    }
+    .input-container button {
+        width: 60px;
+        padding: 8px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 20px;
+        cursor: pointer;
+        outline: none;
+    }
 
 .booking-container {
   display: flex;
@@ -98,7 +152,7 @@
 
 .search-container {
     display: flex;
-    margin-left: 30%; 
+    margin-left: 5%; 
     
 }
 
@@ -159,6 +213,11 @@
    
 }
 
+   thead{
+    color: white;
+    background-color: #003b95;
+   }
+
 .both{
     display: flex;
     gap:100px;
@@ -186,6 +245,14 @@
 
 
 
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+
+}
+
 
 
 
@@ -201,8 +268,8 @@
     }
 
     h2 {
-      text-align: center;
       margin-bottom: 20px;
+      font-weight: 500;
     }
 
     form {
@@ -236,13 +303,30 @@
       background-color: #0056b3;
     }
 
+    .first {
+        background-image: url(/static/images/image.jpg);
+        background-size: cover;
+        background-position: center;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+
+    .first p {
+        color: #fff;
+    }
+
 </style>
 
-<nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; ">
+<nav style="display: flex; align-items: center;  margin-top: -50px; ">
       <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
         <img class="logo_img" src="{% static 'images/logoa.png' %}">
        </div> 
-        <div style="margin-bottom: -50px;">
+        <div style="margin-bottom: -50px; margin-left: 80px;">
             <a href="/">Home</a>
 
             <a href="#" class="hover-trigger">Services</a>
@@ -253,9 +337,6 @@
                 <div class="service-item">
                     <a href="/decorations">Decoration</a>
                 </div>
-                <div class="service-item">
-                    <a href="/photographers">Photographer</a>
-                </div>
             </div>
             <a href="/about_us">About Us</a>
             <a href="/contact">Contact</a>
@@ -263,8 +344,8 @@
 
 
     <div style="margin-bottom: -50px;" >
-        <a href="/Register">Register</a>
-        <a href="/Login">LogIn</a>
+        <a href="/decorations">Decoration</a>
+        <a href="/photographers">Photographer</a>
     </div>
 </nav>
 <body id="body">
@@ -293,29 +374,41 @@
                             local_see
                             </span>
                         <h3> photographer </h3>    
-                    </a>         
+                    </a>     
+                    <a href="#" data-tab="chat" class="sidebar-link">
+                        <span class="material-symbols-outlined" style="color:orangered;" >
+                            message
+                            </span>
+                        <h3> Messages </h3> 
+                    </a>     
                     <a href="#"data-tab="bookings" class="sidebar-link">
                         <span class="material-symbols-outlined" style="color:rgb(2, 111, 237)">book_online</span>
                         <h3> Booking History</h3>    
-                    </a>         
+                    </a>      
+                        
                     <a href="{% url 'profile' %}" data-tab="settings" class="sidebar-link">
                         <span class="material-symbols-outlined" >
                             settings
                             </span>
                         <h3> Settings </h3> 
                     </a>          
-                    <a href="/LogOut" class="sidebar-link">
+                            
+                    <a href="/LogOut" >
                         <span class="material-symbols-outlined" style="color:black">logout</span>
                         <h3> Logout </h3>  
                     </a>  
 
+                    <!-- <a href="/LogOut">
+                        <span class="material-symbols-outlined">logout</span>
+                        <h3> Logout </h3> 
+                        
+                    </a>   -->
                 </div>
-           
             </div>
         </aside>
 
         <!--start of main section style="height: 100vh;overflow-y: auto;"-->   
-      <main > 
+      <main style="margin-top: 1.7rem;margin-left: 25px;"> 
         <div id="home" class="tab-content active" style="margin-top: 50px;"> 
           <!-- <div class="date" style="margin-top: 50px;">
             <input type="date">
@@ -323,27 +416,44 @@
                    <!-- To display the messages, use the following tag -->
           {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                <!-- For displaying as bold -->
+               
                 <strong>Message:</strong> {{ message }}
-                <!-- For closing the message tag -->
+                
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-          {% endfor %} 
+          {% endfor %}
           
           <div>
             <h3 id='greetings'></h3>
             <br>
-          </div>
+         
+
+          <!-- Image below Navbar -->
+            <!-- <img src="{% static 'images/image.jpg' %}" alt="Main Image" style="max-width: 100%; height: auto;margin-top: 0;"> -->
+            
+          <div class="first">
+            <h2>Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h2>
+            <p>Find Hotels and Venue</p>
+            <br>
+            <p>Choose your customize decoration types</p>
+            <br>
+            <p>Easily navigate to the photographer style</p>
+            <br>
+            <p>Find Hotels and Venue</p>
+            
+            </br>  
+          </div> 
+        </div>
           
-         <div class="both">
-          <div class="left">  
+         <div class="both" >
+          <div class="left" style="display: block; border:2px solid whitesmoke; box-shadow: #fff;">  
             <h2>Your Recent Bookings</h2>
             <br>
             {% if recent_bookings %}
-                <div class="b">
-                        <div class="rec" style="display: block; border:2px solid orange">
+                <div class="b" >
+                        <div class="rec" >
                             <table style="width: 100%;">
                                     <thead>
                                         <tr>
@@ -548,7 +658,7 @@
                    </div> 
                    <div id="result" class="venue-container"></div>
          
-                 <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:2vw;flex-wrap:wrap;'>
+                 <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
                      
                  {% for venue in venues %}
                   <div class=" middle">
@@ -595,10 +705,6 @@
                 <div class="main-content1">
                     <div class="whole"> 
                         <div class="filter-container">
-                            <!-- <div class="filters">
-                                <a href="#" id="filterLink"><h2> Filters by:</h2></a>
-                            </div> -->
-                            <!-- Add the filter form here -->
                             
                                 <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
                                     <div class="form-row">
@@ -686,7 +792,7 @@
                        
                      
                      
-                        <form class="search" method= "GET" action="{% url 'search_decoration' %}">
+                        <form class="search" method= "GET" >
                             {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
                             <div class="search-container">
                                 {% comment %} <div class="filters">
@@ -695,54 +801,18 @@
                                 {% comment %} <span class="material-symbols-outlined">
                                     search
                                     </span> {% endcomment %}
-                                    <input type="search" id="searching" name="searched" placeholder="Enter Location" >
-                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                                    <input type="search" id="searching1" name="searched" placeholder="Enter Location" >
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:30px;margin-top:5px;margin-left:-55px">
                             </div>
                             
                             {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search decorations.." aria-label="Search" name ="searched"> {% endcomment %}
                             {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
                         </form>
                        </div> 
-
-                     <div class="dechistory" style="flex-wrap: wrap; margin:20px;">
-                        <h2> Your history of decoration booking </h2>
-                        <br>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th> id </th>
-                                  
-                                    <th>Username</th>
-                                    <th>Decoration Name</th>
-                                    {% comment %} <th>Description</th>
-                                    <th>Decoration</th>
-                                    <th>Photography</th> {% endcomment %}
-                                    <th>Date</th>
-                                    <th>End Date</th>
-                                    <th>Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for booking in decor_bookings %}
-                                <tr> 
-                                    <td>{{ booking.id }}</td>
-                                    <td>{{ booking.User }}
-                                    <td>{{ booking.name }}</td>
-                                    {% comment %} <td>{{ booking.Description }}</td>
-                                    <td>{{ booking.Decoration }}</td>
-                                    <td>{{ booking.Photography }}</td> {% endcomment %}
-                                    <td>{{ booking.date }}</td>
-                                    <td>{{ booking.end_date }}</td>
-                                    <td>{{ booking.cost }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                     </div>
-                       <div id="result" class="venue-container"></div>
+                       <div id="result1" class="decoration-container"></div>
                        <br>
                        
-                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:1vw;flex-wrap:wrap;'>
+                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
                          
                         {% for decoration in decorations %}
                         <div class=" middle">
@@ -756,10 +826,7 @@
                                    <img src="{{ decoration.Decoration_image.first.image.url }}" alt="{{ decoration.Name }}" style="width:280px;height:150px;object-fit:cover" >
                                </div>
                            {% endif %}
-                           </div>
-                           
-                            {% comment %} <img src="{{ decorations.decoration_image.url }}" alt="{{ decoration.Name }}" width="100"> {% endcomment %}
-                            {% comment %} <img src="{% static 'media/' %}{{ decoration.decoration_image }}" alt="{{ decoration.Name }}" width="100"> {% endcomment %}      
+                           </div>  
                             
                            <div class = "title">
                                <h3> {{ decoration.Type }} </h3>
@@ -874,8 +941,8 @@
                                 {% comment %} <span class="material-symbols-outlined">
                                     search
                                     </span> {% endcomment %}
-                                    <input type="search" id="searching" name="searched" placeholder="Enter Location" >
-                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                                    <input type="search" id="searching2" name="searched" placeholder="Enter Location" >
+                                    <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:30px;margin-top:5px;margin-left:-55px">
                             </div>
                             
                             {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
@@ -883,33 +950,24 @@
                         </form>
                        </div> 
 
-                     <div class="dechistory" style="flex-wrap: wrap; margin:20px;">
-                        <h2> Your history of decoration booking </h2>
+                     <!-- <div class="photohistory" style="flex-wrap: wrap;margin:40px;">
+                        <h2> Your history of photographer booking </h2>
                         <br>
                         <table>
                             <thead>
                                 <tr>
                                     <th> id </th>
-                                  
-                                    <th>Username</th>
-                                    <th>Decoration Name</th>
-                                    {% comment %} <th>Description</th>
-                                    <th>Decoration</th>
-                                    <th>Photography</th> {% endcomment %}
+                                    <th>Name</th>
                                     <th>Date</th>
                                     <th>End Date</th>
                                     <th>Cost</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for booking in decor_bookings %}
+                                {% for booking in photographerbookings %}
                                 <tr> 
                                     <td>{{ booking.id }}</td>
-                                    <td>{{ booking.User }}
-                                    <td>{{ booking.name }}</td>
-                                    {% comment %} <td>{{ booking.Description }}</td>
-                                    <td>{{ booking.Decoration }}</td>
-                                    <td>{{ booking.Photography }}</td> {% endcomment %}
+                                    <td>{{ booking.username }}</td>
                                     <td>{{ booking.date }}</td>
                                     <td>{{ booking.end_date }}</td>
                                     <td>{{ booking.cost }}</td>
@@ -917,11 +975,11 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                     </div>
-                       <div id="result" class="venue-container"></div>
+                     </div> -->
+                       <div id="result2" class="photographer-container"></div>
                        <br>
                        
-                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;margin-left:1vw;flex-wrap:wrap;'>
+                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
                          
                         {% for photographer in photographers %}
                         <div class=" middle">
@@ -963,9 +1021,11 @@
 
       
         
-        <div id="bookings" class="tab-content active" style="margin-top:100px;">
-            <h1>Booking History</h1>
-            <table>
+        <div id="bookings" class="tab-content active" style="margin:45px;  white-space: nowrap;">
+            <h1 style="text-align: center;">Booking History</h1>
+            <br>
+            <h2> Your history of decoration booking </h2>
+            <table style="margin-top: 30px;">
                 <thead>
                     <tr>
                         <th> id </th>
@@ -1002,7 +1062,88 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <br>
+            <hr>
+            <div class="dechistory" style="flex-wrap: wrap;">
+                <h2> Your history of decoration booking </h2>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> id </th>
+                          
+                            <th>Username</th>
+                            <th>Decoration Name</th>
+                            {% comment %} <th>Description</th>
+                            <th>Decoration</th>
+                            <th>Photography</th> {% endcomment %}
+                            <th>Date</th>
+                            <th>End Date</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in decor_bookings %}
+                        <tr> 
+                            <td>{{ booking.id }}</td>
+                            <td>{{ booking.User }}
+                            <td>{{ booking.name }}</td>
+                            {% comment %} <td>{{ booking.Description }}</td>
+                            <td>{{ booking.Decoration }}</td>
+                            <td>{{ booking.Photography }}</td> {% endcomment %}
+                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.end_date }}</td>
+                            <td>{{ booking.cost }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+             <br>
+             <hr>
+             <div class="photohistory" style="flex-wrap: wrap;">
+                <h2> Your history of photographer booking </h2>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> id </th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>End Date</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in photographerbookings %}
+                        <tr> 
+                            <td>{{ booking.id }}</td>
+                            <td>{{ booking.username }}</td>
+                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.end_date }}</td>
+                            <td>{{ booking.cost }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
         </div>  
+        <div id="chat" class="tab-content active">
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    {% for message in messages %}
+                        <div class="message {% if message.user == request.user %}sent{% else %}received{% endif %}">
+                            {{ message.message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="input-container">
+                    <input type="text" id="message-input" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+          
+        </div>
         <div id="settings" class="tab-content active">
                 <div class="editprofile">
                   <h2>Edit Profile</h2>
@@ -1025,6 +1166,7 @@
                 </div>
               
         </div>  
+
         
       </main>
      
@@ -1138,6 +1280,123 @@
         }
     });
 </script>
+<script>
+    document.getElementById("searching1").addEventListener("input", function(event) {
+        const searched = event.target.value;
+        console.log('rabina')
+        if (searched.length > 0) {
+            fetch(`/api/search_decoration?searched=${searched}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const resultContainer = document.getElementById("result1");
+                    resultContainer.innerHTML = ""; // Clear previous results
+                    data.decorations.forEach(decoration => {
+                        console.log(decoration)
+                        const decorationHTML = `
+                          
+                              <div class="middle" style = 'display: flex;'>
+                                <div class="car">
+                                    <div class="name">
+                                        <h2>${decoration.Name}</h2>
+                                    </div>
+
+
+                                    
+                                    <div class="pictures">
+                                        ${decoration.decoration_images && decoration.decoration_images.length > 0 ?
+                                            decoration.decoration_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                `
+                                                <div class="img">
+                                                    <img src="${image}" alt="${decoration.Name}" width="280" height="150">
+                                                </div>
+                                                ` : '').join('') : ''}
+                                    </div>
+                                    <div class="title">
+                                        
+                                        <div class="desc" style = 'position:relative'>
+                                            <p>${decoration.Description}</p>
+                                        </div>
+                                        <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
+                                            <h4>NPR: ${decoration.Cost}</h4>
+                                        </div>
+                                        
+                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
+                                            <button type="submit" class="btn-primary"><a href="/${ decoration.id }/exploredecoration">Explore</a></button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                              </div> `;
+                        resultContainer.innerHTML += decorationHTML;
+                        console.log("why are u luri?")
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            document.getElementById("result1").innerHTML = "";
+        }
+    });
+</script>
+<script>
+    document.getElementById("searching2").addEventListener("input", function(event) {
+        const searched = event.target.value;
+        if (searched.length > 0) {
+            fetch(`/api/search_photographer?searched=${searched}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const resultContainer = document.getElementById("result2");
+                    resultContainer.innerHTML = ""; // Clear previous results
+                    data.photographers.forEach(photographer => {
+                        console.log(photographer)
+                        const photographerHTML = `
+                          
+                              <div class="middle" style = 'display: flex;'>
+                                <div class="car">
+                                    <div class="name">
+                                        <h2>${photographer.Name}</h2>
+                                    </div>
+
+
+                                    
+                                    <div class="pictures">
+                                        ${photographer.photographer_images && photographer.photographer_images.length > 0 ?
+                                            photographer.photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
+                                                `
+                                                <div class="img">
+                                                    <img src="${image}" alt="${photographer.Name}" width="280" height="150">
+                                                </div>
+                                                ` : '').join('') : ''}
+                                    </div>
+                                    <div class="title">
+                                        <div class="desc" style = 'position:relative'>
+                                            <p>${photographer.Description}</p>
+                                        </div> 
+                                        
+                                        
+                                        <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
+                                            <h4>NPR: ${photographer.Cost}</h4>
+                                        </div>
+                                        
+                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
+                                            <button type="submit" class="btn-primary"><a href="/${ photographer.id }/explorephotographer">Explore</a></button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                              </div> `;
+                        resultContainer.innerHTML += photographerHTML;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            document.getElementById("result2").innerHTML = "";
+        }
+    });
+</script>
+
+
  <script>
         // Retrieve JSON data from local storage
     storedFormDataJson = localStorage.getItem('formData');
@@ -1170,9 +1429,7 @@
     storedFormData = JSON.parse(storedFormDataJson);
 
     // Now you can access individual fields as properties of storedFormData
-    console.log(storedFormData.event_type);
-    console.log(storedFormData.name);
-    console.log(storedFormData.location);
+     
     // and so on...
 
  </script>
@@ -1206,48 +1463,84 @@
     storedFormData = JSON.parse(storedFormDataJson);
 
     // Now you can access individual fields as properties of storedFormData
-    console.log(storedFormData.event_type);
-    console.log(storedFormData.name);
-    console.log(storedFormData.location);
+    
     // and so on...
 
  </script>
  <script>
-        // Retrieve JSON data from local storage
-    const storedFormDataJson = localStorage.getItem('formData');
-    console.log(storedFormDataJson)
-    console.log("hello")
-    formData = JSON.parse(storedFormDataJson);
+   function sendMessage() {
+    var messageInput = document.getElementById("message-input");
+    var message = messageInput.value.trim();
+    console.log(message)
+    if (message !== "") {
+        var receiverUsername = "username"; // Replace "username" with the actual receiver's username
+        var chatMessages = document.getElementById("chat-messages");
+        var messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", "sent");
+        messageDiv.textContent = message;
+        
+        chatMessages.appendChild(messageDiv);
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Clear input field
+        messageInput.value = "";
 
-    if (storedFormDataJson && formData.type == 'photographer') {
-        document.getElementById("body").style.display='none'
-        // Prompt the user before redirecting
-        const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
-    
-        // Check if the user confirmed
-        if (confirmation) {
-            // Redirect to the booking process page with the date parameter
-            const formData = JSON.parse(storedFormDataJson);
-            if (formData.type == "photographer"){
-                window.location.href = `/bookingprocessp/?date=${formData.date}`;
-            }
-        } else {
-            // User cancelled the action, do nothing or provide alternative action
-            console.log('User cancelled redirection.');
-        }
+        fetch('/send_message/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                receiver: receiverUsername
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Handle response if needed
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error if needed
+        });
     }
-    
-    // Parse JSON data back to object
-    
+}
 
-    // Now you can access individual fields as properties of storedFormData
-    console.log(storedFormData.event_type);
-    console.log(storedFormData.name);
-    console.log(storedFormData.cost);
-    // and so on...
+</script>
+ <script>
+            // Retrieve JSON data from local storage
+        const storedFormDataJson = localStorage.getItem('formData');
+        console.log(storedFormDataJson)
+        console.log("hello")
+        formData = JSON.parse(storedFormDataJson);
+
+        if (storedFormDataJson && formData.type == 'photographer') {
+            document.getElementById("body").style.display='none'
+            // Prompt the user before redirecting
+            const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
+        
+            // Check if the user confirmed
+            if (confirmation) {
+                // Redirect to the booking process page with the date parameter
+                const formData = JSON.parse(storedFormDataJson);
+                if (formData.type == "photographer"){
+                    window.location.href = `/bookingprocessp/?date=${formData.date}`;
+                }
+            } else {
+                // User cancelled the action, do nothing or provide alternative action
+                console.log('User cancelled redirection.');
+            }
+        }
+        
+        // Parse JSON data back to object
+        
+
+        // Now you can access individual fields as properties of storedFormData
+     
+        // and so on...
 
  </script>
-    <script src="{% static 'js/script.js' %}"></script>
     <script>
         // Get the current URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -1266,6 +1559,8 @@ if(done){
 }
 
     </script>
+    <script src="{% static 'js/script.js' %}"></script>
+
 </body>
 </html>
 
