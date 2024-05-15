@@ -4,7 +4,9 @@ from django.core.mail import EmailMessage, send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import redirect, render
 from django.db.models import Q
+from django.urls import reverse
 from django.views.decorators.http import require_GET
+import requests
 
 from EventManagementSystem import settings
 from .models import booking
@@ -50,6 +52,7 @@ def check_booking_availability(request):
         description = request.POST.get('description')
         date_str = request.POST.get('date')
         Venue_image = request.POST.get('Venue_image')
+        id = request.POST.get('id')
 
         # Parse date string to datetime object
         date = datetime.fromisoformat(date_str)
@@ -230,6 +233,7 @@ def booking_process(request):
     if request.method=='POST':  
        try:
         data = json.loads(request.body.decode('utf-8'))  
+        print("ksjbjnsdkjfsdjkfns",data)
         name = data.get('name')
         location = data.get('location')
         capacity = data.get('capacity')
@@ -237,7 +241,7 @@ def booking_process(request):
         cost = data.get('cost')
         check_in = data.get('date')
         Venue_image = request.FILES.get('Venue_image')
-
+        id = request.FILES.get('id')
         check_out = data.get('end_date')
         print(check_in,check_out)
         check_in = datetime.strptime(check_in, '%Y-%m-%dT%H:%M')
@@ -252,6 +256,7 @@ def booking_process(request):
             Event_Type=event_type,
             Cost=int(cost),
             Date=check_in,
+            id = id,
            
             EndDate=check_out
         )
@@ -272,7 +277,8 @@ def booking_process(request):
             'Cost': int(cost),
             'Date': check_in,
             'Venue_image': Venue_image,
-            'EndDate': check_out
+            'EndDate': check_out,
+            'id' : id,
         }
 
         print("Booking data:", data)
@@ -376,3 +382,81 @@ def send_confirmation(user_email, data):
 
 def payment(request):
     return render(request,"booking/payment.html")
+
+from Venues.models import Venues
+from booking.models import VenueBookingWithKhalti
+
+
+@csrf_exempt
+def verify_payment(request):
+    user = request.user
+    print("req body:", request.body)
+    try:
+        
+        data = json.loads(request.body)
+    except json.JSONDecodeError as e:
+        print(f"JSON Decode Error: {e}")
+    # print("JSOnnnnnnnnnnnnnnnnnnnnnnnnnn",json.loads(request.body))
+    data = json.loads(request.body)
+    user = user
+    token = data.get('token')
+    amount = data.get('amount')
+    idx = data.get('idx')
+    venue = data.get('venue')
+    date = data.get('date')
+    enddate = data.get('enddate')
+    name = data.get('name')
+    email = data.get('email')
+    amounts = data.get('amount') / 100
+    print("amount=========================================", amounts, venue)
+
+    venue_ids = Venues.objects.get(id=venue)
+
+    url = "https://khalti.com/api/v2/payment/verify/"
+    payload = {
+        "token": token,
+        "amount": amount,
+    }
+    print(payload)
+
+    headers = {
+        # "Authorization": "Key {}".format(settings.KHALTI_SECRET_KEY)
+        "Authorization": "Key test_secret_key_59649630408043658f15731f3b740d06"
+    }
+
+    print(request.body)
+    response = requests.post(url, payload, headers=headers)
+    print(response.status_code)
+    if response.status_code == 200:
+        print('payment sucesssssssss')
+        # email = request.session.get('email', None)
+        # email = user.email
+        booking = VenueBookingWithKhalti.objects.create(
+            user=user,
+            venue=venue_ids,
+            date=date,
+            name=name,
+            email=email,
+            enddate=enddate,
+            status='pending',
+            pid=idx,
+            payment_status='Paid',
+            amount=amounts
+        )
+        print("Paid amount", amounts)
+
+        send_confirmation(email, data)
+
+        # invoice(email, amount, data.get('product_name'), data.get('idx'))
+        redirect_url = reverse('loginAuthentication:userdashboard')
+        # Return redirect response in JSONs
+        return JsonResponse({
+            'status': True,
+            'details': response.json(),
+            'redirect_url': redirect_url
+        })
+    else:
+        return JsonResponse({
+            'status': False,
+            'message': 'Payment verification failed'
+        })

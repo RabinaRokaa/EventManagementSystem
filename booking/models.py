@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from Venues.models import Venues
 
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
@@ -26,3 +27,17 @@ class booking(models.Model): #making class
 # class book(models.Model):
 #     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 #     venue = models.ForeignKey(Venues, on_delete=models.CASCADE)
+
+
+class VenueBookingWithKhalti(models.Model):
+    booking_id = models.AutoField(primary_key=True, )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    venue = models.ForeignKey(Venues, on_delete=models.CASCADE)
+    date = models.DateField()
+    enddate = models.DateField()
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    status = models.CharField(max_length=100)
+    pid = models.CharField(max_length=100)
+    payment_status = models.CharField(max_length=100)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)

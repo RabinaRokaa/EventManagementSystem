@@ -236,10 +236,8 @@
 }
 
 .rght{
-    border-radius:10px;
-    border:1px solid rgb(20, 20, 20);
-    /* width: auto;
-    height: auto; */
+    border: 2px solid whitesmoke;
+    box-shadow: #fff;
     
 }
 
@@ -303,22 +301,79 @@ hr {
       background-color: #0056b3;
     }
 
-    .first {
-        background-image: url(/static/images/image.jpg);
+    .text {
+        /* background-image: url(/static/images/dash.jpg); */
         background-size: cover;
         background-position: center;
         height: 500px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
+        width: 50%;
+
     }
 
-    .first p {
-        color: #fff;
+
+    .first {
+        /* background-image: url(/static/images/dash.jpg); */
+        background-size: cover;
+        background-position: center;
+        height: 500px;
+        display: flex;
+        
     }
+
+    .text h3{
+        color: rgb(69, 68, 68);
+        margin-top: 30px;
+        
+        font-weight: 300;
+    }
+    .text h1{
+        color: rgb(34, 33, 33);
+        margin-top: 20px;
+    }
+
+    .chat-container {
+    width: 450px;
+    margin: 20px auto;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.message-content {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.incoming .message-content {
+    background-color: #e6e6e6;
+    align-self: flex-start;
+}
+
+.outgoing .message-content {
+    background-color: #0056b3;
+    color: white;
+    align-self: flex-end;
+}
+
 
 </style>
 
@@ -386,7 +441,7 @@ hr {
                         <h3> Booking History</h3>    
                     </a>      
                         
-                    <a href="{% url 'profile' %}" data-tab="settings" class="sidebar-link">
+                    <a href="{% url 'loginAuthentication:profile' %}" data-tab="settings" class="sidebar-link">
                         <span class="material-symbols-outlined" >
                             settings
                             </span>
@@ -414,16 +469,7 @@ hr {
             <input type="date">
            </div>  -->
                    <!-- To display the messages, use the following tag -->
-          {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-               
-                <strong>Message:</strong> {{ message }}
-                
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-          {% endfor %}
+          <!--  -->
           
           <div>
             <h3 id='greetings'></h3>
@@ -433,21 +479,75 @@ hr {
           <!-- Image below Navbar -->
             <!-- <img src="{% static 'images/image.jpg' %}" alt="Main Image" style="max-width: 100%; height: auto;margin-top: 0;"> -->
             
-          <div class="first">
-            <h2>Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h2>
-            <p>Find Hotels and Venue</p>
-            <br>
-            <p>Choose your customize decoration types</p>
-            <br>
-            <p>Easily navigate to the photographer style</p>
-            <br>
-            <p>Find Hotels and Venue</p>
-            
-            </br>  
+          <div class="first" >
+           
+              
+            <div class="text">
+                
+
+                <h1 style="margin-top: 50px;">Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h1>
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Find Hotels and Venue</h3>
+
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Choose your customize decoration types </h3>
+
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Easily navigate to the photographer style</h3>
+
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Find Hotels and Venue</h3>
+                
+            </div> 
+            <div>
+                <img class="imgd" src="{% static 'images/dash1.png' %}">
+            </div>
+           
           </div> 
         </div>
           
          <div class="both" >
+            <div class="rght">
+                <h2 style="text-align: center;"> Chat </h2>
+                <div class="chat-container">
+                    <div class="message incoming">
+                        <div class="avatar">
+                            <img src="https://cdn.vectorstock.com/i/1000v/41/11/flat-business-woman-user-profile-avatar-icon-vector-4334111.avif" alt="Incoming User">
+                        </div>
+                        <div class="message-content">
+                            <p>This is an incoming message.</p>
+                            {% if messages %}
+                            <div class="alert alert-{{ messages.0.tags }} alert-dismissible fade show" role="alert">
+                                <strong>Message:</strong> {{ messages.0 }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="message outgoing">
+                        <div class="avatar">
+                            <img src="https://cdn.vectorstock.com/i/1000v/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.avif" alt="Outgoing User">
+                        </div>
+                        <div class="message-content">
+                            <p>This is an outgoing message.</p>
+                            {% if messages %}
+                        <div class="alert alert-{{ messages.0.tags }} alert-dismissible fade show" role="alert">
+                            <strong>Message:</strong> {{ messages.0 }}
+                        </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="input-box" style="display: flex;">
+                        <input type="text" id="message-input" placeholder="Type your message...">
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+                
+                
+              </div>
           <div class="left" style="display: block; border:2px solid whitesmoke; box-shadow: #fff;">  
             <h2>Your Recent Bookings</h2>
             <br>
@@ -487,35 +587,60 @@ hr {
             {% endif %}
             
           </div>
-          <div class="rght">
-            
-          </div>
-         </div>
-          <!--
-          <div class="left" style="margin: 50px;">   
-            <h2>Your Recent Bookings</h2>
-            <br>
-            {% if recent_bookings %}
-                <div class="booking-container">
-                    {% for booking in recent_bookings %}
-                        <div class="bookings" style="display: inline;">
-                            <h2>{{ booking.Name }}</h2>
-                            <h3>{{ booking.Description }}</h3>
-                            <h3>Address:</Address>{{ booking.Location }}</h3>
-                            <h3>Date:{{ booking.Date }}</h3>
-                            <h3>{{ booking.endDate }}</h3>
-                            <h3>Cost:{{ booking.Cost }}</h3>
-                             <button class="button">View</button>
-                            <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a> 
+          <!-- <div class="rght">
+            <h2 style="text-align: center;"> Chat </h2>
+            <div class="chat-container">
+                <div class="message incoming">
+                    <div class="avatar">
+                        <img src="https://cdn.vectorstock.com/i/1000v/41/11/flat-business-woman-user-profile-avatar-icon-vector-4334111.avif" alt="Incoming User">
+                    </div>
+                    <div class="message-content">
+                        <p>This is an incoming message.</p>
+                        {% if messages %}
+                        <div class="alert alert-{{ messages.0.tags }} alert-dismissible fade show" role="alert">
+                            <strong>Message:</strong> {{ messages.0 }}
                         </div>
-                    {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            {% else %}
-                <img src="{% static 'images/no-data.png' %}" alt="No recent bookings image" style="height: auto; width:150px; margin-top: 20px;">
-                <p>No recent bookings</p>
-
-            {% endif %}
-            -->
+                <div class="message outgoing">
+                    <div class="avatar">
+                        <img src="https://cdn.vectorstock.com/i/1000v/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.avif" alt="Outgoing User">
+                    </div>
+                    <div class="message-content">
+                        <p>This is an outgoing message.</p>
+                        {% if messages %}
+                    <div class="alert alert-{{ messages.0.tags }} alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ messages.0 }}
+                    </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="input-box" style="display: flex;">
+                    <input type="text" id="message-input" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+            
+            
+          </div> -->
+            <!-- <div class="chat-container">
+                <div class="chat-box" id="chat-box">
+                     Messages will be displayed here 
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    
+                        <strong>Message:</strong> {{ message }}
+                        
+                    </div>
+                 {% endfor %}
+                </div>
+                <div class="input-box">
+                    <input type="text" id="message-input" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div> -->
+         </div>
 
 
             <div class="cards">

@@ -102,7 +102,7 @@ def register(request):
 
         # Email Address Confirmation Email
         current_site = get_current_site(request)    #whether it is working on local host or deployed in it will take the domain of the website
-        email_subject = "Confirm your Email @ venuevista - login"  #writing the email subject
+        email_subject = "Confirm your Email @ venuevista - login "  #writing the email subject
         message2 = render_to_string('email_confirmation.html',{
             
             #passing dictionary which contains the setting keys and values for the user
@@ -116,6 +116,7 @@ def register(request):
           message2,
           settings.EMAIL_HOST_USER,
           [myuser.email],
+
         )
         email.fail_silently = True
         email.send()
@@ -147,7 +148,7 @@ def user_login(request, backend=None):
                    # Using dictionary with the keyname fname
         else:
             messages.error(request, "Wrong Credentials!!")
-
+ 
             # Redirect to the homepage if the passed credentials are incorrect
             return redirect('home')
 
@@ -224,7 +225,7 @@ class PasswordResetConfirmCustomView(PasswordResetConfirmView):
 def logOut(request):
    logout(request)
    messages.success(request, "logged Out Succeessfully")
-   return redirect ('home')
+   return redirect ('loginAuthentication:home')
 
 
 # def dashboard(req):

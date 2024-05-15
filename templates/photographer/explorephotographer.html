@@ -874,5 +874,23 @@ nav a {
             });
             
         </script>
+
+<script>
+
+    // Get today's date
+var today = new Date();
+today.setHours(0, 0, 0, 0); // Set time to midnight
+
+// Add event listener to check-in input
+document.getElementById('id_check_in').addEventListener('change', function() {
+    var checkInDate = new Date(this.value); // Convert input value to Date object
+    
+    // Check if check-in date is before today's date
+    if (checkInDate < today) {
+        alert("The check-in date can't be before today's date.please select another date");
+        this.value = ''; // Clear the input
+    }
+});
+</script>
 </body>
 </html>

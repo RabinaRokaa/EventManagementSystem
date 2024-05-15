@@ -26,6 +26,7 @@ urlpatterns = [
     path('generate_pdf/', views.generate_pdf, name='generate_pdf'),
     path('payment/', views.payment, name='payment'),
     path('check-booking-availability/', views.check_booking_availability, name='check_booking_availability'),   
+    path('api/verify_payment/', views.verify_payment, name='verify_payment'),
 ]
 
 

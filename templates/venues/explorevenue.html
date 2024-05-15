@@ -628,6 +628,7 @@ nav a {
         <!-- Single Venue Details -->
         <div id="venue-details">
             <h2 id="venue_name">{{ venue.Name }}</h2>
+            <h2 id="id">{{ venue.id }}</h2>
             <hr>   <!--for horizontal line-->
             <div id="venue-description">
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{venue.Name}} </span><br> <br> {{ venue.Description }}</p>
@@ -762,7 +763,7 @@ nav a {
         
         let status = 0;
 
-        async function checkbooking(event_type, name, location, capacity, description, date,Venue_image) {
+        async function checkbooking(event_type, name, location, capacity, description, date,Venue_image,id) {
             try {
                 const data = new URLSearchParams();
                 date = new Date(date);
@@ -775,6 +776,7 @@ nav a {
                 data.append('description', description);
                 data.append('Venue_image', Venue_image);
                 data.append('date', date);
+                data.append('id', id);
         
                 const response = await fetch('/check-booking-availability/', {
                     method: 'POST',
@@ -812,12 +814,13 @@ nav a {
                 const capacity = document.getElementById('venue-capacity').innerText;
                 const description = document.getElementById('venue-description').innerText;
                 const Venue_image = document.getElementById('Venue_image').getAttribute('src');
+                const id = document.getElementById('id').textContent;
 
                // const decoration = document.getElementById('decoration').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
               
-                await checkbooking(event_type,name,location,capacity,description,date)
+                await checkbooking(event_type,name,location,capacity,description,date,id)
 
                 console.log(status)
 
@@ -843,6 +846,7 @@ nav a {
                 formData.append('date', date);
                 formData.append('end_date', end_date);
                 formData.append('cost', cost);
+                formData.append('id', id);
                 formData.append('url', window.location.href);
 
                 formData.forEach((value, key) => {
@@ -905,5 +909,24 @@ nav a {
     });
     
 </script>
+
+<script>
+
+    // Get today's date
+var today = new Date();
+today.setHours(0, 0, 0, 0); // Set time to midnight
+
+// Add event listener to check-in input
+document.getElementById('id_check_in').addEventListener('change', function() {
+    var checkInDate = new Date(this.value); // Convert input value to Date object
+    
+    // Check if check-in date is before today's date
+    if (checkInDate < today) {
+        alert("The check-in date can't be before today's date.please select another date");
+        this.value = ''; // Clear the input
+    }
+});
+</script>
+
 </body>
 </html>
