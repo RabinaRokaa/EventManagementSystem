@@ -448,13 +448,19 @@ def verify_payment(request):
         send_confirmation(email, data)
 
         # invoice(email, amount, data.get('product_name'), data.get('idx'))
-        redirect_url = reverse('loginAuthentication:userdashboard')
+        # redirect_url = reverse('loginAuthentication:userdashboard')
         # Return redirect response in JSONs
+        print({
+            'status': True,
+            'details': response.json(),
+            # 'redirect_url': redirect_url
+        })
         return JsonResponse({
             'status': True,
             'details': response.json(),
-            'redirect_url': redirect_url
+            # 'redirect_url': redirect_url
         })
+    
     else:
         return JsonResponse({
             'status': False,

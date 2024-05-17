@@ -182,3 +182,87 @@ def send_confirmation(user_email, data):
     email.attach('booking_confirmation.pdf', pdf_content, 'application/pdf')
     email.send()
 
+
+from Venues.models import Venues
+from decbooking.models import decorationBookingWithKhalti
+
+@csrf_exempt
+def verify_payment(request):
+    user = request.user
+    print("req body:", request.body)
+    try:
+        
+        data = json.loads(request.body)
+    except json.JSONDecodeError as e:
+        print(f"JSON Decode Error: {e}")
+    # print("JSOnnnnnnnnnnnnnnnnnnnnnnnnnn",json.loads(request.body))
+    data = json.loads(request.body)
+    user = user
+    token = data.get('token')
+    amount = data.get('amount')
+    idx = data.get('idx')
+    venue = data.get('venue')
+    date = data.get('date')
+    enddate = data.get('enddate')
+    name = data.get('name')
+    email = data.get('email')
+    amounts = data.get('amount') / 100
+    print("amount=========================================", amounts, venue)
+
+    venue_ids = Venues.objects.get(id=venue)
+
+    url = "https://khalti.com/api/v2/payment/verify/"
+    payload = {
+        "token": token,
+        "amount": amount,
+    }
+    print(payload)
+
+    headers = {
+        # "Authorization": "Key {}".format(settings.KHALTI_SECRET_KEY)
+        "Authorization": "Key test_secret_key_59649630408043658f15731f3b740d06"
+    }
+
+    print(request.body)
+    response = requests.post(url, payload, headers=headers)
+    print(response.status_code)
+    if response.status_code == 200:
+        print('payment sucesssssssss')
+        # email = request.session.get('email', None)
+        # email = user.email
+        booking = decorationBookingWithKhalti.objects.create(
+            user=user,
+            venue=venue_ids,
+            date=date,
+            name=name,
+            email=email,
+            enddate=enddate,
+            status='pending',
+            pid=idx,
+            payment_status='Paid',
+            amount=amounts
+        )
+        print("Paid amount", amounts)
+
+        send_confirmation(email, data)
+
+        # invoice(email, amount, data.get('product_name'), data.get('idx'))
+        # redirect_url = reverse('loginAuthentication:userdashboard')
+        # Return redirect response in JSONs
+        print({
+            'status': True,
+            'details': response.json(),
+            # 'redirect_url': redirect_url
+        })
+        return JsonResponse({
+            'status': True,
+            'details': response.json(),
+            # 'redirect_url': redirect_url
+        })
+    
+    else:
+        return JsonResponse({
+            'status': False,
+            'message': 'Payment verification failed'
+        })
+

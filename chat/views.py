@@ -1,14 +1,24 @@
+
+
 from django.shortcuts import render
 from django.db.models import Q
 
 # Create your views here.
-def chat(req):
-    messages = Message.objects.filter(Q(user=req.user) | Q(messaged_to__username='admin'))
-    for message in messages:
-        print(message)
-        print('hey')
+from django.contrib.auth.models import User
+from django.shortcuts import render
 
-    return render (req, "chat/chat.html" ,{'messages': messages})
+def chat(req):
+    # Get the currently logged-in user
+    current_user = req.user
+
+    # Exclude the currently logged-in user and superusers
+    users = User.objects.filter(is_superuser=False).exclude(username=current_user.username)
+
+    receiver_username = req.GET.get('message_to')
+    messages = Message.objects.filter(Q(user__username=receiver_username) | Q(messaged_to__username=receiver_username))
+
+    return render(req, "chat/chat.html", {'messages': messages, 'users': users})
+
 
 
 
@@ -40,21 +50,32 @@ def send_message(request):
         data = json.loads(request.body)
         sender = request.user
         message = data.get('message', '')
-        receiver_username = 'admin'
+        
+        receiver_username =data.get('receiver', '')
+
         if message:
             if receiver_username:
                 receivers = User.objects.filter(username=receiver_username)
                 if receivers.exists():
                     # If multiple users found, take the first one
                     receiver = receivers.first()
-                    if receiver.is_superuser:
-                        sender, receiver = sender, receiver
-                    else:
-                        sender, receiver = receiver, sender
+                    # if receiver.is_superuser:
+                    #     sender, receiver = sender, receiver
+                    # else:
+                    #     sender, receiver = receiver, sender
                 else:
                     return JsonResponse({'status': 'error', 'message': 'Receiver not found'})
-            else:
-                receiver = User.objects.get(is_superuser=True)
+           
+
+           
+            senders = User.objects.filter(username=request.user.username)
+            if senders.exists():
+                    # If multiple users found, take the first one
+                    senders = senders.first()
+                    if senders.is_superuser:
+                        sender=User.objects.filter(username='admin')
+                        sender=sender.first()
+
             Message.objects.create(user=sender, message=message, messaged_to=receiver)
 
             return JsonResponse({'status': 'success'})

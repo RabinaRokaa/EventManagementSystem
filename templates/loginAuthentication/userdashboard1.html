@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-   
+    
 </head>
 <style>
 
@@ -151,8 +152,8 @@
 
 .search-container {
     display: flex;
-    margin-left: 5%;
-   
+    margin-left: 5%; 
+    
 }
 
 .cards{
@@ -160,10 +161,10 @@
 
     display: flex;
     justify-content: flex-start;
-    margin-bottom: 50px;
-    width: 95vw;
-    margin-left: 1vw;
-    margin-right: 3vw;
+    margin-bottom: 50px; 
+    width: 95vw; 
+    margin-left: 1vw; 
+    margin-right: 3vw; 
     flex-wrap: wrap;
     gap:3rem;
 }
@@ -229,18 +230,15 @@
     border:1px solid rgb(16, 15, 15);
     /* width: auto;
      padding: 10%;
-    padding-right: 25%;
+    padding-right: 25%; 
     height: auto; */
 
 }
 
 .rght{
-    border-radius:10px;
-    
     border: 2px solid whitesmoke;
-    /* width: auto;
-    height: auto; */
-   
+    box-shadow: #fff;
+    
 }
 
 
@@ -281,7 +279,7 @@ hr {
       font-weight: bold;
     }
 
-    input[type="text"],
+    input[type="text"], 
     input[type="email"],
     input[type="password"] {
       width: 100%;
@@ -302,8 +300,6 @@ hr {
     button[type="submit"]:hover {
       background-color: #0056b3;
     }
-
-
 
     .text {
         /* background-image: url(/static/images/dash.jpg); */
@@ -342,48 +338,49 @@ hr {
     margin: 20px auto;
 }
 
-    .message {
-        display: flex;
-        margin-bottom: 10px;
-    }
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
 
-    .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 10px;
-    }
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
 
-    .avatar img {
-        width: 100%;
-        height: 100%;
-    }
+.avatar img {
+    width: 100%;
+    height: 100%;
+}
 
-    .message-content {
-        background-color: #f0f0f0;
-        padding: 10px;
-        border-radius: 10px;
-        max-width: 70%;
-    }
+.message-content {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
 
-    .incoming .message-content {
-        background-color: #e6e6e6;
-        align-self: flex-start;
-    }
+.incoming .message-content {
+    background-color: #e6e6e6;
+    align-self: flex-start;
+}
 
-    .outgoing .message-content {
-        background-color: #0056b3;
-        color: white;
-        align-self: flex-end;
-    }
+.outgoing .message-content {
+    background-color: #0056b3;
+    color: white;
+    align-self: flex-end;
+}
+
 
 </style>
 
 <nav style="display: flex; align-items: center;  margin-top: -50px; ">
       <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
         <img class="logo_img" src="{% static 'images/logoa.png' %}">
-       </div>
+       </div> 
         <div style="margin-bottom: -50px; margin-left: 80px;">
             <a href="/">Home</a>
 
@@ -417,40 +414,40 @@ hr {
                     <a href="/userdashboard" data-tab="home" class="sidebar-link" style="color:blue;">
                         <span class="material-symbols-outlined" style="color:#aec6cf">grid_view</span>
                         <h3> Home </h3>    
-                    </a>        
-                           
+                    </a>         
+                            
                     <a href="#" data-tab="venues" class="sidebar-link"  onclick="handleSidebarLinkClick(this)">
                         <span class="material-symbols-outlined" style="color:yellowgreen">roofing</span>
                         <h3> Venues </h3>    
-                    </a>        
+                    </a>         
                     <a href="#" data-tab="decorations" class="sidebar-link" >
                         <span class="material-symbols-outlined" style="color:red">celebration</span>
                         <h3> Decorations </h3>    
-                    </a>        
+                    </a>         
                     <a href="#" data-tab="photographers" class="sidebar-link">
                         <span class="material-symbols-outlined" style="color:goldenrod" class="material-symbols-outlined">
                             local_see
                             </span>
                         <h3> photographer </h3>    
-                    </a>    
+                    </a>     
                     <a href="#" data-tab="chat" class="sidebar-link">
                         <span class="material-symbols-outlined" style="color:orangered;" >
                             message
                             </span>
-                        <h3> Messages </h3>
-                    </a>    
+                        <h3> Messages </h3> 
+                    </a>     
                     <a href="#"data-tab="bookings" class="sidebar-link">
                         <span class="material-symbols-outlined" style="color:rgb(2, 111, 237)">book_online</span>
                         <h3> Booking History</h3>    
                     </a>      
-                       
+                        
                     <a href="{% url 'loginAuthentication:profile' %}" data-tab="settings" class="sidebar-link">
                         <span class="material-symbols-outlined" >
                             settings
                             </span>
-                        <h3> Settings </h3>
+                        <h3> Settings </h3> 
                     </a>          
-                           
+                            
                     <a href="/LogOut" >
                         <span class="material-symbols-outlined" style="color:black">logout</span>
                         <h3> Logout </h3>  
@@ -458,17 +455,22 @@ hr {
 
                     <!-- <a href="/LogOut">
                         <span class="material-symbols-outlined">logout</span>
-                        <h3> Logout </h3>
-                       
+                        <h3> Logout </h3> 
+                        
                     </a>   -->
                 </div>
             </div>
         </aside>
 
-        <!--start of main section style="height: 100vh;overflow-y: auto;"-->  
-      <main style="margin-top: 1.7rem;margin-left: 25px;">
-        <div id="home" class="tab-content active" style="margin-top: 50px;">
-         
+        <!--start of main section style="height: 100vh;overflow-y: auto;"-->   
+      <main style="margin-top: 1.7rem;margin-left: 25px;"> 
+        <div id="home" class="tab-content active" style="margin-top: 50px;"> 
+          <!-- <div class="date" style="margin-top: 50px;">
+            <input type="date">
+           </div>  -->
+                   <!-- To display the messages, use the following tag -->
+          <!--  -->
+          
           <div>
             <h3 id='greetings'></h3>
             <br>
@@ -476,34 +478,35 @@ hr {
 
           <!-- Image below Navbar -->
             <!-- <img src="{% static 'images/image.jpg' %}" alt="Main Image" style="max-width: 100%; height: auto;margin-top: 0;"> -->
+            
+          <div class="first" >
+            <div class="text">
+                <h1 style="margin-top: 50px;">Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h1>
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Find Hotels and Venue</h3>
+
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Choose your customize decoration types </h3>
+
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Easily navigate to the photographer style</h3>
+
+                <h3><span class="material-symbols-outlined" style="color: #003b95;">
+                    check
+                    </span>Find Hotels and Venue</h3>
+                
+            </div> 
+            <div>
+                <img class="imgd" src="{% static 'images/dash1.png' %}">
+            </div>
            
-            <!-- <div class="first" >
-                <div class="text">
-                    <h1 style="margin-top: 50px;">Your Event Venue Awaits - Book Now for a Seamless Planning Experience!"</h1>
-                    <h3><span class="material-symbols-outlined" style="color: #003b95;">
-                        check
-                        </span>Find Hotels and Venue</h3>
-    
-                    <h3><span class="material-symbols-outlined" style="color: #003b95;">
-                        check
-                        </span>Choose your customize decoration types </h3>
-    
-                    <h3><span class="material-symbols-outlined" style="color: #003b95;">
-                        check
-                        </span>Easily navigate to the photographer style</h3>
-    
-                    <h3><span class="material-symbols-outlined" style="color: #003b95;">
-                        check
-                        </span>Find Hotels and Venue</h3>
-                    
-                </div> 
-                <div>
-                    <img class="imgd" src="{% static 'images/dash1.png' %}">
-                </div>
-               
-              </div> 
+          </div> 
         </div>
-        <div class="both" >
+          
+         <div class="both" >
             <div class="rght">
                 <h2 style="text-align: center;"> Chat </h2>
                 <div class="chat-container">
@@ -525,7 +528,7 @@ hr {
                             <img src="https://cdn.vectorstock.com/i/1000v/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.avif" alt="Outgoing User">
                         </div>
                         <div class="message-content">
-                            <p style="color: white;">This is an outgoing message.</p>
+                            <p>This is an outgoing message.</p>
                             {% if messages %}
                         <div class="alert alert-{{ messages.0.tags }} alert-dismissible fade show" role="alert">
                             <strong>Message:</strong> {{ messages.0 }}
@@ -535,11 +538,7 @@ hr {
                     </div>
                     <div class="input-box" style="display: flex;">
                         <input type="text" id="message-input" placeholder="Type your message...">
-                        <button onclick="sendMessage()" style="
-                        background-color: #0056b3;
-                        color: white;
-                        padding: 13px;
-                        border-radius: 1px solid white;">Send</button>
+                        <button onclick="sendMessage()">Send</button>
                     </div>
                 </div>
                 
@@ -637,52 +636,8 @@ hr {
                     <button onclick="sendMessage()">Send</button>
                 </div>
             </div> -->
-         </div> -->
-         
-         <!-- <div class="both" >
-          <div class="left" style="display: block; border:2px solid whitesmoke; box-shadow: #fff;">  
-            <h2>Your Recent Bookings</h2>
-            <br>
-            {% if recent_bookings %}
-                <div class="b" >
-                        <div class="rec" >
-                            <table style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th> id </th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Date</th>
-                                           
-                                            <th>Cost</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for booking in recent_bookings %}
-                                        <tr>
-                                            <td>{{ booking.id }}</td>
-                                            <td>{{ booking.Name }}
-                                            <td>{{ booking.Location }}</td>
-                                           
-                                            <td>{{ booking.Date }}</td>
-                                            <td>{{ booking.Cost }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                        </div>
-                </div>
-            {% else %}
-                <img src="{% static 'images/no-data.png' %}" alt="No recent bookings image" style="height: auto; width:150px; margin-top: 20px;">
-                <p>No recent bookings</p>
+         </div>
 
-            {% endif %}
-           
-          </div>
-          <div class="rght">
-           
-          </div>
-         </div> -->
 
             <div class="cards">
                 <div class="card" style="width: 18rem;">
@@ -714,13 +669,13 @@ hr {
         <div id="venues" class="tab-content active">
             <!-- <h2>Venues Content</h2> -->
             <div class="main-content1">
-                <div class="whole">
+                <div class="whole"> 
                     <div class="filter-container">
                         <!-- <div class="filters">
                             <a href="#" id="filterLink"><h2> Filters by:</h2></a>
                         </div> -->
                         <!-- Add the filter form here -->
-                       
+                        
                             <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
                                 <div class="form-row">
                                     <div class="form-group col-12">
@@ -769,7 +724,7 @@ hr {
                                     <select id="category" class="form-control" name="category">
                                       <option selected>Choose...</option>
                                       {% for cat in categories %}
-                                     
+                                      
                                       <option value="{{ cat }}">{{ cat }}</option>
                                       {% endfor %}
                                     </select> {% endcomment %}
@@ -781,23 +736,23 @@ hr {
                                         <select id="category" class="form-control" name="category">
                                           <option selected>Choose...</option>
                                           {% for cat in categories %}
-                                         
+                                          
                                           <option value="{{ cat }}">{{ cat }}</option>
                                           {% endfor %}
                                         </select>
                                     </div>        
                                 </div>
                                 <div class="form-group">
-                                 
+                                  
                                     {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
                                     <label class="form-check-label" for="reviewed">
                                       Reviewed
                                     </label> {% endcomment %}
                                     <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
-                                 
+                                  
+                                </div> 
                                 </div>
-                                </div>
-                               
+                                
                               </form>
                                  <div class="overlay" id="overlay"></div>
                               {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
@@ -818,10 +773,10 @@ hr {
                                 <input type="search" id="searching" name="searched" placeholder="search here" >
                                 <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;margin-left:-55px;height:30px;margin-top:5px;">
                         </div>
-                       
-                       
+                        
+                        
                     </form>
-                   </div>
+                   </div> 
                    <div id="result" class="venue-container"></div>
          
                  <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
@@ -832,9 +787,9 @@ hr {
                      <div class="name">
                       <h2>{{venue.Name}} </h2>
                      </div>
-                     <div class="pictures">
-                         {% if venue.Venue_image.all %}  
-                         <div class="img">
+                     <div class="pictures"> 
+                         {% if venue.Venue_image.all %}   
+                         <div class="img"> 
                              <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover" >
                          </div>
                      {% endif %}
@@ -842,7 +797,7 @@ hr {
                      
                       {% comment %} <img src="{{ venues.Venue_image.url }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}
                       {% comment %} <img src="{% static 'media/' %}{{ venue.Venue_image }}" alt="{{ venue.Name }}" width="100"> {% endcomment %}      
-                     
+                      
                      <div class = "title">
                          <h3> {{ venue.Location }} </h3>
                          
@@ -853,10 +808,10 @@ hr {
                          <div class="cost">
                              <h4> NPR:{{ venue.Cost }} </h4>
                          </div>    
-                         <div class="btn-container">
+                         <div class="btn-container"> 
                              <button type="submit" class="btn-primary"><a href="/{{ venue.id }}/explorevenue">Explore</a></button>
                              
-                         </div>
+                         </div> 
                          
                          
                      </div>
@@ -869,9 +824,9 @@ hr {
         <div id="decorations" class="tab-content active">
                 <h2></h2>
                 <div class="main-content1">
-                    <div class="whole">
+                    <div class="whole"> 
                         <div class="filter-container">
-                           
+                            
                                 <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
                                     <div class="form-row">
                                         <div class="form-group col-12">
@@ -920,7 +875,7 @@ hr {
                                         <select id="category" class="form-control" name="category">
                                           <option selected>Choose...</option>
                                           {% for cat in categories %}
-                                         
+                                          
                                           <option value="{{ cat }}">{{ cat }}</option>
                                           {% endfor %}
                                         </select> {% endcomment %}
@@ -932,23 +887,23 @@ hr {
                                             <select id="category" class="form-control" name="category">
                                               <option selected>Choose...</option>
                                               {% for cat in categories %}
-                                             
+                                              
                                               <option value="{{ cat }}">{{ cat }}</option>
                                               {% endfor %}
                                             </select>
                                         </div>        
                                     </div>
                                     <div class="form-group">
-                                     
+                                      
                                         {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
                                         <label class="form-check-label" for="reviewed">
                                           Reviewed
                                         </label> {% endcomment %}
                                         <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
-                                     
+                                      
+                                    </div> 
                                     </div>
-                                    </div>
-                                   
+                                    
                                   </form>
                                      <div class="overlay" id="overlay"></div>
                                   {% comment %} <div id="result" class="venue-container"></div> {% endcomment %}
@@ -970,11 +925,11 @@ hr {
                                     <input type="search" id="searching1" name="searched" placeholder="Enter Location" >
                                     <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:30px;margin-top:5px;margin-left:-55px">
                             </div>
-                           
+                            
                             {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search decorations.." aria-label="Search" name ="searched"> {% endcomment %}
                             {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
                         </form>
-                       </div>
+                       </div> 
                        <div id="result1" class="decoration-container"></div>
                        <br>
                        
@@ -986,14 +941,14 @@ hr {
                            <div class="name">
                             <h2>{{decoration.Name}} </h2>
                            </div>
-                           <div class="pictures">
-                           {% if decoration.Decoration_image.all %}  
-                               <div class="img">
+                           <div class="pictures"> 
+                           {% if decoration.Decoration_image.all %}   
+                               <div class="img"> 
                                    <img src="{{ decoration.Decoration_image.first.image.url }}" alt="{{ decoration.Name }}" style="width:280px;height:150px;object-fit:cover" >
                                </div>
                            {% endif %}
                            </div>  
-                           
+                            
                            <div class = "title">
                                <h3> {{ decoration.Type }} </h3>
                                
@@ -1004,10 +959,10 @@ hr {
                                <div class="cost">
                                    <h4> NPR:{{ decoration.Cost }} </h4>
                                </div>    
-                               <div class="btn-container">
+                               <div class="btn-container"> 
                                    <button type="submit" class="btn-primary"><a href="/{{ decoration.id }}/exploredecoration">Explore</a></button>
                                    
-                               </div>
+                               </div> 
                                
                                
                            </div>
@@ -1020,13 +975,13 @@ hr {
         <div id="photographers" class="tab-content active">
                 <h2></h2>
                 <div class="main-content1">
-                    <div class="whole">
+                    <div class="whole"> 
                         <div class="filter-container">
                             <!-- <div class="filters">
                                 <a href="#" id="filterLink"><h2> Filters by:</h2></a>
                             </div> -->
                             <!-- Add the filter form here -->
-                           
+                            
                                 <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;">
                                     <div class="form-row">
                                         <div class="form-group col-12">
@@ -1067,7 +1022,7 @@ hr {
                                         <select id="category" class="form-control" name="category">
                                           <option selected>Choose...</option>
                                           {% for cat in categories %}
-                                         
+                                          
                                           <option value="{{ cat }}">{{ cat }}</option>
                                           {% endfor %}
                                         </select> {% endcomment %}
@@ -1079,7 +1034,7 @@ hr {
                                             <select id="category" class="form-control" name="category">
                                               <option selected>Choose...</option>
                                               {% for cat in categories %}
-                                             
+                                              
                                               <option value="{{ cat }}">{{ cat }}</option>
                                               {% endfor %}
                                             </select>
@@ -1087,10 +1042,10 @@ hr {
                                     </div>
                                     <div class="form-group">
                                         <button id="filterSearch" class="btn btn-primary" style="margin-left:30px;">Search</button>
-                                     
+                                      
+                                    </div> 
                                     </div>
-                                    </div>
-                                   
+                                    
                                   </form>
                                      <div class="overlay" id="overlay"></div>
                         </div>
@@ -1110,11 +1065,11 @@ hr {
                                     <input type="search" id="searching2" name="searched" placeholder="Enter Location" >
                                     <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:30px;margin-top:5px;margin-left:-55px">
                             </div>
-                           
+                            
                             {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
                             {% comment %} <button class="btn btn-outline-secodary" type="submit"> Search </button>   <!--secodaryfor the button color gray for success success--> {% endcomment %}
                         </form>
-                       </div>
+                       </div> 
 
                      <!-- <div class="photohistory" style="flex-wrap: wrap;margin:40px;">
                         <h2> Your history of photographer booking </h2>
@@ -1131,7 +1086,7 @@ hr {
                             </thead>
                             <tbody>
                                 {% for booking in photographerbookings %}
-                                <tr>
+                                <tr> 
                                     <td>{{ booking.id }}</td>
                                     <td>{{ booking.username }}</td>
                                     <td>{{ booking.date }}</td>
@@ -1153,28 +1108,28 @@ hr {
                            <div class="name">
                             <h2>{{photographer.Username}} </h2>
                            </div>
-                           <div class="pictures">
-                           {% if photographer.Photographer_image.all %}  
-                               <div class="img">
+                           <div class="pictures"> 
+                           {% if photographer.Photographer_image.all %}   
+                               <div class="img"> 
                                    <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Username }}" style="width:280px;height:150px;object-fit:cover" >
                                </div>
                            {% endif %}
                            </div>    
-                           
+                            
                            <div class = "title">
                                <h3> {{ decoration.Type }} </h3>
                                
                                <div class="desc">
                                 <p>{{ photographer.Description }}</p>
-                               </div>
+                               </div> 
                                
                                <div class="cost">
                                    <h4> NPR:{{ photographer.Cost }} </h4>
                                </div>    
-                               <div class="btn-container">
+                               <div class="btn-container"> 
                                    <button type="submit" class="btn-primary"><a href="/{{ photographer.id }}/explorephotographer">Explore</a></button>
                                    
-                               </div>
+                               </div> 
                                
                                
                            </div>
@@ -1185,8 +1140,8 @@ hr {
                     </div>
                  </div>
 
-     
-       
+      
+        
         <div id="bookings" class="tab-content active" style="margin:45px;  white-space: nowrap;">
             <h1 style="text-align: center;">Booking History</h1>
             <br>
@@ -1211,7 +1166,7 @@ hr {
                 <tbody>
                     {% for booking in user_bookings %}
                     <tr>
-                       
+                        
                         <td>{{ booking.id }}</td>
                         <td>{{ booking.Event_Type }}</td>
                         <td>{{booking.User}}
@@ -1237,7 +1192,7 @@ hr {
                     <thead>
                         <tr>
                             <th> id </th>
-                         
+                          
                             <th>Username</th>
                             <th>Decoration Name</th>
                             {% comment %} <th>Description</th>
@@ -1250,7 +1205,7 @@ hr {
                     </thead>
                     <tbody>
                         {% for booking in decor_bookings %}
-                        <tr>
+                        <tr> 
                             <td>{{ booking.id }}</td>
                             <td>{{ booking.User }}
                             <td>{{ booking.name }}</td>
@@ -1282,7 +1237,7 @@ hr {
                     </thead>
                     <tbody>
                         {% for booking in photographerbookings %}
-                        <tr>
+                        <tr> 
                             <td>{{ booking.id }}</td>
                             <td>{{ booking.username }}</td>
                             <td>{{ booking.date }}</td>
@@ -1299,10 +1254,7 @@ hr {
                 <div class="chat-messages" id="chat-messages">
                     {% for message in messages %}
                         <div class="message {% if message.user == request.user %}sent{% else %}received{% endif %}">
-                            <p style="margin-bottom: 10px;">{{ message.user.username }}</p>
-                           <p style="font-size: 1.2rem;"> {{ message.message }}</p>
-
-                           
+                            {{ message.message }}
                         </div>
                     {% endfor %}
                 </div>
@@ -1311,7 +1263,7 @@ hr {
                     <button onclick="sendMessage()">Send</button>
                 </div>
             </div>
-         
+          
         </div>
         <div id="settings" class="tab-content active">
                 <div class="editprofile">
@@ -1320,27 +1272,27 @@ hr {
                     {% csrf_token %}
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" value="{{ user.username }}" required>
-             
+              
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" value="{{ user.email }}" required>
-             
+              
                     <label for="first_name">First Name</label>
                     <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
-             
+              
                     <label for="last_name">Last Name</label>
                     <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
-             
+              
                     <button type="submit">Save Changes</button>
                   </form>
                 </div>
-             
+              
         </div>  
 
-       
+        
       </main>
      
-    </div>  
-       
+    </div>   
+        
          <!-- <div class="right">
             <div class="top">
                <div class="logo">
@@ -1351,31 +1303,31 @@ hr {
                 </button>                
             </div>
          </div>  -->
-    </div>  
+    </div>   
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var sidebarLinks = document.querySelectorAll('.sidebar-link');
-   
+    
         sidebarLinks.forEach(function(link) {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default link behavior
-               
+                
                 var tabId = this.getAttribute('data-tab');
                 showTab(tabId); // Call the showTab function with the corresponding tabId
-   
+    
                 // Remove active class from all sidebar links
                 sidebarLinks.forEach(function(link) {
                     link.classList.remove('active');
                 });
-   
+    
                 // Add active class to the clicked link
                 this.classList.add('active');
             });
         });
     });
 </script>
-   
+    
  <script>
         // JavaScript function to switch tabs
   function showTab(tabId) {
@@ -1406,7 +1358,7 @@ hr {
                     data.venues.forEach(venue => {
                         console.log(venue)
                         const venueHTML = `
-                         
+                          
                               <div class="middle" style = 'display: flex;'>
                                 <div class="car">
                                     <div class="name">
@@ -1414,7 +1366,7 @@ hr {
                                     </div>
 
 
-                                   
+                                    
                                     <div class="pictures">
                                         ${venue.Venue_images && venue.Venue_images.length > 0 ?
                                             venue.Venue_images.map((image, index) => index === 0 ? // Corrected syntax here
@@ -1432,12 +1384,12 @@ hr {
                                         <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
                                             <h4>NPR: ${venue.Cost}</h4>
                                         </div>
-                                       
-                                        <div class="btn-container" style = 'position:absolute; bottom:2px; margin-top:10px; '>
+                                        
+                                        <div class="btn-container" style = 'position:absolute; bottom:2px; margin-top:10px; '> 
                                             <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
                                         </div>
                                     </div>
-                                   
+                                    
                                 </div>
                               </div> `;
                         resultContainer.innerHTML += venueHTML;
@@ -1463,7 +1415,7 @@ hr {
                     data.decorations.forEach(decoration => {
                         console.log(decoration)
                         const decorationHTML = `
-                         
+                          
                               <div class="middle" style = 'display: flex;'>
                                 <div class="car">
                                     <div class="name">
@@ -1471,7 +1423,7 @@ hr {
                                     </div>
 
 
-                                   
+                                    
                                     <div class="pictures">
                                         ${decoration.decoration_images && decoration.decoration_images.length > 0 ?
                                             decoration.decoration_images.map((image, index) => index === 0 ? // Corrected syntax here
@@ -1482,19 +1434,19 @@ hr {
                                                 ` : '').join('') : ''}
                                     </div>
                                     <div class="title">
-                                       
+                                        
                                         <div class="desc" style = 'position:relative'>
                                             <p>${decoration.Description}</p>
                                         </div>
                                         <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
                                             <h4>NPR: ${decoration.Cost}</h4>
                                         </div>
-                                       
-                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '>
+                                        
+                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
                                             <button type="submit" class="btn-primary"><a href="/${ decoration.id }/exploredecoration">Explore</a></button>
                                         </div>
                                     </div>
-                                   
+                                    
                                 </div>
                               </div> `;
                         resultContainer.innerHTML += decorationHTML;
@@ -1520,13 +1472,15 @@ hr {
                     data.photographers.forEach(photographer => {
                         console.log(photographer)
                         const photographerHTML = `
-                         
+                          
                               <div class="middle" style = 'display: flex;'>
                                 <div class="car">
                                     <div class="name">
                                         <h2>${photographer.Name}</h2>
                                     </div>
 
+
+                                    
                                     <div class="pictures">
                                         ${photographer.photographer_images && photographer.photographer_images.length > 0 ?
                                             photographer.photographer_images.map((image, index) => index === 0 ? // Corrected syntax here
@@ -1539,18 +1493,18 @@ hr {
                                     <div class="title">
                                         <div class="desc" style = 'position:relative'>
                                             <p>${photographer.Description}</p>
-                                        </div>
-                                       
-                                       
+                                        </div> 
+                                        
+                                        
                                         <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
                                             <h4>NPR: ${photographer.Cost}</h4>
                                         </div>
-                                       
-                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '>
+                                        
+                                        <div class="btn-container" style = 'position:absolute; bottom: 7px; '> 
                                             <button type="submit" class="btn-primary"><a href="/${ photographer.id }/explorephotographer">Explore</a></button>
                                         </div>
                                     </div>
-                                   
+                                    
                                 </div>
                               </div> `;
                         resultContainer.innerHTML += photographerHTML;
@@ -1573,25 +1527,25 @@ hr {
     let formData = JSON.parse(storedFormDataJson);
 
     if (storedFormDataJson && formData.type == 'venue') {
-   
+    
         // Prompt the user before redirecting
         const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
-   
+    
         // Check if the user confirmed
         if (confirmation) {
             // Redirect to the booking process page with the date parameter
-           
+            
             if (formData.type == "venue"){
                 document.getElementById("body").style.display='none'
                 window.location.href = `/bookingprocess/?date=${formData.date}`;
             }
-           
+            
         } else {
             // User cancelled the action, do nothing or provide alternative action
             console.log('User cancelled redirection.');
         }
     }
-   
+    
     // Parse JSON data back to object
     storedFormData = JSON.parse(storedFormDataJson);
 
@@ -1611,7 +1565,7 @@ hr {
 
         // Prompt the user before redirecting
         const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
-   
+    
         // Check if the user confirmed
         if (confirmation) {
             // Redirect to the booking process page with the date parameter
@@ -1619,18 +1573,18 @@ hr {
                 document.getElementById("body").style.display='none'
                 window.location.href = `/bookingprocessd/?date=${formData.date}`;
             }
-           
+            
         } else {
             // User cancelled the action, do nothing or provide alternative action
             console.log('User cancelled redirection.');
         }
     }
-   
+    
     // Parse JSON data back to object
     storedFormData = JSON.parse(storedFormDataJson);
 
     // Now you can access individual fields as properties of storedFormData
-   
+    
     // and so on...
 
  </script>
@@ -1640,25 +1594,12 @@ hr {
     var message = messageInput.value.trim();
     console.log(message)
     if (message !== "") {
-                // Step 1: Get the query string from the current URL
-        const queryString = window.location.search;
-
-        // Step 2: Create a URLSearchParams object
-        const urlParams = new URLSearchParams(queryString);
-
-        // Step 3: Get the value of the 'message_to' parameter
-        // const messageTo = urlParams.get('message_to');
-
-        // Step 4 (optional): Do something with the value
-        // console.log(messageTo); // Output: rabina12
-
-        var receiverUsername = 'admin'
-
+        var receiverUsername = "username"; // Replace "username" with the actual receiver's username
         var chatMessages = document.getElementById("chat-messages");
         var messageDiv = document.createElement("div");
         messageDiv.classList.add("message", "sent");
         messageDiv.textContent = message;
-       
+        
         chatMessages.appendChild(messageDiv);
         // Scroll to bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -1672,14 +1613,12 @@ hr {
             },
             body: JSON.stringify({
                 message: message,
-                receiver: receiverUsername,
-
+                receiver: receiverUsername
             })
         })
         .then(response => response.json())
         .then(data => {
             console.log(data);
-         
             // Handle response if needed
         })
         .catch(error => {
@@ -1701,7 +1640,7 @@ hr {
             document.getElementById("body").style.display='none'
             // Prompt the user before redirecting
             const confirmation = window.confirm('Are you sure you want to proceed to previous booking process?');
-       
+        
             // Check if the user confirmed
             if (confirmation) {
                 // Redirect to the booking process page with the date parameter
@@ -1714,9 +1653,9 @@ hr {
                 console.log('User cancelled redirection.');
             }
         }
-       
+        
         // Parse JSON data back to object
-       
+        
 
         // Now you can access individual fields as properties of storedFormData
      
@@ -1745,3 +1684,5 @@ if(done){
 
 </body>
 </html>
+
+    

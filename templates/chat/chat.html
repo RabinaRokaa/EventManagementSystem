@@ -279,9 +279,25 @@ aside .sidebar .message-count{
 }   
 
   
+.user-container {
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            padding: 10px;
+            cursor: pointer;
+        }
 
+        .user-container:hover{
+background-color: rgb(255, 224, 189);            
+color: white;
+transition: .3s;
+border-radius: 10px;
+        }   
 
-          
+        .user-container:hover{
+
+transition: .3s;
+border-radius: 5px;
+        }   
 
         
     </style>
@@ -348,17 +364,28 @@ aside .sidebar .message-count{
             </div>       
         </div>
     </aside>
-        <div class="user-list">
-            <!-- Add your user list content here -->
-            dilip
-        </div>
     
-    <main>
+        
+    
+    <main style="border: 2px solid black;display: flex;justify-content: space-evenly;align-items: flex-start;">
+
+        <div style="margin-left: 100px;margin-top: 50px;" id="show_users" style="text-align: left;">
+            <h2 style="margin-bottom: 20px;margin-top: 20px;color: rgb(254, 135, 25);">messages</h2>
+            {% for user in users %}
+                <div style="border: 1px solid orange;border-radius: 5px;padding: 10px;padding-right: 50px;" class="user-container" onclick="openChat('{{ user.username }}')">
+                    <h3>{{ user.get_full_name }}</h3>
+                  
+                    <button style="background-color: rgba(255, 255, 255, 0);font-size: 0.8rem;margin-top: 10px;" onclick="event.stopPropagation(); openChat('{{ user.username }}')">new message</button>
+                </div>
+            {% endfor %}
+        </div>
+        
         <div class="chat-container">
             <div class="chat-messages" id="chat-messages">
                 {% for message in messages %}
-                    <div class="message {% if message.user == request.user %}sent{% else %}received{% endif %}">
-                        {{ message.message }}
+                <div class="message {% if message.user.username == 'admin' %}sent{% else %}received{% endif %}">
+                        <p style="margin-bottom: 10px; font-size: 0.8rem;font-weight: bold;">{{ message.user.username }}</p>
+                        <p style="font-size: 1.2rem;">{{ message.message }}</p>
                     </div>
                 {% endfor %}
             </div>
@@ -367,71 +394,69 @@ aside .sidebar .message-count{
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
+
     </main>
    </div>
    <script>
-    function sendMessage() {
-     var messageInput = document.getElementById("message-input");
-     var message = messageInput.value.trim();
-     console.log(message)
-     if (message !== "") {
-         var receiverUsername = "username"; // Replace "username" with the actual receiver's username
-         var chatMessages = document.getElementById("chat-messages");
-         var messageDiv = document.createElement("div");
-         messageDiv.classList.add("message", "sent");
-         messageDiv.textContent = message;
-         
-         chatMessages.appendChild(messageDiv);
-         // Scroll to bottom
-         chatMessages.scrollTop = chatMessages.scrollHeight;
-         // Clear input field
-         messageInput.value = "";
- 
-         fetch('/send_message/', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({
-                 message: message,
-                 receiver: receiverUsername
-             })
-         })
-         .then(response => response.json())
-         .then(data => {
-             console.log(data);
-             // Handle response if needed
-         })
-         .catch(error => {
-             console.error('Error:', error);
-             // Handle error if needed
-         });
-     }
- }
+     function sendMessage() {
+    var messageInput = document.getElementById("message-input");
+    var message = messageInput.value.trim();
+    console.log(message)
+    if (message !== "") {
+                // Step 1: Get the query string from the current URL
+        const queryString = window.location.search;
+
+        // Step 2: Create a URLSearchParams object
+        const urlParams = new URLSearchParams(queryString);
+
+        // Step 3: Get the value of the 'message_to' parameter
+        const messageTo = urlParams.get('message_to');
+
+        // Step 4 (optional): Do something with the value
+        console.log(messageTo); // Output: rabina12
+
+        var receiverUsername = messageTo
+
+        var chatMessages = document.getElementById("chat-messages");
+        var messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", "sent");
+        messageDiv.textContent = message;
+        
+        chatMessages.appendChild(messageDiv);
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Clear input field
+        messageInput.value = "";
+
+        fetch('/send_message/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                receiver: receiverUsername,
+
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+          
+            // Handle response if needed
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error if needed
+        });
+    }
+}
+
+function openChat(username) {
+            // Redirect to the chat page with the specified user
+            window.location.href = `/chat/?message_to=${username}`;
+        }
  
  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

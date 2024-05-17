@@ -21,6 +21,3 @@ class ImageFile(models.Model):
    
 
 
-
-
-

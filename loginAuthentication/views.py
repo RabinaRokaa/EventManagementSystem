@@ -102,7 +102,7 @@ def register(request):
 
         # Email Address Confirmation Email
         current_site = get_current_site(request)    #whether it is working on local host or deployed in it will take the domain of the website
-        email_subject = "Confirm your Email @ venuevista - login "  #writing the email subject
+        email_subject = "Confirm your Email @ venuevista - login"  #writing the email subject
         message2 = render_to_string('email_confirmation.html',{
             
             #passing dictionary which contains the setting keys and values for the user
@@ -116,7 +116,6 @@ def register(request):
           message2,
           settings.EMAIL_HOST_USER,
           [myuser.email],
-
         )
         email.fail_silently = True
         email.send()
@@ -141,16 +140,16 @@ def user_login(request, backend=None):
 
             # For admin login to redirect to the admin panel after login
             if user_param.is_superuser:
-                return redirect('adminpanel')
+                return redirect('loginAuthentication:adminpanel')
             else:
                 print("hello")
                 return redirect(f"/userdashboard/?fname={fname}&done=1")   # Using dictionary with the keyname fname
                    # Using dictionary with the keyname fname
         else:
             messages.error(request, "Wrong Credentials!!")
- 
+
             # Redirect to the homepage if the passed credentials are incorrect
-            return redirect('home')
+            return redirect('loginAuthentication:home')
 
     return render(request, "LoginAuthentication/login.html")  # Rendering HTML page while logging in through normal username and password
 
@@ -225,7 +224,7 @@ class PasswordResetConfirmCustomView(PasswordResetConfirmView):
 def logOut(request):
    logout(request)
    messages.success(request, "logged Out Succeessfully")
-   return redirect ('loginAuthentication:home')
+   return redirect ('home')
 
 
 # def dashboard(req):
@@ -254,7 +253,13 @@ def userdashboard(request):
         user_bookings = booking.objects.filter(User=request.user)  # Fetch all booking history for the current user
         decor_bookings = decbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
         photographerbookings = photographerbooking.objects.filter(User=request.user)  # Fetch all booking history for the current user
-        messages = Message.objects.filter(Q(user=request.user) | Q(messaged_to=request.user))
+        # messages = Message.objects.filter(Q(user=request.user) | Q(messaged_to=request.user))
+        filter1=Q(user=request.user) & Q(messaged_to__username='admin')
+        filter2=Q(user__username='admin') & Q(messaged_to=request.user)
+        messages = Message.objects.filter(filter1 | filter2).order_by('date')
+
+        for message in messages:
+            print("ae",message)
         if request.method == 'POST':
         # Get form data
             username = request.POST['username']
@@ -412,4 +417,3 @@ def profile(request):
     }
 
     return render(request, "loginAuthentication/editprofile.html" ,context )
-

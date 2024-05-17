@@ -142,8 +142,8 @@
                     <td>{{ myuser.username }}</td>
                     <td>{{ myuser.is_active }}</td>
                     <td>
-                        <a href="{% url 'view_user' myuser.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
-                        <a href="{% url 'delete_user' myuser.id %}" onclick="return confirmDelete('{{ myuser.username }}');" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
+                        <a href="{% url 'loginAuthentication:view_user' myuser.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
+                        <a href="{% url 'loginAuthentication:delete_user' myuser.id %}" onclick="return confirmDelete('{{ myuser.username }}');" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
                         {% comment %} <a href="{% url 'delete_user' myuser.id %}">Delete </a> {% endcomment %}
                     </td>
                 </tr>
