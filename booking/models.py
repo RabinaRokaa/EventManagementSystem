@@ -23,10 +23,14 @@ class booking(models.Model): #making class
     EndDate = models.DateTimeField(default=timezone.now)
     Cost= models.IntegerField(default=0, null=True, blank=True)
     Venue_image = models.ImageField(upload_to='venues/', null=True, blank=True)
+    payment_status = models.CharField(max_length=100,default="pending")
+
+
 
 # class book(models.Model):
 #     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 #     venue = models.ForeignKey(Venues, on_delete=models.CASCADE)
+
 
 
 class VenueBookingWithKhalti(models.Model):

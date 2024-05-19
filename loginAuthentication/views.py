@@ -46,32 +46,30 @@ def register(request):
         # Check if the 'is_superuser' checkbox is checked in the form
         is_superuser = request.POST.get('is_superuser', False)
 
-       
-
         #checking user validation
         if User.objects.filter(username=username):
             messages.error(request, "Sorry, the username is already taken! Please try different username for your account.")
-            return redirect('home')
+            return redirect('loginAuthentication:home')
         
         # if User.objects.filter(email=email).exists():
         #     messages.error(request, "Sorry, the email you entered is already registered!!")
-        #     return redirect('home')
+        #     return redirect('loginAuthentication:home')
         
         if len(username)>20:
             messages.error(request, "Username must be under 15 charcters!!")
-            return redirect('home')
+            return redirect('loginAuthentication:home')
         
         # if len(phoneno)>15:
         #     messages.error(request, "Username must be under 10 charcters!!")
-        #     return redirect('home')
+        #     return redirect('loginAuthentication:home')
         
         if pass1 != pass2:
             messages.error(request, "Password mismatch. Please make sure both passwords match and try again.")
-            return redirect('home')
+            return redirect('loginAuthentication:home')
         
         if not username.isalnum():
             messages.error(request, "Username must be Alpha-Numeric!!")
-            return redirect('home')
+            return redirect('loginAuthentication:home')
 
  
        #creating user object in models
@@ -120,7 +118,7 @@ def register(request):
         email.fail_silently = True
         email.send()
          
-        return redirect('login')  #redirect to login page after creating account
+        return redirect('loginAuthentication:login')  #redirect to login page after creating account
         
     return render(request, "LoginAuthentication/register.html")  #rendering html page
 
@@ -148,7 +146,7 @@ def user_login(request, backend=None):
         else:
             messages.error(request, "Wrong Credentials!!")
 
-            # Redirect to the homepage if the passed credentials are incorrect
+            # Redirect to the loginAuthentication:homepage if the passed credentials are incorrect
             return redirect('loginAuthentication:home')
 
     return render(request, "LoginAuthentication/login.html")  # Rendering HTML page while logging in through normal username and password
@@ -213,7 +211,7 @@ class PasswordResetCustomView(PasswordResetView):
     template_name = 'loginAuthentication/password_reset_form.html'
     email_template_name = 'loginAuthentication/password_reset_email.html'
     subject_template_name = 'loginAuthentication/password_reset_subject.txt'
-    success_url = reverse_lazy('password_reset_done')
+    success_url = reverse_lazy('loginAuthentication:password_reset_done')
     success_message = "We've emailed you instructions for setting your password. If an account exists with the email you entered, you should receive them shortly. If you don't receive an email, please make sure you've entered the address you registered with and check your spam folder."
 
 class PasswordResetConfirmCustomView(PasswordResetConfirmView):
@@ -224,7 +222,7 @@ class PasswordResetConfirmCustomView(PasswordResetConfirmView):
 def logOut(request):
    logout(request)
    messages.success(request, "logged Out Succeessfully")
-   return redirect ('home')
+   return redirect ('loginAuthentication:home')
 
 
 # def dashboard(req):

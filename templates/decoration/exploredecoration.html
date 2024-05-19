@@ -613,6 +613,8 @@ nav a {
         <!-- Single decoration Details -->
         <div id="decoration-details">
             <h2 id="decoration_name">{{ decoration.Name }}</h2>
+            <h2 id="id" style="opacity: 0;">{{ decoration.id }}</h2>
+            <hr>   <!--for horizontal line-->
             <hr>   <!--for horizontal line-->
             <div id="decoration-description">
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{decoration.Name}} </span><br> <br> {{ decoration.Description }}</p>
@@ -746,7 +748,7 @@ nav a {
         
         let status = 0;
 
-        async function checkbooking(name,description, date) {
+        async function checkbooking(name,description, date, id) {
             try {
                 const data = new URLSearchParams();
                 date = new Date(date);
@@ -757,6 +759,7 @@ nav a {
                 data.append('description', description);
                 //data.append('decoration_image', decoration_image);
                 data.append('date', date);
+                data.append('id', id);
         
                 const response = await fetch('/check_booking_availabilityd/', {
                     method: 'POST',
@@ -795,8 +798,9 @@ nav a {
                // const decoration = document.getElementById('decoration').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
+                const id = document.getElementById('id').textContent;
               
-                await checkbooking(name,description,date)
+                await checkbooking(name,description,date,id)
 
                 console.log(status)
 
@@ -820,6 +824,7 @@ nav a {
                 formData.append('date', date);
                 formData.append('end_date', end_date);
                 formData.append('cost', cost);
+                formData.append('id', id);
                 formData.append('url', window.location.href);
 
                 formData.forEach((value, key) => {

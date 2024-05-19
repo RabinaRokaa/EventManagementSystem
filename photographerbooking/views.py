@@ -180,12 +180,12 @@ def send_confirmation(user_email, data):
     email.attach('booking_confirmation.pdf', pdf_content, 'application/pdf')
     email.send()
 
-from Venues.models import Venues
-from booking.models import VenueBookingWithKhalti
+from photographer.models import photographer
+from photographerbooking.models import photographerBookingWithKhalti
 
 
 @csrf_exempt
-def verify_payment(request):
+def verify_paymentp(request):
     user = request.user
     print("req body:", request.body)
     try:
@@ -199,15 +199,15 @@ def verify_payment(request):
     token = data.get('token')
     amount = data.get('amount')
     idx = data.get('idx')
-    venue = data.get('venue')
+    photographer = data.get('photographer_id')
     date = data.get('date')
     enddate = data.get('enddate')
     name = data.get('name')
     email = data.get('email')
     amounts = data.get('amount') / 100
-    print("amount=========================================", amounts, venue)
+    print("amount=========================================", amounts, photographer)
 
-    venue_ids = Venues.objects.get(id=venue)
+    photographer_ids = photographer.objects.get(id=photographer)
 
     url = "https://khalti.com/api/v2/payment/verify/"
     payload = {
@@ -228,9 +228,9 @@ def verify_payment(request):
         print('payment sucesssssssss')
         # email = request.session.get('email', None)
         # email = user.email
-        booking = VenueBookingWithKhalti.objects.create(
+        booking = photographerBookingWithKhalti.objects.create(
             user=user,
-            venue=venue_ids,
+            photographer=photographer_ids,
             date=date,
             name=name,
             email=email,

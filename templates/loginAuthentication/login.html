@@ -99,6 +99,7 @@ nav a {
     color:black;
     margin: 0 15px;
     font-weight: normal;
+    font-size: large;
     
 }
 
@@ -167,6 +168,30 @@ nav a {
         display: block;
 
     }
+
+
+    .container{
+     
+      display: flex;
+        align-items: center;
+        gap: 50px;
+        background-image: url("{% static 'images/hii.jpg' %}"); 
+        background-size: cover;
+        background-position: center;
+        display: flex;
+
+    }
+
+    /* .row{
+     
+      
+      
+        background-image: url("{% static 'images/hii.jpg' %}"); 
+        background-size: cover;
+        background-position: center;
+        
+
+    } */
     </style>
 </head>
 <body>
@@ -183,7 +208,7 @@ nav a {
    </button>
    </div>
    {% endfor %} 
-   <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; margin-bottom: 150px;">
+   <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; ;">
     <div class="logo" style="display: flex;align-items: center;justify-content: center; margin-bottom: -50px;">
         <img class="logo_img" src="{% static 'images/logoa.png' %}">
         <div>
@@ -221,7 +246,7 @@ nav a {
             <div class="row">
               <h3>Log In to your account!</h3>
                 <div class="col-md-4">
-                    <img src="{% static 'images/logino.png' %}" alt="Event Image" class="event-image small-image">
+                    <img src="{% static 'images/logoa.png' %}" alt="Event Image" class="event-image small-image">
                 </div>
                 <div class="col-md-8">
                  

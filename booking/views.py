@@ -246,23 +246,40 @@ def booking_process(request):
         print(check_in,check_out)
         check_in = datetime.strptime(check_in, '%Y-%m-%dT%H:%M')
         check_out = datetime.strptime(check_out, '%Y-%m-%dT%H:%M')
-
-        # Create and save the booking object
-        booking_obj = booking(
-            User =request.user.username,
-            Name=name,
-            Location=location,
-            Capacity=capacity,
-            Event_Type=event_type,
-            Cost=int(cost),
-            Date=check_in,
-            id = id,
-           
-            EndDate=check_out
-        )
-        if Venue_image:  # Check if an image was uploaded
-            booking_obj.Venue_image = Venue_image # Associate the image with the venue
         
+        if data.get('paidbhayo')==1:
+            
+
+            # Create and save the booking object
+            booking_obj = booking(
+                User =request.user.username,
+                Name=name,
+                Location=location,
+                Capacity=capacity,
+                Event_Type=event_type,
+                Cost=int(cost),
+                Date=check_in,
+                id = id,
+                payment_status="paid",
+                EndDate=check_out
+            )
+            if Venue_image:  # Check if an image was uploaded
+                booking_obj.Venue_image = Venue_image # Associate the image with the venue
+        else:
+             # Create and save the booking object
+            booking_obj = booking(
+                User =request.user.username,
+                Name=name,
+                Location=location,
+                Capacity=capacity,
+                Event_Type=event_type,
+                Cost=int(cost),
+                Date=check_in,
+                id = id,
+                EndDate=check_out
+            )
+            if Venue_image:  # Check if an image was uploaded
+                booking_obj.Venue_image = Venue_image # Associate the image with the venue
         booking_obj.save()
  # Construct a dictionary containing the data
         data = {

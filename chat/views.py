@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
+from django.db.models import Count
+
 def chat(req):
     # Get the currently logged-in user
     current_user = req.user
@@ -14,10 +16,17 @@ def chat(req):
     # Exclude the currently logged-in user and superusers
     users = User.objects.filter(is_superuser=False).exclude(username=current_user.username)
 
+    # Subquery to annotate each user with the count of associated messages
+    users_with_messages = User.objects.annotate(message_count=Count('message'))
+
+    # Filter users to only those who have at least one message
+    users_with_messages = users_with_messages.filter(message_count__gt=0)
+
     receiver_username = req.GET.get('message_to')
     messages = Message.objects.filter(Q(user__username=receiver_username) | Q(messaged_to__username=receiver_username))
 
-    return render(req, "chat/chat.html", {'messages': messages, 'users': users})
+    return render(req, "chat/chat.html", {'messages': messages, 'users': users_with_messages})
+
 
 
 
@@ -81,7 +90,6 @@ def send_message(request):
             return JsonResponse({'status': 'success'})
         else:
             return JsonResponse({'status': 'error', 'message': 'Message cannot be empty'})
-
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 

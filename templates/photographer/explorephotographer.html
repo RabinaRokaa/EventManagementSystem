@@ -68,6 +68,7 @@ nav a {
     color: white;
     margin: 0 15px;
     font-weight: bold;
+    font-size: large;
 }
 
 nav a:hover {
@@ -614,6 +615,8 @@ nav a {
         <!-- Single photographer Details -->
         <div id="photographer-details">
             <h2 id="photographer_name">{{ photographer.Username }}</h2>
+            <h2 id="id" style="opacity: 0;">{{ photographer.id }}</h2>
+            <hr>   <!--for horizontal line-->
             <hr>   <!--for horizontal line-->
             <div id="photographer-description">
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Username}} </span><br> <br> {{ photographer.Description }}</p>

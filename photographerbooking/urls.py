@@ -20,6 +20,6 @@ urlpatterns = [
     path('bookingprocessp/', views.booking_processp, name='bookingprocessp'),
     path('book_eventp/', views.book_eventp, name= "book_eventp"),  #Path for book event
     path('check_booking_availabilityp/', views.check_booking_availabilityp, name= "check_booking_availabilityp"),  #Path for book event
-    path('api/verify_payment/', views.verify_payment, name='verify_payment'),
+    path('api/verify_paymentp/', views.verify_paymentp, name='verify_paymentp'),
     
 ]

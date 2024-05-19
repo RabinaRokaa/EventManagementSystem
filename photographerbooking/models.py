@@ -23,7 +23,7 @@ class photographerbooking(models.Model): #making class
 
 
 
-class DecorationBookingWithKhalti(models.Model):
+class photographerBookingWithKhalti(models.Model):
     booking_id = models.AutoField(primary_key=True, )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     photographer = models.ForeignKey(photographer, on_delete=models.CASCADE)

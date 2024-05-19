@@ -1,6 +1,7 @@
 from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
+import requests
 from .models import decbooking
 import json
 from django.core.serializers import serialize
@@ -183,16 +184,17 @@ def send_confirmation(user_email, data):
     email.send()
 
 
-from Venues.models import Venues
+from decoration.models import decoration
 from decbooking.models import decorationBookingWithKhalti
 
 @csrf_exempt
-def verify_payment(request):
+def verify_paymentd(request):
     user = request.user
     print("req body:", request.body)
     try:
         
         data = json.loads(request.body)
+
     except json.JSONDecodeError as e:
         print(f"JSON Decode Error: {e}")
     # print("JSOnnnnnnnnnnnnnnnnnnnnnnnnnn",json.loads(request.body))
@@ -201,15 +203,16 @@ def verify_payment(request):
     token = data.get('token')
     amount = data.get('amount')
     idx = data.get('idx')
-    venue = data.get('venue')
+    
     date = data.get('date')
     enddate = data.get('enddate')
     name = data.get('name')
     email = data.get('email')
     amounts = data.get('amount') / 100
-    print("amount=========================================", amounts, venue)
-
-    venue_ids = Venues.objects.get(id=venue)
+    decoration = data.get('decoration_id')
+    decoration_ids = decoration.objects.get(id=decoration)   
+    # print("amount=========================================", amounts, decoration)
+    
 
     url = "https://khalti.com/api/v2/payment/verify/"
     payload = {
@@ -232,11 +235,11 @@ def verify_payment(request):
         # email = user.email
         booking = decorationBookingWithKhalti.objects.create(
             user=user,
-            venue=venue_ids,
+            decoration=decoration_ids,
             date=date,
             name=name,
             email=email,
-            enddate=enddate,
+            end_date=enddate,
             status='pending',
             pid=idx,
             payment_status='Paid',

@@ -115,7 +115,7 @@
         background-color: #f4f4f4;
     }
     .chat-container {
-        width: 300px;
+        width: 500px;
         margin: 50px auto;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -456,6 +456,19 @@ function openChat(username) {
             // Redirect to the chat page with the specified user
             window.location.href = `/chat/?message_to=${username}`;
         }
+
+
+        // Select the first .message element
+var firstMessage = document.querySelector('.user-container');
+
+// Check if the first message exists
+if (firstMessage) {
+    console.log("baglunge cutie")
+    // Remove the first message
+    firstMessage.remove();
+console.log(firstMessage)
+    firstMessage.style.display="none"
+}
  
  </script>
 </body>
