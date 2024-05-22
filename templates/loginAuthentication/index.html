@@ -10,6 +10,8 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 <style>
     .image-container {
@@ -31,8 +33,14 @@
         border-radius: 1px;
         border: 1px solid white;
         /* Add border */
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.049);
+        transition: .3s;
         /* Add box shadow */
+    }
+
+    .card:hover{
+        transition: .3s;
+        transform:scale(1.1);
     }
 
 
@@ -67,7 +75,7 @@
 
 
     .sec-container {
-        background-image: url("https://img.freepik.com/premium-vector/cute-background-with-clouds_363897-7983.jpg?w=360");
+ 
         background-size: contain;
         justify-content: center;
         /* Center the content horizontally */
@@ -75,9 +83,9 @@
         /* Center the content vertically */
         padding: 70px;
         border-radius: 1px;
-        border: 1px solid white;
+       
         /* Add border */
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+     
         /* Add box shadow */
 
     }
@@ -159,9 +167,18 @@
     .card-body{
         text-align: left;
         
-        text-decoration: underline blue;
+       
         font-weight: bold;
     }
+.card{
+    transition: .3s;
+}
+    .card:hover{
+        transition: .3s;
+        transform: scale(1.1);
+    }
+
+
 </style>
 
 <body>
@@ -218,9 +235,9 @@
     <div class="main-content">
         <!-- Image below Navbar -->
 
-        <div class="more">
+        <div class="more" >
             <div class="image-container">
-                {% comment %} <img src="{% static 'images/image.jpg' %}" alt="Main Image"> {% endcomment %}
+                <!-- {% comment %} <img src="{% static 'images/image.jpg' %}" alt="Main Image"> {% endcomment %} -->
                 <div class="btn-container">
                     <h2> "Transforming your vision into reality, one click at a time"</h2>
                     <p> E V E R Y &nbsp E V E N T &nbsp S H O U L D &nbsp BE &nbsp P E R F E C T </p>
@@ -228,43 +245,50 @@
                 </div>
             </div>
         </div>
+        <br><br>
+        <h2 style="text-align: center;color: rgb(0, 15, 80);" data-aos="zoom-in-up">Our <span>services</span></h2>
         <div class="cards">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'images/hotel.png' %}" alt="Card image cap">
-                <div class="card-body">
-                    <a href="/venue">Venues</a>
-                    
-                    
+            <div data-aos="zoom-in-up" data-aos-duration="500" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                <img  src="{% static 'images/hotel.png' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Affordable Venues</h5>
+                    <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">Discover a variety of affordable venues perfect for any occasion.</p>
+                    <a href="/venue" style="display: inline-block; padding: 0.5rem 1rem; background-color: #e2aa28; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Venues</a>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap">
-                <div class="card-body">
-                    <a href="/decorations">Decoration</a>
-                    
+            
+            <div data-aos="zoom-in-up" data-aos-duration="1000" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Stylish Decorations</h5>
+                    <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">Discover a variety of decorations perfect for any occasion.</p>
+                    <a href="/decorations" style="display: inline-block; padding: 0.5rem 1rem; background-color: #b980ff; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Decorations</a>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap">
-                <div class="card-body">
-                    <a href="/photographers">Photographer</a>
-                   
+            <div data-aos="zoom-in-up" data-aos-duration="1500" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Photographers</h5>
+                    <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">Our photographers are ready to capture your beautiful moments</p>
+                    <a href="/photographers" style="display: inline-block; padding: 0.5rem 1rem; background-color: #57794d; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Photographers</a>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{% static 'images/image.jpg' %}" alt="Card image cap">
-                <div class="card-body">
-                    <a href="/venue">Hotels</a>
-                   
+            <div data-aos="zoom-in-up" data-aos-duration="2000" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                <img class="card-img-top" src="{% static 'images/venue.jpg' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                <div style="padding: 1.5rem;">
+                    <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Hotels</h5>
+                    <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">All the hotels are at gorgeous location</p>
+                    <a href="/venue" style="display: inline-block; padding: 0.5rem 1rem; background-color: #1772b4; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Hotels</a>
                 </div>
             </div>
+          
         </div>
 
-        <div class="sec-container">
+        <div class="sec-container" style="margin-top: 100px;">
 
-            <div class="contactuscontent flex">
+            <div class="contactuscontent flex" style="display: flex;width: 100%;flex-wrap: wrap;">
                 <div class="logo" style="margin-left:100px; flex-wrap: wrap;">
-                    <img src="{% static 'images/contact.jpg' %}" alt="logo">
+                    <img style="width: 400px;height: auto;" src="https://img.freepik.com/free-vector/organic-flat-man-customer-support_23-2148893295.jpg" alt="logo">
                 </div>
                 <form class="contactusform" method="post">
                     {% csrf_token %}
@@ -281,34 +305,28 @@
             </div>
         </div>
 
-        <div class="about">
+        <div class="about" style="display: flex; flex-direction: column; gap: 2rem; padding: 2rem; background-color: #f9f9f900; border-radius: 8px;">
             <!-- How we work section -->
-            <div class="how-we-work">
-                <img src="{% static 'images/iconn.png' %}" alt="Icon">
+            <div data-aos="zoom-in-up" class="how-we-work" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="https://i.pinimg.com/736x/b7/9d/2a/b79d2a9ce2937cd06cc43c804f480584.jpg" alt="Icon" style="width: 300px; height: 300px; object-fit: cover">
                 <div>
-                    <h2>How we work?</h2>
-                    <p>"Our Event Management System operates through a streamlined process empowering users to manage
-                        and execute successful events effortlessly.
-                        Join our platform today and elevate your event planning process!"</p>
-                    {% comment %} <button class="how_we_works">Learn more</button> {% endcomment %}
-                    <a href="{% url 'loginAuthentication:about_us' %}" class="how_we_works">Learn more</a>
+                    <h2 style="font-size: 1.75rem; margin-bottom: 0.75rem;">How we work?</h2>
+                    <p style="color: #555; margin-bottom: 1.5rem;">Our Event Management System operates through a streamlined process empowering users to manage and execute successful events effortlessly. Join our platform today and elevate your event planning process!</p>
+                    <a href="{% url 'loginAuthentication:about_us' %}" class="how_we_works" style="display: inline-block; padding: 0.5rem 1rem; background-color: #007bff; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Learn more</a>
                 </div>
             </div>
-
+        
             <!-- Create Your Account section -->
-            <div class="create-your-account">
-                <img src="{% static 'images/icon.png' %}" alt="Icon">
+            <div data-aos="zoom-in-up" class="create-your-account" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 300px; height: 300px; object-fit: cover">
                 <div>
-                    <h2>Create Your Account</h2>
-                    <p>With our intuitive interface, you can easily create, manage, and customize events to suit your
-                        unique requirements.
-                        From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers
-                        unparalleled flexibility to cater to diverse event types.</p>
-                    <br>
-                    <a href="{% url 'loginAuthentication:login' %}" class="your_account">Get Started</a>
+                    <h2 style="font-size: 1.75rem; margin-bottom: 0.75rem;">Create Your Account</h2>
+                    <p style="color: #555; margin-bottom: 1.5rem;">With our intuitive interface, you can easily create, manage, and customize events to suit your unique requirements. From corporate conferences and trade shows to weddings, festivals, and beyond, our system offers unparalleled flexibility to cater to diverse event types.</p>
+                    <a href="{% url 'loginAuthentication:login' %}" class="your_account" style="display: inline-block; padding: 0.5rem 1rem; background-color: #28a745; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Get Started</a>
                 </div>
             </div>
         </div>
+        
     </div>
 
     <!-- Footer -->
@@ -325,6 +343,10 @@
             <a href="#">FAQs</a>
         </div> {% endcomment %}
     </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var trigger = document.querySelector('.hover-trigger');
@@ -342,6 +364,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
