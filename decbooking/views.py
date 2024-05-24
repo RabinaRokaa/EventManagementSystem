@@ -210,6 +210,7 @@ def verify_paymentd(request):
     email = data.get('email')
     amounts = data.get('amount') / 100
     decoration = data.get('decoration_id')
+    print("jwhbfjwbfwefnwnefjweiojfiweifojwejfoweifjweoifjjwef",decoration)
     decoration_ids = decoration.objects.get(id=decoration)   
     # print("amount=========================================", amounts, decoration)
     

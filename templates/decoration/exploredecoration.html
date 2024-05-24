@@ -207,7 +207,7 @@ nav a {
         }
 
         .your_account{
-            background-color: #007bff;;
+            /* background-color: #007bff;; */
             margin: 10px;
             padding: 10px;
             color: white;
@@ -259,7 +259,7 @@ nav a {
         }
 
         .your_account{
-            background-color: rgba(0, 108, 228, 1);
+            /* background-color: rgba(0, 108, 228, 1); */
             margin: 10px;
             padding: 10px;
             color: white;
@@ -379,8 +379,8 @@ nav a {
         }
       
         footer {
-            background-color: rgba(0, 59, 149, 1);
-            color: white;
+            /* background-color: rgba(0, 59, 149, 1); */
+            color: black;
             text-align: right;
             padding: 30px;
             display: flex;
@@ -389,8 +389,8 @@ nav a {
          }
         
          .copy {
-            background-color: rgba(0, 59, 149, 1);
-            color: white;
+            /* background-color: rgba(0, 59, 149, 1); */
+            color: black;
             text-align: left;
             padding-bottom: 10px;
          }
@@ -554,6 +554,95 @@ nav a {
            background-color:blue;
         }
 
+                
+    .contactuscontent {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        /* background-image: url("{% static 'images/hii.jpg' %}"); */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+
+    }
+    .contactuscontent {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        /* background-image: url("{% static 'images/hii.jpg' %}"); */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+
+    }
+
+    /* .contactuscontent::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); Adjust opacity as needed 
+} */
+
+    .contactusform {
+        width: 100%;
+        width: 25px;
+        /* margin-left: 8.55%; */
+        margin-right: 8.55%;
+
+
+
+    }
+
+    /* Additional styles for form elements */
+    .contactusform h2 {
+        margin-bottom: 25px;
+        margin-top: 25px;
+    }
+
+    .contactusform label {
+        display: block;
+        margin-bottom: 0px;
+        text-align: left;
+    }
+
+    .contactusform input,
+    .contactusform textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .contactusform textarea {
+        resize: vertical;
+        /* Allow vertical resizing of textarea */
+    }
+
+    .contactusform button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .contactusform button:hover {
+        background-color: #0056b3;
+    }
+
 </style>
 </head>
 <body>
@@ -608,7 +697,7 @@ nav a {
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ decoration.Decoration_image.first.image.url }}" alt="Main Image" width="50%" style="height: 90vh">
+        <img src="{{ decoration.Decoration_image.first.image.url }}" alt="Main Image" width="50%" style="height: 90vh; border-radius:15px; margin:15px;">
 
         <!-- Single decoration Details -->
         <div id="decoration-details">
@@ -623,7 +712,7 @@ nav a {
             <div id="decoration_image">
                 <p><span style="font-size:1.4rem;"> Some sight of the </span>  <span style="color: blue; font-size:1.4rem;" >decoration</span></p>
                 {% for image in decoration.Decoration_image.all %}
-                    <img src="{{ image.image.url }}" alt="{{ decoration.Name }}" width="300" height="150" style="object-fit:cover;">
+                    <img src="{{ image.image.url }}" alt="{{ decoration.Name }}" width="300" height="150" style="object-fit:cover; border-radius:10px;">
                 {% endfor %}
             </div>
             <div class="facility">
@@ -718,6 +807,32 @@ nav a {
          
     </div> 
      <hr>
+     <div class="contactuscontent flex">
+        <!-- <div class="logoo" style="margin-left:100px; flex-wrap: wrap; height: 20px; width: 30px;">
+            <img src="{% static 'images/contact.jpg' %}" alt="logo">
+
+
+        </div> -->
+        <div class="image-containerr">
+            <img src="{% static 'images/contact2.png' %}" alt="logo" style="height: 650px; width: 600px; justify-content: space-around;">
+        </div>
+            <form class="contactusform" method="post">
+                {% csrf_token %}
+                <h2>Contact Us</h2>
+                <label for="username">Username</label><br>
+                <input type="text" id="username" name="username" placeholder="Name"><br>
+                <label for="email">Email</label><br>
+                <input type="text" id="email" name="email" placeholder="Email"><br>
+                <label for="message">Message</label><br>
+                <textarea class="cutxt" rows="4" name="message" placeholder="Enter your message here...">
+          </textarea><br> 
+            <div class="link" style="display: flex;"> <a  href="/contact"> Ok </a> or <a href="/contact"> Lets get inquiry <span class="material-symbols-outlined">
+                arrow_forward
+                </span></a> </div>
+
+        </div>
+     </div>
+     <hr>
     <div class="more">
         <div class="image-container">
             <h2>Need more than just a decoration?</h2>
@@ -732,13 +847,8 @@ nav a {
     <footer>
         <div class="copy">
             <p>Copyright © 2023
-                by Rabina Roka.</p>
-        </div>
-        <div class="company">
-            <p>Company</p>
-            <a href="#">Contact Us</a>
-            <a href="#">About us</a>
-            <a href="#">FAQs</a>
+                by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUSTe YOUR
+                PRIVACY CHOICES</p>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

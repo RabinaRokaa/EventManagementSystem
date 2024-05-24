@@ -206,7 +206,7 @@ nav a {
         }
 
         .your_account{
-            background-color: rgba(0, 108, 228, 1);
+            /* background-color: rgba(0, 108, 228, 1); */
             margin: 10px;
             padding: 10px;
             color: white;
@@ -258,7 +258,7 @@ nav a {
         }
 
         .your_account{
-            background-color: rgba(0, 108, 228, 1);
+            /* background-color: rgba(0, 108, 228, 1); */
             margin: 10px;
             padding: 10px;
             color: white;
@@ -448,7 +448,7 @@ nav a {
           }
           
           .your_account {
-            background-color: #007bff; /* Adjust color as needed */
+            /* background-color: #007bff; Adjust color as needed  */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -801,7 +801,7 @@ footer {
      <div class="Contact" style="flex-direction:column;">
         
         
-        <p><span style="font-size:1.6rem;"> Additional</span>  <span style="color: blue; font-size:1.6rem;" >Info</span>
+        <p><span style="font-size:1.6rem;"> Additional</span>  <span style=" font-size:1.6rem;" >Info</span>
         
          <li> <span class="material-symbols-outlined" style="background-color: lightblue;">
             place</span>
@@ -856,12 +856,6 @@ footer {
         <div class="image-containerr">
             <img src="{% static 'images/contact2.png' %}" alt="logo" style="height: 650px; width: 600px; justify-content: space-around;">
         </div>
-
-        <!-- <div class="contact" style="margin-bottom: 200px;">
-            <h1 style="    font-weight: 500;
-            font-size: 3rem; 
-            margin-right: 50%;"> Contact Us </h1>
-            <br> -->
             <form class="contactusform" method="post">
                 {% csrf_token %}
                 <h2>Contact Us</h2>
@@ -877,19 +871,6 @@ footer {
                 </span></a> </div>
 
         </div>
-        <!-- <form class="contactusform" method="post">
-            {% csrf_token %}
-            <h2>Contact Us</h2>
-            <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" placeholder="Name"><br>
-            <label for="email">Email</label><br>
-            <input type="text" id="email" name="email" placeholder="Email"><br>
-            <label for="message">Message</label><br>
-            <textarea class="cutxt" rows="4" name="message" placeholder="Enter your message here...">
-      </textarea><br> -->
-      <!-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae voluptates, sit corrupti totam iusto vel hic numquam, nisi perferendis optio obcaecati vero. Nemo, fuga quod amet inventore magni praesentium tempore.</p>
-            <button class="confirm contactusbutton flex" type="submit" name="button"><a href="/contact">Contact</a>S</button>
-        </form> -->
      </div>
      <hr>
     <div class="more">
@@ -911,12 +892,6 @@ footer {
             by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUSTe YOUR
             PRIVACY CHOICES</p>
     </div>
-    {% comment %} <div class="company">
-        <p>Company</p>
-        <a href="#">Contact Us</a>
-        <a href="#">About us</a>
-        <a href="#">FAQs</a>
-    </div> {% endcomment %}
 </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

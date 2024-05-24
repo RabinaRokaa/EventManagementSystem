@@ -547,40 +547,31 @@ nav a {
         <div class="whole"> 
             <div class="filter-container">
                 <div class="filters">
-                    <!-- <a href="#" id="filterLink"><h2> Filters by:</h2></a> -->
-                    <a href="#" id="filterLink"><h2> Filters by </h2><span class="material-symbols-outlined" style="font-size:45px; ">
-                        arrow_drop_down
+                    <a href="#" id="filterLink" style="display: flex;align-items: center;justify-content: center;"><h2> Filters by </h2><span class="material-symbols-outlined" style="font-size:45px; ">
+                        <img style="width: 30px;height: auto;margin-left: 20px;margin-top: -25px;" src="https://cdn-icons-png.flaticon.com/512/6488/6488674.png" alt="">
                         </span></a>
                 </div>
                 <!-- Add the filter form here -->
                 
-                    <form method="GET" id="filterForm" class="popup" style="display: none;">
-                        <div class="form-row">
-                            <div class="form-group col-12">
-                                <div class="input-group">
-                                    <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder=" Name.." />
-                                    <span class="input-group-append">
-                                        <div class="input-group-text bg-transparent">
-                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>        
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-12">
-                                <div class="input-group">
-                                    <input class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location" />
-                                    <span class="input-group-append">
-                                        <div class="input-group-text bg-transparent">
-                                            {% comment %} <i class="fa fa-search"></i> {% endcomment %}
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>        
-                        </div>
+                <form method="GET"  action="{% url 'filter_venues' %}" id="filterForm" class="popup" style="display: none;width: 400px;height: 400px;">
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Name..." style="margin-left: 20px;width: 200px;margin-top: 30px;" />
+                              
+                            </div>
+                        </div>        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div class="input-group">
+                                <input style="margin-left: 20px;width: 200px;"  class="form-control py-2 border-right-0 border" id="location" type="search" name="Location_exact" placeholder="location..." />
+                                
+                            </div>
+                        </div>        
+                    </div>
                        
-                        <div class="form-row">
+                        <div class="form-row" style="margin-left: 20px;margin-top: 20px;">
                           <div class="form-group col-md-2 col-lg-2">
                             <label for="viewCountMin">Minimum cost</label>
                             <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
@@ -642,14 +633,8 @@ nav a {
             <form class="search" method= "GET" >
                 {% csrf_token %}  <!--cross site request forgery token helps keep hackers from hijacking your form -->
                 <div class="search-container">
-                    {% comment %} <div class="filters">
-                        <a href="/filterform"><h1> Filters </h1></a>
-                    </div>  {% endcomment %}
-                    {% comment %} <span class="material-symbols-outlined">
-                        search
-                        </span> {% endcomment %}
-                        <input type="text" id="searching" name="searched" placeholder="Enter Location" >
-                        <img src="https://static.vecteezy.com/system/resources/previews/009/341/164/original/search-icon-sign-symbol-design-free-png.png" style="width:30px;height:auto;margin-left:-50px">
+                    <input type="text" id="searching" name="searched" placeholder="Enter Location" >
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2K1Y3RoV2luHhIPC2dD-PKo-RzccHBCxoMbRRBftSA&s" style="width:35px;height:auto;margin-left:-43px">
                 </div>
                 
                 {% comment %} <input class="form-c+ontrol me-2" type="search" placeholder="Search venues.." aria-label="Search" name ="searched"> {% endcomment %}
@@ -657,7 +642,7 @@ nav a {
             </form>
            </div> 
            <div id="result" class="photographer-container"></div>
-
+           <h1 style="display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:4vw;margin-right:3vw;flex-wrap:wrap;">Our photographers</h1>
         <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
             
         {% for photographer in photographers %}
@@ -680,12 +665,8 @@ nav a {
             <div class = "title">
                 <h3> {{ photographer.Type }} </h3>
                 
-                {% comment %} <div class="desc">
-                 <p>{{ photographer.Description }}</p>
-                </div> {% endcomment %}
-                
-                <div class="cost">
-                    <h4> NPR:{{ photographer.Cost }} </h4>
+                <div class="cost" style="color: rgb(0, 169, 0);margin-bottom: 10px;">
+                    <h4> रु: {{ photographer.Cost }} </h4>
                 </div>    
                 <div class="btn-container"> 
                     <button type="submit" class="btn-primary"><a href="/{{ photographer.id }}/explorephotographer">Explore</a></button>

@@ -87,13 +87,15 @@
         }
 
         #userDetails {
+            background-color: #FAF9F6;
             border: 1px solid #e7e7e7;
             padding: 10px;
             margin-bottom: 20px;
         }
         
         .event-container {
-            border: 1px solid #e7e7e7;
+            background-color: #FAF9F6;
+            
             padding: 10px;
             margin-bottom: 20px;
             align-items:center;
@@ -106,6 +108,7 @@
             margin:10px;
         }
         .event-detail {
+            background-color: #FAF9F6;
             font-size: 16px;
             margin-bottom: 5px;
             /*margin-left:50%;*/
@@ -117,6 +120,7 @@
             margin:10px;
         }
         .user-detail {
+            background-color: #FAF9F6;
             font-size: 16px;
             margin-bottom: 5px;
             margin-left:50%;
@@ -126,27 +130,31 @@
             border : 1px solid black;
         }
         .booking-container {
-            border: 1px solid #e7e7e7;
+            background-color: #FAF9F6;
+           
             padding: 10px;
             width:300px;
         }
         .booking-details-container{
             border: 1px solid #e7e7e7;
+            background-color: #FAF9F6;
 
         }
         .cost-details-container{
             border: 1px solid #e7e7e7;
-
+            background-color: #FAF9F6;
         }
         
         
         .booking-details-box {
+            background-color: #FAF9F6;
             margin-top:9px;
             display: flex;
             flex-direction: column;
         }
         .cost-container {
-            border: 1px solid #e7e7e7;
+            background-color: #FAF9F6;
+            
             padding: 10px;
             width:300px;
         }
@@ -401,8 +409,7 @@ nav a {
 </nav>
 
  <body>
-   {% comment %} <div id="eventDetails"></div> 
-   <div id="userDetails"></div>  {% endcomment %}
+    <div style="margin-bottom: -100px;">
    <p id='usernames' style="opacity:0">{{ username }}</p>
    {% comment %} <p id='firstname' style="opacity:0">{{ first_name }}</p>
    <p id='lastname' style="opacity:0">{{ last_name }}</p>
@@ -417,25 +424,52 @@ nav a {
    <input type="text" id="emailpp" style="opacity:0" value="{{ request.user.email }}">
    <input type="text" id="phone"  style="opacity:0" value="...">
 
-   <div class="container">
+</div>
+
+<img style="display: block;margin: auto;width: 75%;border-radius: 15px;height: 300px;object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1661315459644-18297c559777?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+<div class="container" style="display: flex;justify-content: center;margin-left: 250px;">
        <div class="left-column">
-        <img src="https://plus.unsplash.com/premium_photo-1661315459644-18297c559777?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""  style="width:500px;height: auto;">
-        <div id="bookingDetails" style="width:300px;margin-left: -13px;"></div>
+        <br>
+        <div id="eventDetails" style="width: 500px;max-width: 80vw;"></div>
         <div id="priceDetails" style="width:300px;margin-left: -13px;"></div>
-        <button id="payment-button">Pay with Khalti</button>
+
+        <!-- <button id="payment-button">Pay with Khalti</button> -->
+        <div class="button" style="display: flex;flex-direction: column;margin: 0px; margin-left: 10px;">
+            <h2>Pay options</h2>
+           
+           <button id="payment-button" style="padding: 20px;border-radius: 20px;background-color: #fff;margin-left: 0px;visibility: hidden;">khalti</button>
+           <div id="khalti_option" style="display: flex;align-items: center;justify-content: flex-start;border: 1px solid lightgray;border-radius:5px;width: 200px;padding: 10px;height: 40px;padding-top: 20px;cursor: pointer;">
+
+               <p style="font-size: 0.9rem;">Pay with Khalti</p>
+               <img src="{% static 'images/khalti.png' %}" style="width: 80px;height: auto;margin-top: -5px;" alt="">
+           </div>
+<br>
+           <div id="cash_option" style="display: flex;align-items: center;justify-content: flex-start;border: 1px solid lightgray;border-radius:5px;width: 200px;padding: 10px;height: 40px;padding-top: 20px;cursor: pointer;">
+               <p  style="font-size: 0.9rem;">Pay with Cash </p>
+               <img src="https://cdn-icons-png.flaticon.com/512/2331/2331920.png" alt="" style="width: 40px;height: auto;margin-top: -22px;margin-left: 14px;">
+           </div>
+           <br>
+           <button id="choice_btn" type="button" style="margin-top: 10px;width: 200px;background: blue;padding: 5px;color: white;cursor: pointer;border-radius: 5px;">Book Now</button>
+           <button id="btn" type="button" style="margin-top: 10px;visibility: hidden;">Book Now</button>
+         
+       
+        
+       
+           
+           <!-- <button  style="margin-left: 0px;">Book Now </button> -->
+           
+       </div>
         
     </div>
     <div class="right-column" >
-        <div id="eventDetails" style="width: 500px;max-width: 80vw;"></div>
-        <div id="userDetails"></div>
+        <div id="userDetails" style="margin-top: 30px;"></div>
+        <div id="bookingDetails" style="width:540px;margin-left: 0px;"></div>
         
     </div>
    </div>
 
-   <div style="display: flex;align-items: center;justify-content: left;width: 200px;margin-left: 48vw;">
-       <button id="btn">Book Now </button>
-      <img id="loading_image"  style="width:80px;height: auto;visibility: hidden;" src="https://th.bing.com/th/id/R.400472888ff31541d8d8bafe1481538b?rik=mtxVa7PUxEVTxw&pid=ImgRaw&r=0" alt="">
-</div>
+   <input type="text" 
+      <img id="loading_image"  style="width:80px;height: auto;margin-left:230px;visibility: hidden;" src="https://th.bing.com/th/id/R.400472888ff31541d8d8bafe1481538b?rik=mtxVa7PUxEVTxw&pid=ImgRaw&r=0" alt=""> 
 <div id="overlay"></div>
 
    <img src="https://th.bing.com/th/id/R.400472888ff31541d8d8bafe1481538b?rik=mtxVa7PUxEVTxw&pid=ImgRaw&r=0" id="messageman" style="display: none;" alt="">
@@ -468,7 +502,33 @@ nav a {
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  </body>
- 
+ <script>
+    let clicked=""
+    document.getElementById("khalti_option").addEventListener("click",(()=>{
+       
+        document.getElementById("khalti_option").style.border="2px solid lightgreen"
+        document.getElementById("cash_option").style.border="1px solid lightgray"
+        clicked="khalti"
+    }))
+
+    document.getElementById("cash_option").addEventListener("click",(()=>{
+        clicked="cash"
+        document.getElementById("khalti_option").style.border="1px solid lightgray"
+        document.getElementById("cash_option").style.border="2px solid lightgreen"
+        console.log("cash")
+    }))
+
+    document.getElementById("choice_btn").addEventListener("click",(()=>{
+        if(clicked!=""){
+            if(clicked=="khalti"){
+                document.getElementById("payment-button").click()
+            }else{
+                document.getElementById("btn").click()
+            }
+        }
+    }))
+
+</script>
 
  <script>
         const storedFormDataJson = localStorage.getItem('formData');
@@ -511,8 +571,7 @@ nav a {
         <br>
         <p ><strong></strong> ${formData.description} </p>
        
-        <br>
-            <p style="font-style:underline;"><strong></strong> ${formData.location}</p>
+        
             <br>
             <div class="facility">   
                 <ul>
@@ -521,7 +580,6 @@ nav a {
                     <li><span class="material-symbols-outlined" style="color:orange">restaurant</span>Restaurants</li>
                     <li><span class="material-symbols-outlined" style="color:purple">garage_home</span>Free Parking</li>
                     <br>
-                    <li><span class="material-symbols-outlined" style="margin-top:20px;color:blueviolet">mode_fan</span>AC</li>
                 </ul>
             </div>
             
@@ -773,6 +831,7 @@ var daysDifference = timeDifference / (1000 * 3600 * 24);
     </script>
 
 <script>
+    console.log("formData",formData)
 
     // const email = document.getElementById("emailpp").value;
      
@@ -793,6 +852,7 @@ var daysDifference = timeDifference / (1000 * 3600 * 24);
              "eventHandler": {
                   onSuccess(payload) {
                      console.log("payload:", payload)
+                     
                      const decoration_id = formData.id;
                      const date = formData.date.split("T")[0]
                      const end_date = formData.end_date.split("T")[0];
