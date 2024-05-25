@@ -20,6 +20,7 @@ class photographerbooking(models.Model): #making class
     date = models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField(default=timezone.now)
     cost= models.IntegerField(default=0, null=True, blank=True)
+    payment_status = models.CharField(max_length=100,default="pending")
 
 
 

@@ -192,3 +192,13 @@ def filter_photographers(request):
     } for photographer in photographers]
  
     return JsonResponse({'photographers': data})
+
+
+def delete_imagep(request, image_id):
+    if request.method == 'POST':
+        print("helloo")
+        image = get_object_or_404(ImageFile, pk=image_id)
+        image.delete()
+        return JsonResponse({'message': 'Image deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)

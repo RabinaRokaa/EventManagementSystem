@@ -93,14 +93,23 @@ def booking_processd(request):
         check_out = datetime.strptime(check_out, '%Y-%m-%dT%H:%M')
 
         # Create and save the booking object
-        booking_obj = decbooking(
-            User =request.user.username,
-            name=name,
-            cost=int(cost),
-            date=check_in,
-           
-            end_date=check_out
-        )
+        if data.get("paidbhayo")==1:
+            booking_obj = decbooking(
+                User =request.user.username,
+                name=name,
+                cost=int(cost),
+                date=check_in,
+                end_date=check_out,
+                payment_status="paid"
+            )
+        else:
+             booking_obj = decbooking(
+                User =request.user.username,
+                name=name,
+                cost=int(cost),
+                date=check_in,
+                end_date=check_out,
+            )
         #if Venue_image:  # Check if an image was uploaded
             #booking_obj.Venue_image = Venue_image # Associate the image with the venue
         
@@ -209,9 +218,9 @@ def verify_paymentd(request):
     name = data.get('name')
     email = data.get('email')
     amounts = data.get('amount') / 100
-    decoration = data.get('decoration_id')
-    print("jwhbfjwbfwefnwnefjweiojfiweifojwejfoweifjweoifjjwef",decoration)
-    decoration_ids = decoration.objects.get(id=decoration)   
+    decorationss = data.get('decoration')
+    print("jwhbfjwbfwefnwnefjweiojfiweifojwejfoweifjweoifjjwef",decorationss)
+    decoration_ids = decoration.objects.get(id=decorationss)   
     # print("amount=========================================", amounts, decoration)
     
 
@@ -240,7 +249,7 @@ def verify_paymentd(request):
             date=date,
             name=name,
             email=email,
-            end_date=enddate,
+            enddate=enddate,
             status='pending',
             pid=idx,
             payment_status='Paid',

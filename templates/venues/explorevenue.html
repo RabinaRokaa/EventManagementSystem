@@ -641,18 +641,7 @@ nav a {
     }
 
     /* Footer styles */
-footer {
-    color: black;
-    border: 1px black;
-    
-    box-shadow: 2px 2px 4px 2px rgba(139, 69, 19, 0.5);
-    color:black;
-    text-align: right;
-    padding: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Align items vertically in the center */
-}
+
 
 .copy {
     /* background-color: rgba(0, 59, 149, 1); */
@@ -684,16 +673,7 @@ footer {
 <body>
 
         <!-- To display the messages, use the following tag -->
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <!-- For displaying as bold -->
-            <strong>Message:</strong> {{ message }}
-            <!-- For closing the message tag -->
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %} 
+    
     
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
@@ -737,10 +717,10 @@ footer {
     <!-- Main Content -->
     <div class="main-content">
         <!--to show image below the navbar-->
-        <img src="{{ venue.Venue_image.first.image.url }}" alt="Main Image" width="50%" style="height: 80vh; border-radius:15px; margin:15px;">
+        <img src="{{ venue.Venue_image.first.image.url }}" alt="Main Image"  style="width: 50vw;height: 80vh;object-fit: cover; border-radius:15px; margin:15px;">
 
         <!-- Single Venue Details -->
-        <div id="venue-details">
+        <div id="venue-details" style="width:50vw;">
             <h2 id="venue_name">{{ venue.Name }}</h2>
             <h2 id="id" style="opacity: 0;">{{ venue.id }}</h2>
             <hr>   <!--for horizontal line-->
@@ -847,13 +827,13 @@ footer {
          
     </div> 
      <hr>
-     <div class="contactuscontent flex">
+     <!-- <div class="contactuscontent flex">
         <!-- <div class="logoo" style="margin-left:100px; flex-wrap: wrap; height: 20px; width: 30px;">
             <img src="{% static 'images/contact.jpg' %}" alt="logo">
 
 
         </div> -->
-        <div class="image-containerr">
+        <!-- <div class="image-containerr">
             <img src="{% static 'images/contact2.png' %}" alt="logo" style="height: 650px; width: 600px; justify-content: space-around;">
         </div>
             <form class="contactusform" method="post">
@@ -870,9 +850,9 @@ footer {
                 arrow_forward
                 </span></a> </div>
 
-        </div>
+        </div>  -->
      </div>
-     <hr>
+     
     <div class="more">
         
         <div class="image-container">
@@ -914,6 +894,16 @@ footer {
                 data.append('Venue_image', Venue_image);
                 data.append('date', date);
                 data.append('id', id);
+                const date1 = document.getElementById('id_check_in').value;
+                const end_date2 = document.getElementById('id_check_out').value;
+                const checkInDate = new Date(date1);
+                const checkOutDate = new Date(end_date2);
+                
+        
+                if (checkInDate >= checkOutDate) {
+                    alert('Check-in date must be before the check-out date.');
+                    return 0;
+                }
         
                 const response = await fetch('/check-booking-availability/', {
                     method: 'POST',
@@ -941,6 +931,7 @@ footer {
             console.log(window.location.href)
             bookingForm.addEventListener('click',async function (event) {
 
+
                 event.preventDefault(); // Prevent the default form submission behavior
                 
                 // Gather data from HTML elements
@@ -958,7 +949,8 @@ footer {
                 const date = document.getElementById('id_check_in').value;
               
                 await checkbooking(event_type,name,location,capacity,description,date,id)
-
+                const end_date = document.getElementById('id_check_out').value;
+               
                 console.log(status)
 
                 if (status==0){
@@ -968,7 +960,9 @@ footer {
                 }
                
 
-                const end_date = document.getElementById('id_check_out').value;
+
+              
+                
                 const cost = document.getElementById('costVenue').textContent;
                 // Prepare data to be sent to the backend
                 const formData = new FormData();

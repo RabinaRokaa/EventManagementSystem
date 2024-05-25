@@ -86,7 +86,7 @@ body {
 .container {
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
 }
 
 .card {
@@ -98,6 +98,7 @@ body {
     width: 40%;
     justify-content: center;
     margin-left: 30%;
+    margin-bottom: 100px;
 }
 
 .logo {

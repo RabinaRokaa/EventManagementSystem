@@ -97,7 +97,7 @@ h1{
 
 h2{
     
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 
 h3{
@@ -107,7 +107,7 @@ h3{
 
 h4{
     
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 h5{
@@ -598,6 +598,18 @@ button[type="submit"] {
 }
 
 #searching {
+    padding:12px 25px;
+    border-radius:10px;
+    border:1px solid lightgray;
+    margin-right: 20px; /* Example margin */
+}
+#searching1 {
+    padding:12px 25px;
+    border-radius:10px;
+    border:1px solid lightgray;
+    margin-right: 20px; /* Example margin */
+}
+#searching2 {
     padding:12px 25px;
     border-radius:10px;
     border:1px solid lightgray;

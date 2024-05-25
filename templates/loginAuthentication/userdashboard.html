@@ -35,11 +35,24 @@
         overflow: hidden;
     }
     .chat-messages {
-        height: 300px;
+        height: 400px;
         overflow-y: auto;
         padding: 10px;
         background-color: #fff;
     }
+    .chat-messages::-webkit-scrollbar {
+    width: 4px; /* Adjust the width of the scrollbar */
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: rgb(85, 85, 255); /* Change the scrollbar thumb color to blue */
+    border-radius: 4px; /* Add rounded corners to the scrollbar thumb */
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Optional: Change the background of the scrollbar track */
+    border-radius: 4px; /* Add rounded corners to the scrollbar track */
+}
     /* .message {
         background-color: #e6e6e6;
         padding: 8px 12px;
@@ -53,16 +66,16 @@
     border-radius: 10px; */
     margin-bottom: 10px;
     word-wrap: break-word; /* Add this line */
-    
+   
 }
 
     .message.sent {
         /* background-color: #d9f1ff; */
         text-align: right;
-      
+     
     }
     .message.received {
-        
+       
         max-width: 200px; /* Example maximum width */
         min-height: 40px;
     }
@@ -197,13 +210,13 @@
         border-radius: 1px solid black;
         box-shadow: 1px solid black;
     }
-    .card-text{
+    /* .card-text{
         margin: 15px;
         text-align: center;
         font-size: 1.3rem;
         text-decoration: underline;
         cursor: pointer;
-    }
+    } */
     .button{
         background-color: #007bff;
         color: #ffffff;
@@ -243,7 +256,7 @@
 
 .rght{
     border-radius:10px;
-    
+   
     border: 2px solid whitesmoke;
     /* width: auto;
     height: auto; */
@@ -330,13 +343,13 @@ hr {
         background-position: center;
         height: 500px;
         display: flex;
-        
+       
     }
 
     .text h3{
         color: rgb(69, 68, 68);
         margin-top: 30px;
-        
+       
         font-weight: 300;
     }
     .text h1{
@@ -359,11 +372,37 @@ hr {
 
 
     .received p{
-        background-color: #e6e6e6;
+        /* background-color: #e6e6e6; */
         border-radius: 10px;
         margin: 10px;
         padding: 5%;
     }
+   
+
+
+    .message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.message.sent {
+    flex-direction: row-reverse;
+}
+
+.message.received {
+    flex-direction: row;
+}
+
+.message .avatar {
+    margin: 0 10px;
+}
+
+.message .message-content {
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 60%;
+}
 
     /* .chat-container {
     width: 450px;
@@ -393,6 +432,52 @@ hr {
         color: white;
         align-self: flex-end;
     } */
+
+
+        .venue-containerr:hover{
+            transition: .3s;
+            transform: scale(1.1);
+            border-radius: 10px;
+        }
+        .venue-details {
+            margin-top: 10px;
+        }
+        .venue-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .booking-count {
+            color: #666;
+        }
+
+            #searching1 {
+        padding:12px 25px;
+        border-radius:10px;
+        border:1px solid lightgray;
+        margin-right: 20px; /* Example margin */
+    }
+    #searching2 {
+        padding:12px 25px;
+        border-radius:10px;
+        border:1px solid lightgray;
+        margin-right: 20px; /* Example margin */
+    }
+
+    h2{
+    
+    font-size: 1.5rem;
+}
+
+h3{
+    
+    font-size: 1.1rem;
+}
+
+h4{
+    
+    font-size: 1rem;
+}
 
 </style>
 
@@ -485,10 +570,64 @@ hr {
       <main style="margin-top: 1.7rem;margin-left: 25px;">
         <div id="home" class="tab-content active" style="margin-top: 50px;">
          
-          <div>
+          
             <h3 id='greetings'></h3>
             <br>
-         
+          
+           <div class="recommended_venues">
+            <h2>Recommended Venues:</h2>
+            <div style="display: flex;align-items: center;justify-content: flex-start;">
+                {% for venue in top_3_venues %}
+                <div class="venue-containerr" style="border: 3px solid rgb(208, 208, 208);width:250px;padding: 20px;border-radius: 10px;margin-right: 30px;" onclick='redirectVenue("{{ venue.id }}","{{ venue.Name }}")'>
+                    <div class="venue-name">{{ venue.Name }}</div>
+                    <img src="https://cdn-icons-png.freepik.com/512/2132/2132657.png" style="width:50px;height: auto;margin-bottom: 20px;margin-top: 20px;" alt="">
+                    <div class="venue-detailss">
+                        <p><strong></strong> {{ venue.Location }}</p>
+                        <p><strong></strong> {{ venue.Capacity }}</p>
+    
+                    </div>
+                    <div class="booking-count" style="background-color:rgb(174 185 219);padding: 5px;border-radius: 5px;color: white;width: 105px;margin-top: 15px;">Booked {{ venue.num_bookings }} times</div>
+                </div>
+                {% endfor %}
+
+            </div>
+           </div>
+            <div class="cards">
+                <div data-aos="zoom-in-up" data-aos-duration="500" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <img  src="{% static 'images/hotel.png' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Affordable Venues</h5>
+                        <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">Discover a variety of affordable venues perfect for any occasion.</p>
+                        <a href="/venue" style="display: inline-block; padding: 0.5rem 1rem; background-color: #e2aa28; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Venues</a>
+                    </div>
+                </div>
+                
+                <div data-aos="zoom-in-up" data-aos-duration="1000" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <img class="card-img-top" src="{% static 'images/dec.jpg' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Stylish Decorations</h5>
+                        <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">Discover a variety of decorations perfect for any occasion.</p>
+                        <a href="/decorations" style="display: inline-block; padding: 0.5rem 1rem; background-color: #b980ff; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Decorations</a>
+                    </div>
+                </div>
+                <div data-aos="zoom-in-up" data-aos-duration="1500" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <img class="card-img-top" src="{% static 'images/photo.jpg' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Photographers</h5>
+                        <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">Our photographers are ready to capture your beautiful moments</p>
+                        <a href="/photographers" style="display: inline-block; padding: 0.5rem 1rem; background-color: #57794d; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Photographers</a>
+                    </div>
+                </div>
+                <div data-aos="zoom-in-up" data-aos-duration="2000" class="card" style="width: 18rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <img class="card-img-top" src="{% static 'images/venue.jpg' %}" alt="Card image cap" style="width: 300px; height: 200px;object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <h5  style="font-size: 1.25rem; margin-bottom: 0.75rem;text-decoration: none;">Hotels</h5>
+                        <p class="card-text" style="color: #555; margin-bottom: 1.5rem;">All the hotels are at gorgeous location</p>
+                        <a href="/venue" style="display: inline-block; padding: 0.5rem 1rem; background-color: #1772b4; color: white; border-radius: 4px; text-decoration: none; font-size: 1rem; text-align: center;">Explore Hotels</a>
+                    </div>
+                </div>
+            
+            </div>
 
           <!-- Image below Navbar -->
             <!-- <img src="{% static 'images/image.jpg' %}" alt="Main Image" style="max-width: 100%; height: auto;margin-top: 0;"> -->
@@ -499,25 +638,25 @@ hr {
                     <h3><span class="material-symbols-outlined" style="color: #003b95;">
                         check
                         </span>Find Hotels and Venue</h3>
-    
+   
                     <h3><span class="material-symbols-outlined" style="color: #003b95;">
                         check
                         </span>Choose your customize decoration types </h3>
-    
+   
                     <h3><span class="material-symbols-outlined" style="color: #003b95;">
                         check
                         </span>Easily navigate to the photographer style</h3>
-    
+   
                     <h3><span class="material-symbols-outlined" style="color: #003b95;">
                         check
                         </span>Find Hotels and Venue</h3>
-                    
-                </div> 
+                   
+                </div>
                 <div>
                     <img class="imgd" src="{% static 'images/dash1.png' %}">
                 </div>
                
-              </div> 
+              </div>
         </div>
         <div class="both" >
             <div class="rght">
@@ -558,8 +697,8 @@ hr {
                         border-radius: 1px solid white;">Send</button>
                     </div>
                 </div>
-                
-                
+               
+               
               </div>
           <div class="left" style="display: block; border:2px solid whitesmoke; box-shadow: #fff;">  
             <h2>Your Recent Bookings</h2>
@@ -574,17 +713,17 @@ hr {
                                             <th>Name</th>
                                             <th>Address</th>
                                             <th>Date</th>
-                                            
+                                           
                                             <th>Cost</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for booking in recent_bookings %}
-                                        <tr> 
+                                        <tr>
                                             <td>{{ booking.id }}</td>
                                             <td>{{ booking.Name }}
                                             <td>{{ booking.Location }}</td>
-                                            
+                                           
                                             <td>{{ booking.Date }}</td>
                                             <td>{{ booking.Cost }}</td>
                                         </tr>
@@ -598,9 +737,9 @@ hr {
                 <p>No recent bookings</p>
 
             {% endif %}
-            
+           
           </div>
-          <!-- <div class="rght">
+           <div class="rght">
             <h2 style="text-align: center;"> Chat </h2>
             <div class="chat-container">
                 <div class="message incoming">
@@ -634,17 +773,17 @@ hr {
                     <button onclick="sendMessage()">Send</button>
                 </div>
             </div>
-            
-            
+           
+           
           </div> -->
             <!-- <div class="chat-container">
                 <div class="chat-box" id="chat-box">
-                     Messages will be displayed here 
+                     Messages will be displayed here
                     {% for message in messages %}
                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    
+                   
                         <strong>Message:</strong> {{ message }}
-                        
+                       
                     </div>
                  {% endfor %}
                 </div>
@@ -653,7 +792,7 @@ hr {
                     <button onclick="sendMessage()">Send</button>
                 </div>
             </div> -->
-         </div> -->
+         
          
          <!-- <div class="both" >
           <div class="left" style="display: block; border:2px solid whitesmoke; box-shadow: #fff;">  
@@ -700,7 +839,7 @@ hr {
           </div>
          </div> -->
 
-            <div class="cards">
+            <!-- <div class="cards">
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{% static 'images/hotel.png' %}" alt="Card image cap">
                     <div class="card-body">
@@ -725,7 +864,7 @@ hr {
                       <h3 class="card-text">Hotels</h3>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div id="venues" class="tab-content active">
             <!-- <h2>Venues Content</h2> -->
@@ -840,10 +979,10 @@ hr {
                    </div>
                    <div id="result" class="venue-container"></div>
          
-                 <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
+                 <div class="second" style='display:flex;justify-content:space-evenly;margin-bottom:50px;margin-top:40px;width:80vw;flex-wrap:wrap;'>
                      
                  {% for venue in venues %}
-                  <div class=" middle">
+                  <div class=" middle" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                     <div class = "car">
                      <div class="name">
                       <h2>{{venue.Name}} </h2>
@@ -851,7 +990,7 @@ hr {
                      <div class="pictures">
                          {% if venue.Venue_image.all %}  
                          <div class="img">
-                             <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover" >
+                             <img src="{{ venue.Venue_image.first.image.url }}" alt="{{ venue.Name }}" style="width:280px;height:150px;object-fit:cover;border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                          </div>
                      {% endif %}
                      </div>
@@ -994,10 +1133,10 @@ hr {
                        <div id="result1" class="decoration-container"></div>
                        <br>
                        
-                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
+                     <div class="second" style='display:flex;justify-content:space-evenly;margin-bottom:50px;margin-top:40px;width:80vw;flex-wrap:wrap;''>
                          
                         {% for decoration in decorations %}
-                        <div class=" middle">
+                        <div class=" middle" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                           <div class = "car">
                            <div class="name">
                             <h2>{{decoration.Name}} </h2>
@@ -1005,7 +1144,7 @@ hr {
                            <div class="pictures">
                            {% if decoration.Decoration_image.all %}  
                                <div class="img">
-                                   <img src="{{ decoration.Decoration_image.first.image.url }}" alt="{{ decoration.Name }}" style="width:280px;height:150px;object-fit:cover" >
+                                   <img src="{{ decoration.Decoration_image.first.image.url }}" alt="{{ decoration.Name }}" style="width:280px;height:150px;object-fit:cover;border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                                </div>
                            {% endif %}
                            </div>  
@@ -1159,10 +1298,10 @@ hr {
                        <div id="result2" class="photographer-container"></div>
                        <br>
                        
-                     <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:93vw;flex-wrap:wrap;'>
+                     <div class="second" style='display:flex;justify-content:space-evenly;margin-bottom:50px;margin-top:40px;width:80vw;flex-wrap:wrap;'>
                          
                         {% for photographer in photographers %}
-                        <div class=" middle">
+                        <div class=" middle" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                           <div class = "car">
                            <div class="name">
                             <h2>{{photographer.Username}} </h2>
@@ -1170,7 +1309,7 @@ hr {
                            <div class="pictures">
                            {% if photographer.Photographer_image.all %}  
                                <div class="img">
-                                   <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Username }}" style="width:280px;height:150px;object-fit:cover" >
+                                   <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Username }}" style="width:280px;height:150px;object-fit:cover;border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                                </div>
                            {% endif %}
                            </div>    
@@ -1178,9 +1317,9 @@ hr {
                            <div class = "title">
                                <h3> {{ decoration.Type }} </h3>
                                
-                               <div class="desc">
+                               <!-- <div class="desc">
                                 <p>{{ photographer.Description }}</p>
-                               </div>
+                               </div> -->
                                
                                <div class="cost">
                                    <h4> NPR:{{ photographer.Cost }} </h4>
@@ -1277,6 +1416,7 @@ hr {
                             <td>{{ booking.date }}</td>
                             <td>{{ booking.end_date }}</td>
                             <td>{{ booking.cost }}</td>
+                            <td>{{ booking.payment_status }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -1306,6 +1446,7 @@ hr {
                             <td>{{ booking.date }}</td>
                             <td>{{ booking.end_date }}</td>
                             <td>{{ booking.cost }}</td>
+                            <td>{{ booking.payment_status }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -1356,9 +1497,9 @@ hr {
                     </div>
                 </div>
             </div>
-            
+           
          
-        
+       
         <div id="settings" class="tab-content active">
                 <div class="editprofile">
                   <h2>Edit Profile</h2>
@@ -1400,6 +1541,11 @@ hr {
     </div>  
 
 <script>
+function redirectVenue(id,name){
+    console.log("hello")
+    window.location.href=`/${id}/explorevenue/?Name=${name}`
+}
+
     document.addEventListener("DOMContentLoaded", function() {
         var sidebarLinks = document.querySelectorAll('.sidebar-link');
    
@@ -1452,34 +1598,29 @@ hr {
                     data.venues.forEach(venue => {
                         console.log(venue)
                         const venueHTML = `
-                         
-                              <div class="middle" style = 'display: flex;'>
+                              <div class="middle" style = 'display: flex; height:330px'>
                                 <div class="car">
                                     <div class="name">
                                         <h2>${venue.Name}</h2>
                                     </div>
 
-
-                                   
                                     <div class="pictures">
                                         ${venue.Venue_images && venue.Venue_images.length > 0 ?
                                             venue.Venue_images.map((image, index) => index === 0 ? // Corrected syntax here
                                                 `
-                                                <div class="img">
-                                                    <img src="${image}" alt="${venue.Name}" width="280" height="150">
+                                                <div >
+                                                    <img src="${image}" alt="${venue.Name}" height="150" width="300" style="border-radius:10px">
                                                 </div>
                                                 ` : '').join('') : ''}
                                     </div>
                                     <div class="title">
                                         <h3>${venue.Location}</h3>
-                                        <div class="desc" style = 'position:relative'>
-                                            <p>${venue.Description}</p>
-                                        </div>
-                                        <div class ="cost" style = 'position:absolute; bottom: 10px; left: 60%;  '>
+                                     
+                                        <div class ="cost" style = 'position:absolute; bottom: 20px; left: 60%;'>
                                             <h4>NPR: ${venue.Cost}</h4>
                                         </div>
                                        
-                                        <div class="btn-container" style = 'position:absolute; bottom:2px; margin-top:10px; '>
+                                        <div class="btn-container" style = 'position:absolute; bottom:2px; margin-top:50px;margin-bottom:10px '>
                                             <button type="submit" class="btn-primary"><a href="/${ venue.id }/explorevenue">Explore</a></button>
                                         </div>
                                     </div>
@@ -1681,6 +1822,14 @@ hr {
 
  </script>
  <script>
+    fetchMessages(1)
+document.addEventListener('DOMContentLoaded', function() {
+    setInterval(() => {
+        fetchMessages(0);
+    }, 2000);
+});
+
+
    function sendMessage() {
     var messageInput = document.getElementById("message-input");
     var message = messageInput.value.trim();
@@ -1724,6 +1873,7 @@ hr {
         })
         .then(response => response.json())
         .then(data => {
+            fetchMessages(1)
             console.log(data);
          
             // Handle response if needed
@@ -1734,6 +1884,37 @@ hr {
         });
     }
 }
+
+function fetchMessages(stat) {
+    fetch('/get_messages/')
+        .then(response => response.json())
+        .then(data => {
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = ''; // Clear existing messages
+
+            data.messages.forEach(message => {
+                const isSender = message.user === '{{ request.user.username }}';
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', isSender ? 'sent' : 'received');
+
+                messageElement.innerHTML = `
+                    <div class="avatar">
+                        <img src="${isSender ? 'https://cdn.vectorstock.com/i/1000v/41/11/flat-business-woman-user-profile-avatar-icon-vector-4334111.avif' : 'https://cdn.vectorstock.com/i/1000v/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.avif'}"   alt="${isSender ? 'Your Avatar' : 'Outgoing User'}">
+                    </div>
+                    <div class="message-content" style="background-color: ${isSender ? '#c4c8ff' : '#f2f2f2'};">
+                        <p style="margin: 0;font-weight:bold">${message.user}</p>
+                        <p style="margin: 0;" style="${isSender ? 'width:100px':'width:100px'}">${message.message}</p>
+                    </div>
+                `;
+                chatMessages.appendChild(messageElement);
+            });
+            if(stat){
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        })
+        .catch(error => console.error('Error fetching messages:', error));
+}
+ 
 
 </script>
  <script>

@@ -350,23 +350,7 @@ nav a {
 
       
       
-        footer {
-            
-            background-color: rgba(0, 59, 149, 1);
-            color: white;
-            text-align: right;
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Align items vertically in the center */
-         }
-        
-         .copy {
-            background-color: rgba(0, 59, 149, 1);
-            color: white;
-            text-align: left;
-            padding-bottom: 10px;
-         }
+
         
          .company {
             display: flex;
@@ -400,7 +384,14 @@ nav a {
             margin-top:60px;
             margin-right:350px;
         }
-
+        
+        .copy {
+    /* background-color: rgba(0, 59, 149, 1); */
+    color: black;
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 20px;
+}
         
         .filters{
                 text-align:center;
@@ -696,19 +687,11 @@ nav a {
     
     <!-- Footer -->
     <footer>
-        <div class="copy">
+        <div class="copy" style="padding-top: 30px;">
             <p>Copyright © 2023
-                by Rabina Roka.</p>
+                by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUST YOUR
+                PRIVACY CHOICES</p>
         </div>
-        <div class="company">
-            <p>Company</p>
-            <a href="#">Contact Us</a>
-            <a href="#">About us</a>
-            <a href="#">FAQs</a>
-        </div>
-
-
-
     </footer>
    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -827,8 +810,8 @@ nav a {
                                         <img src="${venue.Venue_images[0]}" alt="${venue.Name}" style="width: 260px; height: 150px; object-fit: cover; border-radius: 8px;">
                                     </div>` : ''}
                             </div>
-                            <div class="title" style="margin-top: 15px;">
-                                <h4 style="text-decoration: none; font-weight: bold; font-size: 1.2rem;color:rgb(103, 103, 192);">${venue.Location}</h4>
+                            <div class="title" style="margin-top: 15px;">                               
+                                <h4 style="text-decoration: none; font-weight: 500; font-size: 1.2rem;color: rgb(0, 81, 195);;">${venue.Location}</h4>
                                 <div style="display: flex; align-items: center; flex-direction: column-reverse;">
                                     <div class="btn-container">
                                         <button type="submit" class="btn-primary" style="width: 100px; background-color: rgb(0, 81, 195);">

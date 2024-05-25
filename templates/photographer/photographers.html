@@ -235,6 +235,10 @@ nav a {
             padding:0px;
         }
         
+        .form-row {
+            gap: 50px;
+        }
+        
 
         .search {
             
@@ -274,7 +278,7 @@ nav a {
          }
 
          .name{
-            color:rgba(0, 108, 228, 1);
+            color:black;
             font-weight:2px bold;
          }
         
@@ -296,32 +300,23 @@ nav a {
        
 
         .second > .middle:hover{
-            box-shadow: 2px 2px 10px gray;
+            box-shadow: 2px 2px 10px rgb(226, 226, 226);
         } 
 
         .middle:hover{
-            box-shadow: 2px 2px 10px gray;
+            box-shadow: 2px 2px 10px rgb(199, 199, 199);
         } 
 
+
+        .copy {
+    /* background-color: rgba(0, 59, 149, 1); */
+    color: black;
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 20px;
+}
       
-      
-        footer {
-            
-            background-color: rgba(0, 59, 149, 1);
-            color: white;
-            text-align: right;
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Align items vertically in the center */
-         }
-        
-         .copy {
-            background-color: rgba(0, 59, 149, 1);
-            color: white;
-            text-align: left;
-            padding-bottom: 10px;
-         }
+
         
          .company {
             display: flex;
@@ -414,7 +409,7 @@ nav a {
            
         /* Style for the input box */
         .form-control {
-             width: 150px; /* Set the width of the input box */
+             width: 100px; /* Set the width of the input box */
         }
 
 
@@ -557,7 +552,7 @@ nav a {
                     <div class="form-row">
                         <div class="form-group col-12">
                             <div class="input-group">
-                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Name..." style="margin-left: 20px;width: 200px;margin-top: 30px;" />
+                                <input class="form-control py-2 border-right-0 border" type="search" id="Name" name="Name_contains" placeholder="Name..." style="margin-left: 20px;width: 150px;margin-top: 30px;" />
                               
                             </div>
                         </div>        
@@ -599,18 +594,7 @@ nav a {
                             </select> {% endcomment %}
                           </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-12">
-                                <label for="category">Category</label>
-                                <select id="category" class="form-control" name="category">
-                                  <option selected>Choose...</option>
-                                  {% for cat in categories %}
-                                  
-                                  <option value="{{ cat }}">{{ cat }}</option>
-                                  {% endfor %}
-                                </select>
-                            </div>        
-                        </div>
+                        
                         <div class="form-group">
                           
                             {% comment %} <input class="form-check-input" type="checkbox" id="reviewed" name="reviewed">
@@ -646,15 +630,15 @@ nav a {
         <div class="second" style='display:flex;justify-content:flex-start;margin-bottom:50px;margin-top:40px;width:95vw;margin-left:3vw;margin-right:3vw;flex-wrap:wrap;'>
             
         {% for photographer in photographers %}
-         <div class=" middle">
+         <div class=" middle" style="border: 1px solid rgb(215, 215, 215);border-radius: 15px;">
            <div class = "car">
-            <div class="name">
+            <div class="name" style="color: black; font-weight: 500;margin-bottom: 20px;">
              <h2>{{photographer.Username}} </h2>
             </div>
             <div class="pictures"> 
                 {% if photographer.Photographer_image.all %}   
                 <div class="img"> 
-                    <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Name }}" style="width:280px;height:150px;object-fit:cover" >
+                    <img src="{{ photographer.Photographer_image.first.image.url }}" alt="{{ photographer.Name }}" style="width:260px;height:150px;object-fit:cover;border-radius: 8px;">
                 </div>
             {% endif %}
             </div>
@@ -682,21 +666,12 @@ nav a {
        </div>
     </div>
     
-    <!-- Footer -->
     <footer>
-        <div class="copy">
+        <div class="copy" style="padding-top: 30px;">
             <p>Copyright © 2023
-                by Rabina Roka.</p>
+                by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUST YOUR
+                PRIVACY CHOICES</p>
         </div>
-        <div class="company">
-            <p>Company</p>
-            <a href="#">Contact Us</a>
-            <a href="#">About us</a>
-            <a href="#">FAQs</a>
-        </div>
-
-        
-
     </footer>
    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

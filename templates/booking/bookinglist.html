@@ -214,6 +214,7 @@
                 <th> Date</th>
                 <th> EndDate</th>
                 <th>Cost</th>
+                <th>Status</th>
                 <th>Actions</th>
                 {% comment %} <th>booking Image</th> {% endcomment %}
                 {% comment %} <th>Actions</th> {% endcomment %}
@@ -233,11 +234,12 @@
                     <td>{{ booking.Date }}</td>
                     <td>{{ booking.EndDate}}</td>
                     <td>{{ booking.Cost}}</td>
+                    <td>{{ booking.payment_status}}</td>
                     
                     <td>
                         <a href="{% url 'booking:booking_detail' booking.id %}" class="btn btn-info"><span class="material-symbols-outlined" style="color:gray">visibility</span> </a>
-                        {% comment %} <button type="button" class="btn btn-info view-btn" data-toggle="modal" data-target="#bookingModal{{ booking.id }}">View</button> {% endcomment %}
-                        <!-- <a href="{% url 'booking:booking_update' booking.id %}" class="material-symbols-outlined" style="color:#4141a2">edit</span></a> -->
+                        
+                        <a href="{% url 'booking:booking_update' booking.id %}" class="material-symbols-outlined" style="color:#4141a2">edit</span></a> 
                         <a href="{% url 'booking:delete_booking' booking.id %}" onclick="return confirmDelete();" class="btn btn-danger" style="color:#ab3a4f"><span class="material-symbols-outlined">delete</span></a>
                     </td>   
                 </tr>
@@ -245,6 +247,87 @@
         </tbody>
       </table>
     </div>
+
+    <br>
+            <hr>
+            <div class="dechistory" style="flex-wrap: wrap;">
+                <h2> Your history of decoration booking </h2>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> id </th>
+                         
+                            <th>Username</th>
+                            <th>Decoration Name</th>
+                            {% comment %} <th>Description</th>
+                            <th>Decoration</th>
+                            <th>Photography</th> {% endcomment %}
+                            <th>Date</th>
+                            <th>End Date</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dbooking in dbookings %}
+                        <tr>
+                            <td>{{ dbooking.id }}</td>
+                            <td>{{ dbooking.User }}
+                            <td>{{ dbooking.name }}</td>
+                            
+                            <td>{{ dbooking.date }}</td>
+                            <td>{{ dbooking.end_date }}</td>
+                            <td>{{ dbooking.cost }}</td>
+                            <td>{{ dbooking.payment_status }}</td>
+                            <td>
+                                
+                                
+                                <a href="/bookingd/{{dbooking.id}}/update/" class="material-symbols-outlined" style="color:#4141a2">edit</span></a> 
+                             
+                            </td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+             <br>
+             <hr>
+             <div class="photohistory" style="flex-wrap: wrap;">
+                <h2> Your history of photographer booking </h2>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th> id </th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>End Date</th>
+                            <th>Cost</th>
+                            <th>status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in pbookings %}
+                        <tr>
+                            <td>{{ booking.id }}</td>
+                            <td>{{ booking.username }}</td>
+                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.end_date }}</td>
+                            <td>{{ booking.cost }}</td>
+                            <td>{{ booking.payment_status }}</td>
+                            <td>
+                                
+                                
+                                <a href="/bookingp/{{booking.id}}/update/" class="material-symbols-outlined" style="color:#4141a2">edit</span></a> 
+                            </td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
     </main>
    </div>
 

@@ -28,8 +28,11 @@ def venues(req):
 
 @csrf_exempt
 def explorevenue(request, id):
+    if request.GET.get("Name",0):
+        venue=Venues.objects.get(Name=request.GET.get('Name'))
+    else:
     # Fetch the venue with the given ID from the database(euta venue click garda tesko matra data display garna)
-    venue = get_object_or_404(Venues, id=id)
+        venue = get_object_or_404(Venues, id=id)
     
     # Render the template with the venue data
     return render(request, 'venues/explorevenue.html', {'venue': venue})

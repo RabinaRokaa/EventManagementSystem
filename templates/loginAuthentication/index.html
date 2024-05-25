@@ -19,7 +19,7 @@
         background-image: url("static/images/index2.jpg");
         background-size: cover;
         background-position: center;
-        height: 80vw;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -53,11 +53,11 @@
     }
 
     .btn-container {
-        margin-top: -285vh;
+        /* margin-top: -285vh; */
     }
 
     .btn-container h2 {
-        margin-top: 150vh;
+        margin-top: -40vh;
         color: white;
     }
 
@@ -159,7 +159,7 @@
 
     .logo_img {
         height: auto;
-        width: 100px;
+        width: 120px;
         display: block;
 
     }
@@ -283,27 +283,28 @@
             </div>
           
         </div>
-
+<hr>
         <div class="sec-container" style="margin-top: 100px;">
 
             <div class="contactuscontent flex" style="display: flex;width: 100%;flex-wrap: wrap;">
                 <div class="logo" style="margin-left:100px; flex-wrap: wrap;">
                     <img style="width: 400px;height: auto;" src="https://img.freepik.com/free-vector/organic-flat-man-customer-support_23-2148893295.jpg" alt="logo">
                 </div>
-                <form class="contactusform" method="post">
+                <form id="contactForm" class="contactusform" method="post" action="/contact/api/">
                     {% csrf_token %}
                     <h2>Contact Us</h2>
                     <label for="username">Username</label><br>
-                    <input type="text" id="username" name="username" placeholder="Name"><br>
+                    <input type="text" id="username" name="username" value="{{request.user.username}}" placeholder="Name"><br>
                     <label for="email">Email</label><br>
                     <input type="text" id="email" name="email" placeholder="Email"><br>
                     <label for="message">Message</label><br>
-                    <textarea class="cutxt" rows="4" name="message" placeholder="Enter your message here...">
-              </textarea><br>
-                    <button class="confirm contactusbutton flex" type="submit" name="button">Submit</button>
+                    <textarea class="cutxt" rows="4" name="message" placeholder="Enter your message here..."></textarea><br>
+                    <button id="submitBtn" class="confirm contactusbutton flex" type="submit" name="button">Submit</button>
                 </form>
+                
             </div>
         </div>
+        <hr>
 
         <div class="about" style="display: flex; flex-direction: column; gap: 2rem; padding: 2rem; background-color: #f9f9f900; border-radius: 8px;">
             <!-- How we work section -->
@@ -331,21 +332,45 @@
 
     <!-- Footer -->
     <footer>
-        <div class="copy">
+        <div class="copy" style="padding-top: 30px;">
             <p>Copyright © 2023
-                by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUSTe YOUR
+                by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUST YOUR
                 PRIVACY CHOICES</p>
         </div>
-        {% comment %} <div class="company">
-            <p>Company</p>
-            <a href="#">Contact Us</a>
-            <a href="#">About us</a>
-            <a href="#">FAQs</a>
-        </div> {% endcomment %}
     </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
+      </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        var formData = new FormData(this);
+
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Your message has been submitted successfully!');
+                // Clear form fields or any other actions
+            } else {
+                alert('Failed to submit message. Please try again later.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting your message. Please try again later.');
+        });
+    });
+});
+
       </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

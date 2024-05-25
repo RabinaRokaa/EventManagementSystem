@@ -11,5 +11,6 @@ app_name = 'chat'
 urlpatterns = [
     path('chat/', views.chat, name= "chat"),  #Path for chat event
     path('chatinside/', views.chatinside, name= "chatinside"),  #Path for chat inside event
-    path('send_message/',views.send_message)
+    path('send_message/',views.send_message),
+    path('chat_api/',views.chat_api)
 ]

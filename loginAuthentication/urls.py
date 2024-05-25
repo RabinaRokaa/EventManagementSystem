@@ -26,6 +26,7 @@ urlpatterns = [
      path('api/filter_venues', views.filter_venues, name= "filter_venues"),
     #  path('api/search_venue', views.search_venue, name= "search_venue"),
     path('booking_history/', views.booking_history, name='booking_history'),
+    path('get_messages/', views.get_user_messages, name='get_messages'),
     
     path('user_list/',views.userlist,name='userlist'),
     path('about_us/',views.about_us,name='about_us'),

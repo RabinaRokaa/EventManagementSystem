@@ -235,3 +235,13 @@ def filter_decorations(request):
 
     # Return JSON response
     return JsonResponse({'decorations': data})
+
+
+def delete_imaged(request, image_id):
+    if request.method == 'POST':
+        print("helloo")
+        image = get_object_or_404(ImageFile, pk=image_id)
+        image.delete()
+        return JsonResponse({'message': 'Image deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)

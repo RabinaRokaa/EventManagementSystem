@@ -27,6 +27,9 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('check-booking-availability/', views.check_booking_availability, name='check_booking_availability'),   
     path('api/verify_payment/', views.verify_payment, name='verify_payment'),
+    path('booking/<int:pk>/update/', views.booking_update, name='booking_update'),
+    path('bookingp/<int:pk>/update/', views.booking_updatep, name='booking_updatep'),
+    path('bookingd/<int:pk>/update/', views.booking_updated, name='booking_updated'),
 ]
 
 

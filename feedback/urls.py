@@ -12,5 +12,6 @@ urlpatterns = [
    
     path('contact/', views.contact_us, name='contact'),
     path('feedback/', views.feedback_list, name='feedback_list'),
+    path('contact/api/', views.contact_us_api, name='contact_us_api'),
     
 ]

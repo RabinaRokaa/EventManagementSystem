@@ -157,57 +157,39 @@ nav a {
     color: blue;
 }
 
-    /* Footer styles */
-footer {
-  background-color: rgba(0, 59, 149, 1);
-  color: white;
-  text-align: right;
-  padding: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Align items vertically in the center */
-}
 
 .copy {
-  background-color: rgba(0, 59, 149, 1);
-  color: white;
-  text-align: left;
-  padding-bottom: 10px;
+    /* background-color: rgba(0, 59, 149, 1); */
+    color: black;
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 20px;
 }
 
-.company {
-  display: flex;
-  flex-direction: column;
-}
 
-.company a {
-  color: white;
-  text-decoration: none;
-  margin: 5px 0;
-  padding-right: 30px;
-  font-size: small;
-}
-
-.company p {
-  color: white;
-  text-decoration: none;
-  margin: 5px 0;
-  padding-right: 30px;
-  font-size: large;
-}
 
 .logo_img {
         height: auto;
-        width: 100px;
+        width: 120px;
         display: block;
 
+    }
+
+    .contactusbutton {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
     }
 
 </style>
 </head>
 <body class="bg-body">
-  <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px; margin-bottom: -50px;">
-    <div class="logo" style="display: flex;align-items: center;justify-content: center;">
+  <nav style="display: flex; align-items: center; justify-content: space-between; margin-top: -50px;">
+    <div class="logo" style="display: flex;align-items: center;justify-content: center;margin-bottom: -50px;">
         <img class="logo_img" src="{% static 'images/logoa.png' %}">
         <div>
             <a href="/">Home</a>
@@ -230,7 +212,7 @@ footer {
     </div>
 
 
-    <div>
+    <div style="margin-bottom: -50px;">
         <a href="/Register">Register</a>
         <a href="/Login">LogIn</a>
     </div>
@@ -280,17 +262,12 @@ footer {
         </main>
     </div>
     <footer>
-      <div class="copy">
-          <p>Copyright © 2023
-              by Rabina Roka</p>
-      </div>
-      <div class="company">
-          <p>Company</p>
-          <a href="#">Contact Us</a>
-          <a href="#">About us</a>
-          <a href="#">FAQs</a>
-      </div>
-  </footer>
+        <div class="copy" style="padding-top: 30px;">
+            <p>Copyright © 2023
+                by Rabina Roka. All rights reserved. LEGAL | PRIVACY POLICY | ACCESSIBILITY | TERMS OF USE | TRUST YOUR
+                PRIVACY CHOICES</p>
+        </div>
+    </footer>
 
 
 <!--===============================================================================================-->

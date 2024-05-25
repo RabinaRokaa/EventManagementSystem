@@ -10,6 +10,8 @@ import requests
 
 from EventManagementSystem import settings
 from .models import booking
+from photographerbooking.models import photographerbooking
+from decbooking.models import decbooking
 import json
 from django.core.serializers import serialize
 from django.shortcuts import render
@@ -36,9 +38,17 @@ def book_event(request):
        
 
 # Create your views here.
-def booking_list(request):
-    bookings = booking.objects.all()  #fetch decorationss from the database
-    return render(request, 'booking/bookinglist.html', {'bookings': bookings})
+# def booking_list(request):
+#     bookings = booking.objects.all()  #fetch decorationss from the database
+#     pbookings = photographerbooking.objects.all()  #fetch decorationss from the database
+#     dbookings = decbooking.objects.all()  #fetch decorationss from the database
+#     # Render the template with the context data
+#     print(dbookings, "rbinaaaaaa")
+#     return render(request, 'booking/bookinglist.html', {
+#         'bookings': bookings,
+#         'pbookings': pbookings,
+#         'dbookings': dbookings
+#     })
 
 
 
@@ -177,7 +187,15 @@ from .models import booking
 
 def booking_list(request):
     bookings = booking.objects.all()
-    return render(request, 'booking/bookinglist.html', {'bookings': bookings})
+    pbookings = photographerbooking.objects.all()  #fetch decorationss from the database
+    dbookings = decbooking.objects.all()  #fetch decorationss from the database
+    # Render the template with the context data
+    print(dbookings, "rbinaaaaaa")
+    return render(request, 'booking/bookinglist.html', {
+        'bookings': bookings,
+        'pbookings': pbookings,
+        'dbookings': dbookings
+    })
 
 def booking_detail(request, pk):
     bookings = get_object_or_404(booking, pk=pk)
@@ -483,3 +501,60 @@ def verify_payment(request):
             'status': False,
             'message': 'Payment verification failed'
         })
+    
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.contrib import messages
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.contrib import messages
+from .models import booking
+
+def booking_update(request, pk):
+    booking_instance = get_object_or_404(booking, id=pk)
+
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        if new_status in ['Pending', 'Confirmed', 'Cancelled']:
+            booking_instance.payment_status = new_status
+            booking_instance.save()
+            messages.success(request, 'Booking status updated successfully!')
+            return redirect(reverse('booking:booking_list'))
+        else:
+            messages.error(request, 'Invalid status value.')
+
+    return render(request, 'booking/booking_update.html', {'booking': booking_instance})
+
+def booking_updatep(request, pk):
+    booking_instance = get_object_or_404(photographerbooking, id=pk)
+
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        if new_status in ['Pending', 'Confirmed', 'Cancelled']:
+            booking_instance.payment_status = new_status
+            booking_instance.save()
+            messages.success(request, 'Booking status updated successfully!')
+            return redirect(reverse('booking:booking_list'))
+        else:
+            messages.error(request, 'Invalid status value.')
+
+    return render(request, 'booking/booking_updatep.html', {'booking': booking_instance})
+
+def booking_updated(request, pk):
+    booking_instance = get_object_or_404(decbooking, id=pk)
+
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        if new_status in ['Pending', 'Confirmed', 'Cancelled']:
+            booking_instance.payment_status = new_status
+            booking_instance.save()
+            messages.success(request, 'Booking status updated successfully!')
+            return redirect(reverse('booking:booking_list'))
+        else:
+            messages.error(request, 'Invalid status value.')
+
+    return render(request, 'booking/booking_updated.html', {'booking': booking_instance})
+

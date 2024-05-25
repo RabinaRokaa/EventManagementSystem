@@ -82,22 +82,39 @@ def booking_processp(request):
         username = data.get('username')
         cost = data.get('cost')
         check_in = data.get('date')
+        id = data.get('photographer_id')
         #Venue_image = request.FILES.get('Venue_image')
-
+        print("dksfbjdsfjsd1111111111111111",id)
         check_out = data.get('end_date')
         print(check_in,check_out)
         check_in = datetime.strptime(check_in, '%Y-%m-%dT%H:%M')
         check_out = datetime.strptime(check_out, '%Y-%m-%dT%H:%M')
 
-        # Create and save the booking object
-        booking_obj = photographerbooking(
-            User =request.user.username,
-            username=username,
-            cost=int(cost),
-            date=check_in,
-           
-            end_date=check_out
-        )
+
+        print("Hello rabinanaaaaaaaaa",data)
+        if data.get("paidbhayo")==1:
+                booking_obj = photographerbooking(
+                User =request.user.username,
+                username=username,
+                cost=int(cost),
+                date=check_in,
+                id=id,
+                end_date=check_out,
+                payment_status="paid"
+            )
+                
+        else:
+
+            # Create and save the booking object
+            booking_obj = photographerbooking(
+                User =request.user.username,
+                username=username,
+                cost=int(cost),
+                date=check_in,
+                id=id,
+            
+                end_date=check_out
+            )
         #if Venue_image:  # Check if an image was uploaded
             #booking_obj.Venue_image = Venue_image # Associate the image with the venue
         
@@ -111,6 +128,7 @@ def booking_processp(request):
             'username': username,
             'cost': int(cost),
             'date': check_in,
+            'id': id,
             #'Venue_image': Venue_image,
             'end_date': check_out
         }
@@ -199,15 +217,15 @@ def verify_paymentp(request):
     token = data.get('token')
     amount = data.get('amount')
     idx = data.get('idx')
-    photographer = data.get('photographer_id')
+    photographerss = data.get('photographer')
     date = data.get('date')
     enddate = data.get('enddate')
     name = data.get('name')
     email = data.get('email')
     amounts = data.get('amount') / 100
-    print("amount=========================================", amounts, photographer)
+    print("amount=========================================", amounts, photographerss)
 
-    photographer_ids = photographer.objects.get(id=photographer)
+    photographer_ids = photographer.objects.get(id=photographerss)
 
     url = "https://khalti.com/api/v2/payment/verify/"
     payload = {

@@ -113,7 +113,7 @@ img{
 .aboutusbox p{
     text-align: center;
     font-size: 20px;
-    padding: 0 70px;
+    
 }
 
 .aboutusbox img {
@@ -123,41 +123,5 @@ img{
     margin: 20px 150px;
 }
 
-/* Footer styles */
-footer {
-    background-color: rgba(0, 59, 149, 1);
-    color: white;
-    text-align: right;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Align items vertically in the center */
-}
 
-.copy {
-    background-color: rgba(0, 59, 149, 1);
-    color: white;
-    text-align: left;
-    padding-bottom: 10px;
-}
 
-.company {
-    display: flex;
-    flex-direction: column;
-}
-
-.company a {
-    color: white;
-    text-decoration: none;
-    margin: 5px 0;
-    padding-right: 30px;
-    font-size: small;
-}
-
-.company p {
-    color: white;
-    text-decoration: none;
-    margin: 5px 0;
-    padding-right: 30px;
-    font-size: large;
-}

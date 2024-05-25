@@ -116,13 +116,14 @@
     }
     .chat-container {
         width: 500px;
-        margin: 50px auto;
+        margin: 100px auto;
+        height: 500px;
         border: 1px solid #ccc;
         border-radius: 5px;
         overflow: hidden;
     }
     .chat-messages {
-        height: 300px;
+        height: 440px;
         overflow-y: auto;
         padding: 10px;
         background-color: #fff;
@@ -140,6 +141,7 @@
     border-radius: 10px;
     margin-bottom: 10px;
     word-wrap: break-word; /* Add this line */
+   
 }
 
     .message.sent {
@@ -367,7 +369,7 @@ border-radius: 5px;
     
         
     
-    <main style="border: 2px solid black;display: flex;justify-content: space-evenly;align-items: flex-start;">
+    <main style="display: flex;justify-content: space-evenly;align-items: flex-start;">
 
         <div style="margin-left: 100px;margin-top: 50px;" id="show_users" style="text-align: left;">
             <h2 style="margin-bottom: 20px;margin-top: 20px;color: rgb(254, 135, 25);">messages</h2>
@@ -375,7 +377,7 @@ border-radius: 5px;
                 <div style="border: 1px solid orange;border-radius: 5px;padding: 10px;padding-right: 50px;" class="user-container" onclick="openChat('{{ user.username }}')">
                     <h3>{{ user.get_full_name }}</h3>
                   
-                    <button style="background-color: rgba(255, 255, 255, 0);font-size: 0.8rem;margin-top: 10px;" onclick="event.stopPropagation(); openChat('{{ user.username }}')">new message</button>
+                    <button style="background-color: rgba(255, 255, 255, 0);font-size: 0.8rem;margin-top: 10px;" onclick="event.stopPropagation(); openChat('{{ user.username }}')">view messages</button>
                 </div>
             {% endfor %}
         </div>
@@ -398,6 +400,72 @@ border-radius: 5px;
     </main>
    </div>
    <script>
+    // Check if the input is focused
+    function checkFocusAndCallFunction() {
+            const inputElement = document.getElementById('message-input');
+            if (document.activeElement !== inputElement) {
+                console.log("hello")
+                fetchMessages(0);
+            }
+        }
+
+        // Set interval to check every 2 seconds (2000 milliseconds)
+        setInterval(checkFocusAndCallFunction, 2000);
+
+         fetchMessages(1);
+        // http://localhost:8000/chat/?message_to=susin1
+
+        function fetchMessages(stat) {
+            let url=window.location.href
+            if(url.split("?").length>1){
+            fetch(`/chat_api?${url.split("?")[1]}`)
+                .then(response => response.json())
+                .then(data => {
+                    const chatMessagesContainer = document.getElementById('chat-messages');
+                    chatMessagesContainer.innerHTML = '';  // Clear current messages
+                    data.messages.forEach(msg => {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', msg.username === 'admin' ? 'sent' : 'received');
+
+    const avatarImg = document.createElement('img');
+    avatarImg.src = msg.username === 'admin' ? 'https://cdn.vectorstock.com/i/1000v/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.avif' : 'https://cdn.vectorstock.com/i/1000v/41/11/flat-business-woman-user-profile-avatar-icon-vector-4334111.avif'; // Replace with actual URLs
+    avatarImg.style.width="30px"
+    avatarImg.style.height="30px"
+    avatarImg.style.borderRadius="30px"
+    avatarImg.style.marginBottom="5px"
+    avatarImg.style.marginLeft=msg.username === 'admin' ? '93%' : ''
+    
+    
+    avatarImg.alt = `${msg.username}'s avatar`;
+    avatarImg.classList.add('avatar');
+    messageDiv.appendChild(avatarImg);
+
+    const usernameP = document.createElement('p');
+    usernameP.style.marginBottom = '5px'; // Adjust spacing if needed
+    usernameP.style.fontSize = '0.8rem';
+    usernameP.style.fontWeight = 'bold';
+    usernameP.textContent = msg.username;
+    usernameP.style.marginBottom="15px"
+
+    const messageP = document.createElement('p');
+    messageP.style.fontSize = '1.2rem';
+    messageP.textContent = msg.message;
+
+    messageDiv.appendChild(usernameP);
+    messageDiv.appendChild(messageP);
+    messageDiv.style.marginBottom="50px"
+
+    chatMessagesContainer.appendChild(messageDiv);
+}
+);
+                    if(stat){
+                    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+                    }
+
+                });
+            }
+        }
+
      function sendMessage() {
     var messageInput = document.getElementById("message-input");
     var message = messageInput.value.trim();
@@ -423,11 +491,12 @@ border-radius: 5px;
         messageDiv.textContent = message;
         
         chatMessages.appendChild(messageDiv);
+        
         // Scroll to bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
         // Clear input field
         messageInput.value = "";
-
+       
         fetch('/send_message/', {
             method: 'POST',
             headers: {
@@ -442,7 +511,7 @@ border-radius: 5px;
         .then(response => response.json())
         .then(data => {
             console.log(data);
-          
+            fetchMessages(1)
             // Handle response if needed
         })
         .catch(error => {
@@ -458,18 +527,43 @@ function openChat(username) {
         }
 
 
+
+
         // Select the first .message element
 var firstMessage = document.querySelector('.user-container');
 
 // Check if the first message exists
 if (firstMessage) {
-    console.log("baglunge cutie")
+    console.log("baglunge cutie ❤️")
     // Remove the first message
     firstMessage.remove();
 console.log(firstMessage)
     firstMessage.style.display="none"
 }
- 
+
+//   // Function to check if the input element is focused
+//   function isInputFocused() {
+//         return document.activeElement === document.getElementById('message-input');
+//     }
+
+//     // Function to refresh the page every 3 seconds
+//     function refreshPage() {
+//         if (!isInputFocused()) {
+//             location.reload();
+//         }
+//     }
+
+//     // Set interval to refresh the page every 3 seconds
+//     setInterval(refreshPage, 3000);
+
+
  </script>
+
+<script>
+   
+   
+    
+    </script>
+    
 </body>
 </html>

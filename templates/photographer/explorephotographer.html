@@ -22,7 +22,7 @@
     
     h2{
         
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     
     h3{
@@ -373,22 +373,13 @@ nav a {
              margin-top: 0;/* Add margin-top to create space between navbar and image */
         }
       
-        footer {
-            background-color: rgba(0, 59, 149, 1);
+        .copy {
+    /* background-color: rgba(0, 59, 149, 1); */
             color: black;
-            text-align: right;
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Align items vertically in the center */
-         }
-        
-         .copy {
-            background-color: rgba(0, 59, 149, 1);
-            color: black;
-            text-align: left;
-            padding-bottom: 10px;
-         }
+            text-align: center;
+            margin-top: 50px;
+            padding-bottom: 20px;
+}
         
          .company {
             display: flex;
@@ -448,13 +439,17 @@ nav a {
           .input-div label {
             font-weight: bold;
           }
-          
+
+
           .input-div input {
             width: 70%;
             padding: 5px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            color: gray;
           }
+          
+       
           
           .your_account {
             background-color: #007bff;; /* Adjust color as needed */
@@ -476,7 +471,7 @@ nav a {
             background-image: url("{% static 'images/image.jpg' %}");
             background-size: cover;
             background-position: center;
-            height: 200px; /* Adjust as needed */
+            height: 250px; /* Adjust as needed */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -649,16 +644,7 @@ nav a {
 <body>
 
         <!-- To display the messages, use the following tag -->
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <!-- For displaying as bold -->
-            <strong>Message:</strong> {{ message }}
-            <!-- For closing the message tag -->
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %} 
+    
     
 <!-- After clicking on the home and other text, they follow the following URLs -->
         
@@ -684,15 +670,21 @@ nav a {
                           <a href="/photographers">Photographer</a>
                       </div>
                   </div>
+                  
                   <a href="/about_us">About Us</a>
                   <a href="/contact">Contact</a>
+                 
               </div>
         </div>
 
 
         <div style="margin-bottom: -50px;">
+            {% if user.is_authenticated %}
+                  <!-- User is logged in, so don't show login and register links -->
+            {% else %}
             <a href="/Register">Register</a>
             <a href="/Login">LogIn</a>
+            {% endif %}
         </div>
     </nav>
     <!-- Main Content -->
@@ -701,10 +693,8 @@ nav a {
         <img src="{{ photographer.Photographer_image.first.image.url }}" alt="Main Image" width="50%" style="height: 85vh; border-radius:15px; margin:15px;">
 
         <!-- Single photographer Details -->
-        <div id="photographer-details">
-            <h2 id="photographer_name">{{ photographer.Username }}</h2>
-            <h2 id="id" style="opacity: 0;">{{ photographer.id }}</h2>
-            <hr>   <!--for horizontal line-->
+        <div id="photographer-details" style="width:50vw;">
+            <h2 id="photographer_name">{{ photographer.Username }}</h2><h5 id="id" style="opacity: 0;">{{ photographer.id }}</h5>
             <hr>   <!--for horizontal line-->
             <div id="photographer-description">
                 <p><span style="font-size:1.4rem;"> About</span>  <span style="color: blue; font-size:1.4rem;" >{{photographer.Username}} </span><br> <br> {{ photographer.Description }}</p>
@@ -754,33 +744,9 @@ nav a {
     <div class="mix">
 
      <div class="Contact" style="flex-direction:column;">
-        
-        
-        <p><span style="font-size:1.6rem;"> Additional</span>  <span style="font-size:1.6rem;" >Info</span>
-        
-         <!-- <li> <span class="material-symbols-outlined" style="background-color: lightblue;">
-            place</span>
-            {% comment %} <div id="photographer-location">
-                <h3>{{ photographer.Location }}</h3>
-            </div> {% endcomment %}
-        </li>
-
-            <br>
-        <li> <span class="material-symbols-outlined" style="background-color: #87a3f3;">
-            groups </span>
-            {% comment %} <div id="photographer-capacity">
-                <h4>Capacity: {{ photographer.Capacity }}</h4>
-            </div> {% endcomment %}
-        </li>  -->
-            <br>
-        <li> <span class="material-symbols-outlined" style="background-color: #ffcd6b;">
-            category </span>
-            <!-- <div id="event_type">
-                <h4>Category: {{ photographer.Type }}</h4>
-            </div> -->
         </li>
      </div> 
-            <form id="booking-form" action="" method="POST">
+            <form id="booking-form" action="" method="POST" style="margin-left: 440px;">
               <input type="hidden" value="photographer" >
                 <div class="input-div">
                   <label form="id_check_incheck_in"> <h2>Date</h2> </label>
@@ -802,13 +768,13 @@ nav a {
          
     </div> 
      <hr>
-     <div class="contactuscontent flex">
+     <!-- <div class="contactuscontent flex">
         <!-- <div class="logoo" style="margin-left:100px; flex-wrap: wrap; height: 20px; width: 30px;">
             <img src="{% static 'images/contact.jpg' %}" alt="logo">
 
 
         </div> -->
-        <div class="image-containerr">
+        <!-- <div class="image-containerr">
             <img src="{% static 'images/contact2.png' %}" alt="logo" style="height: 650px; width: 600px; justify-content: space-around;">
         </div>
             <form class="contactusform" method="post">
@@ -825,8 +791,8 @@ nav a {
                 arrow_forward
                 </span></a> </div>
 
-        </div>
-     </div>
+        </div> 
+     </div> -->
      <hr>
 
 
@@ -855,17 +821,28 @@ nav a {
         
         let status = 0;
 
-        async function checkbooking(username,description, date) {
+        async function checkbooking(username,description, date,id) {
             try {
                 const data = new URLSearchParams();
                 date = new Date(date);
                 date = date.toISOString().split('.')[0];
+                const date1 = document.getElementById('id_check_in').value;
+                const end_date2 = document.getElementById('id_check_out').value;
+                const checkInDate = new Date(date1);
+                const checkOutDate = new Date(end_date2);
+                
+        
+                if (checkInDate >= checkOutDate) {
+                    alert('Check-in date must be before the check-out date.');
+                    return 0;
+                }
         
                 
                 data.append('username', username);
                 data.append('description', description);
                 //data.append('photographer_image', photographer_image);
                 data.append('date', date);
+                data.append('id', id);
         
                 const response = await fetch('/check_booking_availabilityp/', {
                     method: 'POST',
@@ -904,8 +881,9 @@ nav a {
                // const photographer = document.getElementById('photographer').innerText;
                // const photography = document.getElementById('photography').innerText;
                 const date = document.getElementById('id_check_in').value;
+                const id = document.getElementById('id').textContent;
               
-                await checkbooking(username,description,date)
+                await checkbooking(username,description,date,id)
 
                 console.log(status)
 
@@ -929,6 +907,7 @@ nav a {
                 formData.append('date', date);
                 formData.append('end_date', end_date);
                 formData.append('cost', cost);
+                formData.append('id', id);
                 formData.append('url', window.location.href);
 
                 formData.forEach((value, key) => {

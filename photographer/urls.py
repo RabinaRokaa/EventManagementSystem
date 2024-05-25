@@ -17,5 +17,5 @@ urlpatterns = [
     path('<int:id>/explorephotographer', views.explorephotographer, name="explorephotographer"),
     path('api/filter_photographers', views.filter_photographers, name= "filter_photographers"),
      path('api/search_photographer', views.search_photographer, name= "search_photographer"),
-     path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
+     path('delete_imagep/<int:image_id>/', views.delete_imagep, name='delete_imagep'),
 ]    

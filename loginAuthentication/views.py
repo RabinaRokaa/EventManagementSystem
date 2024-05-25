@@ -1,4 +1,5 @@
 from django.core.mail import EmailMessage, send_mail
+from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
@@ -244,6 +245,17 @@ def userdashboard(request):
     user_bookings = None
     decor_bookings = None
     photographerbookings = None
+
+    # Assuming your model is named Booking
+    top_3_venues = booking.objects.values(
+       'id', 'Name', 'Location', 'Capacity',
+    ).annotate(num_bookings=Count('Name')).order_by('-num_bookings')[:3]
+
+    # Print or use the top 3 venues
+    # for venue in top_3_venues:
+        # print(venue['Name'], "-", venue['num_bookings'])
+        
+    # top_3_venues = Venues.objects.filter(Name = top_3_venues[0]['Name'],Name = top_3_venues[1]['Name'],Name = top_3_venues[2]['Name'])
     # messages = None
 
     if request.user.is_authenticated:
@@ -256,8 +268,7 @@ def userdashboard(request):
         filter2=Q(user__username='admin') & Q(messaged_to=request.user)
         messages = Message.objects.filter(filter1 | filter2).order_by('date')
 
-        for message in messages:
-            print("ae",message)
+     
         if request.method == 'POST':
         # Get form data
             username = request.POST['username']
@@ -285,17 +296,33 @@ def userdashboard(request):
         'photographerbookings':photographerbookings,
         'user': request.user,
         'messages': messages,
+        'top_3_venues': top_3_venues,
     }
 
     return render(request, 'loginAuthentication/userdashboard.html', context)
 
+def get_user_messages(request):
+    filter1 = Q(user=request.user) & Q(messaged_to__username='admin')
+    filter2 = Q(user__username='admin') & Q(messaged_to=request.user)
+    messages = Message.objects.filter(filter1 | filter2).order_by('date')
+    
+    messages_data = []
+    for message in messages:
+        messages_data.append({
+            'user': message.user.username,
+            'messaged_to': message.messaged_to.username,
+            'message': message.message,
+            'date': message.date.strftime('%Y-%m-%d %H:%M:%S'),
+        })
+    
+    return JsonResponse({'messages': messages_data})
 
 def userdashboards(req):
     recent_bookings = booking.objects.filter(user=req.user).order_by('-booking_date')[:5] 
     return render(req, 'loginAuthentication/userdashboards.html', {'recent_bookings': recent_bookings})
 
 def adminpanel(req):
-    total_bookings=booking.objects.count()
+    total_bookings=booking.objects.count() + photographerbooking.objects.count() + decbooking.objects.count()
     return render(req, 'loginAuthentication/adminpanel.html',{'total_bookings':total_bookings})
 
 def userlist(request):

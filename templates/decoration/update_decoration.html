@@ -45,9 +45,9 @@
     <ul id="image-list">
         {% for image in decorations.Decoration_image.all %}
             <li id="image-{{ image.id }}">
-                <img src="{{ image.image.url }}" alt="Decoration Image" height=50; width=80;>
+                <img src="{{ image.image.url }}" alt="Decoration Image" height=50; width=80; style="margin-left: -40px;" >
                 <br>
-                <!-- <button type="button" class="delete-image" data-image-id="{{ image.id }}">Delete</button> -->
+                <button type="button" class="delete-image" data-image-id="{{ image.id }}" style="margin-left: -40px;">Delete</button>
             </li>
         {% endfor %}
     </ul>
@@ -66,7 +66,7 @@
 
         function deleteImage(imageId) {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/delete_image/' + imageId + '/');
+            xhr.open('POST', '/delete_imaged/' + imageId + '/');
             xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
             xhr.onload = function() {
                 if (xhr.status === 200) {
