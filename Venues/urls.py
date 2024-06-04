@@ -20,6 +20,7 @@ urlpatterns = [
      path('api/search_venue', views.search_venue, name= "search_venue"),
      path('<int:id>/explorevenue/', views.explorevenue, name="explorevenue"),
      path('delete_image/<int:image_id>/', views.delete_image, name='delete_image'),
+     path("review_store/",views.review_store)
 
     # path('api/search-city',views.searchCity,name='searchcity')
 

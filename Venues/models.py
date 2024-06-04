@@ -1,6 +1,7 @@
 from django.db import models
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
+from django.contrib.auth.models import User
 class Venues(models.Model): #making class
     Name = models.CharField(max_length=100) #making field
     Location = models.CharField(max_length=100) #making field
@@ -22,3 +23,10 @@ class ImageFile(models.Model):
     #                                                 <img src="${venue.Venue_image[0].image.url}" alt="${venue.Name}" width="300" height="150">
     #                                             </div>` : ''}
     #                                     </div> 
+
+class Reviews(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message=models.CharField(max_length=200)
+    rating=models.IntegerField()
+    venue_name=models.CharField(max_length=100)
+    status=models.BooleanField(default=True)

@@ -217,7 +217,7 @@ class PasswordResetCustomView(PasswordResetView):
 
 class PasswordResetConfirmCustomView(PasswordResetConfirmView):
     template_name = 'loginAuthentication/password_reset_confirm.html'
-    success_url = reverse_lazy('password_reset_complete')
+    success_url = reverse_lazy('loginAuthentication:password_reset_complete')
 
 
 def logOut(request):

@@ -668,6 +668,111 @@ nav a {
     font-size: large;
 }
 
+
+ /* Modal styles */
+ .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0,0,0); 
+      background-color: rgba(0,0,0,0.4); 
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; 
+      max-width: 500px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Rating styles */
+    .rating {
+      display: flex;
+      direction: row-reverse;
+      justify-content: center;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      position: relative;
+      width: 1em;
+      font-size: 3rem;
+      color: #FFD700;
+      cursor: pointer;
+    }
+
+    .rating label::before {
+      content: "★";
+      position: absolute;
+      opacity: 0.2;
+ 
+    }
+
+    .rating label:hover:before,
+    .rating label:hover ~ label:before {
+      opacity: 1 !important;
+    }
+
+    .rating input:checked ~ label:before {
+      opacity: 1;
+    }
+
+    .rating label:hover:before,
+    .rating label:hover ~ label:before,
+    .rating input:checked ~ label:before,
+    .rating input:checked ~ label:hover:before,
+    .rating input:checked ~ label:hover ~ label:before {
+      opacity: 1;
+    }
+
+    /* Review textarea */
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    /* Buttons */
+    #submitReviewBtn {
+      background-color: rgb(238, 166, 0);
+      padding: 5px 10px;
+      margin-top: 10px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    #submitReviewBtn:hover {
+      background-color: #d69400;
+    }
+
 </style>
 </head>
 <body>
@@ -804,6 +909,150 @@ nav a {
                 <h4>Category: {{ venue.Type }}</h4>
             </div>
         </li>
+        <br><br><br>
+        <div>
+            <h2>Reviews</h2>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                {% for review in reviews %}
+                    <div style="background-color: #ffffff; border: 1px solid #dddddd; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);max-width: 50vw;width: 400px;">
+                        <h2 style="font-size: 1.2em; margin: 0; color: #333333;">{{ review.user.username }}</h2>
+                        <p style="font-size: 1em; margin: 10px 0; color: #666666;">{{ review.message }}</p>
+                        <p style="font-size: 0.9em; color: #ed9600;">Rating: {{ review.rating }} / 5</p>
+                        <!-- <p style="font-size: 0.7rem;color: gray;">sentiment: {{ review.status }}</p> -->
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            
+            <!-- Button to trigger modal -->
+<!-- Button to trigger modal -->
+<button id="openModalBtn" style="background-color: rgb(238, 166, 0); padding: 5px 10px;">Add a Review</button>
+
+<!-- Modal -->
+<div id="reviewModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <br>
+    <h2>Add Review and Rating</h2>
+    <!-- Rating UI -->
+    <div class="rating">
+      <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"></label>
+      <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"></label>
+      <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"></label>
+      <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"></label>
+      <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+    </div>
+    <br><br><br>
+    <!-- Review Text Area -->
+    <textarea id="reviewText" rows="4" placeholder="Write your review here..."></textarea>
+    <!-- Submit Button -->
+    <button id="submitReviewBtn">Submit Review</button>
+  </div>
+</div>
+
+<script>
+  // Get the modal
+  var modal = document.getElementById("reviewModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("openModalBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // Get the submit button
+  var submitBtn = document.getElementById("submitReviewBtn");
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    fetch(`/review-check/?name=${"{{ venue.Name }}"}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.status==0){
+            window.alert("You haven't booked this venue, please book first to review")
+            return 0
+        }
+        modal.style.display = "block";
+        
+   
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // Get all rating inputs
+  var ratingInputs = document.querySelectorAll('input[name="rating"]');
+  var selectedRating = 0;
+
+  // Add event listener to each rating input
+  ratingInputs.forEach(function(input) {
+    input.addEventListener('change', function() {
+      selectedRating = this.value;
+      console.log('Selected Rating: ' + selectedRating);
+    });
+  });
+
+  // When the submit button is clicked
+  submitBtn.onclick = function() {
+    var reviewText = document.getElementById("reviewText").value;
+    if (selectedRating === 0) {
+      console.log('Please select a rating.');
+    } else {
+      console.log('Rating: ' + selectedRating);
+      console.log('Review: ' + reviewText);
+      console.log("{{ venue.id }}")
+    }
+    // review_store
+    fetch(`/review_store/?message=${reviewText}&rating=${selectedRating}&Name=${"{{ venue.Name }}"}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.status==1){
+            modal.style.display = "none";
+            window.alert("Thank you for your review!")
+            window.location.reload()
+        }
+     
+        
+   
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+
+
+   // Close the modal after submitting
+  }
+
+
+</script>
+
+           
+
+
+        </div>
      </div> 
             <form id="booking-form" action="" method="POST">
               <input type="hidden" value="venue" >
@@ -959,9 +1208,6 @@ nav a {
 
                 }
                
-
-
-              
                 
                 const cost = document.getElementById('costVenue').textContent;
                 // Prepare data to be sent to the backend
